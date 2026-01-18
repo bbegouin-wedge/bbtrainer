@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://jsbmmotyoh34"]
+
+[ext_resource type="Script" uid="uid://dty86jwqsevc2" path="res://scenes/global/gobal_game.gd" id="1_un8vh"]
+[ext_resource type="Script" uid="uid://b325vfvl6yhfo" path="res://camera_2d.gd" id="2_6xoaf"]
+[ext_resource type="PackedScene" uid="uid://dxpcgxyp7fp2a" path="res://scenes/UI/welcome_ui.tscn" id="2_fsc7a"]
+[ext_resource type="PackedScene" uid="uid://cye7ydmvgd7oo" path="res://scenes/arena/arena.tscn" id="3_6xoaf"]
+
+[node name="gobal_game" type="Node2D"]
+script = ExtResource("1_un8vh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("2_6xoaf")
+
+[node name="Arena" parent="." instance=ExtResource("3_6xoaf")]
+scale = Vector2(0.7, 0.7)
+
+[node name="WelcomeUI" parent="." instance=ExtResource("2_fsc7a")]
