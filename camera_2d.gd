@@ -30,10 +30,11 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
-		print(zoom)
 		if event.button_index == MouseButton.MOUSE_BUTTON_WHEEL_UP:
 			if zoom.x >= 0.3:
 				zoom *= 0.9  # Zoom avant
+				return
 		elif event.button_index == MouseButton.MOUSE_BUTTON_WHEEL_DOWN:
 			if zoom.y <= 0.9:
-				zoom *= 1.1  # Zoom avant
+				zoom *= 1.1
+				return  # Zoom avant

@@ -8,11 +8,14 @@ enum GameMode {
 }
 
 signal show_config_dialog
-
 @export var current_game_mode = GameMode.WELCOME
+@export var grid_displayed = false
+var grid_has_changed = false
+var is_pitch_vertical = true
 
 
 func _process(delta: float) -> void:
+	# print_tree()
 	if current_game_mode == GameMode.WELCOME:
 		var ui = get_node("WelcomeUI")
 		var arena = get_node("Arena")
@@ -23,14 +26,36 @@ func _process(delta: float) -> void:
 		var ui = get_node("WelcomeUI")
 		ui.hide()
 		arena.show()
+	if grid_displayed:
+		var grid = get_node("Arena/grid")
+		grid.show()
+	if grid_displayed == false:
+		var grid = get_node("Arena/grid")
+		grid.hide()
+
+func toggle_grid() -> void:
+	print("grid has changed")
+	grid_displayed = !grid_displayed
+
+func toggle_pitch_orientation() -> void:
+	print("pitch orientation has changed")
+	is_pitch_vertical = !is_pitch_vertical
+	var terrain = get_node("Arena")
+	if !is_pitch_vertical:
+		terrain.rotation_degrees = 0
+	else:
+		terrain.rotation_degrees = 90
 		
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
 		handle_escape()
 		get_viewport().set_input_as_handled()
+	if event.is_action_pressed("toggle_grid"):
+		toggle_grid()
+	if event.is_action_pressed("toggle_pitch_orientation"):
+		toggle_pitch_orientation()
 
 func handle_escape():
-	print("ESC pressé")
 	if current_game_mode == GameMode.WELCOME:
 		current_game_mode = GameMode.SETUP
 		return
