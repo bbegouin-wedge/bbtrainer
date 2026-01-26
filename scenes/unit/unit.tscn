@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://brii1v5bgvp8d" path="res://assets/player_icons/DarkElf/Blitzer1B.png" id="1_fmv3f"]
 [ext_resource type="Script" uid="uid://b3lj57tauqcch" path="res://scenes/unit/unit.gd" id="1_fvc8g"]
-[ext_resource type="Shader" uid="uid://txku5bny0kjf" path="res://assets/shaders/outline.gdshader" id="2_vgvef"]
+[ext_resource type="Shader" uid="uid://co6ihpld44rvp" path="res://assets/shaders/fade_outline.gdshader" id="2_0wuuu"]
 [ext_resource type="Script" uid="uid://dhnrqbom0mh1f" path="res://components/select.gd" id="3_bhlit"]
 [ext_resource type="Script" uid="uid://clj3l2ucue57f" path="res://components/drag_and_drop.gd" id="3_vh40f"]
 [ext_resource type="Script" uid="uid://b0ocx6ljsqkli" path="res://components/hoverable.gd" id="6_3po7s"]
@@ -10,13 +10,14 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3po7s"]
 resource_local_to_scene = true
-shader = ExtResource("2_vgvef")
+shader = ExtResource("2_0wuuu")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 3.0000001425
 shader_parameter/pattern = 0
 shader_parameter/inside = false
-shader_parameter/add_margins = true
+shader_parameter/add_margins = false
 shader_parameter/number_of_images = Vector2(1, 1)
+shader_parameter/fade = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmv3f"]
 resource_local_to_scene = true
@@ -38,10 +39,6 @@ shape = SubResource("RectangleShape2D_fmv3f")
 [node name="drag_and_drop" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("3_vh40f")
 target = NodePath("..")
-
-[node name="drag_and_drop" type="Node" parent="drag_and_drop" node_paths=PackedStringArray("target")]
-script = ExtResource("3_vh40f")
-target = NodePath("../..")
 
 [node name="select" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("3_bhlit")

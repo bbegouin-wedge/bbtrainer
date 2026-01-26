@@ -2,15 +2,13 @@ shader_type canvas_item;
 
 uniform vec4 color : source_color = vec4(1.0);
 uniform float width : hint_range(0, 10) = 1.0;
-uniform int pattern : hint_range(0, 2) = 0;
+uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
 uniform bool inside = false;
 uniform bool add_margins = true;
 uniform vec2 number_of_images = vec2(1.0);
 
-// Paramètres de pulsation - VITESSE AUGMENTÉE
-uniform float pulse_speed : hint_range(0.1, 20.0) = 5.0; // Changé de 2.0 à 5.0
-uniform float pulse_min_alpha : hint_range(0.0, 1.0) = 0.3;
-uniform float pulse_max_alpha : hint_range(0.0, 1.0) = 1.0;
+// Paramètre de fade (0.0 = invisible, 1.0 = complètement visible)
+uniform float fade : hint_range(0.0, 1.0) = 0.0;
 
 varying flat vec4 modulate;
 
@@ -72,12 +70,9 @@ void fragment() {
 	}
 	
 	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, image_top_left, image_bottom_right, TEXTURE)) {
-		// Pulsation plus rapide
-		float pulse = sin(TIME * pulse_speed) * 0.5 + 0.5;
-		float alpha_multiplier = mix(pulse_min_alpha, pulse_max_alpha, pulse);
-		
+		// Appliquer le fade à la couleur de l'outline
 		vec4 outline_color = color;
-		outline_color.a *= alpha_multiplier;
+		outline_color.a *= fade; // Multiplier l'alpha par le fade
 		
 		COLOR.rgb = inside ? mix(COLOR.rgb, outline_color.rgb * modulate.rgb, outline_color.a * modulate.a) : outline_color.rgb * modulate.rgb;
 		COLOR.a += (1.0 - COLOR.a) * outline_color.a * modulate.a;
