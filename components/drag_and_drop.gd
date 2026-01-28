@@ -69,7 +69,6 @@ func _drop() -> void:
 	
 	
 func _on_target_input_event(_viewport: Node, event: InputEvent) -> void:
-	print("target event drag and drop")
 	if not enabled: 
 		return 
 		

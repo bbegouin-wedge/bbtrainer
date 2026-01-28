@@ -23,12 +23,10 @@ func _toggle_selection() -> void:
 func select() -> void:
 	sprite.material.set_shader_parameter("width", 3)
 	is_selected = true
-	print("Pièce sélectionnée: ", sprite.name)
 
 func deselect() -> void:
 	is_selected = false
 	sprite.material.set_shader_parameter("width", 0)
-	print("Pièce désélectionnée: ", sprite.name)
 	
 func manage_click(event: InputEvent) -> void:
 		if event.pressed:

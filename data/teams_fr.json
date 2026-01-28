@@ -1,0 +1,5157 @@
+{
+  "bloodbowl_version": "2025",
+  "edition": "Third Season Edition",
+  "teams": [
+	{
+	  "uid": "HUMAN",
+	  "name": "Humain",
+	  "rerollCost": 50000,
+	  "tier": "Niveau 2",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "HUMAN__HUMAN_LINEMAN",
+		  "positionName": "Trois-quart",
+		  "cost": 50000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Human/Lineman2B.png",
+			"red": "assets/player_icons/Human/Lineman2R.png"
+		  }
+		},
+		{
+		  "uid": "HUMAN__HALFLING_HOPEFUL",
+		  "positionName": "Halfling Hopeful",
+		  "cost": 30000,
+		  "MA": 5,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 7,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 3,
+		  "icon": {
+			"blue": "assets/player_icons/Human/Lineman2B.png",
+			"red": "assets/player_icons/Human/Lineman2R.png"
+		  }
+		},
+		{
+		  "uid": "HUMAN__HUMAN_CATCHER",
+		  "positionName": "Receveur",
+		  "cost": 75000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"CATCH",
+            "DODGE"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Human/Catcher1B.png",
+			"red": "assets/player_icons/Human/Catcher1R.png"
+		  }
+		},
+		{
+		  "uid": "HUMAN__HUMAN_THROWER",
+		  "positionName": "Lanceur",
+		  "cost": 75000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"PASS",
+            "SURE_HANDS"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Human/Thrower1B.png",
+			"red": "assets/player_icons/Human/Thrower1R.png"
+		  }
+		},
+		{
+		  "uid": "HUMAN__HUMAN_BLITZER",
+		  "positionName": "Blitzeur",
+		  "cost": 85000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+            "TACKLE"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Human/Blitzer1B.png",
+			"red": "assets/player_icons/Human/Blitzer1R.png"
+		  }
+		},
+		{
+		  "uid": "HUMAN__OGRE",
+		  "positionName": "Ogre",
+		  "cost": 140000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BONE_HEAD",
+			"LONER_3",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Human/Ogre1B.png",
+			"red": "assets/player_icons/Human/Ogre1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "OLD_WORLD_CLASSIC"
+	  ],
+	  "icon": "assets/team_icons/humans.png"
+	},
+	{
+	  "uid": "ORC",
+	  "name": "Orc",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 2",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "ORC__ORC_LINEMAN",
+		  "positionName": "Trois-quart Orc",
+		  "cost": 50000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 10,
+		  "skills": [],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Orc/Lineman2B.png",
+			"red": "assets/player_icons/Orc/Lineman2R.png"
+		  }
+		},
+		{
+		  "uid": "ORC__GOBLIN_LINEMAN",
+		  "positionName": "Gobelin",
+		  "cost": 40000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 4,
+		  "icon": {
+			"blue": "assets/player_icons/Orc/Goblin4B.png",
+			"red": "assets/player_icons/Orc/Goblin4R.png"
+		  }
+		},
+		{
+		  "uid": "ORC__ORC_THROWER",
+		  "positionName": "Lanceur Orc",
+		  "cost": 75000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"PASS",
+            "SURE_HANDS"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Orc/Thrower1B.png",
+			"red": "assets/player_icons/Orc/Thrower1R.png"
+		  }
+		},
+		{
+		  "uid": "ORC__ORC_BLITZER",
+		  "positionName": "Blitzeur",
+		  "cost": 85000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 10,
+		  "skills": [
+			"BLOCK",
+            "BREAK_TACKLE"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Orc/Blitzer1B.png",
+			"red": "assets/player_icons/Orc/Blitzer1R.png"
+		  }
+		},
+		{
+		  "uid": "ORC__BIG_UN_BLOCKER",
+		  "positionName": "Big Un",
+		  "cost": 95000,
+		  "MA": 5,
+		  "ST": 4,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"MIGHTY_BLOW",
+			"TAUNT",
+			"THICK_SKULL",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Orc/BlackOrcBlocker1B.png",
+			"red": "assets/player_icons/Orc/BlackOrcBlocker1R.png"
+		  }
+		},
+		{
+		  "uid": "ORC__TROLL",
+		  "positionName": "Troll",
+		  "cost": 115000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"ALWAYS_HUNGRY",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"PROJECTILE_VOMIT",
+			"REALLY_STUPID",
+			"REGENERATION",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Orc/Troll1B.png",
+			"red": "assets/player_icons/Orc/Troll1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "BADLANDS_BRAWL"
+	  ],
+	  "icon": "assets/team_icons/orcs.png"
+	},
+	{
+	  "uid": "DWARF",
+	  "name": "Nain",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 1",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "DWARF__DWARF_LINEMAN",
+		  "positionName": "Trois-quart Nain",
+		  "cost": 70000,
+		  "MA": 4,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BLOCK",
+			"DEFENSIVE",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Dwarf/Blocker3B.png",
+			"red": "assets/player_icons/Dwarf/Blocker3R.png"
+		  }
+		},
+		{
+		  "uid": "DWARF__DWARF_RUNNER",
+		  "positionName": "Coureur",
+		  "cost": 80000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"SPRINT",
+			"SURE_HANDS",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Dwarf/Runner2B.png",
+			"red": "assets/player_icons/Dwarf/Runner2R.png"
+		  }
+		},
+		{
+		  "uid": "DWARF__DWARF_BLITZER",
+		  "positionName": "Blitzeur",
+		  "cost": 100000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 4,
+		  "AV": 10,
+		  "skills": [
+			"BLOCK",
+			"DIVING_TACKLE",
+			"TACKLE",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "PASSING"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Dwarf/Blitzer1B.png",
+			"red": "assets/player_icons/Dwarf/Blitzer1R.png"
+		  }
+		},
+		{
+		  "uid": "DWARF__TROLL_SLAYER",
+		  "positionName": "Tueur de Troll",
+		  "cost": 95000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+			"DAUNTLESS",
+			"FRENZY",
+			"HATRED",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Dwarf/TrollSlayer1B.png",
+			"red": "assets/player_icons/Dwarf/TrollSlayer1R.png"
+		  }
+		},
+		{
+		  "uid": "DWARF__DEATHROLLER",
+		  "positionName": "Roule Mort",
+		  "cost": 170000,
+		  "MA": 5,
+		  "ST": 7,
+		  "AG": 5,
+		  "PA": 6,
+		  "AV": 11,
+		  "skills": [
+			"BREAK_TACKLE",
+			"DIRTY_PLAYER",
+			"JUGGERNAUT",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"NO_BALL",
+			"SECRET_WEAPON",
+            "STAND_FIRM"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Dwarf/Deathroller1B.png",
+			"red": "assets/player_icons/Dwarf/Deathroller1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "WORLDS_EDGE_SUPERLEAGUE"
+	  ],
+	  "icon": "assets/team_icons/dwarves.png"
+	},
+	{
+	  "uid": "SKAVEN",
+	  "name": "Skaven",
+	  "rerollCost": 50000,
+	  "tier": "Niveau 2",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "SKAVEN__SKAVEN_CLANRAT",
+		  "positionName": "Trois-quart Skaven",
+		  "cost": 50000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Skaven/Lineman2B.png",
+			"red": "assets/player_icons/Skaven/Lineman2R.png"
+		  }
+		},
+		{
+		  "uid": "SKAVEN__SKAVEN_THROWER",
+		  "positionName": "Lanceur",
+		  "cost": 80000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 2,
+		  "AV": 8,
+		  "skills": [
+			"PASS",
+            "SURE_HANDS"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Skaven/Thrower1B.png",
+			"red": "assets/player_icons/Skaven/Thrower1R.png"
+		  }
+		},
+		{
+		  "uid": "SKAVEN__GUTTER_RUNNER",
+		  "positionName": "Coureur d'égoût",
+		  "cost": 85000,
+		  "MA": 9,
+		  "ST": 2,
+		  "AG": 2,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+            "STAB"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Skaven/GutterRunner2B.png",
+			"red": "assets/player_icons/Skaven/GutterRunner2R.png"
+		  }
+		},
+		{
+		  "uid": "SKAVEN__SKAVEN_BLITZER",
+		  "positionName": "Blitzeur",
+		  "cost": 90000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+            "STRIP_BALL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "MUTATIONS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Skaven/Blitzer1B.png",
+			"red": "assets/player_icons/Skaven/Blitzer1R.png"
+		  }
+		},
+		{
+		  "uid": "SKAVEN__RAT_OGRE",
+		  "positionName": "Rat Ogre",
+		  "cost": 150000,
+		  "MA": 6,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"ANIMAL_SAVAGERY",
+			"FRENZY",
+			"LONER_4",
+			"MIGHTY_BLOW",
+            "PREHENSILE_TAIL"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Skaven/RatOgre1B.png",
+			"red": "assets/player_icons/Skaven/RatOgre1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "UNDERWORLD_CHALLENGE"
+	  ],
+	  "icon": "assets/team_icons/skavens.png"
+	},
+	{
+	  "uid": "BRETONNIAN",
+	  "name": "Bretonnien",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 2",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "BRETONNIAN__BRETONNIAN_SQUIRE",
+		  "positionName": "Écuyer",
+		  "cost": 50000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+            "WRESTLE"
+		  ],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Bretonnian/BretonnianSquireB.png",
+			"red": "assets/player_icons/Bretonnian/BretonnianSquireR.png"
+		  }
+		},
+		{
+		  "uid": "BRETONNIAN__KNIGHT_CATCHER",
+		  "positionName": "Chevalier Receveur",
+		  "cost": 85000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"CATCH",
+			"DAUNTLESS",
+            "NERVES_OF_STEEL"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Bretonnian/BretonnianKnightCatcherB.png",
+			"red": "assets/player_icons/Bretonnian/BretonnianKnightCatcherR.png"
+		  }
+		},
+		{
+		  "uid": "BRETONNIAN__KNIGHT_THROWER",
+		  "positionName": "Chevalier Lanceur",
+		  "cost": 80000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"DAUNTLESS",
+			"NERVES_OF_STEEL",
+            "PASS"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Bretonnian/BretonnianKnightThrowerB.png",
+			"red": "assets/player_icons/Bretonnian/BretonnianKnightThrowerR.png"
+		  }
+		},
+		{
+		  "uid": "BRETONNIAN__GRAIL_KNIGHT",
+		  "positionName": "Chevalier du Graal",
+		  "cost": 95000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 10,
+		  "skills": [
+			"BLOCK",
+			"DAUNTLESS",
+            "STEADY_FOOTING"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "AGILITY"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Bretonnian/GrailKnightB.png",
+			"red": "assets/player_icons/Bretonnian/GrailKnightR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "OLD_WORLD_CLASSIC"
+	  ],
+	  "icon": "assets/team_icons/bretonien.png"
+	},
+	{
+	  "uid": "CHAOS_RENEGADE",
+	  "name": "Renégats du Chaos",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 3",
+	  "specialRules": [
+        "FAVOURED_OF_CHOOSE_EITHER_KHORNE_NURGLE_SLAANESH_TZEENTCH_OR_UNDIVIDED"
+	  ],
+	  "cross_limit": [
+		{
+		  "max": 3,
+		  "in": [
+			"CHAOS_RENEGADE__OGRE",
+			"CHAOS_RENEGADE__TROLL",
+			"CHAOS_RENEGADE__MINOTAUR",
+            "CHAOS_RENEGADE__RAT_OGRE"
+		  ]
+		}
+	  ],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "CHAOS_RENEGADE__RENEGADE_HUMAN",
+		  "positionName": "Renégat Humain",
+		  "cost": 50000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+            "ANIMOSITY_(ALL)"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/RenegadeHumanB.png",
+			"red": "assets/player_icons/Chaos Renegade/RenegadeHumanR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__RENEGADE_GOBLIN",
+		  "positionName": "Renégat Gobelin",
+		  "cost": 40000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"ANIMOSITY_(ALL)",
+			"DODGE",
+			"RIGHT_STUFF",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/RenegadeGoblinB.png",
+			"red": "assets/player_icons/Chaos Renegade/RenegadeGoblinR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__RENEGADE_ORC",
+		  "positionName": "Renégat Orc",
+		  "cost": 50000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 10,
+		  "skills": [
+            "ANIMOSITY_(ALL)"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/RenegadeOrcB.png",
+			"red": "assets/player_icons/Chaos Renegade/RenegadeOrcR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__RENEGADE_SKAVEN",
+		  "positionName": "Renégat Skaven",
+		  "cost": 50000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+            "ANIMOSITY_(ALL)"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/RenegadeSkavenB.png",
+			"red": "assets/player_icons/Chaos Renegade/RenegadeSkavenR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__RENEGADE_DARK_ELF",
+		  "positionName": "Renégat Elfe Noir",
+		  "cost": 65000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+            "ANIMOSITY_(ALL)"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/RenegadeDarkElfB.png",
+			"red": "assets/player_icons/Chaos Renegade/RenegadeDarkElfR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__RENEGADE_HUMAN_THROWER",
+		  "positionName": "Renégat Lanceur",
+		  "cost": 75000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"ANIMOSITY_(ALL)",
+			"PASS",
+            "SURE_HANDS"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+			"MUTATIONS",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/RenegadeHumanThrowerB.png",
+			"red": "assets/player_icons/Chaos Renegade/RenegadeHumanThrowerR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__TROLL",
+		  "positionName": "Troll",
+		  "cost": 115000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"ALWAYS_HUNGRY",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"PROJECTILE_VOMIT",
+			"REALLY_STUPID",
+			"REGENERATION",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+			"MUTATIONS",
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/TrollB.png",
+			"red": "assets/player_icons/Chaos Renegade/TrollR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__OGRE",
+		  "positionName": "Ogre",
+		  "cost": 140000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BONE_HEAD",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/OgreB.png",
+			"red": "assets/player_icons/Chaos Renegade/OgreR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__MINOTAUR",
+		  "positionName": "Minotaure",
+		  "cost": 150000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"FRENZY",
+			"HORNS",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "UNCHANNELLED_FURY"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/MinotaurB.png",
+			"red": "assets/player_icons/Chaos Renegade/MinotaurR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_RENEGADE__RAT_OGRE",
+		  "positionName": "Rat Ogre",
+		  "cost": 150000,
+		  "MA": 6,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"ANIMAL_SAVAGERY",
+			"FRENZY",
+			"LONER_4",
+			"MIGHTY_BLOW",
+            "PREHENSILE_TAIL"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Renegade/TrollB.png",
+			"red": "assets/player_icons/Chaos Renegade/TrollR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "CHAOS_CLASH"
+	  ],
+	  "icon": "assets/team_icons/chaos_renegades.png"
+	},
+	{
+	  "uid": "GNOME",
+	  "name": "Gnome",
+	  "rerollCost": 50000,
+	  "tier": "Niveau 4",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "GNOME__GNOME_LINEMAN",
+		  "positionName": "Trois-quart Gnome",
+		  "cost": 40000,
+		  "MA": 5,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 7,
+		  "skills": [
+			"JUMP_UP",
+			"RIGHT_STUFF",
+			"STUNTY",
+            "WRESTLE"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Gnome/GnomeLinemanB.png",
+			"red": "assets/player_icons/Gnome/GnomeLinemanR.png"
+		  }
+		},
+		{
+		  "uid": "GNOME__WOODLAND_FOX",
+		  "positionName": "Renard",
+		  "cost": 50000,
+		  "MA": 7,
+		  "ST": 2,
+		  "AG": 2,
+		  "PA": 6,
+		  "AV": 6,
+		  "skills": [
+			"DODGE",
+			"MY_BALL",
+			"SIDESTEP",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Gnome/WoodlandFoxB.png",
+			"red": "assets/player_icons/Gnome/WoodlandFoxR.png"
+		  }
+		},
+		{
+		  "uid": "GNOME__GNOME_ILLUSIONIST",
+		  "positionName": "Illusioniste",
+		  "cost": 50000,
+		  "MA": 5,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 7,
+		  "skills": [
+			"JUMP_UP",
+			"STUNTY",
+			"TRICKSTER",
+            "WRESTLE"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Gnome/GnomeIllusionistB.png",
+			"red": "assets/player_icons/Gnome/GnomeIllusionistR.png"
+		  }
+		},
+		{
+		  "uid": "GNOME__GNOME_BEASTMASTER",
+		  "positionName": "Gnome Beastmaster",
+		  "cost": 55000,
+		  "MA": 5,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"GUARD",
+			"JUMP_UP",
+			"STUNTY",
+            "WRESTLE"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Gnome/GnomeBeastmasterB.png",
+			"red": "assets/player_icons/Gnome/GnomeBeastmasterR.png"
+		  }
+		},
+		{
+		  "uid": "GNOME__ALTERN_FOREST_TREEMAN",
+		  "positionName": "Homme-Arbre",
+		  "cost": 120000,
+		  "MA": 2,
+		  "ST": 6,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 11,
+		  "skills": [
+			"MIGHTY_BLOW",
+			"STAND_FIRM",
+			"STRONG_ARM",
+			"TAKE_ROOT",
+			"THICK_SKULL",
+			"THROW_TEAMMATE",
+            "TIMMM_BER"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Gnome/AlternForestTreemanB.png",
+			"red": "assets/player_icons/Gnome/AlternForestTreemanR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+		"HALFLING_THIMBLE_CUP",
+        "WOODLAND_LEAGUE"
+	  ],
+	  "icon": "assets/team_icons/gnomes.png"
+	},
+	{
+	  "uid": "IMPERIAL_NOBILITY",
+	  "name": "Noblesse Impériale",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 2",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "IMPERIAL_NOBILITY__IMPERIAL_RETAINER",
+		  "positionName": "Imperial Suivant",
+		  "cost": 45000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+            "FEND"
+		  ],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Imperial Nobility/ImperialRetainerB.png",
+			"red": "assets/player_icons/Imperial Nobility/ImperialRetainerR.png"
+		  }
+		},
+		{
+		  "uid": "IMPERIAL_NOBILITY__IMPERIAL_THROWER",
+		  "positionName": "Imperial Lanceur",
+		  "cost": 75000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 2,
+		  "AV": 9,
+		  "skills": [
+			"GIVE_AND_GO",
+			"PASS",
+            "PRO"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Imperial Nobility/ImperialThrowerB.png",
+			"red": "assets/player_icons/Imperial Nobility/ImperialThrowerR.png"
+		  }
+		},
+		{
+		  "uid": "IMPERIAL_NOBILITY__BODYGUARD",
+		  "positionName": "Garde du Corps",
+		  "cost": 85000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"STAND_FIRM",
+            "WRESTLE"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "AGILITY"
+		  ],
+		  "max_quantity": 4,
+		  "icon": {
+			"blue": "assets/player_icons/Imperial Nobility/BodyguardB.png",
+			"red": "assets/player_icons/Imperial Nobility/BodyguardR.png"
+		  }
+		},
+		{
+		  "uid": "IMPERIAL_NOBILITY__NOBLE_BLITZER",
+		  "positionName": "Noble Blitzeur",
+		  "cost": 90000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+			"CATCH",
+            "PRO"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Imperial Nobility/NobleBlitzerB.png",
+			"red": "assets/player_icons/Imperial Nobility/NobleBlitzerR.png"
+		  }
+		},
+		{
+		  "uid": "IMPERIAL_NOBILITY__OGRE",
+		  "positionName": "Ogre",
+		  "cost": 140000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BONE_HEAD",
+			"LONER_3",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Imperial Nobility/OgreB.png",
+			"red": "assets/player_icons/Imperial Nobility/OgreR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "OLD_WORLD_CLASSIC"
+	  ],
+	  "icon": "assets/team_icons/imperial_nobility.png"
+	},
+	{
+	  "uid": "TOMB_KINGS",
+	  "name": "Rois des Tombes",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 2",
+	  "specialRules": [
+        "MASTERS_OF_UNDEATH"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "TOMB_KINGS__SKELETON_LINEMAN",
+		  "positionName": "Squelette Trois-quart",
+		  "cost": 40000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 8,
+		  "skills": [
+			"REGENERATION",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Khemri/Skeleton2B.png",
+			"red": "assets/player_icons/Khemri/Skeleton2R.png"
+		  }
+		},
+		{
+		  "uid": "TOMB_KINGS__TOMB_KINGS_THROWER",
+		  "positionName": "Tomb Kings Lanceur",
+		  "cost": 65000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"PASS",
+			"REGENERATION",
+			"SURE_HANDS",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Khemri/ThroRa2B.png",
+			"red": "assets/player_icons/Khemri/ThroRa2R.png"
+		  }
+		},
+		{
+		  "uid": "TOMB_KINGS__TOMB_KINGS_BLITZER",
+		  "positionName": "Tomb Kings Blitzeur",
+		  "cost": 85000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+			"REGENERATION",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Khemri/BlitzRa2B.png",
+			"red": "assets/player_icons/Khemri/BlitzRa2R.png"
+		  }
+		},
+		{
+		  "uid": "TOMB_KINGS__TOMB_GUARDIAN",
+		  "positionName": "Tomb Gardien",
+		  "cost": 115000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"BRAWLER",
+			"DECAY",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 4,
+		  "icon": {
+			"blue": "assets/player_icons/Khemri/Mummy1B.png",
+			"red": "assets/player_icons/Khemri/Mummy1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "SYLVANIAN_SPOTLIGHT"
+	  ],
+	  "icon": "assets/team_icons/undead.png"
+	},
+	{
+	  "uid": "UNDERWORLD_DENIZENS",
+	  "name": "Habitants des Bas-Fonds",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 1",
+	  "specialRules": [
+        "BRIBERY_AND_CORRUPTION"
+	  ],
+	  "cross_limit": [
+		{
+		  "max": 1,
+		  "in": [
+			"UNDERWORLD_DENIZENS__TROLL",
+            "UNDERWORLD_DENIZENS__RAT_OGRE"
+		  ]
+		}
+	  ],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "UNDERWORLD_DENIZENS__GOBLIN_LINEMAN",
+		  "positionName": "Trois-quart Gobelin",
+		  "cost": 40000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Underworld/UnderworldGoblin4B.png",
+			"red": "assets/player_icons/Underworld/UnderworldGoblin4R.png"
+		  }
+		},
+		{
+		  "uid": "UNDERWORLD_DENIZENS__SNOTLING_LINEMAN",
+		  "positionName": "Snotling Trois-quart",
+		  "cost": 15000,
+		  "MA": 5,
+		  "ST": 1,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 6,
+		  "skills": [
+			"DODGE",
+			"INSIGNIFICANT",
+			"RIGHT_STUFF",
+			"SIDESTEP",
+			"STUNTY",
+            "TITCHY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+            "GENERAL"
+		  ],
+		  "max_quantity": 6,
+		  "icon": {
+			"blue": "assets/player_icons/Underworld/UnderworldGoblin4B.png",
+			"red": "assets/player_icons/Underworld/UnderworldGoblin4R.png"
+		  }
+		},
+		{
+		  "uid": "UNDERWORLD_DENIZENS__SKAVEN_CLANRAT",
+		  "positionName": "Skaven Clanrat",
+		  "cost": 50000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+            "ANIMOSITY_(GOBLIN)"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 3,
+		  "icon": {
+			"blue": "assets/player_icons/Underworld/SkavenLineman1B.png",
+			"red": "assets/player_icons/Underworld/SkavenLineman1R.png"
+		  }
+		},
+		{
+		  "uid": "UNDERWORLD_DENIZENS__SKAVEN_THROWER",
+		  "positionName": "Skaven Lanceur",
+		  "cost": 80000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 2,
+		  "AV": 8,
+		  "skills": [
+			"ANIMOSITY_(GOBLIN)",
+			"PASS",
+            "SURE_HANDS"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+			"MUTATIONS",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Underworld/SkavenThrower1B.png",
+			"red": "assets/player_icons/Underworld/SkavenThrower1R.png"
+		  }
+		},
+		{
+		  "uid": "UNDERWORLD_DENIZENS__GUTTER_RUNNER",
+		  "positionName": "Gutter Coureur",
+		  "cost": 85000,
+		  "MA": 9,
+		  "ST": 2,
+		  "AG": 2,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"ANIMOSITY_(GOBLIN)",
+			"DODGE",
+            "STAB"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Underworld/SkavenLineman1B.png",
+			"red": "assets/player_icons/Underworld/SkavenLineman1R.png"
+		  }
+		},
+		{
+		  "uid": "UNDERWORLD_DENIZENS__SKAVEN_BLITZER",
+		  "positionName": "Skaven Blitzeur",
+		  "cost": 90000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"ANIMOSITY_(GOBLIN)",
+			"BLOCK",
+            "STRIP_BALL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Underworld/SkavenBlitzer1B.png",
+			"red": "assets/player_icons/Underworld/SkavenBlitzer1R.png"
+		  }
+		},
+		{
+		  "uid": "UNDERWORLD_DENIZENS__TROLL",
+		  "positionName": "Troll",
+		  "cost": 115000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"ALWAYS_HUNGRY",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"PROJECTILE_VOMIT",
+			"REALLY_STUPID",
+			"REGENERATION",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Underworld/Troll1B.png",
+			"red": "assets/player_icons/Underworld/Troll1R.png"
+		  }
+		},
+		{
+		  "uid": "UNDERWORLD_DENIZENS__RAT_OGRE",
+		  "positionName": "Rat Ogre",
+		  "cost": 150000,
+		  "MA": 6,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"ANIMAL_SAVAGERY",
+			"FRENZY",
+			"LONER_4",
+			"MIGHTY_BLOW",
+            "PREHENSILE_TAIL"
+		  ],
+		  "primaryAccess": [
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Underworld/Troll1B.png",
+			"red": "assets/player_icons/Underworld/Troll1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "UNDERWORLD_CHALLENGE"
+	  ],
+	  "icon": "assets/team_icons/underworld.png"
+	},
+	{
+	  "uid": "VAMPIRE",
+	  "name": "Vampire",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 2",
+	  "specialRules": [
+        "MASTERS_OF_UNDEATH"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "VAMPIRE__THRALL_LINEMAN",
+		  "positionName": "Esclave Trois-quart",
+		  "cost": 40000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Vampire/Thrall2B.png",
+			"red": "assets/player_icons/Vampire/Thrall2R.png"
+		  }
+		},
+		{
+		  "uid": "VAMPIRE__VAMPIRE_RUNNER",
+		  "positionName": "Vampire Coureur",
+		  "cost": 100000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"BLOODLUST_(2+)",
+			"HYPNOTIC_GAZE",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Vampire/VampireRunnerB.png",
+			"red": "assets/player_icons/Vampire/VampireRunnerR.png"
+		  }
+		},
+		{
+		  "uid": "VAMPIRE__VAMPIRE_THROWER",
+		  "positionName": "Vampire Lanceur",
+		  "cost": 110000,
+		  "MA": 6,
+		  "ST": 4,
+		  "AG": 2,
+		  "PA": 2,
+		  "AV": 9,
+		  "skills": [
+			"BLOODLUST_(2+)",
+			"HYPNOTIC_GAZE",
+			"PASS",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Vampire/VampireThrowerB.png",
+			"red": "assets/player_icons/Vampire/VampireThrowerR.png"
+		  }
+		},
+		{
+		  "uid": "VAMPIRE__VAMPIRE_BLITZER",
+		  "positionName": "Vampire Blitzeur",
+		  "cost": 110000,
+		  "MA": 6,
+		  "ST": 4,
+		  "AG": 2,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"BLOODLUST_(3+)",
+			"HYPNOTIC_GAZE",
+			"JUGGERNAUT",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Vampire/VampireBlitzerB.png",
+			"red": "assets/player_icons/Vampire/VampireBlitzerR.png"
+		  }
+		},
+		{
+		  "uid": "VAMPIRE__VARGHEIST",
+		  "positionName": "Vargheist",
+		  "cost": 150000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"BLOODLUST_(3+)",
+			"CLAWS",
+			"FRENZY",
+			"LONER_4",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Vampire/VargheistB.png",
+			"red": "assets/player_icons/Vampire/VargheistR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "SYLVANIAN_SPOTLIGHT"
+	  ],
+	  "icon": "assets/team_icons/vampires.png"
+	},
+	{
+	  "uid": "WOOD_ELF",
+	  "name": "Elfe Sylvain",
+	  "rerollCost": 50000,
+	  "tier": "Niveau 1",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "WOOD_ELF__WOOD_ELF_LINEMAN",
+		  "positionName": "Wood Elf Trois-quart",
+		  "cost": 65000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Wood Elf/WoodElfLinemanB.png",
+			"red": "assets/player_icons/Wood Elf/WoodElfLinemanR.png"
+		  }
+		},
+		{
+		  "uid": "WOOD_ELF__WOOD_ELF_THROWER",
+		  "positionName": "Wood Elf Lanceur",
+		  "cost": 85000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 2,
+		  "AV": 8,
+		  "skills": [
+			"PASS",
+            "SAFE_PAIR_OF_HANDS"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Wood Elf/WoodElfThrowerB.png",
+			"red": "assets/player_icons/Wood Elf/WoodElfThrowerR.png"
+		  }
+		},
+		{
+		  "uid": "WOOD_ELF__WOOD_ELF_CATCHER",
+		  "positionName": "Wood Elf Receveur",
+		  "cost": 90000,
+		  "MA": 8,
+		  "ST": 2,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"CATCH",
+			"DODGE",
+            "SPRINT"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Wood Elf/WoodElfCatcherB.png",
+			"red": "assets/player_icons/Wood Elf/WoodElfCatcherR.png"
+		  }
+		},
+		{
+		  "uid": "WOOD_ELF__WARDANCER",
+		  "positionName": "Danseur de Guerre",
+		  "cost": 130000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"BLOCK",
+			"DODGE",
+            "LEAP"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Wood Elf/WardancerB.png",
+			"red": "assets/player_icons/Wood Elf/WardancerR.png"
+		  }
+		},
+		{
+		  "uid": "WOOD_ELF__LOREN_FOREST_TREEMAN",
+		  "positionName": "Loren Forest Homme-Arbre",
+		  "cost": 120000,
+		  "MA": 2,
+		  "ST": 6,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 11,
+		  "skills": [
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"STAND_FIRM",
+			"STRONG_ARM",
+			"TAKE_ROOT",
+			"THICK_SKULL",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Wood Elf/LorenForestTreemanB.png",
+			"red": "assets/player_icons/Wood Elf/LorenForestTreemanR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+		"ELVEN_KINGDOMS_LEAGUE",
+        "WOODLAND_LEAGUE"
+	  ],
+	  "icon": "assets/team_icons/wood_elves.png"
+	},
+	{
+	  "uid": "AMAZON",
+	  "name": "Amazone",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 1",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "AMAZON__EAGLE_WARRIOR",
+		  "positionName": "Eagle Guerrier",
+		  "cost": 50000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+            "DODGE"
+		  ],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Amazon/Linewoman2B.png",
+			"red": "assets/player_icons/Amazon/Linewoman2R.png"
+		  }
+		},
+		{
+		  "uid": "AMAZON__PYTHON_WARRIOR",
+		  "positionName": "Python Guerrier",
+		  "cost": 80000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"ON_THE_BALL",
+			"PASS",
+            "SAFE_PASS"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Amazon/Thrower1B.png",
+			"red": "assets/player_icons/Amazon/Thrower1R.png"
+		  }
+		},
+		{
+		  "uid": "AMAZON__PIRANHA_WARRIOR",
+		  "positionName": "Piranha Guerrier",
+		  "cost": 90000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"HIT_AND_RUN",
+            "JUMP_UP"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Amazon/Catcher1B.png",
+			"red": "assets/player_icons/Amazon/Catcher1R.png"
+		  }
+		},
+		{
+		  "uid": "AMAZON__JAGUAR_WARRIOR",
+		  "positionName": "Jaguar Guerrier",
+		  "cost": 110000,
+		  "MA": 6,
+		  "ST": 4,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"DEFENSIVE",
+            "DODGE"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "AGILITY"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Amazon/Blitzer1B.png",
+			"red": "assets/player_icons/Amazon/Blitzer1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "LUSTRIAN_SUPERLEAGUE"
+	  ],
+	  "icon": "assets/team_icons/amazones.png"
+	},
+	{
+	  "uid": "BLACK_ORC",
+	  "name": "Orc Noir",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 3",
+	  "specialRules": [
+		"BRAWLIN_BRUTES",
+        "BRIBERY_AND_CORRUPTION"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "BLACK_ORC__GOBLIN_BRUISER",
+		  "positionName": "Gobelin Cogneur",
+		  "cost": 45000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+			"STUNTY",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Black Orc/GoblinBruiserB.png",
+			"red": "assets/player_icons/Black Orc/GoblinBruiserR.png"
+		  }
+		},
+		{
+		  "uid": "BLACK_ORC__BLACK_ORC",
+		  "positionName": "Black Orc",
+		  "cost": 90000,
+		  "MA": 4,
+		  "ST": 4,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BRAWLER",
+            "GRAB"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 6,
+		  "icon": {
+			"blue": "assets/player_icons/Black Orc/BlackOrcB.png",
+			"red": "assets/player_icons/Black Orc/BlackOrcR.png"
+		  }
+		},
+		{
+		  "uid": "BLACK_ORC__TRAINED_TROLL",
+		  "positionName": "Entraîné Troll",
+		  "cost": 115000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"ALWAYS_HUNGRY",
+			"MIGHTY_BLOW",
+			"PROJECTILE_VOMIT",
+			"REALLY_STUPID",
+			"REGENERATION",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Black Orc/TrainedTrollB.png",
+			"red": "assets/player_icons/Black Orc/TrainedTrollR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "BADLANDS_BRAWL"
+	  ],
+	  "icon": "assets/team_icons/black_orcs.png"
+	},
+	{
+	  "uid": "CHAOS_CHOSEN",
+	  "name": "Élus du Chaos",
+	  "rerollCost": 50000,
+	  "tier": "Niveau 3",
+	  "specialRules": [
+        "FAVOURED_OF_CHOOSE_ANY"
+	  ],
+	  "cross_limit": [
+		{
+		  "limit": 1,
+		  "limitedPlayerIds": [
+			"CHAOS_CHOSEN__TROLL",
+			"CHAOS_CHOSEN__OGRE",
+            "CHAOS_CHOSEN__MINOTAUR"
+		  ]
+		}
+	  ],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "CHAOS_CHOSEN__BEASTMEN_LINEMAN",
+		  "positionName": "Beastmen Trois-quart",
+		  "cost": 55000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"HORNS",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Chosen/BeastmanLinemanB.png",
+			"red": "assets/player_icons/Chaos Chosen/BeastmanLinemanR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_CHOSEN__CHAOS_CHOSEN",
+		  "positionName": "Chaos Chosen",
+		  "cost": 100000,
+		  "MA": 5,
+		  "ST": 4,
+		  "AG": 3,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+            "ARM_BAR"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 4,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Chosen/ChaosChosenB.png",
+			"red": "assets/player_icons/Chaos Chosen/ChaosChosenR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_CHOSEN__TROLL",
+		  "positionName": "Troll",
+		  "cost": 115000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"ALWAYS_HUNGRY",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"PROJECTILE_VOMIT",
+			"REALLY_STUPID",
+			"REGENERATION",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Chosen/TrollB.png",
+			"red": "assets/player_icons/Chaos Chosen/TrollR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_CHOSEN__OGRE",
+		  "positionName": "Ogre",
+		  "cost": 140000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BONE_HEAD",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Chosen/OgreB.png",
+			"red": "assets/player_icons/Chaos Chosen/OgreR.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_CHOSEN__MINOTAUR",
+		  "positionName": "Minotaure",
+		  "cost": 150000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"FRENZY",
+			"HORNS",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "UNCHANNELLED_FURY"
+		  ],
+		  "primaryAccess": [
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Chaos Chosen/MinotaurB.png",
+			"red": "assets/player_icons/Chaos Chosen/MinotaurR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "CHAOS_CLASH"
+	  ],
+	  "icon": "assets/team_icons/chaos_chosen.png"
+	},
+	{
+	  "uid": "CHAOS_DWARF",
+	  "name": "Nain du Chaos",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 1",
+	  "specialRules": [
+        "FAVOURED_OF_HASHUT"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "CHAOS_DWARF__HOBGOBLIN_LINEMAN",
+		  "positionName": "Hobgobelin Trois-quart",
+		  "cost": 40000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [],
+		  "primaryAccess": [
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/ChaosDwarf/Hobgoblin4B.png",
+			"red": "assets/player_icons/ChaosDwarf/Hobgoblin4R.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_DWARF__SNEAKY_STABBA",
+		  "positionName": "Sneaky Stabba",
+		  "cost": 60000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 5,
+		  "AV": 8,
+		  "skills": [
+			"SHADOWING",
+            "STAB"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/ChaosDwarf/Hobgoblin4B.png",
+			"red": "assets/player_icons/ChaosDwarf/Hobgoblin4R.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_DWARF__CHAOS_DWARF_BLOCKER",
+		  "positionName": "Chaos Dwarf Bloqueur",
+		  "cost": 70000,
+		  "MA": 4,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"BLOCK",
+			"IRON_HARD_SKIN",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "MUTATIONS"
+		  ],
+		  "max_quantity": 4,
+		  "icon": {
+			"blue": "assets/player_icons/ChaosDwarf/ChaosDwarfBlocker1B.png",
+			"red": "assets/player_icons/ChaosDwarf/ChaosDwarfBlocker1R.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_DWARF__FLAMESMITH",
+		  "positionName": "Flamesmith",
+		  "cost": 80000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"BRAWLER",
+			"BREATHE_FIRE",
+			"DISTURBING_PRESENCE",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "MUTATIONS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/ChaosDwarf/ChaosDwarfBlocker1B.png",
+			"red": "assets/player_icons/ChaosDwarf/ChaosDwarfBlocker1R.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_DWARF__BULL_CENTAUR",
+		  "positionName": "Centaure-Taureau",
+		  "cost": 130000,
+		  "MA": 6,
+		  "ST": 4,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"SPRINT",
+			"SURE_FEET",
+			"THICK_SKULL",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "MUTATIONS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/ChaosDwarf/BullCentaur2B.png",
+			"red": "assets/player_icons/ChaosDwarf/BullCentaur2R.png"
+		  }
+		},
+		{
+		  "uid": "CHAOS_DWARF__MINOTAUR",
+		  "positionName": "Minotaure",
+		  "cost": 150000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"FRENZY",
+			"HORNS",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "UNCHANNELLED_FURY"
+		  ],
+		  "primaryAccess": [
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/ChaosDwarf/Minotaur1B.png",
+			"red": "assets/player_icons/ChaosDwarf/Minotaur1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+		"BADLANDS_BRAWL",
+        "CHAOS_CLASH"
+	  ],
+	  "icon": "assets/team_icons/chaos_dwarves.png"
+	},
+	{
+	  "uid": "DARK_ELF",
+	  "name": "Elfe Noir",
+	  "rerollCost": 50000,
+	  "tier": "Niveau 1",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "DARK_ELF__DARK_ELF_LINEMAN",
+		  "positionName": "Elfe Noir Trois-quart",
+		  "cost": 65000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/DarkElf/Lineman1B.png",
+			"red": "assets/player_icons/DarkElf/Lineman1R.png"
+		  }
+		},
+		{
+		  "uid": "DARK_ELF__DARK_ELF_RUNNER",
+		  "positionName": "Elfe Noir Coureur",
+		  "cost": 80000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"DUMP_OFF",
+            "PUNT"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/DarkElf/Runner1B.png",
+			"red": "assets/player_icons/DarkElf/Runner1R.png"
+		  }
+		},
+		{
+		  "uid": "DARK_ELF__DARK_ELF_ASSASSIN",
+		  "positionName": "Elfe Noir Assassin",
+		  "cost": 90000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"HIT_AND_RUN",
+			"SHADOWING",
+            "STAB"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/DarkElf/Assassin1B.png",
+			"red": "assets/player_icons/DarkElf/Assassin1R.png"
+		  }
+		},
+		{
+		  "uid": "DARK_ELF__DARK_ELF_BLITZER",
+		  "positionName": "Elfe Noir Blitzeur",
+		  "cost": 105000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+            "BLOCK"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/DarkElf/Blitzer1B.png",
+			"red": "assets/player_icons/DarkElf/Blitzer1R.png"
+		  }
+		},
+		{
+		  "uid": "DARK_ELF__WITCH_ELF",
+		  "positionName": "Elfe Sorcière",
+		  "cost": 110000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"FRENZY",
+            "JUMP_UP"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/DarkElf/WitchElf1B.png",
+			"red": "assets/player_icons/DarkElf/WitchElf1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "ELVEN_KINGDOMS_LEAGUE"
+	  ],
+	  "icon": "assets/team_icons/dark_elves.png"
+	},
+	{
+	  "uid": "ELVEN_UNION",
+	  "name": "Union Elfique",
+	  "rerollCost": 50000,
+	  "tier": "Niveau 2",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "ELVEN_UNION__ELF_LINEMAN",
+		  "positionName": "Elf Trois-quart",
+		  "cost": 65000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+            "FUMBLEROOSKI"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Elf/Lineman2B.png",
+			"red": "assets/player_icons/Elf/Lineman2R.png"
+		  }
+		},
+		{
+		  "uid": "ELVEN_UNION__ELF_THROWER",
+		  "positionName": "Elf Lanceur",
+		  "cost": 75000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 2,
+		  "AV": 8,
+		  "skills": [
+			"HAIL_MARY_PASS",
+            "PASS"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Elf/Thrower1B.png",
+			"red": "assets/player_icons/Elf/Thrower1R.png"
+		  }
+		},
+		{
+		  "uid": "ELVEN_UNION__ELF_CATCHER",
+		  "positionName": "Elf Receveur",
+		  "cost": 100000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"CATCH",
+			"DIVING_CATCH",
+            "NERVES_OF_STEEL"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Elf/Catcher1B.png",
+			"red": "assets/player_icons/Elf/Catcher1R.png"
+		  }
+		},
+		{
+		  "uid": "ELVEN_UNION__ELF_BLITZER",
+		  "positionName": "Elf Blitzeur",
+		  "cost": 115000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+            "SIDESTEP"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Elf/Blitzer1B.png",
+			"red": "assets/player_icons/Elf/Blitzer1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "ELVEN_KINGDOMS_LEAGUE"
+	  ],
+	  "icon": "assets/team_icons/elven_union.png"
+	},
+	{
+	  "uid": "GOBLIN",
+	  "name": "Gobelin",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 4",
+	  "specialRules": [
+        "BRIBERY_AND_CORRUPTION"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "GOBLIN__GOBLIN_LINEMAN",
+		  "positionName": "Gobelin Trois-quart",
+		  "cost": 40000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Goblin/Goblin4B.png",
+			"red": "assets/player_icons/Goblin/Goblin4R.png"
+		  }
+		},
+		{
+		  "uid": "GOBLIN__LOONY",
+		  "positionName": "Loony",
+		  "cost": 40000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 6,
+		  "AV": 8,
+		  "skills": [
+			"CHAINSAW",
+			"NO_BALL",
+			"SECRET_WEAPON",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Goblin/Looney1B.png",
+			"red": "assets/player_icons/Goblin/Looney1R.png"
+		  }
+		},
+		{
+		  "uid": "GOBLIN__BOMMA",
+		  "positionName": "Bomma",
+		  "cost": 45000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"BOMBARDIER",
+			"DODGE",
+			"SECRET_WEAPON",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Goblin/Bombardier1B.png",
+			"red": "assets/player_icons/Goblin/Bombardier1R.png"
+		  }
+		},
+		{
+		  "uid": "GOBLIN__'OOLIGAN",
+		  "positionName": "'Ooligan",
+		  "cost": 60000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 5,
+		  "AV": 8,
+		  "skills": [
+			"DIRTY_PLAYER",
+			"DISTURBING_PRESENCE",
+			"DODGE",
+			"RIGHT_STUFF",
+			"STUNTY",
+            "TAUNT"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Goblin/Goblin4B.png",
+			"red": "assets/player_icons/Goblin/Goblin4R.png"
+		  }
+		},
+		{
+		  "uid": "GOBLIN__DOOM_DIVER",
+		  "positionName": "Doom Diver",
+		  "cost": 65000,
+		  "MA": 6,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 6,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+			"STUNTY",
+            "SWOOP"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Goblin/Fanatic1B.png",
+			"red": "assets/player_icons/Goblin/Fanatic1R.png"
+		  }
+		},
+		{
+		  "uid": "GOBLIN__FANATIC",
+		  "positionName": "Fanatic",
+		  "cost": 70000,
+		  "MA": 3,
+		  "ST": 7,
+		  "AG": 3,
+		  "PA": 6,
+		  "AV": 8,
+		  "skills": [
+			"BALL_AND_CHAIN",
+			"NO_BALL",
+			"SECRET_WEAPON",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Goblin/Fanatic1B.png",
+			"red": "assets/player_icons/Goblin/Fanatic1R.png"
+		  }
+		},
+		{
+		  "uid": "GOBLIN__POGOER",
+		  "positionName": "Pogoer",
+		  "cost": 75000,
+		  "MA": 7,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"POGO",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Goblin/Pogoer1B.png",
+			"red": "assets/player_icons/Goblin/Pogoer1R.png"
+		  }
+		},
+		{
+		  "uid": "GOBLIN__TRAINED_TROLL",
+		  "positionName": "Entraîné Troll",
+		  "cost": 115000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"ALWAYS_HUNGRY",
+			"MIGHTY_BLOW",
+			"PROJECTILE_VOMIT",
+			"REALLY_STUPID",
+			"REGENERATION",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Goblin/Troll2B.png",
+			"red": "assets/player_icons/Goblin/Troll2R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+		"BADLANDS_BRAWL",
+        "UNDERWORLD_CHALLENGE"
+	  ],
+	  "icon": "assets/team_icons/gobelings.png"
+	},
+	{
+	  "uid": "HALFLING",
+	  "name": "Halfling",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 4",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "HALFLING__HALFLING_HOPEFUL",
+		  "positionName": "Halfling Espoir",
+		  "cost": 30000,
+		  "MA": 5,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 7,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Halfling/Halfling5B.png",
+			"red": "assets/player_icons/Halfling/Halfling5R.png"
+		  }
+		},
+		{
+		  "uid": "HALFLING__HALFLING_HEFTY",
+		  "positionName": "Halfling Hefty",
+		  "cost": 50000,
+		  "MA": 5,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"FEND",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Halfling/Halfling5B.png",
+			"red": "assets/player_icons/Halfling/Halfling5R.png"
+		  }
+		},
+		{
+		  "uid": "HALFLING__HALFLING_CATCHER",
+		  "positionName": "Halfling Receveur",
+		  "cost": 55000,
+		  "MA": 5,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 7,
+		  "skills": [
+			"CATCH",
+			"DODGE",
+			"RIGHT_STUFF",
+			"SPRINT",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Halfling/Halfling5B.png",
+			"red": "assets/player_icons/Halfling/Halfling5R.png"
+		  }
+		},
+		{
+		  "uid": "HALFLING__ALTERN_FOREST_TREEMAN",
+		  "positionName": "Altern Forest Homme-Arbre",
+		  "cost": 120000,
+		  "MA": 2,
+		  "ST": 6,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 11,
+		  "skills": [
+			"MIGHTY_BLOW",
+			"STAND_FIRM",
+			"STRONG_ARM",
+			"TAKE_ROOT",
+			"THICK_SKULL",
+			"THROW_TEAMMATE",
+            "TIMMM_BER"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Halfling/Treeman2B.png",
+			"red": "assets/player_icons/Halfling/Treeman2R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+		"HALFLING_THIMBLE_CUP",
+        "WOODLAND_LEAGUE"
+	  ],
+	  "icon": "assets/team_icons/halfling.png"
+	},
+	{
+	  "uid": "HIGH_ELF",
+	  "name": "Haut Elfe",
+	  "rerollCost": 50000,
+	  "tier": "Niveau 1",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "HIGH_ELF__HIGH_ELF_LINEMAN",
+		  "positionName": "High Elf Trois-quart",
+		  "cost": 65000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/HighElf/Lineman2B.png",
+			"red": "assets/player_icons/HighElf/Lineman2R.png"
+		  }
+		},
+		{
+		  "uid": "HIGH_ELF__HIGH_ELF_THROWER",
+		  "positionName": "High Elf Lanceur",
+		  "cost": 100000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 2,
+		  "AV": 9,
+		  "skills": [
+			"CLOUD_BURSTER",
+			"PASS",
+            "SAFE_PASS"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/HighElf/Thrower1B.png",
+			"red": "assets/player_icons/HighElf/Thrower1R.png"
+		  }
+		},
+		{
+		  "uid": "HIGH_ELF__HIGH_ELF_CATCHER",
+		  "positionName": "High Elf Receveur",
+		  "cost": 90000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+            "CATCH"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 4,
+		  "icon": {
+			"blue": "assets/player_icons/HighElf/Catcher1B.png",
+			"red": "assets/player_icons/HighElf/Catcher1R.png"
+		  }
+		},
+		{
+		  "uid": "HIGH_ELF__HIGH_ELF_BLITZER",
+		  "positionName": "High Elf Blitzeur",
+		  "cost": 100000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 2,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+            "BLOCK"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/HighElf/Blitzer1B.png",
+			"red": "assets/player_icons/HighElf/Blitzer1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "ELVEN_KINGDOMS_LEAGUE"
+	  ],
+	  "icon": "assets/team_icons/high_elves.png"
+	},
+	{
+	  "uid": "KHORNE",
+	  "name": "Khorne",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 3",
+	  "specialRules": [
+		"BRAWLIN_BRUTES",
+        "FAVOURED_OF_KHORNE"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "KHORNE__BLOODBORN_MARAUDER",
+		  "positionName": "Bloodborn Maraudeur",
+		  "cost": 50000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+            "FRENZY"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Khorne/BloodbornMarauderB.png",
+			"red": "assets/player_icons/Khorne/BloodbornMarauderR.png"
+		  }
+		},
+		{
+		  "uid": "KHORNE__KHORNGOR",
+		  "positionName": "Khorngor",
+		  "cost": 70000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"HORNS",
+			"JUGGERNAUT",
+			"JUMP_UP",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "PASSING"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Khorne/KhorngorB.png",
+			"red": "assets/player_icons/Khorne/KhorngorR.png"
+		  }
+		},
+		{
+		  "uid": "KHORNE__BLOODSEEKER",
+		  "positionName": "Chercheur de Sang",
+		  "cost": 105000,
+		  "MA": 5,
+		  "ST": 4,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+            "FRENZY"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 4,
+		  "icon": {
+			"blue": "assets/player_icons/Khorne/BloodseekerB.png",
+			"red": "assets/player_icons/Khorne/BloodseekerR.png"
+		  }
+		},
+		{
+		  "uid": "KHORNE__BLOODSPAWN",
+		  "positionName": "Rejeton de Sang",
+		  "cost": 160000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"CLAWS",
+			"FRENZY",
+			"LONER_4",
+			"MIGHTY_BLOW",
+            "UNCHANNELLED_FURY"
+		  ],
+		  "primaryAccess": [
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Khorne/BloodspawnB.png",
+			"red": "assets/player_icons/Khorne/BloodspawnR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "CHAOS_CLASH"
+	  ],
+	  "icon": "assets/team_icons/khorne.png"
+	},
+	{
+	  "uid": "LIZARDMEN",
+	  "name": "Lizardman",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 1",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "LIZARDMAN__SKINK_LINEMAN",
+		  "positionName": "Saurus Trois-quart",
+		  "cost": 60000,
+		  "MA": 8,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+			"DEVIOUS",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Lizardman/Skink2B.png",
+			"red": "assets/player_icons/Lizardman/Skink2R.png"
+		  }
+		},
+		{
+		  "uid": "LIZARDMAN__CHAMELEON_SKINK",
+		  "positionName": "Chameleon Saurus",
+		  "cost": 70000,
+		  "MA": 7,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+			"ON_THE_BALL",
+			"SHADOWING",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Lizardman/Skink2B.png",
+			"red": "assets/player_icons/Lizardman/Skink2R.png"
+		  }
+		},
+		{
+		  "uid": "LIZARDMAN__SAURUS_BLOCKER",
+		  "positionName": "Saurus Bloqueur",
+		  "cost": 90000,
+		  "MA": 6,
+		  "ST": 4,
+		  "AG": 5,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"JUGGERNAUT",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "AGILITY"
+		  ],
+		  "max_quantity": 6,
+		  "icon": {
+			"blue": "assets/player_icons/Lizardman/Saurus2B.png",
+			"red": "assets/player_icons/Lizardman/Saurus2R.png"
+		  }
+		},
+		{
+		  "uid": "LIZARDMAN__KROXIGOR",
+		  "positionName": "Kroxigor",
+		  "cost": 140000,
+		  "MA": 6,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"BONE_HEAD",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"PREHENSILE_TAIL",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Lizardman/Kroxigor1B.png",
+			"red": "assets/player_icons/Lizardman/Kroxigor1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "LUSTRIAN_SUPERLEAGUE"
+	  ],
+	  "icon": "assets/team_icons/lizardmens.png"
+	},
+	{
+	  "uid": "NECROMANTIC_HORROR",
+	  "name": "Horreur Nécromantique",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 2",
+	  "specialRules": [
+        "MASTERS_OF_UNDEATH"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "NECROMANTIC_HORROR__ZOMBIE_LINEMAN",
+		  "positionName": "Zombie Trois-quart",
+		  "cost": 40000,
+		  "MA": 4,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"EYE_GOUGE",
+			"REGENERATION",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Necromantic/Zombie1B.png",
+			"red": "assets/player_icons/Necromantic/Zombie1R.png"
+		  }
+		},
+		{
+		  "uid": "NECROMANTIC_HORROR__GHOUL_RUNNER",
+		  "positionName": "Goule Coureur",
+		  "cost": 75000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Necromantic/Ghoul2B.png",
+			"red": "assets/player_icons/Necromantic/Ghoul2R.png"
+		  }
+		},
+		{
+		  "uid": "NECROMANTIC_HORROR__WRAITH",
+		  "positionName": "Wraith",
+		  "cost": 85000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+			"FOUL_APPEARANCE",
+			"NO_BALL",
+			"REGENERATION",
+            "SIDESTEP"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Necromantic/Wight1B.png",
+			"red": "assets/player_icons/Necromantic/Wight1R.png"
+		  }
+		},
+		{
+		  "uid": "NECROMANTIC_HORROR__FLESH_GOLEM",
+		  "positionName": "Golem de Chair",
+		  "cost": 110000,
+		  "MA": 4,
+		  "ST": 4,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"REGENERATION",
+			"STAND_FIRM",
+			"THICK_SKULL",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Necromantic/FleshGolem2B.png",
+			"red": "assets/player_icons/Necromantic/FleshGolem2R.png"
+		  }
+		},
+		{
+		  "uid": "NECROMANTIC_HORROR__WEREWOLF",
+		  "positionName": "Loup-Garou",
+		  "cost": 120000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"CLAWS",
+			"FRENZY",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Necromantic/Werewolf2B.png",
+			"red": "assets/player_icons/Necromantic/Werewolf2R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "SYLVANIAN_SPOTLIGHT"
+	  ],
+	  "icon": "assets/team_icons/necromantic_horror.png"
+	},
+	{
+	  "uid": "NORSE",
+	  "name": "Norse",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 1",
+	  "specialRules": [],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "NORSE__NORSE_RAIDER",
+		  "positionName": "Norse Raider",
+		  "cost": 50000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"BLOCK",
+			"DRUNKARD",
+			"THICK_SKULL",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Norse/Lineman2B.png",
+			"red": "assets/player_icons/Norse/Lineman2R.png"
+		  }
+		},
+		{
+		  "uid": "NORSE__BEER_BOAR",
+		  "positionName": "Beer Boar",
+		  "cost": 20000,
+		  "MA": 5,
+		  "ST": 1,
+		  "AG": 3,
+		  "PA": 6,
+		  "AV": 6,
+		  "skills": [
+			"DODGE",
+			"NO_BALL",
+			"PICK_ME_UP",
+			"STUNTY",
+            "TITCHY"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Norse/Runner1B.png",
+			"red": "assets/player_icons/Norse/Runner1R.png"
+		  }
+		},
+		{
+		  "uid": "NORSE__NORSE_BERSERKER",
+		  "positionName": "Norse Berserker",
+		  "cost": 90000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 5,
+		  "AV": 8,
+		  "skills": [
+			"BLOCK",
+			"FRENZY",
+            "JUMP_UP"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "PASSING"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Norse/Berserker1B.png",
+			"red": "assets/player_icons/Norse/Berserker1R.png"
+		  }
+		},
+		{
+		  "uid": "NORSE__VALKYRIE",
+		  "positionName": "Valkyrie",
+		  "cost": 95000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"CATCH",
+			"DAUNTLESS",
+			"PASS",
+            "STRIP_BALL"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Norse/Thrower1B.png",
+			"red": "assets/player_icons/Norse/Thrower1R.png"
+		  }
+		},
+		{
+		  "uid": "NORSE__ULFWERENER",
+		  "positionName": "Ulfwerener",
+		  "cost": 105000,
+		  "MA": 6,
+		  "ST": 4,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"FRENZY",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "AGILITY"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Norse/Ulfwerener1B.png",
+			"red": "assets/player_icons/Norse/Ulfwerener1R.png"
+		  }
+		},
+		{
+		  "uid": "NORSE__YHETEE",
+		  "positionName": "Yhetee",
+		  "cost": 140000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"CLAWS",
+			"DISTURBING_PRESENCE",
+			"FRENZY",
+			"LONER_4",
+            "UNCHANNELLED_FURY"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Norse/SnowTroll1B.png",
+			"red": "assets/player_icons/Norse/SnowTroll1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+		"CHAOS_CLASH",
+        "OLD_WORLD_CLASSIC"
+	  ],
+	  "icon": "assets/team_icons/norse.png"
+	},
+	{
+	  "uid": "NURGLE",
+	  "name": "Nurgle",
+	  "rerollCost": 60000,
+	  "tier": "Niveau 3",
+	  "specialRules": [
+		"BRAWLIN_BRUTES",
+        "FAVOURED_OF_NURGLE"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "NURGLE__ROTTER_LINEMAN",
+		  "positionName": "Rotter Trois-quart",
+		  "cost": 40000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"DECAY",
+            "PLAGUE_RIDDEN"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Nurgle/Rotter1B.png",
+			"red": "assets/player_icons/Nurgle/Rotter1R.png"
+		  }
+		},
+		{
+		  "uid": "NURGLE__PESTIGOR",
+		  "positionName": "Pestigor",
+		  "cost": 70000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"HORNS",
+			"PLAGUE_RIDDEN",
+			"REGENERATION",
+			"STEADY_FOOTING",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "PASSING"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Nurgle/Pestigor2B.png",
+			"red": "assets/player_icons/Nurgle/Pestigor2R.png"
+		  }
+		},
+		{
+		  "uid": "NURGLE__BLOATER",
+		  "positionName": "Bouffi",
+		  "cost": 110000,
+		  "MA": 4,
+		  "ST": 4,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"DISTURBING_PRESENCE",
+			"FOUL_APPEARANCE",
+			"PLAGUE_RIDDEN",
+			"REGENERATION",
+			"STAND_FIRM",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+			"MUTATIONS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 4,
+		  "icon": {
+			"blue": "assets/player_icons/Nurgle/NurgleWarrior1B.png",
+			"red": "assets/player_icons/Nurgle/NurgleWarrior1R.png"
+		  }
+		},
+		{
+		  "uid": "NURGLE__ROTSPAWN",
+		  "positionName": "Rejeton Pourri",
+		  "cost": 140000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"DISTURBING_PRESENCE",
+			"FOUL_APPEARANCE",
+			"LONER_4",
+			"MIGHTY_BLOW",
+			"PICK_ME_UP",
+			"PLAGUE_RIDDEN",
+			"REALLY_STUPID",
+			"REGENERATION",
+            "TENTACLES"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"GENERAL",
+            "MUTATIONS"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Nurgle/BeastOfNurgle1B.png",
+			"red": "assets/player_icons/Nurgle/BeastOfNurgle1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "CHAOS_CLASH"
+	  ],
+	  "icon": "assets/team_icons/nurgle.png"
+	},
+	{
+	  "uid": "OGRE",
+	  "name": "Ogre",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 4",
+	  "specialRules": [
+		"BRAWLIN_BRUTES",
+        "LOW_COST_LINEMEN"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "OGRE__GNOBLAR_LINEMAN",
+		  "positionName": "Gnoblar Trois-quart",
+		  "cost": 15000,
+		  "MA": 5,
+		  "ST": 1,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 6,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+			"SIDESTEP",
+			"STUNTY",
+            "TITCHY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+            "GENERAL"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Ogre/Snotling4B.png",
+			"red": "assets/player_icons/Ogre/Snotling4R.png"
+		  }
+		},
+		{
+		  "uid": "OGRE__OGRE_BLOCKER",
+		  "positionName": "Ogre Bloqueur",
+		  "cost": 140000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BONE_HEAD",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 5,
+		  "icon": {
+			"blue": "assets/player_icons/Ogre/Ogre5B.png",
+			"red": "assets/player_icons/Ogre/Ogre5R.png"
+		  }
+		},
+		{
+		  "uid": "OGRE__OGRE_RUNT_PUNTER",
+		  "positionName": "Ogre Runt Punter",
+		  "cost": 145000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 4,
+		  "AV": 10,
+		  "skills": [
+			"BONE_HEAD",
+			"KICK_TEAMMATE",
+			"MIGHTY_BLOW",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Ogre/Ogre5B.png",
+			"red": "assets/player_icons/Ogre/Ogre5R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+		"BADLANDS_BRAWL",
+        "WORLDS_EDGE_SUPERLEAGUE"
+	  ],
+	  "icon": "assets/team_icons/orcs.png"
+	},
+	{
+	  "uid": "OLD_WORLD_ALLIANCE",
+	  "name": "Alliance du Vieux Monde",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 1",
+	  "specialRules": [],
+	  "cross_limit": [
+		{
+		  "max": 1,
+		  "in": [
+			"OLD_WORLD_ALLIANCE__OGRE",
+            "OLD_WORLD_ALLIANCE__ALTERN_FOREST_TREEMAN"
+		  ]
+		}
+	  ],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__HUMAN_LINEMAN",
+		  "positionName": "Humain Trois-quart",
+		  "cost": 50000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/HumanLinemanB.png",
+			"red": "assets/player_icons/Old World Alliance/HumanLinemanR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__HALFLING_HOPEFUL",
+		  "positionName": "Halfling Espoir",
+		  "cost": 30000,
+		  "MA": 5,
+		  "ST": 2,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 7,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+            "AGILITY"
+		  ],
+		  "secondaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 3,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/HalflingHopefulB.png",
+			"red": "assets/player_icons/Old World Alliance/HalflingHopefulR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__HUMAN_CATCHER",
+		  "positionName": "Humain Receveur",
+		  "cost": 75000,
+		  "MA": 8,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 8,
+		  "skills": [
+			"CATCH",
+            "DODGE"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/HumanCatcherB.png",
+			"red": "assets/player_icons/Old World Alliance/HumanCatcherR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__DWARF_LINEMAN",
+		  "positionName": "Dwarf Trois-quart",
+		  "cost": 70000,
+		  "MA": 4,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BLOCK",
+			"DEFENSIVE",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+            "STRENGTH"
+		  ],
+		  "max_quantity": 3,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/DwarfLinemanB.png",
+			"red": "assets/player_icons/Old World Alliance/DwarfLinemanR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__HUMAN_THROWER",
+		  "positionName": "Humain Lanceur",
+		  "cost": 75000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 9,
+		  "skills": [
+			"PASS",
+            "SURE_HANDS"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/HumanThrowerB.png",
+			"red": "assets/player_icons/Old World Alliance/HumanThrowerR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__DWARF_RUNNER",
+		  "positionName": "Dwarf Coureur",
+		  "cost": 80000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"SPRINT",
+			"SURE_HANDS",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/DwarfRunnerB.png",
+			"red": "assets/player_icons/Old World Alliance/DwarfRunnerR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__HUMAN_BLITZER",
+		  "positionName": "Humain Blitzeur",
+		  "cost": 85000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+            "TACKLE"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "AGILITY"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/HumanBlitzerB.png",
+			"red": "assets/player_icons/Old World Alliance/HumanBlitzerR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__DWARF_BLITZER",
+		  "positionName": "Dwarf Blitzeur",
+		  "cost": 100000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 4,
+		  "AV": 10,
+		  "skills": [
+			"BLOCK",
+			"DIVING_TACKLE",
+			"TACKLE",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/DwarfBlitzerB.png",
+			"red": "assets/player_icons/Old World Alliance/DwarfBlitzerR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__TROLL_SLAYER",
+		  "positionName": "Troll Tueur",
+		  "cost": 95000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+			"DAUNTLESS",
+			"FRENZY",
+			"HATRED",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+            "AGILITY"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/TrollSlayerB.png",
+			"red": "assets/player_icons/Old World Alliance/TrollSlayerR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__OGRE",
+		  "positionName": "Ogre",
+		  "cost": 140000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 4,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"BONE_HEAD",
+			"LONER_3",
+			"MIGHTY_BLOW",
+			"THICK_SKULL",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/OgreB.png",
+			"red": "assets/player_icons/Old World Alliance/OgreR.png"
+		  }
+		},
+		{
+		  "uid": "OLD_WORLD_ALLIANCE__ALTERN_FOREST_TREEMAN",
+		  "positionName": "Altern Forest Homme-Arbre",
+		  "cost": 120000,
+		  "MA": 2,
+		  "ST": 6,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 11,
+		  "skills": [
+			"MIGHTY_BLOW",
+			"STAND_FIRM",
+			"STRONG_ARM",
+			"TAKE_ROOT",
+			"THICK_SKULL",
+			"THROW_TEAMMATE",
+            "TIMMM_BER"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 1,
+		  "icon": {
+			"blue": "assets/player_icons/Old World Alliance/AlternForestTreemanB.png",
+			"red": "assets/player_icons/Old World Alliance/AlternForestTreemanR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "OLD_WORLD_CLASSIC"
+	  ],
+	  "icon": "assets/team_icons/old_world_alliance.png"
+	},
+	{
+	  "uid": "SHAMBLING_UNDEAD",
+	  "name": "Morts-Vivants Titubants",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 2",
+	  "specialRules": [
+        "MASTERS_OF_UNDEATH"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "SHAMBLING_UNDEAD__SKELETON_LINEMAN",
+		  "positionName": "Squelette Trois-quart",
+		  "cost": 40000,
+		  "MA": 5,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 8,
+		  "skills": [
+			"REGENERATION",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Undead/Skeleton2B.png",
+			"red": "assets/player_icons/Undead/Skeleton2R.png"
+		  }
+		},
+		{
+		  "uid": "SHAMBLING_UNDEAD__ZOMBIE_LINEMAN",
+		  "positionName": "Zombie Trois-quart",
+		  "cost": 40000,
+		  "MA": 4,
+		  "ST": 3,
+		  "AG": 4,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"EYE_GOUGE",
+			"REGENERATION",
+            "UNSTEADY"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Undead/Zombie1B.png",
+			"red": "assets/player_icons/Undead/Zombie1R.png"
+		  }
+		},
+		{
+		  "uid": "SHAMBLING_UNDEAD__GHOUL_RUNNER",
+		  "positionName": "Goule Coureur",
+		  "cost": 75000,
+		  "MA": 7,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 3,
+		  "AV": 8,
+		  "skills": [
+			"DODGE",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "secondaryAccess": [
+			"DEVIOUS",
+			"PASSING",
+            "STRENGTH"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Undead/Ghoul2B.png",
+			"red": "assets/player_icons/Undead/Ghoul2R.png"
+		  }
+		},
+		{
+		  "uid": "SHAMBLING_UNDEAD__WIGHT_BLITZER",
+		  "positionName": "Revenant Blitzeur",
+		  "cost": 95000,
+		  "MA": 6,
+		  "ST": 3,
+		  "AG": 3,
+		  "PA": 5,
+		  "AV": 9,
+		  "skills": [
+			"BLOCK",
+			"REGENERATION",
+			"TACKLE",
+            "THICK_SKULL"
+		  ],
+		  "primaryAccess": [
+			"GENERAL",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Undead/Wight1B.png",
+			"red": "assets/player_icons/Undead/Wight1R.png"
+		  }
+		},
+		{
+		  "uid": "SHAMBLING_UNDEAD__MUMMY",
+		  "positionName": "Momie",
+		  "cost": 125000,
+		  "MA": 3,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 6,
+		  "AV": 10,
+		  "skills": [
+			"MIGHTY_BLOW",
+            "REGENERATION"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Undead/Mummy1B.png",
+			"red": "assets/player_icons/Undead/Mummy1R.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "SYLVANIAN_SPOTLIGHT"
+	  ],
+	  "icon": "assets/team_icons/undead.png"
+	},
+	{
+	  "uid": "SNOTLING",
+	  "name": "Snotling",
+	  "rerollCost": 70000,
+	  "tier": "Niveau 4",
+	  "specialRules": [
+		"BRIBERY_AND_CORRUPTION",
+		"LOW_COST_LINEMEN",
+        "SWARMING"
+	  ],
+	  "cross_limit": [],
+	  "allowedStaff": [
+		"APOTHECARY",
+		"CHEERLEADERS",
+        "COACH_ASSISTANTS"
+	  ],
+	  "availablePlayers": [
+		{
+		  "uid": "SNOTLING__SNOTLING_LINEMAN",
+		  "positionName": "Snotling Trois-quart",
+		  "cost": 15000,
+		  "MA": 5,
+		  "ST": 1,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 6,
+		  "skills": [
+			"DODGE",
+			"INSIGNIFICANT",
+			"RIGHT_STUFF",
+			"SIDESTEP",
+			"STUNTY",
+            "TITCHY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+            "GENERAL"
+		  ],
+		  "max_quantity": 16,
+		  "icon": {
+			"blue": "assets/player_icons/Snotling/SnotlingLinemanB.png",
+			"red": "assets/player_icons/Snotling/SnotlingLinemanR.png"
+		  }
+		},
+		{
+		  "uid": "SNOTLING__FUN-HOPPA",
+		  "positionName": "Fun-hoppa",
+		  "cost": 20000,
+		  "MA": 6,
+		  "ST": 1,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 6,
+		  "skills": [
+			"DODGE",
+			"POGO",
+			"RIGHT_STUFF",
+			"SIDESTEP",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+            "GENERAL"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Snotling/FunHoppaB.png",
+			"red": "assets/player_icons/Snotling/FunHoppaR.png"
+		  }
+		},
+		{
+		  "uid": "SNOTLING__STILTY_RUNNA",
+		  "positionName": "Stilty Runna",
+		  "cost": 20000,
+		  "MA": 6,
+		  "ST": 1,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 6,
+		  "skills": [
+			"DODGE",
+			"RIGHT_STUFF",
+			"SIDESTEP",
+			"SPRINT",
+            "STUNTY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+            "DEVIOUS"
+		  ],
+		  "secondaryAccess": [
+            "GENERAL"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Snotling/StiltyRunnaB.png",
+			"red": "assets/player_icons/Snotling/StiltyRunnaR.png"
+		  }
+		},
+		{
+		  "uid": "SNOTLING__FUNGUS_FLINGA",
+		  "positionName": "Fungus Flinga",
+		  "cost": 30000,
+		  "MA": 5,
+		  "ST": 1,
+		  "AG": 3,
+		  "PA": 4,
+		  "AV": 6,
+		  "skills": [
+			"BOMBARDIER",
+			"DODGE",
+			"RIGHT_STUFF",
+			"SECRET_WEAPON",
+			"SIDESTEP",
+			"STUNTY",
+            "TITCHY"
+		  ],
+		  "primaryAccess": [
+			"AGILITY",
+			"DEVIOUS",
+            "PASSING"
+		  ],
+		  "secondaryAccess": [
+            "GENERAL"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Snotling/FungusFlingaB.png",
+			"red": "assets/player_icons/Snotling/FungusFlingaR.png"
+		  }
+		},
+		{
+		  "uid": "SNOTLING__PUMP_WAGON",
+		  "positionName": "Chariot à Pompe",
+		  "cost": 100000,
+		  "MA": 5,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 6,
+		  "AV": 9,
+		  "skills": [
+			"DIRTY_PLAYER",
+			"JUGGERNAUT",
+			"MIGHTY_BLOW",
+			"REALLY_STUPID",
+            "STAND_FIRM"
+		  ],
+		  "primaryAccess": [
+			"DEVIOUS",
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+            "GENERAL"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Snotling/PumpWagonB.png",
+			"red": "assets/player_icons/Snotling/PumpWagonR.png"
+		  }
+		},
+		{
+		  "uid": "SNOTLING__TRAINED_TROLL",
+		  "positionName": "Entraîné Troll",
+		  "cost": 115000,
+		  "MA": 4,
+		  "ST": 5,
+		  "AG": 5,
+		  "PA": 5,
+		  "AV": 10,
+		  "skills": [
+			"ALWAYS_HUNGRY",
+			"MIGHTY_BLOW",
+			"PROJECTILE_VOMIT",
+			"REALLY_STUPID",
+			"REGENERATION",
+            "THROW_TEAMMATE"
+		  ],
+		  "primaryAccess": [
+            "STRENGTH"
+		  ],
+		  "secondaryAccess": [
+			"AGILITY",
+			"GENERAL",
+            "PASSING"
+		  ],
+		  "max_quantity": 2,
+		  "icon": {
+			"blue": "assets/player_icons/Snotling/TrainedTrollB.png",
+			"red": "assets/player_icons/Snotling/TrainedTrollR.png"
+		  }
+		}
+	  ],
+	  "leagues": [
+        "UNDERWORLD_CHALLENGE"
+	  ],
+	  "icon": "assets/team_icons/snots.png"
+	}
+  ]
+}

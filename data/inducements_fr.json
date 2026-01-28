@@ -1,0 +1,219 @@
+{
+  "bloodbowl_version": "2025",
+  "edition": "Third Season Edition",
+  "inducements": [
+    {
+      "uid": "PRAYERS_TO_NUFFLE",
+      "name": "Prieres a Nuffle",
+      "cost": 10,
+      "reducedCost": null,
+      "maxQuantity": 3,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Lancez un D16 (relancez les doublons) et consultez la table des Prieres a Nuffle pour des effets durant jusqu'a la fin du match."
+    },
+    {
+      "uid": "TEMP_AGENCY_CHEERLEADERS",
+      "name": "Pom-pom girls interimaires",
+      "cost": 5,
+      "reducedCost": null,
+      "maxQuantity": 5,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Augmente le nombre de Pom-pom girls de votre equipe de 1 par achat pour ce match uniquement."
+    },
+    {
+      "uid": "PART_TIME_ASSISTANT_COACHES",
+      "name": "Entraineurs assistants a temps partiel",
+      "cost": 20,
+      "reducedCost": null,
+      "maxQuantity": 5,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Augmente le nombre d'Entraineurs assistants de votre equipe de 1 par achat pour ce match uniquement."
+    },
+    {
+      "uid": "TEAM_MASCOT",
+      "name": "Mascotte d'equipe",
+      "cost": 25,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Accorde une relance d'equipe supplementaire utilisable uniquement sur un resultat de 4+ au D6 (sur 1-3, la relance est perdue). Permet aussi de relancer les 1 sur la table des Supporters."
+    },
+    {
+      "uid": "WEATHER_MAGE",
+      "name": "Mage meteorologue",
+      "cost": 25,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Une fois par match, le Mage peut lancer sur la table Meteo avec un modificateur de +2 ou -2 de votre choix."
+    },
+    {
+      "uid": "BLITZERS_BEST_KEGS",
+      "name": "Tonneaux de la meilleure biere",
+      "cost": 50,
+      "reducedCost": null,
+      "maxQuantity": 2,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Fournit un modificateur de +1 lors des jets pour recuperer les joueurs KO."
+    },
+    {
+      "uid": "CANOPIC_JAR",
+      "name": "Vase canope",
+      "cost": 50,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Au debut de chaque drive, lancez un D6 pour l'un des six effets differents (maledictions ou benedictions) qui durent jusqu'a la fin du drive."
+    },
+    {
+      "uid": "BRIBES",
+      "name": "Pots-de-vin",
+      "cost": 100,
+      "reducedCost": 50,
+      "maxQuantity": 3,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "reducedCostFor": ["BRIBERY_AND_CORRUPTION"],
+      "description": "Quand un joueur est expulse, lancez un D6. Sur 2+, le joueur n'est pas expulse. Un 1 naturel echoue toujours. Chaque Pot-de-vin ne peut etre utilise qu'une fois."
+    },
+    {
+      "uid": "EXTRA_TEAM_TRAINING",
+      "name": "Entrainement supplementaire",
+      "cost": 100,
+      "reducedCost": null,
+      "maxQuantity": 8,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Accorde une relance d'equipe supplementaire pour la duree du match."
+    },
+    {
+      "uid": "WANDERING_APOTHECARY",
+      "name": "Apothicaire itinerant",
+      "cost": 100,
+      "reducedCost": null,
+      "maxQuantity": 2,
+      "category": "COMMON",
+      "restrictedTo": ["APOTHECARY"],
+      "description": "Fonctionne exactement comme un Apothicaire d'equipe et peut etre utilise une fois par match. Disponible uniquement pour les equipes pouvant engager un Apothicaire."
+    },
+    {
+      "uid": "BRETONNIAN_PASTRIES",
+      "name": "Patisseries bretonniennes",
+      "cost": 15,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "A la fin de chaque drive, lancez un D6 pour un joueur KO. Sur 2+, le joueur va en Reserve. Sur 1, rien ne se passe."
+    },
+    {
+      "uid": "BRETONNIAN_DAMSEL",
+      "name": "Damoiselle bretonnienne",
+      "cost": 150,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Une fois par match, la Damoiselle peut lancer soit le sort Zap! soit le sort Vents Violents."
+    },
+    {
+      "uid": "MERCENARY_PLAYER",
+      "name": "Joueur mercenaire",
+      "cost": 30,
+      "reducedCost": null,
+      "maxQuantity": 3,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Engagez un joueur du roster d'une autre equipe a son cout de base +30 000 PO. Le Mercenaire gagne le trait Solitaire (4+). L'equipe ne peut pas depasser 16 joueurs."
+    },
+    {
+      "uid": "STAR_PLAYER",
+      "name": "Joueur vedette",
+      "cost": 0,
+      "reducedCost": null,
+      "maxQuantity": 2,
+      "category": "COMMON",
+      "restrictedTo": [],
+      "description": "Engagez un Joueur vedette a son cout indique. L'equipe ne peut pas depasser 16 joueurs au total. Les Joueurs vedettes ne peuvent pas gagner de PX ni recevoir le titre de MVP."
+    },
+    {
+      "uid": "MORTUARY_ASSISTANT",
+      "name": "Assistant mortuaire",
+      "cost": 100,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "SPECIALIZED",
+      "restrictedTo": ["MASTERS_OF_UNDEATH"],
+      "description": "Une fois par match, vous pouvez relancer un jet de Regeneration rate pour l'un de vos joueurs."
+    },
+    {
+      "uid": "PLAGUE_DOCTOR",
+      "name": "Medecin de peste",
+      "cost": 100,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "SPECIALIZED",
+      "restrictedTo": ["FAVOURED_OF_NURGLE"],
+      "description": "Une fois par match, vous pouvez soit relancer un jet de Regeneration rate, soit l'utiliser comme un Apothicaire."
+    },
+    {
+      "uid": "RIOTOUS_ROOKIES",
+      "name": "Recrues turbulentes",
+      "cost": 150,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "SPECIALIZED",
+      "restrictedTo": ["LOW_COST_LINEMEN"],
+      "description": "Apres avoir deploye votre equipe avec 11 joueurs (en utilisant des Journaliers si necessaire), lancez 2D3+1 pour des Journaliers supplementaires. Disponible pour les equipes avec des Trois-quarts coutant 50 000 PO ou moins."
+    },
+    {
+      "uid": "HALFLING_MASTER_CHEF",
+      "name": "Maitre cuisinier halfling",
+      "cost": 300,
+      "reducedCost": 100,
+      "maxQuantity": 1,
+      "category": "SPECIALIZED",
+      "restrictedTo": [],
+      "reducedCostFor": ["HALFLING_THIMBLE_CUP"],
+      "description": "Au debut de chaque mi-temps, lancez 3D6. Pour chaque 4+, gagnez +1 relance d'equipe et l'equipe adverse perd 1 relance d'equipe (minimum 0)."
+    },
+    {
+      "uid": "JOSEF_BUGMAN",
+      "name": "Josef Bugman",
+      "cost": 100,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "INFAMOUS_STAFF",
+      "restrictedTo": [],
+      "description": "Personnel d'encadrement infame. Josef fournit la biere XXXXXX de Bugman qui accorde des bonus speciaux a l'equipe."
+    },
+    {
+      "uid": "SPORTS_WIZARD",
+      "name": "Sorcier sportif",
+      "cost": 150,
+      "reducedCost": null,
+      "maxQuantity": 1,
+      "category": "WIZARD",
+      "restrictedTo": [],
+      "description": "Une fois par match, le Sorcier peut lancer l'un de ses sorts disponibles : Boule de feu ou Zap!"
+    },
+    {
+      "uid": "DODGY_LEAGUE_REP",
+      "name": "Representant de ligue louche",
+      "cost": 120,
+      "reducedCost": 80,
+      "maxQuantity": 1,
+      "category": "BIASED_REFEREE",
+      "restrictedTo": [],
+      "reducedCostFor": ["BRIBERY_AND_CORRUPTION"],
+      "description": "Arbitre partial qui peut etre convaincu de fermer les yeux. Fournit des avantages lors des aggressions et une protection contre les expulsions."
+    }
+  ]
+}

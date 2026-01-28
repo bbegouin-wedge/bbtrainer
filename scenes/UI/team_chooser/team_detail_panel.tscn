@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://de36h0ufbtsfq"]
+
+[ext_resource type="LabelSettings" uid="uid://ou3q6a1knl5k" path="res://scenes/UI/ui_presets/title.tres" id="1_at2j8"]
+[ext_resource type="Texture2D" uid="uid://clc1671q1qok1" path="res://assets/team_icons/dwarves.png" id="2_1ah4k"]
+
+[node name="team_detail_panel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -317.0
+offset_bottom = -264.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="team_name" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 28.0
+offset_right = 273.0
+offset_bottom = 100.0
+text = "amazones"
+label_settings = ExtResource("1_at2j8")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 107.0
+offset_right = 278.0
+offset_bottom = 343.0
+texture = ExtResource("2_1ah4k")
+expand_mode = 1

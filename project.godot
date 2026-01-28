@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0.009961832, 0.13618547, 0.23756689, 1)
 config/icon="res://icon.svg"
 
+[autoload]
+
+BloodBowlManager="*res://data/blood_bowl_manager.gd"
+
 [display]
 
 window/size/viewport_width=1920

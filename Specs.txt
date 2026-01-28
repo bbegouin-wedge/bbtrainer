@@ -5,4 +5,4 @@
 - implémenter un mode setup
 - gérer les coordonnées lors des rotations de terrains
 - faire les pastilles de couleur automatiques pour les compétences
-- drag and drop du terrain
+- drag and drop du terrain: done

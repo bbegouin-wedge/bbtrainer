@@ -10,28 +10,10 @@ func _ready():
 	# Activer la caméra
 	enabled = true
 
-func _process(delta):
-	# Navigation au clavier (optionnel)
-	var speed = 500
-	if Input.is_action_pressed("ui_right"):
-		position.x += speed * delta
-	if Input.is_action_pressed("ui_left"):
-		position.x -= speed * delta
-	if Input.is_action_pressed("ui_down"):
-		position.y += speed * delta
-	if Input.is_action_pressed("ui_up"):
-		position.y -= speed * delta
-	
-	# Zoom avec molette (optionnel)
-	if Input.is_action_just_pressed("zoom_in"):
-		zoom *= 0.9  # Zoom avant
-	if Input.is_action_just_pressed("zoom_out"):
-		zoom *= 1.1  # Zoom arrière
-
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MouseButton.MOUSE_BUTTON_WHEEL_UP:
-			if zoom.x >= 0.3:
+			if zoom.x >= 0.2:
 				zoom *= 0.9  # Zoom avant
 				return
 		elif event.button_index == MouseButton.MOUSE_BUTTON_WHEEL_DOWN:

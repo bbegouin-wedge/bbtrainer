@@ -1,0 +1,894 @@
+{
+  "bloodbowl_version": "2025",
+  "edition": "Troisième Saison",
+  "skills": [
+    {
+      "uid": "BLOCK",
+      "name": "Blocage",
+      "category": "GENERAL",
+      "type": "Élite",
+      "activation": "Active",
+      "description": "Un joueur avec cette Compétence peut choisir de ne pas être Mis à Terre lorsqu'un résultat Double Chute est appliqué lors d'une Action de Blocage dont il fait partie."
+    },
+    {
+      "uid": "DAUNTLESS",
+      "name": "Intrépidité",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur avec cette Compétence effectue une Action de Blocage contre un joueur adverse avec une Caractéristique de Force supérieure (avant l'application de tout modificateur), ce joueur peut lancer un D6 et ajouter sa propre Caractéristique de Force. Si le résultat est supérieur à la Caractéristique de Force non modifiée du joueur adverse, alors ce joueur augmente sa Caractéristique de Force non modifiée pour égaler celle du joueur adverse pour la durée de l'Action de Blocage. Les modificateurs sont ensuite appliqués normalement. Si ce joueur a également une Compétence qui lui permet d'effectuer plusieurs Actions de Blocage, comme la Compétence Frénésie, alors il doit faire un jet séparé pour chaque Action de Blocage."
+    },
+    {
+      "uid": "FEND",
+      "name": "Parade",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur avec cette Compétence est Repoussé suite à une Action de Blocage effectuée contre lui, alors le joueur adverse ne peut pas Suivre. Cette Compétence ne peut pas être utilisée contre un joueur avec le Trait Boulet et Chaîne ou contre un joueur avec la Compétence Juggernaut qui effectue une Action de Blitz."
+    },
+    {
+      "uid": "FRENZY",
+      "name": "Frénésie",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Chaque fois que ce joueur effectue une Action de Blocage, si la cible est Repoussée, alors ce joueur doit Suivre après l'Action de Blocage. Si, après que la cible soit Repoussée, elle est toujours Debout, alors ce joueur doit effectuer une seconde Action de Blocage ciblant le même joueur adverse et doit à nouveau Suivre si la cible est Repoussée. Si ce joueur effectue une Action de Blitz, effectuer une seconde Action de Blocage coûtera également au joueur une case de mouvement. Si ce joueur n'a plus de mouvement, alors il doit Se Précipiter. Si ce joueur ne peut pas Se Précipiter alors il ne peut pas effectuer la seconde Action de Blocage. Un joueur avec cette Compétence ne peut pas avoir les Compétences Saisie, Frappe Éclair ou Blocages Multiples."
+    },
+    {
+      "uid": "KICK",
+      "name": "Frappe précise",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Si ce joueur est désigné comme le botteur, alors lors du Coup d'Envoi, l'entraîneur de ce joueur peut choisir que le ballon ne dévie que de D3 cases plutôt que les D6 habituels."
+    },
+    {
+      "uid": "PRO",
+      "name": "Pro",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Durant l'activation de ce joueur, il peut tenter de relancer un seul dé. Cela peut être un dé lancé seul, dans le cadre d'un jet de dés multiples ou d'une réserve de dés. Pour utiliser cette Compétence, le joueur doit lancer un D6. Sur 3+, le dé peut être relancé ; sur 1-2, le dé ne peut pas être relancé. La Compétence ne peut pas être utilisée pour relancer un dé fait dans le cadre d'un Jet d'Armure, Jet de Blessure, Jet de Victime, un jet fait en dehors de l'activation du joueur, ou tout jet de dé non fait au nom du joueur (comme Argumenter l'Appel ou si la Foule Intervient). Une fois qu'un joueur a tenté d'utiliser cette Compétence, il ne peut pas utiliser une relance d'une autre source pour relancer le dé."
+    },
+    {
+      "uid": "STEADY_FOOTING",
+      "name": "Pied Sûr",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Chaque fois que ce joueur devrait être Mis à Terre ou Tomber, lancez un D6. Sur un 6, ce joueur n'est pas Mis à Terre ou ne Tombe pas. Si cela se produit pendant son activation, il peut continuer son activation normalement et aucun Turnover ne sera causé."
+    },
+    {
+      "uid": "STRIP_BALL",
+      "name": "Arracher le Ballon",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Blocage contre un joueur adverse tenant le ballon, si le joueur adverse est Repoussé, alors il lâchera le ballon dans la case où il a été Repoussé, moment où il Rebondira. Le ballon le fait alors, avant qu'ils ne deviennent À Terre (le cas échéant) mais après que ce joueur choisisse de Suivre."
+    },
+    {
+      "uid": "SURE_HANDS",
+      "name": "Prise Sûre",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut relancer le D6 lorsqu'il tente de ramasser le ballon, mais pas lors d'une Action Sécuriser le Ballon. De plus, la Compétence Arracher le Ballon ne peut pas être utilisée contre ce joueur."
+    },
+    {
+      "uid": "TACKLE",
+      "name": "Tacle",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur adverse tente d'Esquiver hors d'une case dans la Zone de Tacle de ce joueur, il ne peut pas utiliser la Compétence Esquive. De plus, lorsque ce joueur effectue une Action de Blocage contre un joueur adverse, le joueur adverse ne compte pas comme ayant la Compétence Esquive si un résultat Trébuchement est sélectionné."
+    },
+    {
+      "uid": "TAUNT",
+      "name": "Provocation",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur avec cette Compétence est Repoussé suite à une Action de Blocage effectuée contre lui, l'entraîneur de ce joueur peut choisir de faire Suivre le joueur adverse. Cette Compétence ne peut pas être utilisée contre un joueur adverse avec le Trait Prendre Racine qui est devenu Enraciné."
+    },
+    {
+      "uid": "WRESTLE",
+      "name": "Lutte",
+      "category": "GENERAL",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut utiliser cette Compétence lorsqu'un résultat Double Chute est appliqué, soit lorsqu'il effectue une Action de Blocage soit lorsqu'il est la cible d'une Action de Blocage. Au lieu d'appliquer le résultat Double Chute normalement, et indépendamment de toute autre Compétence que l'un ou l'autre joueur pourrait posséder, les deux joueurs sont placés À Terre."
+    },
+    {
+      "uid": "CATCH",
+      "name": "Réception",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut relancer tout Test d'Agilité raté lorsqu'il tente de Réceptionner le ballon."
+    },
+    {
+      "uid": "DEFENSIVE",
+      "name": "Défenseur",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Durant les Tours de votre adversaire, les joueurs adverses Marqués par ce joueur ne peuvent pas utiliser les Compétences Garde ou Coup de Pied Appuyé."
+    },
+    {
+      "uid": "DIVING_CATCH",
+      "name": "Réception Plongeante",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut tenter de Réceptionner le ballon s'il atterrit dans une case de sa Zone de Tacle suite à une Passe, une Touche ou un Coup d'Envoi. Il ne peut pas utiliser cette Compétence pour tenter de Réceptionner le ballon s'il atterrit dans une case de sa Zone de Tacle suite à un Rebond. De plus, ce joueur peut appliquer un modificateur de +1 à son Test d'Agilité lorsqu'il tente de Réceptionner le ballon dans le cadre d'une Action de Passe s'il se trouve dans la case cible."
+    },
+    {
+      "uid": "DIVING_TACKLE",
+      "name": "Tacle Plongeant",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur adverse tente de quitter la Zone de Tacle de ce joueur suite à une Esquive, un Saut ou un Bond, après que le Test d'Agilité ait été lancé et que tous les modificateurs et relances aient été appliqués, ce joueur peut utiliser cette Compétence. Appliquez immédiatement un modificateur de -2 au Test d'Agilité du joueur adverse et placez ce joueur À Terre dans la case que le joueur adverse a quittée. Si un joueur tente de quitter la Zone de Tacle de plusieurs joueurs avec cette Compétence en même temps, un seul de ces joueurs peut utiliser cette Compétence."
+    },
+    {
+      "uid": "DODGE",
+      "name": "Esquive",
+      "category": "AGILITY",
+      "type": "Élite",
+      "activation": "Active",
+      "description": "Une fois par Tour, ce joueur peut relancer un seul Test d'Agilité lorsqu'il tente d'Esquiver. De plus, cette Compétence affectera le résultat Trébuchement lorsqu'un joueur adverse effectue une Action de Blocage contre ce joueur."
+    },
+    {
+      "uid": "HIT_AND_RUN",
+      "name": "Frappe et court",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur avec cette Compétence effectue une Action de Blocage ou une Action Spéciale de Poignardage, après avoir entièrement résolu l'Action, il peut immédiatement se déplacer d'une case gratuite en ignorant les Zones de Tacle, tant qu'il est toujours Debout. Le joueur doit s'assurer qu'après ce mouvement gratuit, il n'est pas Marqué par ou Marquant un joueur adverse. Un joueur avec cette Compétence ne peut pas également avoir la Compétence Frénésie."
+    },
+    {
+      "uid": "JUMP_UP",
+      "name": "Rétablissement",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Cette Compétence peut être utilisée pendant qu'un joueur est À Terre. Un joueur À Terre avec cette Compétence peut se Relever gratuitement, sans avoir à dépenser 3 cases de mouvement pour le faire. De plus, un joueur À Terre avec cette Compétence peut déclarer une Action de Blocage tout en étant À Terre. S'il le fait, il doit effectuer un Test d'Agilité, en appliquant un modificateur de +1 au jet. Si le Test d'Agilité est réussi, il peut immédiatement se Relever et effectuer l'Action de Blocage. Si le Test d'Agilité échoue, alors le joueur reste À Terre et son activation se termine immédiatement."
+    },
+    {
+      "uid": "LEAP",
+      "name": "Saut",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Durant leur Action de Mouvement, un joueur avec cette Compétence peut tenter de Sauter par-dessus une seule case adjacente quel que soit ce qui se trouve dans la case. Sauter fonctionne de la même manière que Bondir, à l'exception que le joueur qui Saute peut réduire les modificateurs négatifs qu'il recevrait en Sautant de 1, jusqu'à un minimum de -1. Un joueur avec cette Compétence ne peut pas également avoir le Trait Bâton Sauteur."
+    },
+    {
+      "uid": "SAFE_PAIR_OF_HANDS",
+      "name": "Paire de Mains Sûres",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Si ce joueur devait être Mis à Terre, Tomber ou Placé À Terre alors qu'il est en possession du ballon, alors avant qu'il ne devienne À Terre, il peut placer le ballon dans n'importe quelle case adjacente inoccupée à la case dans laquelle il deviendra À Terre au lieu de faire Rebondir le ballon normalement."
+    },
+    {
+      "uid": "SIDESTEP",
+      "name": "Glissade Contrôlée",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Chaque fois que ce joueur est Repoussé pour quelque raison que ce soit, alors au lieu que l'entraîneur adverse choisisse où ce joueur est Repoussé, l'entraîneur de ce joueur peut choisir n'importe quelle case adjacente inoccupée dans laquelle ce joueur sera Repoussé à la place. S'il n'y a pas de cases adjacentes inoccupées, alors cette Compétence ne peut pas être utilisée."
+    },
+    {
+      "uid": "SPRINT",
+      "name": "Sprint",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Mouvement, il peut tenter de Se Précipiter une fois de plus qu'il ne serait normalement autorisé à le faire."
+    },
+    {
+      "uid": "SURE_FEET",
+      "name": "Équilibre",
+      "category": "AGILITY",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Une fois par Tour, ce joueur peut relancer un seul D6 lorsqu'il tente de Foncer."
+    },
+    {
+      "uid": "ACCURATE",
+      "name": "Lancer Précis",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Passe qui est une Passe Rapide ou une Passe Courte, ce joueur peut appliquer un modificateur de +1 au Test de Capacité de Passe."
+    },
+    {
+      "uid": "CANNONEER",
+      "name": "Canonnier",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Passe qui est une Passe Longue ou une Bombe Longue, ce joueur peut appliquer un modificateur de +1 au Test de Capacité de Passe."
+    },
+    {
+      "uid": "CLOUD_BURSTER",
+      "name": "Perce-Nuages",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Passe, les joueurs adverses ne peuvent pas tenter d'Intercepter le ballon."
+    },
+    {
+      "uid": "DUMP_OFF",
+      "name": "Délestage",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Chaque fois qu'un joueur adverse tente d'effectuer une Action de Blocage contre ce joueur, ou une Action Spéciale qui cible directement ce joueur, ce joueur peut utiliser cette Compétence. Lorsqu'il le fait, ce joueur peut immédiatement effectuer une Passe Rapide avant que l'Action le ciblant ne soit résolue. Cette Passe Rapide ne peut pas causer de Turnover mais suit par ailleurs toutes les règles normales pour faire une Passe Rapide. Une fois la Passe Rapide résolue, cette Action ciblant ce joueur continue."
+    },
+    {
+      "uid": "GIVE_AND_GO",
+      "name": "Passe dans la course",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Si ce joueur effectue une Action de Passe qui est une Passe Rapide, ou effectue une Action de Remise, alors, tant qu'un Turnover n'est pas causé, son activation ne se termine pas une fois la Passe ou la Remise résolue. Au lieu de cela, il peut continuer avec son Action de Mouvement en utilisant tout mouvement qu'il lui reste."
+    },
+    {
+      "uid": "HAIL_MARY_PASS",
+      "name": "Passe désespérée",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Passe ou une Action Spéciale de Lancer une Bombe, il peut déclarer n'importe quelle case du terrain comme case cible plutôt que d'utiliser la Règle de Portée. Effectuez un Test de Capacité de Passe normalement en traitant le lancer comme une Bombe Longue, et en traitant tout résultat de Passe Précise comme une Passe Imprécise. Une Passe de la Dernière Chance ne peut pas être interceptée."
+    },
+    {
+      "uid": "LEADER",
+      "name": "Chef",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Passive",
+      "description": "Dans une équipe qui a un ou plusieurs joueurs avec cette Compétence, sur le terrain au début d'une mi-temps, peut gagner une seule Relance d'Équipe supplémentaire - c'est ce qu'on appelle une Relance de Meneur. Une équipe ne peut gagner une Relance de Meneur que si elle a un joueur avec la Compétence Meneur sur le terrain, et si tous les joueurs avec cette Compétence sont retirés du jeu, soit comme Victime soit en étant Expulsés, avant que la Relance de Meneur ne soit utilisée, alors elle est perdue. Une Relance de Meneur suit toutes les règles habituelles des Relances d'Équipe standard, à l'exception qu'elle ne peut pas être perdue suite à l'Embauche d'un Chef Cuisinier."
+    },
+    {
+      "uid": "NERVES_OF_STEEL",
+      "name": "Nerfs d'Acier",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut ignorer tous les modificateurs pour être Marqué lors d'un Test d'Agilité pour Réceptionner le ballon, ou lors d'un Test d'Agilité pour Passer le ballon."
+    },
+    {
+      "uid": "ON_THE_BALL",
+      "name": "Sur le Ballon",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur adverse effectue une Action de Passe, après que la case cible ait été déclarée mais avant que le Test de Capacité de Passe ne soit lancé, ce joueur peut se déplacer jusqu'à 3 cases, suivant toutes les règles habituelles pour une Action de Mouvement, à l'exception qu'il ne peut pas Se Précipiter. Si ce joueur Tombe pendant ce Mouvement, alors son Mouvement se termine immédiatement et l'Action de Passe se résout. Si plusieurs joueurs ont cette Compétence, alors ils peuvent tous l'utiliser pendant la même Action de Passe, bien qu'ils doivent le faire un à la fois, et si l'un d'entre eux Tombe avant que les autres aient eu la chance de se Déplacer, alors ils ne peuvent pas le faire. De plus, durant la Séquence de Début d'Engagement après que le Coup d'Envoi Dévie mais avant que l'Événement de Coup d'Envoi ne soit lancé, un seul joueur Ouvert de l'équipe qui reçoit avec cette Compétence peut se Déplacer jusqu'à 3 cases, suivant toutes les règles habituelles pour une Action de Mouvement, à l'exception qu'il ne peut pas Se Précipiter. Un joueur ne peut pas utiliser cette Compétence si un Touchback est causé et ne peut pas se déplacer dans la moitié adverse. Si ce joueur Tombe pendant ce Mouvement, alors son Mouvement se termine immédiatement et l'Événement de Coup d'Envoi est lancé."
+    },
+    {
+      "uid": "PASS",
+      "name": "Passe",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut relancer tout Test de Capacité de Passe raté lors d'une Action de Passe."
+    },
+    {
+      "uid": "PUNT",
+      "name": "Dégagement",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut déclarer une Action Spéciale de Dégagement ; un seul joueur peut déclarer une Action Spéciale de Dégagement par Tour. Lorsqu'un joueur déclare une Action Spéciale de Dégagement, il est d'abord autorisé à effectuer une Action de Mouvement, bien qu'il ne puisse pas continuer à se déplacer après que l'Action Spéciale de Dégagement ait été résolue. Si après son Action de Mouvement ce joueur est en possession du ballon, il peut le Dégager sur le terrain. Positionnez le Gabarit de Touche sur ce joueur de manière à ce qu'il soit orienté vers l'une des deux Zones d'En-But ou l'une ou l'autre des Lignes de Touche. Lancez un D6 pour déterminer la direction dans laquelle le ballon est botté, puis un second D6 pour déterminer combien de cases dans cette direction le ballon voyagera. Si ce joueur a la Compétence Botter, il peut relancer l'un ou les deux de ces dés - bien qu'il doive décider de relancer la direction ou non avant de lancer pour la distance. Si le ballon atterrit dans une case contenant un joueur, alors il doit tenter de Réceptionner le ballon, sinon il Rebondira. Lors d'une Action Spéciale de Dégagement, aucun Turnover n'est causé si le ballon se retrouve au sol ; cependant, si après que l'Action Spéciale de Dégagement soit résolue le ballon est en possession d'un joueur adverse, ou dans la foule, un Turnover est causé."
+    },
+    {
+      "uid": "SAFE_PASS",
+      "name": "Passe assurée",
+      "category": "PASSING",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Si ce joueur obtient un 1 naturel lors d'un Test de Capacité de Passe, alors cela résultera en une Passe Trébuchée à la place, le joueur conserve la possession du ballon et son activation se termine immédiatement. Aucun Turnover n'est causé."
+    },
+    {
+      "uid": "ARM_BAR",
+      "name": "Clé de Bras",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Si un joueur adverse Tombe suite à une tentative d'Esquive, de Saut ou de Bond hors d'une case dans la Zone de Tacle de ce joueur, ce joueur peut utiliser cette Compétence. S'il le fait, il peut appliquer un modificateur de +1 soit au Jet d'Armure soit au Jet de Blessure. Ce modificateur peut être appliqué après que le jet ait été fait. Si le joueur adverse subit une Victime suite à une Esquive, un Saut ou un Bond raté hors d'une case dans la Zone de Tacle de ce joueur, alors ce joueur comptera comme ayant causé cette Victime et recevra des Points de Star Player appropriés. Si un joueur tente de quitter la Zone de Tacle de plusieurs joueurs avec cette Compétence en même temps, un seul de ces joueurs peut utiliser cette Compétence."
+    },
+    {
+      "uid": "BRAWLER",
+      "name": "Bagarreur",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur déclare une Action de Blocage, il peut relancer un seul résultat Double Chute."
+    },
+    {
+      "uid": "BREAK_TACKLE",
+      "name": "Esquive en force",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Une fois par Tour, lorsque ce joueur tente d'Esquiver, il peut appliquer un modificateur de +1 au Test d'Agilité s'il a une Caractéristique de Force de 3 ou moins, un modificateur de +2 au Test d'Agilité s'il a une Caractéristique de Force de 4, ou un modificateur de +3 au Test d'Agilité s'il a une Caractéristique de Force de 5 ou plus."
+    },
+    {
+      "uid": "BULLSEYE",
+      "name": "Dans le Mille",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Lancer un Coéquipier, si le résultat du lancer est un Lancer Superbe, alors le joueur lancé ne Déviera pas avant d'atterrir et atterrira plutôt dans la case cible. Un joueur sans le Trait Lancer un Coéquipier ne peut pas avoir cette Compétence."
+    },
+    {
+      "uid": "GRAB",
+      "name": "Projection",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur déclare une Action de Blocage, si le joueur adverse est Repoussé, alors l'entraîneur de ce joueur peut choisir n'importe quelle case adjacente inoccupée à la cible dans laquelle il sera Repoussé. S'il n'y a pas de cases adjacentes inoccupées, alors cette Compétence ne peut pas être utilisée. De plus, lorsque ce joueur effectue une Action de Blocage, les joueurs adverses ne peuvent pas utiliser la Compétence Pas de Côté. Un joueur avec cette Compétence ne peut pas avoir la Compétence Frénésie."
+    },
+    {
+      "uid": "GUARD",
+      "name": "Garde",
+      "category": "STRENGTH",
+      "type": "Élite",
+      "activation": "Active",
+      "description": "Ce joueur peut fournir des Assistances Offensives et Défensives lorsqu'un joueur effectue une Action de Blocage quel que soit le nombre de joueurs adverses qui Marquent ce joueur."
+    },
+    {
+      "uid": "JUGGERNAUT",
+      "name": "Juggernaut",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur déclare une Action de Blitz, il peut traiter tout résultat de Double Chute comme Repoussé pendant toute Action de Blocage qu'il effectue pendant l'Action de Blitz. De plus, lorsque ce joueur effectue une Action de Blocage dans le cadre d'une Action de Blitz, les joueurs adverses ne peuvent pas utiliser les Compétences Repoussoir, Tient Bon ou Lutte."
+    },
+    {
+      "uid": "MIGHTY_BLOW",
+      "name": "Chataîgne",
+      "category": "STRENGTH",
+      "type": "Élite",
+      "activation": "Active",
+      "description": "Chaque fois que ce joueur Met à Terre un joueur adverse lors d'une Action de Blocage, même si ce joueur est également Mis à Terre, il peut appliquer un modificateur de +1 soit au Jet d'Armure soit au Jet de Blessure. Ce modificateur peut être appliqué après que le jet ait été fait."
+    },
+    {
+      "uid": "MULTIPLE_BLOCK",
+      "name": "Blocages Multiples",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur déclare une Action de Blocage, il peut effectuer deux Actions de Blocage ciblant chacune un joueur adverse différent qu'il Marque. S'il le fait, alors ce joueur réduira sa Caractéristique de Force de 2 pour la durée des Actions de Blocage. Ces Actions de Blocage se produisent simultanément, bien que vous puissiez souhaiter les lancer séparément pour plus de clarté. Cela signifie que les deux Actions de Blocage sont résolues entièrement, même si l'une d'entre elles résulte en un Turnover. Ce joueur ne peut pas Suivre pendant l'une ou l'autre de ces Actions de Blocage. Un joueur avec cette Compétence ne peut pas également avoir la Compétence Frénésie."
+    },
+    {
+      "uid": "STAND_FIRM",
+      "name": "Stabilité",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur devrait être Repoussé lors d'une Action de Blocage, y compris lors d'une Poussée en Chaîne, il peut choisir de ne pas être Repoussé et de rester dans sa case actuelle. Utiliser cette Compétence n'empêchera pas un joueur avec la Compétence Frénésie d'effectuer une seconde Action de Blocage, tant que ce joueur est toujours Debout."
+    },
+    {
+      "uid": "STRONG_ARM",
+      "name": "Bras Musclé",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Lancer un Coéquipier, ce joueur peut appliquer un modificateur de +1 au Test de Capacité de Passe. Un joueur sans le Trait Lancer un Coéquipier ne peut pas avoir cette Compétence."
+    },
+    {
+      "uid": "THICK_SKULL",
+      "name": "Crâne Épais",
+      "category": "STRENGTH",
+      "type": "Standard",
+      "activation": "Passive",
+      "description": "Lorsqu'un Jet de Blessure est fait pour ce joueur, il ne sera Assommé que sur un jet de 9 ; un jet de 8 sera traité comme un résultat Sonné. Si ce joueur a également le Trait Minuscule, alors il ne sera Assommé que sur un jet de 8 ; un jet de 7 sera traité comme un résultat Sonné."
+    },
+    {
+      "uid": "DIRTY_PLAYER",
+      "name": "Joueur Vicieux",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Faute, il peut appliquer un modificateur de +1 soit au Jet d'Armure soit au Jet de Blessure. Ce modificateur doit être appliqué après que le jet ait été fait."
+    },
+    {
+      "uid": "EYE_GOUGE",
+      "name": "Fourchette",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur adverse est Repoussé par ce joueur, le joueur adverse ne peut pas fournir d'Assistances Offensives ou Défensives jusqu'à ce qu'il soit activé la prochaine fois."
+    },
+    {
+      "uid": "FUMBLEROOSKI",
+      "name": "Fumblerooski",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Mouvement alors qu'il est en possession du ballon, il peut choisir de placer le ballon au sol dans n'importe quelle case dans laquelle il se déplace pendant son Action de Mouvement. Cela ne causera pas de Turnover."
+    },
+    {
+      "uid": "LETHAL_FLIGHT",
+      "name": "Vol Mortel",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est lancé dans le cadre d'une Action de Lancer un Coéquipier, s'il atterrit dans une case qui contient un joueur adverse, y compris s'il Rebondit dans une case contenant un joueur adverse, et que le joueur adverse est Mis à Terre, alors il peut appliquer un modificateur de +1 soit au Jet d'Armure soit au Jet de Blessure. Ce modificateur peut être appliqué après que le jet ait été fait. Si un joueur adverse subit une Victime suite au fait d'être Mis à Terre par le joueur lancé avec cette Compétence, alors ce joueur comptera comme ayant causé cette Victime et recevra des Points de Star Player appropriés. Un joueur sans le Trait Bonne Taille ne peut pas avoir cette Compétence."
+    },
+    {
+      "uid": "LONE_FOULER",
+      "name": "Agresseur Solitaire",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur effectue une Action de Faute, s'il n'y a pas de joueurs fournissant une Assistance Offensive ou Défensive, alors ce joueur peut relancer un Jet d'Armure raté."
+    },
+    {
+      "uid": "PILE_DRIVER",
+      "name": "Marteau Pilon",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur adverse est Mis à Terre par ce joueur lors d'une Action de Blocage, ce joueur peut effectuer une Action de Faute gratuite contre le joueur adverse tant qu'il est toujours Debout et ne Marque pas le joueur adverse. Ce joueur est alors Placé À Terre et son activation se termine immédiatement."
+    },
+    {
+      "uid": "PUT_THE_BOOT_IN",
+      "name": "Coup de Pied Appuyé",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut fournir des Assistances Offensives lorsqu'un coéquipier effectue une Action de Faute quel que soit le nombre de joueurs adverses qui Marquent ce joueur."
+    },
+    {
+      "uid": "QUICK_FOUL",
+      "name": "Agression Éclair",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "L'activation de ce joueur ne se termine pas après avoir effectué une Action de Faute, et il peut continuer avec son Action de Mouvement avec tout mouvement qu'il lui reste."
+    },
+    {
+      "uid": "SABOTEUR",
+      "name": "Saboteur",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur adverse est Mis à Terre suite à l'Action de Blocage d'un joueur adverse, avant que le Jet d'Armure ne soit fait, il peut lancer un D6. Sur 1-3, rien ne se passe et le Jet d'Armure est fait normalement. Sur 4+, l'arme de Sabotage de ce joueur se déclenche et le joueur adverse est également Mis à Terre, bien que cela ne causera pas de Turnover à moins que le joueur adverse ne tienne le ballon. Si l'arme de Sabotage de ce joueur se déclenche, alors il est automatiquement Assommé et le Jet d'Armure n'est pas fait pour lui. Un joueur sans le Trait Arme Secrète ne peut pas avoir cette Compétence."
+    },
+    {
+      "uid": "SHADOWING",
+      "name": "Poursuite",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Chaque fois qu'un joueur adverse tente d'Esquiver hors d'une case dans la Zone de Tacle de ce joueur, ce joueur peut utiliser cette Compétence. Lorsque ce joueur utilise cette Compétence, lancez un D6. Sur 1-3, rien ne se passe. Sur 4+, ce joueur est immédiatement placé dans la case que le joueur adverse a quittée. Ce joueur ne peut utiliser cette Compétence qu'un nombre de fois par Tour égal à son MA. Si un joueur tente de quitter la Zone de Tacle de plusieurs joueurs avec cette Compétence en même temps, un seul de ces joueurs peut utiliser cette Compétence."
+    },
+    {
+      "uid": "SNEAKY_GIT",
+      "name": "Sournois",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur n'est pas Expulsé lors d'une Action de Faute si un double naturel est lancé pour le Jet d'Armure, tant que l'Armure du joueur cible n'est pas cassée. Si l'Armure du joueur cible est cassée, ce joueur sera toujours Expulsé normalement."
+    },
+    {
+      "uid": "VIOLENT_INNOVATOR",
+      "name": "Innovateur Violent",
+      "category": "DEVIOUS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Si un joueur adverse subit une Victime suite à une Action Spéciale effectuée par ce joueur, ce joueur gagnera des Points de Star Player pour avoir causé une Victime de manière appropriée. Un joueur ne peut avoir cette Compétence que s'il a un Trait qui lui permet d'effectuer une Action Spéciale."
+    },
+    {
+      "uid": "BIG_HAND",
+      "name": "Main Démeusurée",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur ignore tous les modificateurs négatifs lorsqu'il tente de ramasser le ballon."
+    },
+    {
+      "uid": "CLAWS",
+      "name": "Griffes",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Passive",
+      "description": "Chaque fois qu'un Jet d'Armure est fait pour un joueur adverse qui a été Mis à Terre par ce joueur lors d'une Action de Blocage, même si ce joueur est également Mis à Terre, alors tout jet d'un 8 naturel ou plus pour le Jet d'Armure cassera l'Armure du joueur adverse quelle que soit sa Valeur d'Armure réelle."
+    },
+    {
+      "uid": "DISTURBING_PRESENCE",
+      "name": "Présence Perturbante",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Passive",
+      "description": "Tout joueur adverse qui effectue une Action de Passe, une Action de Lancer un Coéquipier ou une Action Spéciale de Lancer une Bombe, ou tente d'Intercepter ou de Réceptionner le ballon, applique un modificateur de -1 au Test de Capacité de Passe ou au Test d'Agilité pour chaque joueur de son équipe avec cette Compétence dans un rayon de 3 cases."
+    },
+    {
+      "uid": "EXTRA_ARMS",
+      "name": "Bras Supplémentaires",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur applique un modificateur de +1 au Test d'Agilité chaque fois qu'il tente de Réceptionner, Ramasser ou Intercepter le ballon."
+    },
+    {
+      "uid": "FOUL_APPEARANCE",
+      "name": "Répulsion",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Passive",
+      "description": "Chaque fois qu'un joueur adverse tente d'effectuer une Action de Blocage contre ce joueur, ou une Action Spéciale qui cible directement ce joueur, il doit lancer un D6 avant que tout autre dé ne soit lancé. Sur 2+, l'Action de Blocage continue normalement. Sur 1, l'Action de Blocage est immédiatement annulée et l'activation du joueur adverse se termine immédiatement."
+    },
+    {
+      "uid": "HORNS",
+      "name": "Cornes",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Chaque fois que ce joueur déclare une Action de Blitz, alors il applique un modificateur de +1 à sa Caractéristique de Force pour toute Action de Blocage effectuée pendant cette Action de Blitz."
+    },
+    {
+      "uid": "IRON_HARD_SKIN",
+      "name": "Peau de Fer",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Passive",
+      "description": "Les joueurs adverses ne peuvent pas appliquer de modificateurs lors d'un Jet d'Armure contre ce joueur. De plus, la Compétence Griffes ne peut pas être utilisée contre ce joueur."
+    },
+    {
+      "uid": "MONSTROUS_MOUTH",
+      "name": "Gueule Monstrueuse",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est activé, il peut déclarer une Action Spéciale de Morsure ; il n'y a pas de limite au nombre de joueurs qui peuvent déclarer cette Action Spéciale par Tour. Lorsque ce joueur déclare une Action Spéciale de Morsure, il peut sélectionner un joueur adverse Debout qu'il Marque et lancer un D6. Sur 1-3, rien ne se passe. Sur 4+, le joueur adverse est considéré comme Mordu. Tant qu'il est Mordu, le joueur adverse ne peut pas quitter la case dans laquelle il se trouve tant que ce joueur continue de le Marquer. Cette condition se termine immédiatement si ce joueur ne Marque plus le joueur adverse pour quelque raison que ce soit. Ce joueur peut utiliser l'Action Spéciale de Morsure pour remplacer l'Action de Blocage effectuée dans le cadre d'une Action de Blitz s'il le souhaite, bien que son activation se terminera toujours dès qu'il aura effectué l'Action Spéciale de Morsure. De plus, la Compétence Arracher le Ballon ne peut pas être utilisée contre ce joueur."
+    },
+    {
+      "uid": "PREHENSILE_TAIL",
+      "name": "Queue Préhensile",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur adverse tente d'Esquiver, de Bondir ou de Sauter hors d'une case dans la Zone de Tacle de ce joueur, il applique un modificateur supplémentaire de -1 au Test d'Agilité. Si un joueur tente de quitter la Zone de Tacle de plusieurs joueurs avec cette Compétence en même temps, un seul de ces joueurs peut utiliser cette Compétence."
+    },
+    {
+      "uid": "TENTACLES",
+      "name": "Tentacules",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Lorsqu'un joueur adverse tente d'Esquiver, de Bondir ou de Sauter hors d'une case dans la Zone de Tacle de ce joueur, ce joueur peut utiliser cette Compétence. Lorsqu'un joueur utilise cette Compétence, il lance un D6 et ajoute sa Caractéristique de Force au jet ; il soustrait ensuite la Caractéristique de Force du joueur adverse du résultat. Si le résultat est de 6 ou plus, ou si le jet est un 6 naturel, alors le joueur adverse ne quitte pas la case. Il est arrêté dans sa course et son activation se termine. Si le résultat est de 5 ou moins, ou si le jet est un 1 naturel, cette Compétence n'a aucun effet. Si un joueur tente de quitter la Zone de Tacle de plusieurs joueurs avec cette Compétence en même temps, un seul de ces joueurs peut utiliser cette Compétence."
+    },
+    {
+      "uid": "TWO_HEADS",
+      "name": "Deux Têtes",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut appliquer un modificateur de +1 au Test d'Agilité chaque fois qu'il tente d'Esquiver."
+    },
+    {
+      "uid": "VERY_LONG_LEGS",
+      "name": "Très Longues Jambes",
+      "category": "MUTATIONS",
+      "type": "Standard",
+      "activation": "Active",
+      "description": "Ce joueur peut appliquer un modificateur de +1 au Test d'Agilité chaque fois qu'il tente de Sauter ou de Bondir, et peut appliquer un modificateur de +2 au Test d'Agilité chaque fois qu'il tente d'Intercepter le ballon. De plus, ce joueur ignore la Compétence Perce-Nuages."
+    },
+    {
+      "uid": "ALWAYS_HUNGRY",
+      "name": "Toujours Affamé",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Chaque fois que ce joueur effectue une Action de Lancer un Coéquipier, avant de faire le Test de Capacité de Passe, il doit lancer un D6. Sur 2+, il peut continuer avec l'Action de Lancer un Coéquipier normalement. Sur 1, le joueur tentera de manger son coéquipier - il doit lancer un D6 supplémentaire. Sur 2+, le coéquipier se libérera et l'Action de Lancer un Coéquipier résultera automatiquement en un Lancer Raté. Sur 1, le joueur mangera son coéquipier - retirez-le immédiatement de votre Liste d'Équipe. Aucun Apothicaire ne peut être utilisé pour essayer de le sauver, et aucun jet de Régénération ne peut être fait. Si le coéquipier était en possession du ballon, il rebondira de la case occupée par ce joueur. Un turnover est alors causé."
+    },
+    {
+      "uid": "ANIMAL_SAVAGERY",
+      "name": "Sauvagerie Animale",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur est activé, après avoir déclaré son action, il doit lancer un D6. Il peut appliquer un modificateur de +2 au jet s'il a déclaré une Action de Blocage ou une Action de Blitz. Sur 4+, le joueur peut effectuer l'action déclarée normalement. Sur 1-3, ce joueur s'en prend à l'un de ses coéquipiers. Choisissez un coéquipier Debout adjacent à ce joueur ; le joueur choisi est immédiatement Mis à Terre. Cela ne causera pas de Turnover à moins que le joueur ne tienne le ballon. Si ce joueur a soit la Compétence Griffes soit Coup Puissant, alors il doit les utiliser lors du Jet d'Armure pour le joueur Mis à Terre. Si ce joueur obtient 1-3 et qu'il n'y a pas de coéquipiers Debout adjacents à lui, alors il est Distrait."
+    },
+    {
+      "uid": "ANIMOSITY",
+      "name": "Animosité",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Chaque fois que ce joueur tente d'effectuer une Action de Passe ou une Action de Remise à un coéquipier avec le même Mot-clé que celui indiqué entre parenthèses, lancez un D6. Sur 1, le joueur refuse d'effectuer l'action et son activation se termine immédiatement. Certains joueurs peuvent avoir le Trait Animosité (tous), auquel cas ils appliqueront cette règle à tous leurs coéquipiers, quels que soient les Mots-clés qu'ils ont."
+    },
+    {
+      "uid": "BALL_AND_CHAIN",
+      "name": "Boulet et Chaîne",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est activé, la seule action qu'il peut annoncer est une action spéciale Boulet et Chaîne. Lorsqu'un joueur effectue une action spéciale Boulet et Chaîne, placez le gabarit de retour sur ce joueur, face à l'une des zones d'en-but ou l'une des lignes de touche, puis lancez un D6 et déplacez ce joueur vers la case indiquée par le gabarit. Un joueur qui se déplace de cette manière n'a pas à effectuer un test d'agilité pour esquiver ; il réussit automatiquement. Les joueurs adverses ne peuvent pas utiliser les compétences Filature ou Tentacules. Si ce mouvement emmène le joueur hors du terrain, il risque d'être blessé par la foule. Si ce mouvement emmène le joueur dans une case occupée par un joueur debout, il effectue un blocage contre ce joueur. Si ce mouvement emmène le joueur dans une case occupée par un joueur à terre ou sonné, ce joueur est repoussé et un jet d'armure est effectué. Si ce mouvement emmène le joueur dans une case contenant le ballon, le ballon rebondit immédiatement."
+    },
+    {
+      "uid": "BLOODLUST",
+      "name": "Soif de Sang",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur est activé, après avoir déclaré son Action, il doit lancer un D6, en ajoutant 1 au jet s'il a déclaré une Action de Blocage ou une Action de Blitz. S'il obtient un résultat égal ou supérieur au nombre indiqué entre parenthèses, il peut s'activer normalement. Si le joueur obtient un résultat inférieur au nombre indiqué entre parenthèses, ou obtient un 1 naturel, il peut continuer son activation normalement bien qu'il puisse changer son action déclarée en Action de Mouvement s'il le souhaite. À la fin de son activation, ce joueur peut mordre un coéquipier Servant Serf adjacent. S'il le fait, effectuez immédiatement un Jet de Blessure pour le Servant Serf, en traitant tout résultat de Victime comme Gravement Blessé ; cela ne causera pas de Turnover à moins que le Servant Serf ne tienne le ballon. Si ce joueur ne mord pas un Servant Serf pour quelque raison que ce soit, alors un Turnover est causé."
+    },
+    {
+      "uid": "BOMBARDIER",
+      "name": "Bombardier",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est activé, il peut déclarer une Action Spéciale de Lancer une Bombe ; un seul joueur peut déclarer cette Action Spéciale par Tour. Lorsqu'un joueur effectue une Action Spéciale de Lancer une Bombe, il lance une bombe de la même manière que lorsqu'un joueur effectue une Action de Passe, en suivant toutes les règles habituelles pour une Action de Passe. Un joueur qui a déclaré une Action Spéciale de Lancer une Bombe ne peut pas effectuer d'Action de Mouvement avant de lancer la bombe. Si à un moment quelconque une bombe se retrouve au sol, elle explosera immédiatement dans cette case. Lorsqu'une bombe explose, tout joueur dans la case où elle a explosé est touché par l'explosion. De plus, lancez un D6 pour chaque joueur adjacent à la case dans laquelle la bombe a explosé. Sur 4+, il est touché par l'explosion."
+    },
+    {
+      "uid": "BONE_HEAD",
+      "name": "Cerveau Lent",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur est activé, après avoir déclaré son Action, il doit lancer un D6. Sur 2+, le joueur peut effectuer l'Action déclarée normalement. Sur 1, le joueur devient Distrait."
+    },
+    {
+      "uid": "BREATHE_FIRE",
+      "name": "Souffle de Feu",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est activé, il peut déclarer une Action Spéciale de Souffle de Feu ; il n'y a pas de limite au nombre de joueurs qui peuvent déclarer cette Action Spéciale par Tour. Lorsqu'un joueur effectue une Action Spéciale de Souffle de Feu, il peut choisir un joueur adverse Debout qu'il Marque et lancer un D6, en appliquant un modificateur de -1 si la cible a une FO de 5 ou plus. Sur 1, ce joueur est immédiatement Mis à Terre. Sur 2-3, rien ne se passe. Sur 4+, le joueur adverse est immédiatement Placé À Terre. Si le jet est un 6 naturel, le joueur adverse est Mis à Terre à la place."
+    },
+    {
+      "uid": "CHAINSAW",
+      "name": "Tronçonneuse",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est activé, il peut déclarer une Action Spéciale de Tronçonneuse. Lorsqu'un joueur effectue une Action Spéciale d'Attaque à la Tronçonneuse, lancez un D6. Sur 2+, ce joueur peut immédiatement effectuer un Jet d'Armure contre un joueur adverse Debout adjacent, en appliquant un modificateur de +3 au Jet d'Armure. Sur 1, la Tronçonneuse Recule et ce joueur est Mis à Terre à la place. Si ce joueur est Mis à Terre ou Tombe pour quelque raison que ce soit, alors un modificateur de +3 est appliqué lorsque l'entraîneur adverse effectue un Jet d'Armure pour ce joueur."
+    },
+    {
+      "uid": "DECAY",
+      "name": "Décomposition",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Appliquez un modificateur de +1 à tout Jet de Victime fait pour ce joueur."
+    },
+    {
+      "uid": "DRUNKARD",
+      "name": "Ivrogne",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Ce joueur applique un modificateur de -1 au test chaque fois qu'il tente de Se Précipiter."
+    },
+    {
+      "uid": "HATRED",
+      "name": "Haine",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Chaque fois que ce joueur bloque un joueur avec le même mot-clé que celui entre parenthèses, ce joueur peut relancer un résultat Crâne."
+    },
+    {
+      "uid": "HYPNOTIC_GAZE",
+      "name": "Regard Hypnotique",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est activé, il peut déclarer une Action Spéciale de Regard Hypnotique. Lorsqu'un joueur effectue une Action Spéciale de Regard Hypnotique, il sélectionne un joueur adverse Debout adjacent à lui et lance un D6. Sur 1-2, rien ne se passe et l'activation de ce joueur se termine immédiatement. Sur 3+, le joueur adverse sélectionné devient Distrait et l'activation de ce joueur se termine immédiatement."
+    },
+    {
+      "uid": "INSIGNIFICANT",
+      "name": "Insignifiant",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Lors de la création d'une Liste d'Équipe, vous ne pouvez pas inclure plus de joueurs avec ce Trait que de joueurs sans ce Trait."
+    },
+    {
+      "uid": "KICK_TEAM_MATE",
+      "name": "Botter un Coéquipier",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Une fois par tour d'équipe, en plus d'un autre joueur effectuant soit une Passe soit une Action de Lancer un Coéquipier, un seul joueur avec ce Trait de l'équipe active peut effectuer une Action Spéciale 'Botter un Coéquipier' et tenter de botter un Coéquipier Debout avec le trait Bonne Taille qui se trouve dans une case adjacente. Si l'Action Spéciale Botter un Coéquipier est ratée, le joueur botté est automatiquement retiré du jeu et un jet de blessure est effectué contre lui, en traitant un résultat Sonné comme un résultat KO."
+    },
+    {
+      "uid": "LONER",
+      "name": "Solitaire",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur souhaite utiliser une Relance d'Équipe, il doit lancer un D6. S'il obtient un résultat égal ou supérieur au nombre indiqué entre parenthèses, alors il peut utiliser la Relance d'Équipe normalement. S'il obtient un résultat inférieur au nombre indiqué entre parenthèses, alors il ne peut pas relancer le dé et la Relance d'Équipe est perdue comme si elle avait été utilisée."
+    },
+    {
+      "uid": "LONER_3",
+      "name": "Solitaire (3+)",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur souhaite utiliser une Relance d'Équipe, il doit lancer un D6. Sur 3+, il peut utiliser la Relance d'Équipe normalement. Sur 1-2, il ne peut pas relancer le dé et la Relance d'Équipe est perdue."
+    },
+    {
+      "uid": "LONER_4",
+      "name": "Solitaire (4+)",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur souhaite utiliser une Relance d'Équipe, il doit lancer un D6. Sur 4+, il peut utiliser la Relance d'Équipe normalement. Sur 1-3, il ne peut pas relancer le dé et la Relance d'Équipe est perdue."
+    },
+    {
+      "uid": "THROW_TEAMMATE",
+      "name": "Lancer un Coéquipier",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Ce joueur peut déclarer l'Action Lancer un Coéquipier."
+    },
+    {
+      "uid": "MY_BALL",
+      "name": "Mon Ballon",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Ce joueur avec ce Trait ne peut pas volontairement abandonner le ballon lorsqu'il en a la possession, et ne peut donc pas déclarer d'Actions de Passe, d'Actions de Remise, ou utiliser toute autre Compétence ou Trait qui lui permettrait de renoncer à la possession du ballon. La seule façon dont il peut perdre la possession du ballon est en étant Mis à Terre, Placé À Terre, en Tombant ou par l'effet d'une Compétence, d'un Trait ou d'une règle spéciale d'un modèle adverse."
+    },
+    {
+      "uid": "NO_BALL",
+      "name": "Pas de Bras",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Un joueur avec ce Trait ne peut jamais avoir la possession du ballon. Si ce joueur devait être tenu de tenter de Réceptionner ou de Ramasser le ballon, il échouera automatiquement comme s'il avait obtenu un 1 naturel. Un joueur avec ce Trait ne peut pas tenter d'Intercepter une Passe."
+    },
+    {
+      "uid": "PICK_ME_UP",
+      "name": "Petit Remontant",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "À la fin de chacun des Tours de l'adversaire, lancez un D6 pour chaque coéquipier À Terre dans un rayon de 3 cases d'un ou plusieurs joueurs Debout avec ce Trait. Sur 5+, le joueur À Terre avec ce Trait peut immédiatement se Relever. Si un joueur avec ce Trait se Relève suite à l'utilisation de ce Trait par un coéquipier, il ne peut pas également utiliser ce Trait pendant le même Tour."
+    },
+    {
+      "uid": "PLAGUE_RIDDEN",
+      "name": "Porteur de Peste",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Une fois par match, lorsqu'un joueur avec ce Trait cause une Victime contre un joueur adverse suite à une Action de Blocage, et que ce joueur subit un résultat Mort sur son Jet de Victime et n'est pas sauvé par un Apothicaire, vous pouvez immédiatement ajouter un nouveau joueur Servant de votre Roster d'Équipe à votre Boîte de Réserves. Ce Trait ne peut pas être utilisé contre les joueurs Gros Costauds, ou tout joueur avec les Traits Décomposition, Régénération ou Minuscule."
+    },
+    {
+      "uid": "POGO_STICK",
+      "name": "Bâton Sauteur",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Durant leur mouvement, un joueur avec ce Trait peut tenter de Sauter au Bâton par-dessus une seule case adjacente quel que soit ce qui se trouve dans la case. Sauter au Bâton fonctionne de la même manière que Bondir, à l'exception que le joueur qui Saute au Bâton peut ignorer tous les modificateurs négatifs qu'il recevrait en Bondissant. Un joueur avec ce Trait ne peut pas également avoir la Compétence Saut."
+    },
+    {
+      "uid": "PROJECTILE_VOMIT",
+      "name": "Vomi",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est activé, il peut déclarer une Action Spéciale de Vomi Projectile. Lorsque ce joueur effectue une Action Spéciale de Vomi Projectile, sélectionnez un joueur adverse Debout adjacent à ce joueur et lancez un D6. Sur 2+, ce joueur vomit sur sa cible ; effectuez un Jet d'Armure pour le joueur sélectionné. Sur 1, ce joueur se couvre de bile acide ; effectuez un Jet d'Armure pour ce joueur."
+    },
+    {
+      "uid": "REALLY_STUPID",
+      "name": "Gros Débile",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur est activé, après avoir déclaré son Action, il doit lancer un D6. Il peut appliquer un modificateur de +1 au jet s'il a des coéquipiers Debout qui ne sont pas Distraits, et n'ont pas le Trait Vraiment Stupide, adjacents à lui. Sur 4+, le joueur peut effectuer l'Action déclarée normalement. Sur 1-3, ce joueur devient Distrait."
+    },
+    {
+      "uid": "REGENERATION",
+      "name": "Régénération",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur subit une Victime, avant de faire le Jet de Victime pour lui, lancez un D6. Sur 1-3, ce joueur subit la Victime normalement. Sur 4+, ce joueur se Régénère et ignore la Victime (bien que tous les Points de Star Player gagnés pour avoir causé la Victime soient toujours gagnés) et est plutôt placé dans la Boîte de Réserves de son équipe."
+    },
+    {
+      "uid": "RIGHT_STUFF",
+      "name": "Poids Plume",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Ce joueur peut être lancé par un coéquipier avec le Trait Lancer un Coéquipier, même si ce joueur est À Terre."
+    },
+    {
+      "uid": "SECRET_WEAPON",
+      "name": "Arme Secrète",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "À la fin d'un Engagement auquel ce joueur a participé, même s'il n'est pas sur le terrain à la fin de l'Engagement, il est Expulsé pour avoir commis une Faute."
+    },
+    {
+      "uid": "STAB",
+      "name": "Poignard",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Lorsque ce joueur est activé, il peut déclarer une Action Spéciale de Poignardage. Lorsque ce joueur effectue une Action Spéciale de Poignardage, sélectionnez un joueur adverse Debout adjacent à ce joueur et effectuez un Jet d'Armure pour le joueur sélectionné. Ce Jet d'Armure ne peut être modifié d'aucune façon. Si l'Armure du joueur est cassée, effectuez un Jet de Blessure pour lui, sinon rien ne se passe."
+    },
+    {
+      "uid": "STUNTY",
+      "name": "Minus",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Lorsque ce joueur tente d'Esquiver, il ne subit aucun modificateur négatif à son Test d'Agilité pour être Marqué par des joueurs adverses. De plus, ce joueur applique un modificateur de -1 au Test d'Agilité lorsqu'il tente d'Intercepter le ballon. Un joueur avec ce Trait est plus sujet aux blessures et donc si un Jet de Blessure est fait pour lui, lancez sur la Table de Blessures Minuscule à la place."
+    },
+    {
+      "uid": "SWOOP",
+      "name": "Piqué",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Lorsque ce joueur est lancé par une Action de Lancer un Coéquipier, il peut choisir de ne pas Dévier avant d'atterrir normalement. S'il le fait, positionnez le Gabarit de Lancer sur ce joueur de manière à ce qu'il soit orienté vers l'une des deux Zones d'En-But ou l'une ou l'autre des Lignes de Touche. Lancez un D6 pour déterminer la direction dans laquelle ce joueur voyagera, puis un second D6 pour déterminer combien de cases dans cette direction ce joueur voyagera. De plus, s'il choisit de ne pas Dévier normalement, ce joueur peut relancer le Test d'Agilité lorsqu'il tente d'atterrir."
+    },
+    {
+      "uid": "TAKE_ROOT",
+      "name": "Prendre Racine",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur est activé, après avoir déclaré son Action, s'il est Debout, il doit lancer un D6. Sur 2+, le joueur peut effectuer l'Action déclarée normalement. Sur 1, le joueur devient Enraciné. Tant qu'il est Enraciné, un joueur ne peut pas effectuer d'Actions de Mouvement, ne peut pas Suivre après avoir effectué une Action de Blocage, ne peut pas être Repoussé, et ne peut pas quitter sa case actuelle pour quelque raison que ce soit, à l'exception d'être Assommé ou de subir une Victime."
+    },
+    {
+      "uid": "THROW_TEAM_MATE",
+      "name": "Lancer un Coéquipier",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Ce joueur peut déclarer l'Action Lancer un Coéquipier."
+    },
+    {
+      "uid": "TIMMM_BER",
+      "name": "Tiiii-mber !",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Si ce joueur a un MA de 2 ou moins et tente de se relever, appliquez un modificateur de +1 au jet pour se relever pour chaque coéquipier Ouvert Debout adjacent à ce joueur. Un jet d'un 1 naturel échouera toujours normalement."
+    },
+    {
+      "uid": "TITCHY",
+      "name": "Microbe",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Un joueur avec ce Trait peut appliquer un modificateur de +1 au Test d'Agilité lorsqu'il tente d'esquiver. Cependant, lorsqu'un joueur adverse tente d'esquiver dans une case dans la zone de tacle de ce joueur, ce joueur n'applique pas le modificateur de -1 au Test d'Agilité du joueur adverse."
+    },
+    {
+      "uid": "TRICKSTER",
+      "name": "Farceur",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Active",
+      "description": "Chaque fois qu'un joueur adverse tente d'effectuer une Action de Blocage contre ce joueur, ou une Action Spéciale qui cible directement ce joueur (à l'exception d'une Action de Blocage causée par l'Action Spéciale Boulet et Chaîne), ce joueur peut utiliser ce Trait. Avant de déterminer combien de dés sont lancés, ce joueur peut être retiré du terrain et placé dans n'importe quelle autre case inoccupée adjacente au joueur effectuant l'Action."
+    },
+    {
+      "uid": "UNCHANNELLED_FURY",
+      "name": "Fureur Débridée",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Chaque fois que ce joueur est activé, après avoir déclaré son Action, il doit lancer un D6. Il peut appliquer un modificateur de +2 au jet s'il a déclaré une Action de Blocage ou une Action de Blitz. Sur 4+, le joueur peut effectuer l'Action déclarée normalement. Sur 1-3, ce joueur enrage de manière incohérente mais rien ne se passe vraiment. Son activation se termine immédiatement."
+    },
+    {
+      "uid": "UNSTEADY",
+      "name": "Instable",
+      "category": "TRAITS",
+      "type": "Trait",
+      "activation": "Passive",
+      "description": "Ce joueur ne peut pas déclarer d'Actions Sécuriser le Ballon."
+    }
+  ]
+}
