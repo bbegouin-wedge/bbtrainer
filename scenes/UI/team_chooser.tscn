@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyhu8l1o0xe6o"]
+[gd_scene load_steps=8 format=3 uid="uid://dyhu8l1o0xe6o"]
 
 [ext_resource type="LabelSettings" uid="uid://ou3q6a1knl5k" path="res://scenes/UI/ui_presets/title.tres" id="1_d56wm"]
+[ext_resource type="Texture2D" uid="uid://c4tbfje3tyjnm" path="res://assets/ui/panel/stone-panel.png" id="1_jm76x"]
 [ext_resource type="FontFile" uid="uid://bcmmna6iucjsj" path="res://assets/fonts/PermanentMarker-Regular.ttf" id="2_kd1ts"]
 [ext_resource type="Script" uid="uid://b2u0ms3ejqyux" path="res://scenes/UI/team_chooser/team_chooser.gd" id="3_kd1ts"]
 [ext_resource type="Script" uid="uid://c0mj5kitj28eh" path="res://scenes/UI/team_chooser/team_detail.gd" id="4_0u7p0"]
@@ -8,6 +9,15 @@
 [sub_resource type="LabelSettings" id="LabelSettings_jm76x"]
 font = ExtResource("2_kd1ts")
 font_size = 35
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g5y1w"]
+texture = ExtResource("1_jm76x")
+texture_margin_left = 90.0
+texture_margin_top = 90.0
+texture_margin_right = 90.0
+texture_margin_bottom = 90.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [node name="team_chooser" type="Control"]
 layout_mode = 3
@@ -17,15 +27,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(2.4065375e-08, 0.08678458, 0.10858362, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -35,44 +48,57 @@ offset_right = 846.0
 offset_bottom = 629.0
 grow_horizontal = 2
 
-[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+[node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Bienvenue sur BBTrainer ! "
 label_settings = ExtResource("1_d56wm")
 
-[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="subtitile" type="Label" parent="Panel/VBoxContainer/VBoxContainer"]
+[node name="subtitile" type="Label" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Vous etes le joueur ROUGE"
 label_settings = SubResource("LabelSettings_jm76x")
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Choisissez votre équipe"
 label_settings = SubResource("LabelSettings_jm76x")
 
-[node name="team_list" type="GridContainer" parent="Panel/VBoxContainer"]
+[node name="team_list" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 columns = 5
 script = ExtResource("3_kd1ts")
 
-[node name="team_detail" type="GridContainer" parent="Panel/VBoxContainer"]
+[node name="team_detail" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 columns = 5
 script = ExtResource("4_0u7p0")
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-text = "sfqsdfqsdf"
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"texturedButton"
+text = "Valider"
+
+[node name="Panel2" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_g5y1w")

@@ -32,6 +32,10 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://b6ja1dfsxjk21"
+
 [input]
 
 select={

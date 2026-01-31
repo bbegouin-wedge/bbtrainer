@@ -8,15 +8,21 @@ func _ready():
 
 func load_data():
 	data = BloodBowlData.new()
-	
-	# Charger depuis le fichier JSON
-	var json_path = "res://data/teams_fr.json"
-	
-	if data.load_from_json(json_path):
+
+	# Charger les équipes depuis le fichier JSON
+	var teams_path = "res://data/teams_fr.json"
+	if data.load_from_json(teams_path):
 		print("Données Blood Bowl chargées avec succès!")
 		data.print_summary()
 	else:
 		push_error("Échec du chargement des données Blood Bowl")
+
+	# Charger les compétences depuis le fichier JSON
+	var skills_path = "res://data/skills_fr.json"
+	if data.load_skills_from_json(skills_path):
+		print("Compétences Blood Bowl chargées avec succès!")
+	else:
+		push_error("Échec du chargement des compétences Blood Bowl")
 
 # API d'accès facile
 func get_team(team_uid: String) -> BloodBowlData.Team:
@@ -49,10 +55,16 @@ func get_affordable_players(team_uid: String, budget: int) -> Array[BloodBowlDat
 	var team = get_team(team_uid)
 	if not team:
 		return []
-	
+
 	var affordable: Array[BloodBowlData.Player] = []
 	for player in team.available_players:
 		if player.cost <= budget:
 			affordable.append(player)
-	
+
 	return affordable
+
+func get_skill_name(skill_uid: String) -> String:
+	return data.get_skill_name(skill_uid)
+
+func get_skill(skill_uid: String) -> BloodBowlData.Skill:
+	return data.get_skill_by_uid(skill_uid)

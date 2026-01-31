@@ -4,6 +4,22 @@ extends Resource
 
 # Classes de données
 
+class Skill:
+	var uid: String
+	var name: String
+	var category: String
+	var type: String
+	var activation: String
+	var description: String
+
+	func _init(data: Dictionary):
+		uid = data.get("uid", "")
+		name = data.get("name", "")
+		category = data.get("category", "")
+		type = data.get("type", "")
+		activation = data.get("activation", "")
+		description = data.get("description", "")
+
 # Classe pour stocker les icônes de joueur (versions bleue et rouge)
 class PlayerIcon:
 	var blue: String
@@ -126,10 +142,12 @@ class Player:
 var bloodbowl_version: String
 var edition: String
 var teams: Array[Team] = []
+var skills: Array[Skill] = []
 
 # Index pour accès rapide
 var teams_by_uid: Dictionary = {}
 var teams_by_name: Dictionary = {}
+var skills_by_uid: Dictionary = {}
 
 func load_from_json(json_path: String) -> bool:
 	var file = FileAccess.open(json_path, FileAccess.READ)
@@ -194,6 +212,51 @@ func get_teams_by_tier(tier: String) -> Array[Team]:
 		if team.tier == tier:
 			result.append(team)
 	return result
+
+func load_skills_from_json(json_path: String) -> bool:
+	var file = FileAccess.open(json_path, FileAccess.READ)
+	if not file:
+		push_error("Impossible d'ouvrir le fichier: " + json_path)
+		return false
+
+	var json_text = file.get_as_text()
+	file.close()
+
+	var json = JSON.new()
+	var error = json.parse(json_text)
+
+	if error != OK:
+		push_error("Erreur de parsing JSON skills: " + json.get_error_message())
+		return false
+
+	var data = json.data
+	if typeof(data) != TYPE_DICTIONARY:
+		push_error("Le JSON skills ne contient pas un dictionnaire racine")
+		return false
+
+	skills.clear()
+	skills_by_uid.clear()
+
+	if not data.has("skills"):
+		push_error("Le JSON ne contient pas de skills")
+		return false
+
+	for skill_data in data["skills"]:
+		var skill = Skill.new(skill_data)
+		skills.append(skill)
+		skills_by_uid[skill.uid] = skill
+
+	print("Chargement réussi: %d compétences" % skills.size())
+	return true
+
+func get_skill_by_uid(skill_uid: String) -> Skill:
+	return skills_by_uid.get(skill_uid, null)
+
+func get_skill_name(skill_uid: String) -> String:
+	var skill = get_skill_by_uid(skill_uid)
+	if skill:
+		return skill.name
+	return skill_uid
 
 func print_summary():
 	print("\n=== Blood Bowl %s - %s ===" % [bloodbowl_version, edition])
