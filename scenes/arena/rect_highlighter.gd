@@ -26,7 +26,7 @@ extends ColorRect
 		border_color = value
 		_update_shader()
 
-@export var background_color: Color = Color(0.2, 0.2, 0.3, 0.3):
+@export var background_color: Color = Color(0.2, 0.2, 0.741, 0.302):
 	set(value):
 		background_color = value
 		_update_shader()
@@ -61,7 +61,7 @@ func _ready():
 	
 	_update_shader()
 	
-func _process(delta: float) -> void:	
+func _process(_delta: float) -> void:	
 	if !enabled:
 		return
 		

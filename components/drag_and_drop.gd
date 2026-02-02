@@ -19,7 +19,7 @@ func _ready() -> void:
 	assert(target, "No target set for DragAndDrop component")
 	target.input_event.connect(_on_target_input_event.unbind(1))
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if dragging and target:
 		target.global_position = target.get_global_mouse_position() + offset
 

@@ -1,6 +1,6 @@
 extends GridContainer
 
-@onready var team_list = $"../team_list"
+@onready var team_list = $"../ScrollContainer/vertical_team_list"
 
 var tree: Tree
 
@@ -27,6 +27,7 @@ func _setup_tree():
 	tree.set_column_custom_minimum_width(6, 200)  # Compétences
 
 	tree.custom_minimum_size = Vector2(1200, 300)
+	tree.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	add_child(tree)
 
 func _on_team_selected(team: BloodBowlData.Team):

@@ -1,8 +1,10 @@
+- donde: 
+	- drag and drop du terrain: done
+	- faire les chargements de roster 
+
+
 - faire les snaps sur le drag and drap avec fantome au départ et à l'arrivée
-- faire les chargements de roster
 - faire les panneaux latéraux d'inspection des joueurs
 - faire les controles de match (démarrage fin...)
 - implémenter un mode setup
-- gérer les coordonnées lors des rotations de terrains
 - faire les pastilles de couleur automatiques pour les compétences
-- drag and drop du terrain: done

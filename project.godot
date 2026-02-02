@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-BloodBowlManager="*res://data/blood_bowl_manager.gd"
+BloodBowlManager="*res://scenes/global/blood_bowl_manager.gd"
+GameStatusManager="*res://scenes/global/game_status_manager.gd"
 
 [display]
 

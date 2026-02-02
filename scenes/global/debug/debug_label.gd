@@ -10,8 +10,6 @@ func _ready():
 	hoveredTileLabel.position = Vector2(get_screen_top_left().x, get_screen_top_left().y + 50)
 
 func get_screen_top_left() -> Vector2:
-	var viewport_size = get_viewport_rect().size
-	
 	# Coin haut-gauche en coordonnées monde
 	var top_left = Vector2(0,0)
 	return top_left
@@ -24,7 +22,7 @@ func putSettings() -> LabelSettings:
 	return setting
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	var hovered_tile = playArea.get_hovered_tile()
 	

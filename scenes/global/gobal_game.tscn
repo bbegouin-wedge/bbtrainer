@@ -1,15 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://jsbmmotyoh34"]
+[gd_scene load_steps=9 format=3 uid="uid://jsbmmotyoh34"]
 
 [ext_resource type="Script" uid="uid://dty86jwqsevc2" path="res://scenes/global/gobal_game.gd" id="1_un8vh"]
 [ext_resource type="Script" uid="uid://b325vfvl6yhfo" path="res://camera_2d.gd" id="2_6xoaf"]
 [ext_resource type="PackedScene" uid="uid://dnyqrraykddet" path="res://scenes/UI/in_game/action_panel.tscn" id="2_d4y71"]
 [ext_resource type="PackedScene" uid="uid://dxpcgxyp7fp2a" path="res://scenes/UI/welcome_ui.tscn" id="2_fsc7a"]
 [ext_resource type="PackedScene" uid="uid://cye7ydmvgd7oo" path="res://scenes/arena/arena.tscn" id="3_6xoaf"]
+[ext_resource type="PackedScene" uid="uid://dyhu8l1o0xe6o" path="res://scenes/UI/team_chooser/team_chooser.tscn" id="4_f0iub"]
 [ext_resource type="Script" uid="uid://dvfagydduxs0h" path="res://components/camera_mover.gd" id="5_6xoaf"]
 [ext_resource type="Script" uid="uid://cxaqkgwpw53n2" path="res://components/camera_rotator.gd" id="6_wmhk5"]
 
-[node name="gobal_game" type="Node2D"]
+[node name="gobalGame" type="Node2D"]
 script = ExtResource("1_un8vh")
+
+[node name="GameControlManager" type="Node" parent="."]
+
+[node name="CameraMover" type="Node2D" parent="GameControlManager" node_paths=PackedStringArray("target")]
+script = ExtResource("5_6xoaf")
+target = NodePath("../../Camera2D")
+
+[node name="CameraRotator" type="Node2D" parent="GameControlManager" node_paths=PackedStringArray("target")]
+script = ExtResource("6_wmhk5")
+target = NodePath("../../Arena")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.4, 0.4)
@@ -17,20 +28,14 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 script = ExtResource("2_6xoaf")
 
+[node name="teamChooser" parent="." instance=ExtResource("4_f0iub")]
+
 [node name="WelcomeUI" parent="." instance=ExtResource("2_fsc7a")]
 
 [node name="Arena" parent="." instance=ExtResource("3_6xoaf")]
-
-[node name="camera_mover" type="Node2D" parent="." node_paths=PackedStringArray("target")]
-script = ExtResource("5_6xoaf")
-target = NodePath("../Camera2D")
 
 [node name="ActionPanel" parent="." instance=ExtResource("2_d4y71")]
 anchors_preset = 12
 anchor_top = 1.0
 grow_vertical = 0
 size_flags_vertical = 4
-
-[node name="camera_rotator" type="Node2D" parent="." node_paths=PackedStringArray("target")]
-script = ExtResource("6_wmhk5")
-target = NodePath("../Camera2D")
