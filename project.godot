@@ -11,15 +11,17 @@ config_version=5
 [application]
 
 config/name="bloodbowltrainer"
-run/main_scene="uid://jsbmmotyoh34"
+run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0.009961832, 0.13618547, 0.23756689, 1)
 config/icon="res://icon.svg"
 
 [autoload]
 
-BloodBowlManager="*res://scenes/global/blood_bowl_manager.gd"
-GameStatusManager="*res://scenes/global/game_status_manager.gd"
+BloodBowlManager="*res://autoload/blood_bowl_manager.gd"
+GameStatusManager="*res://autoload/game_status_manager.gd"
+TeamState="*res://autoload/team_state.gd"
+EventBus="*res://autoload/event_bus.gd"
 
 [display]
 
@@ -35,7 +37,7 @@ enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")
 
 [gui]
 
-theme/custom="uid://b6ja1dfsxjk21"
+theme/custom="res://scenes/ui/theme/global_theme.tres"
 
 [input]
 

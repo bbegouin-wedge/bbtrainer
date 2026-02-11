@@ -1,0 +1,121 @@
+[gd_scene load_steps=4 format=3 uid="uid://lu12l2ogvnfn"]
+
+[ext_resource type="Script" uid="uid://cj6acr6n1pchv" path="res://scenes/ui/team_compositor/roster_tree.gd" id="1_p7srw"]
+[ext_resource type="Script" uid="uid://pe3o3ok4a1ah" path="res://scenes/ui/team_compositor/validate.gd" id="2_o835y"]
+
+[sub_resource type="Theme" id="Theme_o835y"]
+
+[node name="TeamCompositor" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(2.4065375e-08, 0.08678458, 0.10858362, 1)
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="titleInfos" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer/titleInfos"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"HeaderMedium"
+text = "Recrutez otre votre equipe"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/titleInfos"]
+layout_mode = 2
+
+[node name="subtitile" type="Label" parent="Panel/MarginContainer/VBoxContainer/titleInfos"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"HeaderSmall"
+text = "engagez vos joueurs"
+
+[node name="spacer2" type="Control" parent="Panel/MarginContainer/VBoxContainer/titleInfos"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="spacer3" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="roster-tree" type="Tree" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+theme = SubResource("Theme_o835y")
+theme_type_variation = &"team_roster_panel"
+script = ExtResource("1_p7srw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="spacer3" type="Control" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Return" type="Button" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"texturedButton"
+text = "retour"
+
+[node name="spacer" type="Control" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Validate" type="Button" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"texturedButton"
+text = "Valider"
+script = ExtResource("2_o835y")
+
+[node name="spacer2" type="Control" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[connection signal="button_clicked" from="Panel/MarginContainer/VBoxContainer/roster-tree" to="Panel/MarginContainer/VBoxContainer/roster-tree" method="_on_button_clicked"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Return" to="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Return" method="_on_run_game_button_pressed"]
+[connection signal="button_up" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Validate" to="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Validate" method="_on_button_up"]

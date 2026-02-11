@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dhnrqbom0mh1f" path="res://components/select.gd" id="3_bhlit"]
 [ext_resource type="Script" uid="uid://clj3l2ucue57f" path="res://components/drag_and_drop.gd" id="3_vh40f"]
 [ext_resource type="Script" uid="uid://b0ocx6ljsqkli" path="res://components/hoverable.gd" id="6_3po7s"]
-[ext_resource type="Script" uid="uid://d222mcp0kjqqx" path="res://data/unit/unit_stats.gd" id="7_0wuuu"]
+[ext_resource type="Script" uid="uid://d222mcp0kjqqx" path="res://scenes/unit/unit_stats.gd" id="7_0wuuu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3po7s"]
 resource_local_to_scene = true

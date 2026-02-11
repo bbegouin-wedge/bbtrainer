@@ -64,26 +64,31 @@ func _start_dragging() -> void:
 	drag_started.emit()
 	
 func _drop() -> void:
+	if tilemap_layer:
+		var tile := tilemap_layer.local_to_map(tilemap_layer.get_local_mouse_position())
+		if tilemap_layer is PlayArea and not tilemap_layer.is_tile_in_bounds(tile):
+			_cancel_dragging()
+			return
+		var top_left_local := tilemap_layer.map_to_local(tile) - Vector2(105, 105)
+		target.global_position = tilemap_layer.to_global(top_left_local)
 	_end_dragging()
 	dropped.emit(starting_position)
 	
 	
 func _on_target_input_event(_viewport: Node, event: InputEvent) -> void:
-	if not enabled: 
-		return 
-		
+	if not enabled:
+		return
+
 	var dragging_object := get_tree().get_first_node_in_group("dragging")
-	
+
 	if not dragging and dragging_object:
 		return
-		
+
 	if dragging and event.is_action_pressed("cancel_drag"):
 		_cancel_dragging()
-		#get_viewport().set_input_as_handled()
-		
+
 	elif not dragging and event.is_action_pressed("select"):
 		_start_dragging()
-		#get_viewport().set_input_as_handled()
+
 	elif dragging and event.is_action_released("select"):
 		_drop()
-		#get_viewport().set_input_as_handled()

@@ -10,6 +10,12 @@ extends Node2D
 @export var keyboard_pan_enabled: bool = true
 @export var keyboard_pan_speed: float = 500.0
 
+# Zoom molette
+@export var zoom_enabled: bool = true
+@export var zoom_step: float = 0.1
+@export var zoom_min: float = 0.2
+@export var zoom_max: float = 2.0
+
 var is_panning: bool = false
 var pan_start_position: Vector2
 
@@ -24,7 +30,15 @@ func _input(event: InputEvent):
 				else:
 					is_panning = false
 		
-		if event is InputEventMouseMotion and is_panning:
+	if zoom_enabled and event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			var new_zoom = target.zoom * (1.0 + zoom_step)
+			target.zoom = new_zoom.clampf(zoom_min, zoom_max) * Vector2.ONE
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			var new_zoom = target.zoom * (1.0 - zoom_step)
+			target.zoom = new_zoom.clampf(zoom_min, zoom_max) * Vector2.ONE
+
+	if event is InputEventMouseMotion and is_panning:
 			var delta = (event.position - pan_start_position)
 			target.position -= delta / target.zoom
 			pan_start_position = event.position

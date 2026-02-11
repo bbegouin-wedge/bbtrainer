@@ -82,6 +82,9 @@ class Team:
 			if player.uid == player_uid:
 				return player
 		return null
+	
+	func get_player_by_index(player_idx: int) -> Player:
+		return available_players[player_idx]
 
 	func get_icon_texture() -> Texture2D:
 		if icon.is_empty():
