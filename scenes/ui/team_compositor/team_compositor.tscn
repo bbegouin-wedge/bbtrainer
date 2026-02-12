@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://lu12l2ogvnfn"]
+[gd_scene load_steps=5 format=3 uid="uid://lu12l2ogvnfn"]
 
 [ext_resource type="Script" uid="uid://cj6acr6n1pchv" path="res://scenes/ui/team_compositor/roster_tree.gd" id="1_p7srw"]
 [ext_resource type="Script" uid="uid://pe3o3ok4a1ah" path="res://scenes/ui/team_compositor/validate.gd" id="2_o835y"]
+[ext_resource type="Script" path="res://scenes/ui/inducements_selector/return_button.gd" id="3_ret01"]
 
 [sub_resource type="Theme" id="Theme_o835y"]
 
@@ -47,7 +48,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"HeaderMedium"
-text = "Recrutez otre votre equipe"
+text = "Constituez votre equipe"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/titleInfos"]
 layout_mode = 2
@@ -97,6 +98,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"texturedButton"
 text = "retour"
+script = ExtResource("3_ret01")
 
 [node name="spacer" type="Control" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -117,5 +119,5 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [connection signal="button_clicked" from="Panel/MarginContainer/VBoxContainer/roster-tree" to="Panel/MarginContainer/VBoxContainer/roster-tree" method="_on_button_clicked"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Return" to="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Return" method="_on_run_game_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Return" to="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Return" method="_on_pressed"]
 [connection signal="button_up" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Validate" to="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Validate" method="_on_button_up"]

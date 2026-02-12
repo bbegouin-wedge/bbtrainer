@@ -11,6 +11,8 @@ signal unit_moved(unit: Node, from: Vector2i, to: Vector2i)
 
 # --- Team Building
 signal team_selected 
+signal star_selected(star:BloodBowlData.StarPlayer)
+signal star_deselected(star:BloodBowlData.StarPlayer)
 
 # --- Game flow ---
 signal game_started

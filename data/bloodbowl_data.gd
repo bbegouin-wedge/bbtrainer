@@ -43,6 +43,61 @@ class PlayerIcon:
 			return null
 		return load("res://" + red)
 
+class StarPlayer:
+	var uid: String
+	var name: String
+	var cost: int
+	var MA: int
+	var ST: int
+	var AG: String
+	var PA: String
+	var AV: String
+	var player_type: String
+	var skills: Array[String]
+	var special_ability_name: String
+	var special_ability_description: String
+	var plays_for: Array[String]
+	var available_for_rosters: Array[String]
+	var icon  # PlayerIcon or Array[PlayerIcon] for duo players
+
+	func _init(data: Dictionary):
+		uid = data.get("uid", "")
+		name = data.get("name", "")
+		cost = data.get("cost", 0)
+		MA = data.get("MA", 0)
+		ST = data.get("ST", 0)
+		AG = str(data.get("AG", ""))
+		PA = str(data.get("PA", ""))
+		AV = str(data.get("AV", ""))
+		player_type = data.get("playerType", "")
+		special_ability_name = data.get("specialAbilityName", "")
+		special_ability_description = data.get("specialAbilityDescription", "")
+
+		skills = []
+		if data.has("skills"):
+			skills.assign(data["skills"])
+		plays_for = []
+		if data.has("playsFor"):
+			plays_for.assign(data["playsFor"])
+		available_for_rosters = []
+		if data.has("availableForRosters"):
+			available_for_rosters.assign(data["availableForRosters"])
+
+		var icon_data = data.get("icon", {})
+		if icon_data is Array:
+			icon = []
+			for ic in icon_data:
+				icon.append(PlayerIcon.new(ic))
+		else:
+			icon = PlayerIcon.new(icon_data)
+
+	func get_blue_icon_texture() -> Texture2D:
+		if icon is PlayerIcon:
+			return icon.get_blue_texture()
+		elif icon is Array and icon.size() > 0:
+			return icon[0].get_blue_texture()
+		return null
+
 class Team:
 	var uid: String
 	var name: String
@@ -146,11 +201,13 @@ var bloodbowl_version: String
 var edition: String
 var teams: Array[Team] = []
 var skills: Array[Skill] = []
+var star_players: Array[StarPlayer] = []
 
 # Index pour accès rapide
 var teams_by_uid: Dictionary = {}
 var teams_by_name: Dictionary = {}
 var skills_by_uid: Dictionary = {}
+var star_players_by_uid: Dictionary = {}
 
 func load_from_json(json_path: String) -> bool:
 	var file = FileAccess.open(json_path, FileAccess.READ)
@@ -251,6 +308,45 @@ func load_skills_from_json(json_path: String) -> bool:
 
 	print("Chargement réussi: %d compétences" % skills.size())
 	return true
+
+func load_star_players_from_json(json_path: String) -> bool:
+	var file = FileAccess.open(json_path, FileAccess.READ)
+	if not file:
+		push_error("Impossible d'ouvrir le fichier: " + json_path)
+		return false
+
+	var json_text = file.get_as_text()
+	file.close()
+
+	var json = JSON.new()
+	var error = json.parse(json_text)
+
+	if error != OK:
+		push_error("Erreur de parsing JSON star_players: " + json.get_error_message())
+		return false
+
+	var data = json.data
+	if typeof(data) != TYPE_DICTIONARY:
+		push_error("Le JSON star_players ne contient pas un dictionnaire racine")
+		return false
+
+	star_players.clear()
+	star_players_by_uid.clear()
+
+	if not data.has("star_players"):
+		push_error("Le JSON ne contient pas de star_players")
+		return false
+
+	for sp_data in data["star_players"]:
+		var sp = StarPlayer.new(sp_data)
+		star_players.append(sp)
+		star_players_by_uid[sp.uid] = sp
+
+	print("Chargement réussi: %d star players" % star_players.size())
+	return true
+
+func get_star_player_by_uid(uid: String) -> StarPlayer:
+	return star_players_by_uid.get(uid, null)
 
 func get_skill_by_uid(skill_uid: String) -> Skill:
 	return skills_by_uid.get(skill_uid, null)

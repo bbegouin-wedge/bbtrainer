@@ -1,9 +1,9 @@
 extends Node
 
-enum GameStatus { STARTING, 
-CHOOSE_TEAM, 
-RECRUIT_PLAYER, 
-GAME_SETUP, 
+enum GameStatus { STARTING,
+CHOOSE_TEAM,
+RECRUIT_PLAYER,
+SELECT_INDUCEMENTS,
 READY_TO_RUN }
 signal onStateChanged(newStatus)
 

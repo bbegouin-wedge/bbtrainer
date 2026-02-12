@@ -25,4 +25,4 @@ func _onActivateWelcomeScreen():
 	createRoomContainer.hide()
 
 func _onCreateRoomPressed():
-	EventBus.game_phase_changed.emit(GameStatusManager.GameStatus.CHOOSE_TEAM)
+	SceneOrchestrator.go_next()

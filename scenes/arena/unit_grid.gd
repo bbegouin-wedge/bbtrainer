@@ -11,7 +11,6 @@ func  _ready() -> void:
 	for i in size.x:
 		for j in size.y:
 			units[Vector2i(i,j)] = null
-	#add_unit(Vector2i(2,3),$"../../Unit")
 	
 func add_unit(tile: Vector2i, unit: Node) -> void:
 	units[tile] = unit

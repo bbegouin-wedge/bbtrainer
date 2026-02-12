@@ -21,13 +21,23 @@ func _spawn_team_in_reserves() -> void:
 	for player: BloodBowlData.Player in composition:
 		var count: int = composition[player]
 		for i in count:
-			if cell_index >= cells.size():
-				push_warning("Plus de place dans les réserves")
+			cell_index = _spawn_unit(cells, cell_index, player.get_blue_icon_texture())
+			if cell_index == -1:
 				return
-			var unit := UNIT_SCENE.instantiate()
-			var tile_center := blue_reserves.map_to_local(cells[cell_index])
-			unit.position = to_local(blue_reserves.to_global(tile_center - Vector2(105, 105)))
-			add_child(unit)
-			unit.drag_and_drop.tilemap_layer = play_area
-			unit.skin.texture = player.get_blue_icon_texture()
-			cell_index += 1
+
+	for star: BloodBowlData.StarPlayer in TeamState._champions_list.values():
+		cell_index = _spawn_unit(cells, cell_index, star.get_blue_icon_texture())
+		if cell_index == -1:
+			return
+
+func _spawn_unit(cells: Array[Vector2i], cell_index: int, texture: Texture2D) -> int:
+	if cell_index >= cells.size():
+		push_warning("Plus de place dans les réserves")
+		return -1
+	var unit := UNIT_SCENE.instantiate()
+	var tile_center := blue_reserves.map_to_local(cells[cell_index])
+	unit.position = to_local(blue_reserves.to_global(tile_center - Vector2(105, 105)))
+	add_child(unit)
+	unit.drag_and_drop.tilemap_layer = play_area
+	unit.skin.texture = texture
+	return cell_index + 1

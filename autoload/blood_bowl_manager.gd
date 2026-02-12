@@ -23,6 +23,13 @@ func load_data():
 	else:
 		push_error("Échec du chargement des compétences Blood Bowl")
 
+	# Charger les star players depuis le fichier JSON
+	var star_players_path = "res://data/star_players_fr.json"
+	if data.load_star_players_from_json(star_players_path):
+		print("Star Players Blood Bowl chargés avec succès!")
+	else:
+		push_error("Échec du chargement des Star Players Blood Bowl")
+
 # API d'accès facile
 func get_team(team_uid: String) -> BloodBowlData.Team:
 	return data.get_team_by_uid(team_uid)
@@ -67,3 +74,16 @@ func get_skill_name(skill_uid: String) -> String:
 
 func get_skill(skill_uid: String) -> BloodBowlData.Skill:
 	return data.get_skill_by_uid(skill_uid)
+
+func get_all_star_players() -> Array[BloodBowlData.StarPlayer]:
+	return data.star_players
+
+func get_stars_for_team(team: BloodBowlData.Team) -> Array[BloodBowlData.StarPlayer]:
+	var result: Array[BloodBowlData.StarPlayer] = []
+	for sp in data.star_players:
+		if team.uid in sp.available_for_rosters:
+			result.append(sp)
+	return result
+
+func get_star_player(uid: String) -> BloodBowlData.StarPlayer:
+	return data.get_star_player_by_uid(uid)

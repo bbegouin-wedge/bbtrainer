@@ -3,6 +3,7 @@ extends Node
 
 var _selectedTeam : BloodBowlData.Team = null;
 var _team_composition: Dictionary = {}
+var _champions_list: Dictionary = {}
 
 func selectTeam(selectedTeam: BloodBowlData.Team) -> void: 
 	_selectedTeam = selectedTeam
@@ -29,3 +30,11 @@ func getPlayerCount(ofType: BloodBowlData.Player) -> int:
 
 func get_composition() -> Dictionary:
 	return _team_composition
+	
+func add_star(champion: BloodBowlData.StarPlayer) -> void:
+	_champions_list[champion.uid]=champion
+	EventBus.star_selected.emit(champion)
+
+func remove_star(champion: BloodBowlData.StarPlayer) -> void:
+	_champions_list.erase(champion.uid)
+	EventBus.star_deselected.emit(champion)

@@ -22,6 +22,7 @@ BloodBowlManager="*res://autoload/blood_bowl_manager.gd"
 GameStatusManager="*res://autoload/game_status_manager.gd"
 TeamState="*res://autoload/team_state.gd"
 EventBus="*res://autoload/event_bus.gd"
+SceneOrchestrator="*res://autoload/scene_orchestrator.gd"
 
 [display]
 
