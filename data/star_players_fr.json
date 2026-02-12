@@ -12,11 +12,57 @@
       "PA": "-",
       "AV": "6+",
       "playerType": "Blitzer, Squirrel",
-      "skills": ["CLAWS", "DAUNTLESS", "DODGE", "FRENZY", "JUMP_UP", "LONER_4", "NO_BALL", "SIDESTEP", "STUNTY", "TITCHY"],
+      "skills": [
+        "CLAWS",
+        "DAUNTLESS",
+        "DODGE",
+        "FRENZY",
+        "JUMP_UP",
+        "LONER_4",
+        "NO_BALL",
+        "SIDESTEP",
+        "STUNTY",
+        "TITCHY"
+      ],
       "specialAbilityName": "Blind Rage",
       "specialAbilityDescription": "Akhorne may choose to re-roll the D6 when rolling for the Dauntless Skill.",
       "playsFor": [],
-      "availableForRosters": ["AMAZON", "BLACK_ORC", "BRETONNIAN", "CHAOS_CHOSEN", "CHAOS_DWARF", "CHAOS_RENEGADES", "DARK_ELF", "DWARF", "ELVEN_UNION", "GNOME", "GOBLIN", "HALFLING", "HIGH_ELF", "HUMAN", "IMPERIAL_NOBILITY", "KHORNE", "LIZARDMEN", "NECROMANTIC_HORROR", "NORSE", "NURGLE", "OGRE", "OLD_WORLD_ALLIANCE", "ORC", "SHAMBLING_UNDEAD", "SKAVEN", "SNOTLING", "TOMB_KINGS", "UNDERWORLD_DENIZENS", "VAMPIRE", "WOOD_ELF"]
+      "availableForRosters": [
+        "AMAZON",
+        "BLACK_ORC",
+        "BRETONNIAN",
+        "CHAOS_CHOSEN",
+        "CHAOS_DWARF",
+        "CHAOS_RENEGADES",
+        "DARK_ELF",
+        "DWARF",
+        "ELVEN_UNION",
+        "GNOME",
+        "GOBLIN",
+        "HALFLING",
+        "HIGH_ELF",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "KHORNE",
+        "LIZARDMEN",
+        "NECROMANTIC_HORROR",
+        "NORSE",
+        "NURGLE",
+        "OGRE",
+        "OLD_WORLD_ALLIANCE",
+        "ORC",
+        "SHAMBLING_UNDEAD",
+        "SKAVEN",
+        "SNOTLING",
+        "TOMB_KINGS",
+        "UNDERWORLD_DENIZENS",
+        "VAMPIRE",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/AKHORNE_THE_SQUIRREL-B.png",
+        "red": "assets/star_icons/AKHORNE_THE_SQUIRREL-R.png"
+      }
     },
     {
       "uid": "ANQI_PANQI",
@@ -28,11 +74,26 @@
       "PA": "6+",
       "AV": "10+",
       "playerType": "Blocker, Lizardman",
-      "skills": ["BLOCK", "GRAB", "LONER_4", "STAND_FIRM", "UNSTEADY"],
+      "skills": [
+        "BLOCK",
+        "GRAB",
+        "LONER_4",
+        "STAND_FIRM",
+        "UNSTEADY"
+      ],
       "specialAbilityName": "Savage Blow",
       "specialAbilityDescription": "Once per game, when Anqi performs a Block Action against an opposition player he may choose to re-roll any number of the Block Dice.",
-      "playsFor": ["LUSTRIAN_SUPERLEAGUE"],
-      "availableForRosters": ["AMAZON", "LIZARDMEN"]
+      "playsFor": [
+        "LUSTRIAN_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "LIZARDMEN"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/ANQI_PANQI-B.png",
+        "red": "assets/star_icons/ANQI_PANQI-R.png"
+      }
     },
     {
       "uid": "BARIK_FARBLAST",
@@ -44,11 +105,34 @@
       "PA": "3+",
       "AV": "9+",
       "playerType": "Thrower, Dwarf",
-      "skills": ["CANNONEER", "HAIL_MARY_PASS", "LONER_4", "PASS", "SECRET_WEAPON", "SURE_HANDS", "THICK_SKULL"],
+      "skills": [
+        "CANNONEER",
+        "HAIL_MARY_PASS",
+        "LONER_4",
+        "PASS",
+        "SECRET_WEAPON",
+        "SURE_HANDS",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Blast It!",
       "specialAbilityDescription": "When Barik performs a Hail Mary Pass, he may re-roll any Scatter results for determining where the ball lands, and any team-mate attempting to catch the ball applies a +1 modifier to the roll.",
-      "playsFor": ["OLD_WORLD_CLASSIC", "WORLDS_EDGE_SUPERLEAGUE"],
-      "availableForRosters": ["BRETONNIAN", "DWARF", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OGRE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC",
+        "WORLDS_EDGE_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "DWARF",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OGRE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/BARIK_FARBLAST-B.png",
+        "red": "assets/star_icons/BARIK_FARBLAST-R.png"
+      }
     },
     {
       "uid": "BILEROT_VOMITFLESH",
@@ -60,11 +144,29 @@
       "PA": "6+",
       "AV": "10+",
       "playerType": "Blocker, Human",
-      "skills": ["DIRTY_PLAYER", "DISTURBING_PRESENCE", "FOUL_APPEARANCE", "LONE_FOULER", "LONER_4", "REGENERATION", "UNSTEADY"],
+      "skills": [
+        "DIRTY_PLAYER",
+        "DISTURBING_PRESENCE",
+        "FOUL_APPEARANCE",
+        "LONE_FOULER",
+        "LONER_4",
+        "REGENERATION",
+        "UNSTEADY"
+      ],
       "specialAbilityName": "Putrid Regurgitation",
       "specialAbilityDescription": "Once per half, Bilerot may use the Projectile Vomit Special Action. This may still be used even if Bilerot has already performed a Block Action this Turn.",
-      "playsFor": ["FAVOURED_OF_NURGLE"],
-      "availableForRosters": ["CHAOS_CHOSEN", "CHAOS_RENEGADES", "NURGLE"]
+      "playsFor": [
+        "FAVOURED_OF_NURGLE"
+      ],
+      "availableForRosters": [
+        "CHAOS_CHOSEN",
+        "CHAOS_RENEGADES",
+        "NURGLE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/BILEROT_VOMITFLESH-B.png",
+        "red": "assets/star_icons/BILEROT_VOMITFLESH-R.png"
+      }
     },
     {
       "uid": "BOA_KONSSSTRIKTR",
@@ -76,11 +178,28 @@
       "PA": "4+",
       "AV": "9+",
       "playerType": "Runner, Snakeman",
-      "skills": ["DODGE", "FEND", "HYPNOTIC_GAZE", "LONER_4", "PREHENSILE_TAIL", "SAFE_PAIR_OF_HANDS", "SIDESTEP"],
+      "skills": [
+        "DODGE",
+        "FEND",
+        "HYPNOTIC_GAZE",
+        "LONER_4",
+        "PREHENSILE_TAIL",
+        "SAFE_PAIR_OF_HANDS",
+        "SIDESTEP"
+      ],
       "specialAbilityName": "Look Into My Eyes",
       "specialAbilityDescription": "Once per game, if Boa begins his activation Marking an opposition player in possession of the ball, he may roll a D6. On a 1, nothing happens. On a 2+, the opposition player loses possession of the ball, Boa immediately gains possession of the ball, and Boa's activation immediately ends.",
-      "playsFor": ["LUSTRIAN_SUPERLEAGUE"],
-      "availableForRosters": ["AMAZON", "LIZARDMEN"]
+      "playsFor": [
+        "LUSTRIAN_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "LIZARDMEN"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/BOA_KONSSSTRIKTR-B.png",
+        "red": "assets/star_icons/BOA_KONSSSTRIKTR-R.png"
+      }
     },
     {
       "uid": "BOMBER_DRIBBLESNOT",
@@ -92,11 +211,35 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Goblin, Special",
-      "skills": ["ACCURATE", "BOMBARDIER", "DODGE", "LONER_4", "RIGHT_STUFF", "SECRET_WEAPON", "STUNTY"],
+      "skills": [
+        "ACCURATE",
+        "BOMBARDIER",
+        "DODGE",
+        "LONER_4",
+        "RIGHT_STUFF",
+        "SECRET_WEAPON",
+        "STUNTY"
+      ],
       "specialAbilityName": "Kaboom!",
       "specialAbilityDescription": "Once per game, if an opposition player catches a bomb thrown by Bomber, you can choose to have it explode rather than the opposition player immediately attempting to throw it again.",
-      "playsFor": ["BADLANDS_BRAWL", "UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "BADLANDS_BRAWL",
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/BOMBER_DRIBBLESNOT-B.png",
+        "red": "assets/star_icons/BOMBER_DRIBBLESNOT-R.png"
+      }
     },
     {
       "uid": "CAPTAIN_KARINA_VON_RIESZ",
@@ -108,11 +251,29 @@
       "PA": "3+",
       "AV": "9+",
       "playerType": "Runner, Vampire",
-      "skills": ["BLOODLUST_2", "DODGE", "HYPNOTIC_GAZE", "JUMP_UP", "LONER_4", "REGENERATION"],
+      "skills": [
+        "BLOODLUST_2",
+        "DODGE",
+        "HYPNOTIC_GAZE",
+        "JUMP_UP",
+        "LONER_4",
+        "REGENERATION"
+      ],
       "specialAbilityName": "Tasty Morsel",
       "specialAbilityDescription": "Once per game, when Karina fails a Bloodlust roll, she may bite opposition players with ST 3 or lower as if they were Thrall Linemen. Star Players cannot be targeted by this ability.",
-      "playsFor": ["SYLVANIAN_SPOTLIGHT"],
-      "availableForRosters": ["NECROMANTIC_HORROR", "TOMB_KINGS", "SHAMBLING_UNDEAD", "VAMPIRE"]
+      "playsFor": [
+        "SYLVANIAN_SPOTLIGHT"
+      ],
+      "availableForRosters": [
+        "NECROMANTIC_HORROR",
+        "TOMB_KINGS",
+        "SHAMBLING_UNDEAD",
+        "VAMPIRE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/CAPTAIN_KARINA_VON_RIESZ-B.png",
+        "red": "assets/star_icons/CAPTAIN_KARINA_VON_RIESZ-R.png"
+      }
     },
     {
       "uid": "CINDY_PIEWHISTLE",
@@ -124,11 +285,33 @@
       "PA": "3+",
       "AV": "7+",
       "playerType": "Halfling, Special",
-      "skills": ["ACCURATE", "BOMBARDIER", "DODGE", "LONER_4", "SECRET_WEAPON", "STUNTY"],
+      "skills": [
+        "ACCURATE",
+        "BOMBARDIER",
+        "DODGE",
+        "LONER_4",
+        "SECRET_WEAPON",
+        "STUNTY"
+      ],
       "specialAbilityName": "All You Can Eat",
       "specialAbilityDescription": "Once per game, Cindy may perform two Throw Bomb Special Actions rather than one; though she must commit to doing so before making the first Action. After the second action, roll a D6 - on a 1-3, she is sent off.",
-      "playsFor": ["HALFLING_THIMBLE_CUP", "OLD_WORLD_CLASSIC"],
-      "availableForRosters": ["BRETONNIAN", "GNOME", "HALFLING", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "HALFLING_THIMBLE_CUP",
+        "OLD_WORLD_CLASSIC"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "GNOME",
+        "HALFLING",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/CINDY_PIEWHISTLE-B.png",
+        "red": "assets/star_icons/CINDY_PIEWHISTLE-R.png"
+      }
     },
     {
       "uid": "COUNT_LUTHOR_VON_DRAKENBORG",
@@ -140,11 +323,28 @@
       "PA": "3+",
       "AV": "10+",
       "playerType": "Blocker, Vampire",
-      "skills": ["BLOCK", "HYPNOTIC_GAZE", "LONER_4", "REGENERATION", "SIDESTEP"],
+      "skills": [
+        "BLOCK",
+        "HYPNOTIC_GAZE",
+        "LONER_4",
+        "REGENERATION",
+        "SIDESTEP"
+      ],
       "specialAbilityName": "Star of the Show",
       "specialAbilityDescription": "Once per game, when Count Luthor scores a Touchdown, his controlling coach gains one Team Re-roll until the end of the following Drive.",
-      "playsFor": ["SYLVANIAN_SPOTLIGHT"],
-      "availableForRosters": ["NECROMANTIC_HORROR", "TOMB_KINGS", "SHAMBLING_UNDEAD", "VAMPIRE"]
+      "playsFor": [
+        "SYLVANIAN_SPOTLIGHT"
+      ],
+      "availableForRosters": [
+        "NECROMANTIC_HORROR",
+        "TOMB_KINGS",
+        "SHAMBLING_UNDEAD",
+        "VAMPIRE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/COUNT_LUTHOR_VON_DRAKENBORG-B.png",
+        "red": "assets/star_icons/COUNT_LUTHOR_VON_DRAKENBORG-R.png"
+      }
     },
     {
       "uid": "DEEPROOT_STRONGBRANCH",
@@ -156,11 +356,31 @@
       "PA": "4+",
       "AV": "11+",
       "playerType": "Big Guy, Treeman",
-      "skills": ["BLOCK", "BULLSEYE", "LONER_4", "MIGHTY_BLOW", "STAND_FIRM", "STRONG_ARM", "THICK_SKULL", "THROW_TEAM_MATE", "TIMMM_BER"],
+      "skills": [
+        "BLOCK",
+        "BULLSEYE",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "STAND_FIRM",
+        "STRONG_ARM",
+        "THICK_SKULL",
+        "THROW_TEAM_MATE",
+        "TIMMM_BER"
+      ],
       "specialAbilityName": "Reliable",
       "specialAbilityDescription": "If Deeproot fumbles a Throw Team-mate action, the thrown player will bounce as normal but will automatically land safely.",
-      "playsFor": ["WOODLAND_LEAGUE"],
-      "availableForRosters": ["GNOME", "HALFLING", "WOOD_ELF"]
+      "playsFor": [
+        "WOODLAND_LEAGUE"
+      ],
+      "availableForRosters": [
+        "GNOME",
+        "HALFLING",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/DEEPROOT_STRONGBRANCH-B.png",
+        "red": "assets/star_icons/DEEPROOT_STRONGBRANCH-R.png"
+      }
     },
     {
       "uid": "DRIBL_AND_DRULL",
@@ -172,11 +392,35 @@
       "PA": "4+",
       "AV": "8+",
       "playerType": "Skink, Special",
-      "skills": ["DIRTY_PLAYER", "DODGE", "LONER_4", "QUICK_FLAIL", "SIDESTEP", "SNEAKY_GIT", "STAB", "STUNTY"],
+      "skills": [
+        "DIRTY_PLAYER",
+        "DODGE",
+        "LONER_4",
+        "QUICK_FLAIL",
+        "SIDESTEP",
+        "SNEAKY_GIT",
+        "STAB",
+        "STUNTY"
+      ],
       "specialAbilityName": "A Sneaky Pair",
       "specialAbilityDescription": "Whenever Dribl or Drull perform either a Foul Action or a Stab Special Action against an opposition player Marked by both Dribl & Drull, they may apply a +1 modifier to the roll.",
-      "playsFor": ["LUSTRIAN_SUPERLEAGUE"],
-      "availableForRosters": ["AMAZON", "LIZARDMEN"]
+      "playsFor": [
+        "LUSTRIAN_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "LIZARDMEN"
+      ],
+      "icon": [
+        {
+          "blue": "assets/star_icons/DRIBL-B.png",
+          "red": "assets/star_icons/DRIBL-R.png"
+        },
+        {
+          "blue": "assets/star_icons/DRULL-B.png",
+          "red": "assets/star_icons/DRULL-R.png"
+        }
+      ]
     },
     {
       "uid": "ELDRIL_SIDEWINDER",
@@ -188,11 +432,29 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Catcher, Elf",
-      "skills": ["CATCH", "DODGE", "HYPNOTIC_GAZE", "LONER_4", "NERVES_OF_STEEL", "ON_THE_BALL"],
+      "skills": [
+        "CATCH",
+        "DODGE",
+        "HYPNOTIC_GAZE",
+        "LONER_4",
+        "NERVES_OF_STEEL",
+        "ON_THE_BALL"
+      ],
       "specialAbilityName": "Mesmerising Dance",
       "specialAbilityDescription": "Once per half, Eldril may re-roll the dice when performing a Hypnotic Gaze Special Action.",
-      "playsFor": ["ELVEN_KINGDOMS_LEAGUE"],
-      "availableForRosters": ["DARK_ELF", "ELVEN_UNION", "HIGH_ELF", "WOOD_ELF"]
+      "playsFor": [
+        "ELVEN_KINGDOMS_LEAGUE"
+      ],
+      "availableForRosters": [
+        "DARK_ELF",
+        "ELVEN_UNION",
+        "HIGH_ELF",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/ELDRIL_SIDEWINDER-B.png",
+        "red": "assets/star_icons/ELDRIL_SIDEWINDER-R.png"
+      }
     },
     {
       "uid": "ESTELLE_LA_VENEAUX",
@@ -204,11 +466,26 @@
       "PA": "4+",
       "AV": "8+",
       "playerType": "Human, Lineman",
-      "skills": ["DISTURBING_PRESENCE", "DODGE", "GUARD", "LONER_4", "SIDESTEP"],
+      "skills": [
+        "DISTURBING_PRESENCE",
+        "DODGE",
+        "GUARD",
+        "LONER_4",
+        "SIDESTEP"
+      ],
       "specialAbilityName": "Baleful Hex",
       "specialAbilityDescription": "Once per game, at the beginning of Estelle's activation, she may select an opposition player within 5 squares and roll a D6. On a 2+, the selected player becomes Distracted and cannot be activated during their team's next Turn.",
-      "playsFor": ["LUSTRIAN_SUPERLEAGUE"],
-      "availableForRosters": ["AMAZON", "LIZARDMEN"]
+      "playsFor": [
+        "LUSTRIAN_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "LIZARDMEN"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/ESTELLE_LA_VENEAUX-B.png",
+        "red": "assets/star_icons/ESTELLE_LA_VENEAUX-R.png"
+      }
     },
     {
       "uid": "FUNGUS_THE_LOON",
@@ -220,11 +497,34 @@
       "PA": "-",
       "AV": "8+",
       "playerType": "Goblin, Special",
-      "skills": ["BALL_AND_CHAIN", "LONER_4", "MIGHTY_BLOW", "NO_BALL", "SECRET_WEAPON", "STUNTY"],
+      "skills": [
+        "BALL_AND_CHAIN",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "NO_BALL",
+        "SECRET_WEAPON",
+        "STUNTY"
+      ],
       "specialAbilityName": "Whirling Dervish",
       "specialAbilityDescription": "Once per Activation, Fungus may re-roll the D6 when determining which direction he moves in.",
-      "playsFor": ["BADLANDS_BRAWL", "UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "BADLANDS_BRAWL",
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/FUNGUS_THE_LOON-B.png",
+        "red": "assets/star_icons/FUNGUS_THE_LOON-R.png"
+      }
     },
     {
       "uid": "GLART_SMASHRIP",
@@ -236,11 +536,29 @@
       "PA": "6+",
       "AV": "9+",
       "playerType": "Blocker, Skaven",
-      "skills": ["BLOCK", "CLAWS", "GRAB", "JUGGERNAUT", "LONER_4", "STAND_FIRM"],
+      "skills": [
+        "BLOCK",
+        "CLAWS",
+        "GRAB",
+        "JUGGERNAUT",
+        "LONER_4",
+        "STAND_FIRM"
+      ],
       "specialAbilityName": "Frenzied Rush",
       "specialAbilityDescription": "Once per half, when Glart declares a Blitz Action he may gain the Frenzy Skill until the end of his activation. Glart may not use the Grab Skill during a Turn in which he uses this special rule.",
-      "playsFor": ["UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["GOBLIN", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "GOBLIN",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GLART_SMASHRIP-B.png",
+        "red": "assets/star_icons/GLART_SMASHRIP-R.png"
+      }
     },
     {
       "uid": "GLORIEL_SUMMERBLOOM",
@@ -252,11 +570,29 @@
       "PA": "2+",
       "AV": "8+",
       "playerType": "Thrower, Elf",
-      "skills": ["ACCURATE", "DODGE", "LONER_3", "PASS", "SIDESTEP", "SURE_HANDS"],
+      "skills": [
+        "ACCURATE",
+        "DODGE",
+        "LONER_3",
+        "PASS",
+        "SIDESTEP",
+        "SURE_HANDS"
+      ],
       "specialAbilityName": "Shot to Nothing",
       "specialAbilityDescription": "Once per game, when Gloriel is activated she may use this special rule. If she does, Gloriel gains the Hail Mary Pass Skill until the end of her activation.",
-      "playsFor": ["ELVEN_KINGDOMS_LEAGUE"],
-      "availableForRosters": ["DARK_ELF", "ELVEN_UNION", "HIGH_ELF", "WOOD_ELF"]
+      "playsFor": [
+        "ELVEN_KINGDOMS_LEAGUE"
+      ],
+      "availableForRosters": [
+        "DARK_ELF",
+        "ELVEN_UNION",
+        "HIGH_ELF",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GLORIEL_SUMMERBLOOM-B.png",
+        "red": "assets/star_icons/GLORIEL_SUMMERBLOOM-R.png"
+      }
     },
     {
       "uid": "GLOTL_STOP",
@@ -268,11 +604,28 @@
       "PA": "6+",
       "AV": "10+",
       "playerType": "Big Guy, Lizardman",
-      "skills": ["ANIMAL_SAVAGERY", "FRENZY", "LONER_4", "MIGHTY_BLOW", "PREHENSILE_TAIL", "STAND_FIRM", "THICK_SKULL"],
+      "skills": [
+        "ANIMAL_SAVAGERY",
+        "FRENZY",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "PREHENSILE_TAIL",
+        "STAND_FIRM",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Primal Savagery",
       "specialAbilityDescription": "Once per game, when Glotl fails an Animal Savagery roll, it may lash out at an opposition player rather than a team-mate.",
-      "playsFor": ["LUSTRIAN_SUPERLEAGUE"],
-      "availableForRosters": ["AMAZON", "LIZARDMEN"]
+      "playsFor": [
+        "LUSTRIAN_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "LIZARDMEN"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GLOTL_STOP-B.png",
+        "red": "assets/star_icons/GLOTL_STOP-R.png"
+      }
     },
     {
       "uid": "GRAK_AND_CRUMBLEBERRY",
@@ -284,11 +637,63 @@
       "PA": "4+",
       "AV": "10+",
       "playerType": "Big Guy, Ogre and Halfling",
-      "skills": ["BONE_HEAD", "KICK_TEAM_MATE", "LONER_4", "MIGHTY_BLOW", "THICK_SKULL", "DODGE", "LETHAL_FLIGHT", "RIGHT_STUFF", "STUNTY", "SURE_HANDS"],
+      "skills": [
+        "BONE_HEAD",
+        "KICK_TEAM_MATE",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "THICK_SKULL",
+        "DODGE",
+        "LETHAL_FLIGHT",
+        "RIGHT_STUFF",
+        "STUNTY",
+        "SURE_HANDS"
+      ],
       "specialAbilityName": "I'll Carry You",
       "specialAbilityDescription": "Once per half, if Grak begins his activation adjacent to Crumbleberry he may pick up Crumbleberry; temporarily remove Crumbleberry from the pitch. At the end of Grak's activation, place Crumbleberry in an unoccupied square adjacent to Grak. While being carried, Grak gains Break Tackle and Dodge.",
       "playsFor": [],
-      "availableForRosters": ["AMAZON", "BLACK_ORC", "BRETONNIAN", "CHAOS_CHOSEN", "CHAOS_DWARF", "CHAOS_RENEGADES", "DARK_ELF", "DWARF", "ELVEN_UNION", "GNOME", "GOBLIN", "HALFLING", "HIGH_ELF", "HUMAN", "IMPERIAL_NOBILITY", "KHORNE", "LIZARDMEN", "NECROMANTIC_HORROR", "NORSE", "NURGLE", "OGRE", "OLD_WORLD_ALLIANCE", "ORC", "SHAMBLING_UNDEAD", "SKAVEN", "SNOTLING", "TOMB_KINGS", "UNDERWORLD_DENIZENS", "VAMPIRE", "WOOD_ELF"]
+      "availableForRosters": [
+        "AMAZON",
+        "BLACK_ORC",
+        "BRETONNIAN",
+        "CHAOS_CHOSEN",
+        "CHAOS_DWARF",
+        "CHAOS_RENEGADES",
+        "DARK_ELF",
+        "DWARF",
+        "ELVEN_UNION",
+        "GNOME",
+        "GOBLIN",
+        "HALFLING",
+        "HIGH_ELF",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "KHORNE",
+        "LIZARDMEN",
+        "NECROMANTIC_HORROR",
+        "NORSE",
+        "NURGLE",
+        "OGRE",
+        "OLD_WORLD_ALLIANCE",
+        "ORC",
+        "SHAMBLING_UNDEAD",
+        "SKAVEN",
+        "SNOTLING",
+        "TOMB_KINGS",
+        "UNDERWORLD_DENIZENS",
+        "VAMPIRE",
+        "WOOD_ELF"
+      ],
+      "icon": [
+        {
+          "blue": "assets/star_icons/GRAK-B.png",
+          "red": "assets/star_icons/GRAK-R.png"
+        },
+        {
+          "blue": "assets/star_icons/CRUMBLEBERRY-B.png",
+          "red": "assets/star_icons/CRUMBLEBERRY-R.png"
+        }
+      ]
     },
     {
       "uid": "GRASHNAK_BLACKHOOF",
@@ -300,11 +705,31 @@
       "PA": "6+",
       "AV": "9+",
       "playerType": "Big Guy, Minotaur",
-      "skills": ["FRENZY", "HORNS", "LONER_4", "MIGHTY_BLOW", "THICK_SKULL", "UNCHANNELLED_FURY"],
+      "skills": [
+        "FRENZY",
+        "HORNS",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "THICK_SKULL",
+        "UNCHANNELLED_FURY"
+      ],
       "specialAbilityName": "Gored by the Bull",
       "specialAbilityDescription": "Once per game, when Grashnak performs a Block Action as part of a Blitz Action, he may roll one additional Block Dice against the opposition player regardless of their ST, to a maximum of three Block Dice.",
-      "playsFor": ["CHAOS_CLASH"],
-      "availableForRosters": ["CHAOS_CHOSEN", "CHAOS_DWARF", "CHAOS_RENEGADES", "KHORNE", "NORSE", "NURGLE"]
+      "playsFor": [
+        "CHAOS_CLASH"
+      ],
+      "availableForRosters": [
+        "CHAOS_CHOSEN",
+        "CHAOS_DWARF",
+        "CHAOS_RENEGADES",
+        "KHORNE",
+        "NORSE",
+        "NURGLE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GRASHNAK_BLACKHOOF-B.png",
+        "red": "assets/star_icons/GRASHNAK_BLACKHOOF-R.png"
+      }
     },
     {
       "uid": "GRETCHEN_WACHTER",
@@ -316,11 +741,32 @@
       "PA": "-",
       "AV": "9+",
       "playerType": "Special, Undead, Wraith",
-      "skills": ["DISTURBING_PRESENCE", "DODGE", "FOUL_APPEARANCE", "JUMP_UP", "LONER_4", "NO_BALL", "REGENERATION", "SHADOWING", "SIDESTEP"],
+      "skills": [
+        "DISTURBING_PRESENCE",
+        "DODGE",
+        "FOUL_APPEARANCE",
+        "JUMP_UP",
+        "LONER_4",
+        "NO_BALL",
+        "REGENERATION",
+        "SHADOWING",
+        "SIDESTEP"
+      ],
       "specialAbilityName": "Incorporeal",
       "specialAbilityDescription": "Once per game, when Gretchen is activated she may use this special rule. Until the end of her activation, Gretchen does not have to make Dodge rolls for leaving a square within an opposition player's Tackle Zone.",
-      "playsFor": ["SYLVANIAN_SPOTLIGHT"],
-      "availableForRosters": ["NECROMANTIC_HORROR", "TOMB_KINGS", "SHAMBLING_UNDEAD", "VAMPIRE"]
+      "playsFor": [
+        "SYLVANIAN_SPOTLIGHT"
+      ],
+      "availableForRosters": [
+        "NECROMANTIC_HORROR",
+        "TOMB_KINGS",
+        "SHAMBLING_UNDEAD",
+        "VAMPIRE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GRETCHEN_WACHTER-B.png",
+        "red": "assets/star_icons/GRETCHEN_WACHTER-R.png"
+      }
     },
     {
       "uid": "GRIFF_OBERWALD",
@@ -332,11 +778,30 @@
       "PA": "3+",
       "AV": "9+",
       "playerType": "Blitzer, Human",
-      "skills": ["BLOCK", "DODGE", "FEND", "LONER_3", "SPRINT", "SURE_FEET"],
+      "skills": [
+        "BLOCK",
+        "DODGE",
+        "FEND",
+        "LONER_3",
+        "SPRINT",
+        "SURE_FEET"
+      ],
       "specialAbilityName": "Consummate Professional",
       "specialAbilityDescription": "Once per game, Griff may apply a +1 modifier to an Agility Test he has made. This modifier may be applied after the roll has been made.",
-      "playsFor": ["OLD_WORLD_CLASSIC"],
-      "availableForRosters": ["BRETONNIAN", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GRIFF_OBERWALD-B.png",
+        "red": "assets/star_icons/GRIFF_OBERWALD-R.png"
+      }
     },
     {
       "uid": "GRIM_IRONJAW",
@@ -348,11 +813,28 @@
       "PA": "6+",
       "AV": "9+",
       "playerType": "Dwarf, Special",
-      "skills": ["BLOCK", "DAUNTLESS", "FRENZY", "HATRED_BIG_GUY", "LONER_4", "MULTIPLE_BLOCK", "THICK_SKULL"],
+      "skills": [
+        "BLOCK",
+        "DAUNTLESS",
+        "FRENZY",
+        "HATRED_BIG_GUY",
+        "LONER_4",
+        "MULTIPLE_BLOCK",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Slayer",
       "specialAbilityDescription": "Once per game, when an opposition Big Guy is Knocked Down as a result of a Block Action performed by Grim, you may apply an additional +1 modifier to either the Armour Roll or the Injury Roll.",
-      "playsFor": ["WORLDS_EDGE_SUPERLEAGUE"],
-      "availableForRosters": ["DWARF", "OGRE"]
+      "playsFor": [
+        "WORLDS_EDGE_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "DWARF",
+        "OGRE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GRIM_IRONJAW-B.png",
+        "red": "assets/star_icons/GRIM_IRONJAW-R.png"
+      }
     },
     {
       "uid": "GROMBRINDAL",
@@ -364,11 +846,38 @@
       "PA": "4+",
       "AV": "10+",
       "playerType": "Blocker, Dwarf",
-      "skills": ["BLOCK", "BREAK_TACKLE", "DAUNTLESS", "LONER_4", "MIGHTY_BLOW", "STAND_FIRM", "SURE_FEET", "THICK_SKULL"],
+      "skills": [
+        "BLOCK",
+        "BREAK_TACKLE",
+        "DAUNTLESS",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "STAND_FIRM",
+        "SURE_FEET",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Wisdom of the White Dwarf",
       "specialAbilityDescription": "Once per game, when Grombrindal is activated he may select one team-mate within 2 squares. The selected team-mate gains one of the following Skills until the end of turn: Break Tackle, Dauntless, Mighty Blow, Sure Feet.",
-      "playsFor": ["HALFLING_THIMBLE_CUP", "OLD_WORLD_CLASSIC", "WORLDS_EDGE_SUPERLEAGUE"],
-      "availableForRosters": ["BRETONNIAN", "DWARF", "GNOME", "HALFLING", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OGRE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "HALFLING_THIMBLE_CUP",
+        "OLD_WORLD_CLASSIC",
+        "WORLDS_EDGE_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "DWARF",
+        "GNOME",
+        "HALFLING",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OGRE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GROMBRINDAL-B.png",
+        "red": "assets/star_icons/GROMBRINDAL-R.png"
+      }
     },
     {
       "uid": "GUFFLE_PUSMAW",
@@ -380,11 +889,28 @@
       "PA": "6+",
       "AV": "10+",
       "playerType": "Blocker, Human",
-      "skills": ["FOUL_APPEARANCE", "LONER_4", "MONSTROUS_MOUTH", "NERVES_OF_STEEL", "ON_THE_BALL", "PLAGUE_RIDDEN"],
+      "skills": [
+        "FOUL_APPEARANCE",
+        "LONER_4",
+        "MONSTROUS_MOUTH",
+        "NERVES_OF_STEEL",
+        "ON_THE_BALL",
+        "PLAGUE_RIDDEN"
+      ],
       "specialAbilityName": "Quick Bite",
       "specialAbilityDescription": "Once per match, when marking an opponent who catches the ball, Guffle may immediately roll against their armor. If successful, he gains possession with no turnover.",
-      "playsFor": ["FAVOURED_OF_NURGLE"],
-      "availableForRosters": ["CHAOS_CHOSEN", "CHAOS_RENEGADES", "NURGLE"]
+      "playsFor": [
+        "FAVOURED_OF_NURGLE"
+      ],
+      "availableForRosters": [
+        "CHAOS_CHOSEN",
+        "CHAOS_RENEGADES",
+        "NURGLE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/GUFFLE_PUSMAW-B.png",
+        "red": "assets/star_icons/GUFFLE_PUSMAW-R.png"
+      }
     },
     {
       "uid": "HAKFLEM_SKUTTLESPIKE",
@@ -396,11 +922,28 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Runner, Skaven",
-      "skills": ["DODGE", "EXTRA_ARMS", "LONER_4", "PREHENSILE_TAIL", "TWO_HEADS"],
+      "skills": [
+        "DODGE",
+        "EXTRA_ARMS",
+        "LONER_4",
+        "PREHENSILE_TAIL",
+        "TWO_HEADS"
+      ],
       "specialAbilityName": "Threatening Pass",
       "specialAbilityDescription": "Once per game, if Hakflem is adjacent to a team-mate who is in possession of the ball when he is activated, then Hakflem can choose to gain possession of the ball. The teammate is immediately knocked down without causing a turnover.",
-      "playsFor": ["UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["GOBLIN", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "GOBLIN",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/HAKFLEM_SKUTTLESPIKE-B.png",
+        "red": "assets/star_icons/HAKFLEM_SKUTTLESPIKE-R.png"
+      }
     },
     {
       "uid": "HELMUT_WULF",
@@ -412,11 +955,30 @@
       "PA": "-",
       "AV": "9+",
       "playerType": "Human, Special",
-      "skills": ["CHAINSAW", "LONER_4", "NO_BALL", "PRO", "SECRET_WEAPON", "STAND_FIRM"],
+      "skills": [
+        "CHAINSAW",
+        "LONER_4",
+        "NO_BALL",
+        "PRO",
+        "SECRET_WEAPON",
+        "STAND_FIRM"
+      ],
       "specialAbilityName": "Old Pro",
       "specialAbilityDescription": "Helmut may use his Pro Skill once per game to re-roll a single dice rolled as part of an Armour Roll.",
-      "playsFor": ["OLD_WORLD_CLASSIC"],
-      "availableForRosters": ["BRETONNIAN", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/HELMUT_WULF-B.png",
+        "red": "assets/star_icons/HELMUT_WULF-R.png"
+      }
     },
     {
       "uid": "HTHARK_THE_UNSTOPPABLE",
@@ -428,11 +990,35 @@
       "PA": "6+",
       "AV": "10+",
       "playerType": "Blitzer, Dwarf",
-      "skills": ["BLOCK", "BREAK_TACKLE", "DEFENSIVE", "JUGGERNAUT", "LONER_4", "SPRINT", "SURE_FEET", "THICK_SKULL", "UNSTEADY"],
+      "skills": [
+        "BLOCK",
+        "BREAK_TACKLE",
+        "DEFENSIVE",
+        "JUGGERNAUT",
+        "LONER_4",
+        "SPRINT",
+        "SURE_FEET",
+        "THICK_SKULL",
+        "UNSTEADY"
+      ],
       "specialAbilityName": "Unstoppable Momentum",
       "specialAbilityDescription": "Whenever H'thark performs a Block Action as part of a Blitz Action, he may re-roll a single Block Dice.",
-      "playsFor": ["BADLANDS_BRAWL", "FAVOURED_OF_HASHUT"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_CHOSEN", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC"]
+      "playsFor": [
+        "BADLANDS_BRAWL",
+        "FAVOURED_OF_HASHUT"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_CHOSEN",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/HTHARK_THE_UNSTOPPABLE-B.png",
+        "red": "assets/star_icons/HTHARK_THE_UNSTOPPABLE-R.png"
+      }
     },
     {
       "uid": "IVAN_THE_ANIMAL_DEATHSHROUD",
@@ -444,11 +1030,31 @@
       "PA": "5+",
       "AV": "9+",
       "playerType": "Blitzer, Undead",
-      "skills": ["BLOCK", "DISTURBING_PRESENCE", "HATRED_DWARF", "JUGGERNAUT", "LONER_4", "REGENERATION", "STRIP_BALL", "TACKLE"],
+      "skills": [
+        "BLOCK",
+        "DISTURBING_PRESENCE",
+        "HATRED_DWARF",
+        "JUGGERNAUT",
+        "LONER_4",
+        "REGENERATION",
+        "STRIP_BALL",
+        "TACKLE"
+      ],
       "specialAbilityName": "Dwarven Scourge",
       "specialAbilityDescription": "Once per game, when an opposition player is Knocked Down as a result of a Block Action performed by Ivan, you may apply an additional +1 modifier to the Armour Roll or Injury roll. If this is against a Dwarf player this may instead be a +2 modifier.",
-      "playsFor": ["SYLVANIAN_SPOTLIGHT"],
-      "availableForRosters": ["NECROMANTIC_HORROR", "TOMB_KINGS", "SHAMBLING_UNDEAD", "VAMPIRE"]
+      "playsFor": [
+        "SYLVANIAN_SPOTLIGHT"
+      ],
+      "availableForRosters": [
+        "NECROMANTIC_HORROR",
+        "TOMB_KINGS",
+        "SHAMBLING_UNDEAD",
+        "VAMPIRE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/IVAN_THE_ANIMAL_DEATHSHROUD-B.png",
+        "red": "assets/star_icons/IVAN_THE_ANIMAL_DEATHSHROUD-R.png"
+      }
     },
     {
       "uid": "IVAR_ERIKSSON",
@@ -460,11 +1066,28 @@
       "PA": "4+",
       "AV": "9+",
       "playerType": "Blitzer, Human",
-      "skills": ["BLOCK", "GUARD", "LONER_4", "TACKLE"],
+      "skills": [
+        "BLOCK",
+        "GUARD",
+        "LONER_4",
+        "TACKLE"
+      ],
       "specialAbilityName": "Raiding Party",
       "specialAbilityDescription": "Once per Drive, when Ivar begins his activation he may select one Open team-mate within 5 squares. The selected player may immediately move 1 square, though they must end this move Marking an opposition player.",
-      "playsFor": ["OLD_WORLD_CLASSIC"],
-      "availableForRosters": ["BRETONNIAN", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/IVAR_ERIKSSON-B.png",
+        "red": "assets/star_icons/IVAR_ERIKSSON-R.png"
+      }
     },
     {
       "uid": "JEREMIAH_KOOL",
@@ -476,11 +1099,32 @@
       "PA": "2+",
       "AV": "9+",
       "playerType": "Runner, Elf",
-      "skills": ["BLOCK", "DODGE", "DIVING_CATCH", "DUMP_OFF", "LONER_4", "NERVES_OF_STEEL", "ON_THE_BALL", "PASS", "SIDESTEP"],
+      "skills": [
+        "BLOCK",
+        "DODGE",
+        "DIVING_CATCH",
+        "DUMP_OFF",
+        "LONER_4",
+        "NERVES_OF_STEEL",
+        "ON_THE_BALL",
+        "PASS",
+        "SIDESTEP"
+      ],
       "specialAbilityName": "The Flashing Blade",
       "specialAbilityDescription": "Once per game, at the start of his activation, Jeremiah may declare a Stab Special Action against an opposition player he is Marking. After performing the Stab Special Action, Jeremiah may then perform a Move Action before his activation ends.",
-      "playsFor": ["ELVEN_KINGDOMS_LEAGUE"],
-      "availableForRosters": ["DARK_ELF", "ELVEN_UNION", "HIGH_ELF", "WOOD_ELF"]
+      "playsFor": [
+        "ELVEN_KINGDOMS_LEAGUE"
+      ],
+      "availableForRosters": [
+        "DARK_ELF",
+        "ELVEN_UNION",
+        "HIGH_ELF",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/JEREMIAH_KOOL-B.png",
+        "red": "assets/star_icons/JEREMIAH_KOOL-R.png"
+      }
     },
     {
       "uid": "JORDELL_FRESHBREEZE",
@@ -492,11 +1136,33 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Blitzer, Elf",
-      "skills": ["BLOCK", "DIVING_CATCH", "DODGE", "LEAP", "LONER_4", "SIDESTEP", "STEADY_FOOTING"],
+      "skills": [
+        "BLOCK",
+        "DIVING_CATCH",
+        "DODGE",
+        "LEAP",
+        "LONER_4",
+        "SIDESTEP",
+        "STEADY_FOOTING"
+      ],
       "specialAbilityName": "Swift as the Breeze",
       "specialAbilityDescription": "Once per game, Jordell may choose to pass a single Dodge, Leap or Rush Test on a 2+, regardless of any modifiers.",
-      "playsFor": ["ELVEN_KINGDOMS_LEAGUE", "WOODLAND_LEAGUE"],
-      "availableForRosters": ["DARK_ELF", "ELVEN_UNION", "GNOME", "HALFLING", "HIGH_ELF", "WOOD_ELF"]
+      "playsFor": [
+        "ELVEN_KINGDOMS_LEAGUE",
+        "WOODLAND_LEAGUE"
+      ],
+      "availableForRosters": [
+        "DARK_ELF",
+        "ELVEN_UNION",
+        "GNOME",
+        "HALFLING",
+        "HIGH_ELF",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/JORDELL_FRESHBREEZE-B.png",
+        "red": "assets/star_icons/JORDELL_FRESHBREEZE-R.png"
+      }
     },
     {
       "uid": "JOSEF_BUGMAN",
@@ -508,11 +1174,34 @@
       "PA": "4+",
       "AV": "9+",
       "playerType": "Blocker, Dwarf",
-      "skills": ["BLOCK", "DRUNKARD", "FEND", "LONER_3", "TACKLE", "TAUNT", "THICK_SKULL"],
+      "skills": [
+        "BLOCK",
+        "DRUNKARD",
+        "FEND",
+        "LONER_3",
+        "TACKLE",
+        "TAUNT",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Dwarfen Grit",
       "specialAbilityDescription": "Once per game, when Josef's armour is broken as the result of an Armour Roll, you may choose to have the Armour Roll re-rolled.",
-      "playsFor": ["OLD_WORLD_CLASSIC", "WORLDS_EDGE_SUPERLEAGUE"],
-      "availableForRosters": ["BRETONNIAN", "DWARF", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OGRE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC",
+        "WORLDS_EDGE_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "DWARF",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OGRE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/JOSEF_BUGMAN-B.png",
+        "red": "assets/star_icons/JOSEF_BUGMAN-R.png"
+      }
     },
     {
       "uid": "KARLA_VON_KILL",
@@ -524,11 +1213,32 @@
       "PA": "3+",
       "AV": "9+",
       "playerType": "Blitzer, Human",
-      "skills": ["BLOCK", "DAUNTLESS", "DODGE", "JUMP_UP", "LONER_4"],
+      "skills": [
+        "BLOCK",
+        "DAUNTLESS",
+        "DODGE",
+        "JUMP_UP",
+        "LONER_4"
+      ],
       "specialAbilityName": "Indomitable",
       "specialAbilityDescription": "Once per game, when Karla successfully rolls to use her Dauntless Skill, she may increase her ST characteristic to double that of the target of the Block Action.",
-      "playsFor": ["LUSTRIAN_SUPERLEAGUE", "OLD_WORLD_CLASSIC"],
-      "availableForRosters": ["AMAZON", "BRETONNIAN", "HUMAN", "IMPERIAL_NOBILITY", "LIZARDMEN", "NORSE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "LUSTRIAN_SUPERLEAGUE",
+        "OLD_WORLD_CLASSIC"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "BRETONNIAN",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "LIZARDMEN",
+        "NORSE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/KARLA_VON_KILL-B.png",
+        "red": "assets/star_icons/KARLA_VON_KILL-R.png"
+      }
     },
     {
       "uid": "KIROTH_KRAKENEYE",
@@ -540,11 +1250,29 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Runner, Elf",
-      "skills": ["DISTURBING_PRESENCE", "FOUL_APPEARANCE", "LONER_4", "ON_THE_BALL", "TACKLE", "TENTACLES"],
+      "skills": [
+        "DISTURBING_PRESENCE",
+        "FOUL_APPEARANCE",
+        "LONER_4",
+        "ON_THE_BALL",
+        "TACKLE",
+        "TENTACLES"
+      ],
       "specialAbilityName": "Black Ink",
       "specialAbilityDescription": "Once per game, at the start of any of his activations, Kiroth can select an opposition player he is Marking. The selected player becomes Distracted until they are next activated.",
-      "playsFor": ["ELVEN_KINGDOMS_LEAGUE"],
-      "availableForRosters": ["DARK_ELF", "ELVEN_UNION", "HIGH_ELF", "WOOD_ELF"]
+      "playsFor": [
+        "ELVEN_KINGDOMS_LEAGUE"
+      ],
+      "availableForRosters": [
+        "DARK_ELF",
+        "ELVEN_UNION",
+        "HIGH_ELF",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/KIROTH_KRAKENEYE-B.png",
+        "red": "assets/star_icons/KIROTH_KRAKENEYE-R.png"
+      }
     },
     {
       "uid": "KREEK_RUSTGOUGER",
@@ -556,11 +1284,29 @@
       "PA": "-",
       "AV": "10+",
       "playerType": "Big Guy, Skaven, Special",
-      "skills": ["BALL_AND_CHAIN", "LONER_4", "MIGHTY_BLOW", "NO_BALL", "PREHENSILE_TAIL", "SECRET_WEAPON"],
+      "skills": [
+        "BALL_AND_CHAIN",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "NO_BALL",
+        "PREHENSILE_TAIL",
+        "SECRET_WEAPON"
+      ],
       "specialAbilityName": "I'll Be Back!",
       "specialAbilityDescription": "The first time in a game that Kreek would be Sent-off as per the Secret Weapon Trait, he is not Sent-off and may instead continue as part of the game.",
-      "playsFor": ["UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["GOBLIN", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "GOBLIN",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/KREEK_RUSTGOUGER-B.png",
+        "red": "assets/star_icons/KREEK_RUSTGOUGER-R.png"
+      }
     },
     {
       "uid": "LORD_BORAK_THE_DESPOILER",
@@ -572,11 +1318,32 @@
       "PA": "5+",
       "AV": "10+",
       "playerType": "Blocker, Human",
-      "skills": ["BLOCK", "DIRTY_PLAYER", "LEADER", "LONER_3", "MIGHTY_BLOW", "PUT_THE_BOOT_IN", "SNEAKY_GIT"],
+      "skills": [
+        "BLOCK",
+        "DIRTY_PLAYER",
+        "LEADER",
+        "LONER_3",
+        "MIGHTY_BLOW",
+        "PUT_THE_BOOT_IN",
+        "SNEAKY_GIT"
+      ],
       "specialAbilityName": "Lord of Chaos",
       "specialAbilityDescription": "Once per game, when Lord Borak performs a Block Action he may re-roll a single Block Dice.",
-      "playsFor": ["CHAOS_CLASH"],
-      "availableForRosters": ["CHAOS_CHOSEN", "CHAOS_DWARF", "CHAOS_RENEGADES", "KHORNE", "NORSE", "NURGLE"]
+      "playsFor": [
+        "CHAOS_CLASH"
+      ],
+      "availableForRosters": [
+        "CHAOS_CHOSEN",
+        "CHAOS_DWARF",
+        "CHAOS_RENEGADES",
+        "KHORNE",
+        "NORSE",
+        "NURGLE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/LORD_BORAK_THE_DESPOILER-B.png",
+        "red": "assets/star_icons/LORD_BORAK_THE_DESPOILER-R.png"
+      }
     },
     {
       "uid": "MAPLE_HIGHGROVE",
@@ -588,11 +1355,29 @@
       "PA": "5+",
       "AV": "11+",
       "playerType": "Big Guy, Treeman",
-      "skills": ["BRAWLER", "GRAB", "LONER_4", "MIGHTY_BLOW", "STAND_FIRM", "TENTACLES", "THICK_SKULL"],
+      "skills": [
+        "BRAWLER",
+        "GRAB",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "STAND_FIRM",
+        "TENTACLES",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Vicious Vines",
       "specialAbilityDescription": "Once per half, when Maple declares a Block Action he may do so against an opposition player who is 2 squares away following all the normal rules for performing a Block Action, though he may not follow-up.",
-      "playsFor": ["WOODLAND_LEAGUE"],
-      "availableForRosters": ["GNOME", "HALFLING", "WOOD_ELF"]
+      "playsFor": [
+        "WOODLAND_LEAGUE"
+      ],
+      "availableForRosters": [
+        "GNOME",
+        "HALFLING",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/MAPLE_HIGHGROVE-B.png",
+        "red": "assets/star_icons/MAPLE_HIGHGROVE-R.png"
+      }
     },
     {
       "uid": "MAX_SPLEENRIPPER",
@@ -604,11 +1389,27 @@
       "PA": "-",
       "AV": "9+",
       "playerType": "Human, Special",
-      "skills": ["CHAINSAW", "LONER_4", "NO_BALL", "SECRET_WEAPON"],
+      "skills": [
+        "CHAINSAW",
+        "LONER_4",
+        "NO_BALL",
+        "SECRET_WEAPON"
+      ],
       "specialAbilityName": "Maximum Carnage",
       "specialAbilityDescription": "Once per game, after Max performs a Chainsaw Attack Special Action he may immediately perform another Chainsaw Attack Special Action that targets a different opposition player.",
-      "playsFor": ["FAVOURED_OF_KHORNE"],
-      "availableForRosters": ["CHAOS_CHOSEN", "CHAOS_RENEGADES", "KHORNE", "NORSE"]
+      "playsFor": [
+        "FAVOURED_OF_KHORNE"
+      ],
+      "availableForRosters": [
+        "CHAOS_CHOSEN",
+        "CHAOS_RENEGADES",
+        "KHORNE",
+        "NORSE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/MAX_SPLEENRIPPER-B.png",
+        "red": "assets/star_icons/MAX_SPLEENRIPPER-R.png"
+      }
     },
     {
       "uid": "MORG_N_THORG",
@@ -620,11 +1421,51 @@
       "PA": "4+",
       "AV": "11+",
       "playerType": "Big Guy, Ogre",
-      "skills": ["BLOCK", "BULLSEYE", "LONER_4", "MIGHTY_BLOW", "THICK_SKULL", "THROW_TEAM_MATE"],
+      "skills": [
+        "BLOCK",
+        "BULLSEYE",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "THICK_SKULL",
+        "THROW_TEAM_MATE"
+      ],
       "specialAbilityName": "The Ballista",
       "specialAbilityDescription": "Once per game, when Morg performs a Throw Team-mate Action, he may re-roll the Passing Ability Test.",
-      "playsFor": ["OLD_WORLD_CLASSIC", "LUSTRIAN_SUPERLEAGUE"],
-      "availableForRosters": ["AMAZON", "BLACK_ORC", "BRETONNIAN", "CHAOS_CHOSEN", "CHAOS_DWARF", "CHAOS_RENEGADES", "DARK_ELF", "DWARF", "ELVEN_UNION", "GOBLIN", "HALFLING", "HIGH_ELF", "HUMAN", "IMPERIAL_NOBILITY", "KHORNE", "LIZARDMEN", "NORSE", "NURGLE", "OGRE", "OLD_WORLD_ALLIANCE", "ORC", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS", "WOOD_ELF"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC",
+        "LUSTRIAN_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "BLACK_ORC",
+        "BRETONNIAN",
+        "CHAOS_CHOSEN",
+        "CHAOS_DWARF",
+        "CHAOS_RENEGADES",
+        "DARK_ELF",
+        "DWARF",
+        "ELVEN_UNION",
+        "GOBLIN",
+        "HALFLING",
+        "HIGH_ELF",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "KHORNE",
+        "LIZARDMEN",
+        "NORSE",
+        "NURGLE",
+        "OGRE",
+        "OLD_WORLD_ALLIANCE",
+        "ORC",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/MORG_N_THORG-B.png",
+        "red": "assets/star_icons/MORG_N_THORG-R.png"
+      }
     },
     {
       "uid": "NOBBLA_BLACKWART",
@@ -636,11 +1477,36 @@
       "PA": "-",
       "AV": "8+",
       "playerType": "Goblin, Special",
-      "skills": ["BLOCK", "CHAINSAW", "DODGE", "LONER_4", "NO_BALL", "SABOTEUR", "SECRET_WEAPON", "STUNTY"],
+      "skills": [
+        "BLOCK",
+        "CHAINSAW",
+        "DODGE",
+        "LONER_4",
+        "NO_BALL",
+        "SABOTEUR",
+        "SECRET_WEAPON",
+        "STUNTY"
+      ],
       "specialAbilityName": "Kick 'em While They're Down!",
       "specialAbilityDescription": "Once per game, Nobbla may use the Chainsaw Attack Special Action against a Prone or Stunned opposition player. This action does not count as a Foul.",
-      "playsFor": ["BADLANDS_BRAWL", "UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "BADLANDS_BRAWL",
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/NOBBLA_BLACKWART-B.png",
+        "red": "assets/star_icons/NOBBLA_BLACKWART-R.png"
+      }
     },
     {
       "uid": "PUGGY_BACONBREATH",
@@ -652,11 +1518,33 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Blitzer, Halfling",
-      "skills": ["BLOCK", "DODGE", "LONER_3", "NERVES_OF_STEEL", "RIGHT_STUFF", "STUNTY"],
+      "skills": [
+        "BLOCK",
+        "DODGE",
+        "LONER_3",
+        "NERVES_OF_STEEL",
+        "RIGHT_STUFF",
+        "STUNTY"
+      ],
       "specialAbilityName": "Halfling Luck",
       "specialAbilityDescription": "Once per game, Puggy may re-roll a single dice that was rolled either as a single dice roll, a multiple dice roll, or a dice pool, though this cannot be a dice that was rolled as part of an Armour Roll, Injury Roll or Casualty Roll.",
-      "playsFor": ["HALFLING_THIMBLE_CUP", "OLD_WORLD_CLASSIC"],
-      "availableForRosters": ["BRETONNIAN", "GNOME", "HALFLING", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "HALFLING_THIMBLE_CUP",
+        "OLD_WORLD_CLASSIC"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "GNOME",
+        "HALFLING",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/PUGGY_BACONBREATH-B.png",
+        "red": "assets/star_icons/PUGGY_BACONBREATH-R.png"
+      }
     },
     {
       "uid": "RASHNAK_BACKSTABBER",
@@ -668,11 +1556,29 @@
       "PA": "5+",
       "AV": "8+",
       "playerType": "Goblin, Special",
-      "skills": ["LONER_4", "SHADOWING", "SIDESTEP", "SNEAKY_GIT", "STAB"],
+      "skills": [
+        "LONER_4",
+        "SHADOWING",
+        "SIDESTEP",
+        "SNEAKY_GIT",
+        "STAB"
+      ],
       "specialAbilityName": "Toxin Connoisseur",
       "specialAbilityDescription": "Once per game, when Rashnak successfully breaks an opposition player's armour as a result of a Stab Special Action, you may apply an additional +1 modifier to the Injury Roll.",
-      "playsFor": ["BADLANDS_BRAWL"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC"]
+      "playsFor": [
+        "BADLANDS_BRAWL"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/RASHNAK_BACKSTABBER-B.png",
+        "red": "assets/star_icons/RASHNAK_BACKSTABBER-R.png"
+      }
     },
     {
       "uid": "RIPPER_BOLGROT",
@@ -684,11 +1590,34 @@
       "PA": "4+",
       "AV": "10+",
       "playerType": "Big Guy, Troll",
-      "skills": ["BULLSEYE", "GRAB", "LONER_4", "MIGHTY_BLOW", "REGENERATION", "THROW_TEAM_MATE"],
+      "skills": [
+        "BULLSEYE",
+        "GRAB",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "REGENERATION",
+        "THROW_TEAM_MATE"
+      ],
       "specialAbilityName": "Thinking Man's Troll",
       "specialAbilityDescription": "Once per half, Ripper may re-roll a single dice that was rolled either as a single dice roll, a multiple dice roll, or a dice pool, though this cannot be a dice that was rolled as part of an Armour Roll, Injury Roll or Casualty Roll.",
-      "playsFor": ["BADLANDS_BRAWL", "UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "BADLANDS_BRAWL",
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/RIPPER_BOLGROT-B.png",
+        "red": "assets/star_icons/RIPPER_BOLGROT-R.png"
+      }
     },
     {
       "uid": "RODNEY_ROACHBAIT",
@@ -700,11 +1629,30 @@
       "PA": "4+",
       "AV": "7+",
       "playerType": "Gnome, Special",
-      "skills": ["CATCH", "DIVING_CATCH", "JUMP_UP", "LONER_4", "ON_THE_BALL", "SIDESTEP", "STUNTY", "WRESTLE"],
+      "skills": [
+        "CATCH",
+        "DIVING_CATCH",
+        "JUMP_UP",
+        "LONER_4",
+        "ON_THE_BALL",
+        "SIDESTEP",
+        "STUNTY",
+        "WRESTLE"
+      ],
       "specialAbilityName": "Catch of the Day",
       "specialAbilityDescription": "Once per half, if Rodney is Standing and begins his activation within 3 squares of a ball which is on the ground he may roll a D6. On a 1-2, nothing happens. On a 3+, Rodney immediately gains possession of the ball.",
-      "playsFor": ["WOODLAND_LEAGUE"],
-      "availableForRosters": ["GNOME", "HALFLING", "WOOD_ELF"]
+      "playsFor": [
+        "WOODLAND_LEAGUE"
+      ],
+      "availableForRosters": [
+        "GNOME",
+        "HALFLING",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/RODNEY_ROACHBAIT-B.png",
+        "red": "assets/star_icons/RODNEY_ROACHBAIT-R.png"
+      }
     },
     {
       "uid": "ROWANA_FORESTFOOT",
@@ -716,11 +1664,29 @@
       "PA": "4+",
       "AV": "8+",
       "playerType": "Blocker, Gnome",
-      "skills": ["DODGE", "DUMP_OFF", "GUARD", "HORNS", "JUMP_UP", "LEAP", "LONER_4"],
+      "skills": [
+        "DODGE",
+        "DUMP_OFF",
+        "GUARD",
+        "HORNS",
+        "JUMP_UP",
+        "LEAP",
+        "LONER_4"
+      ],
       "specialAbilityName": "Bounding Leap",
       "specialAbilityDescription": "Once per game, after declaring that she will Leap but before rolling any dice, Rowana may choose to use this special rule. If she does, Rowana suffers no negative modifiers for the Agility Test to Leap and may choose to re-roll the result.",
-      "playsFor": ["WOODLAND_LEAGUE"],
-      "availableForRosters": ["GNOME", "HALFLING", "WOOD_ELF"]
+      "playsFor": [
+        "WOODLAND_LEAGUE"
+      ],
+      "availableForRosters": [
+        "GNOME",
+        "HALFLING",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/ROWANA_FORESTFOOT-B.png",
+        "red": "assets/star_icons/ROWANA_FORESTFOOT-R.png"
+      }
     },
     {
       "uid": "ROXANNA_DARKNAIL",
@@ -732,11 +1698,29 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Elf, Special",
-      "skills": ["DODGE", "FRENZY", "JUMP_UP", "JUGGERNAUT", "LEAP", "LONER_4"],
+      "skills": [
+        "DODGE",
+        "FRENZY",
+        "JUMP_UP",
+        "JUGGERNAUT",
+        "LEAP",
+        "LONER_4"
+      ],
       "specialAbilityName": "Slashing Nails",
       "specialAbilityDescription": "Once per half, when Roxanna declares a Blitz Action, she gains the Claws Skill until the end of her activation.",
-      "playsFor": ["ELVEN_KINGDOMS_LEAGUE"],
-      "availableForRosters": ["DARK_ELF", "ELVEN_UNION", "HIGH_ELF", "WOOD_ELF"]
+      "playsFor": [
+        "ELVEN_KINGDOMS_LEAGUE"
+      ],
+      "availableForRosters": [
+        "DARK_ELF",
+        "ELVEN_UNION",
+        "HIGH_ELF",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/ROXANNA_DARKNAIL-B.png",
+        "red": "assets/star_icons/ROXANNA_DARKNAIL-R.png"
+      }
     },
     {
       "uid": "RUMBELOW_SHEEPSKIN",
@@ -748,11 +1732,27 @@
       "PA": "5+",
       "AV": "8+",
       "playerType": "Blitzer, Halfling",
-      "skills": ["BLOCK", "HORNS", "JUGGERNAUT", "LONER_4", "TACKLE", "THICK_SKULL"],
+      "skills": [
+        "BLOCK",
+        "HORNS",
+        "JUGGERNAUT",
+        "LONER_4",
+        "TACKLE",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Ram",
       "specialAbilityDescription": "Once per game, when an opposition player is Knocked Down as a result of a Block Action performed by Rumbelow, you may apply an additional +1 modifier to either the Armour Roll or the Injury Roll.",
-      "playsFor": ["HALFLING_THIMBLE_CUP"],
-      "availableForRosters": ["GNOME", "HALFLING"]
+      "playsFor": [
+        "HALFLING_THIMBLE_CUP"
+      ],
+      "availableForRosters": [
+        "GNOME",
+        "HALFLING"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/RUMBELOW_SHEEPSKIN-B.png",
+        "red": "assets/star_icons/RUMBELOW_SHEEPSKIN-R.png"
+      }
     },
     {
       "uid": "SCRAPPA_SOREHEAD",
@@ -764,11 +1764,36 @@
       "PA": "4+",
       "AV": "8+",
       "playerType": "Goblin, Special",
-      "skills": ["DIRTY_PLAYER", "DODGE", "LONER_4", "POGO", "RIGHT_STUFF", "SPRINT", "STUNTY", "SURE_FEET"],
+      "skills": [
+        "DIRTY_PLAYER",
+        "DODGE",
+        "LONER_4",
+        "POGO",
+        "RIGHT_STUFF",
+        "SPRINT",
+        "STUNTY",
+        "SURE_FEET"
+      ],
       "specialAbilityName": "Yoink!",
       "specialAbilityDescription": "Once per game, when Scrappa attempts to Intercept a Pass Action he may roll a D6. On a 2+, Scrappa doesn't need to Intercept; instead, he will automatically Intercept the Pass Action and gains control of the ball.",
-      "playsFor": ["BADLANDS_BRAWL", "UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "BADLANDS_BRAWL",
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/SCRAPPA_SOREHEAD-B.png",
+        "red": "assets/star_icons/SCRAPPA_SOREHEAD-R.png"
+      }
     },
     {
       "uid": "SCYLA_ANFINGRIMM",
@@ -780,11 +1805,30 @@
       "PA": "6+",
       "AV": "10+",
       "playerType": "Big Guy, Spawn",
-      "skills": ["CLAWS", "FRENZY", "LONER_4", "MIGHTY_BLOW", "PREHENSILE_TAIL", "THICK_SKULL", "UNCHANNELLED_FURY"],
+      "skills": [
+        "CLAWS",
+        "FRENZY",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "PREHENSILE_TAIL",
+        "THICK_SKULL",
+        "UNCHANNELLED_FURY"
+      ],
       "specialAbilityName": "Fury of the Blood God",
       "specialAbilityDescription": "Once per match, if Scyla rolls a 1 on his Unchannelled Fury roll after declaring a Block Action, he may perform two Block Actions instead. The first Block Action must be fully resolved, including the use of the Frenzy Skill, before the second one is performed.",
-      "playsFor": ["FAVOURED_OF_KHORNE"],
-      "availableForRosters": ["CHAOS_CHOSEN", "CHAOS_RENEGADES", "KHORNE", "NORSE"]
+      "playsFor": [
+        "FAVOURED_OF_KHORNE"
+      ],
+      "availableForRosters": [
+        "CHAOS_CHOSEN",
+        "CHAOS_RENEGADES",
+        "KHORNE",
+        "NORSE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/SCYLA_ANFINGRIMM-B.png",
+        "red": "assets/star_icons/SCYLA_ANFINGRIMM-R.png"
+      }
     },
     {
       "uid": "SKITTER_STAB_STAB",
@@ -796,11 +1840,28 @@
       "PA": "4+",
       "AV": "8+",
       "playerType": "Runner, Skaven",
-      "skills": ["DODGE", "LONER_4", "PREHENSILE_TAIL", "SHADOWING", "STAB"],
+      "skills": [
+        "DODGE",
+        "LONER_4",
+        "PREHENSILE_TAIL",
+        "SHADOWING",
+        "STAB"
+      ],
       "specialAbilityName": "Master Assassin",
       "specialAbilityDescription": "Once per game, when Skitter performs a Stab Special Action, he may choose to re-roll the Armour Roll.",
-      "playsFor": ["UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["GOBLIN", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "GOBLIN",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/SKITTER_STAB_STAB-B.png",
+        "red": "assets/star_icons/SKITTER_STAB_STAB-R.png"
+      }
     },
     {
       "uid": "SKRORG_SNOWPELT",
@@ -812,11 +1873,34 @@
       "PA": "6+",
       "AV": "9+",
       "playerType": "Big Guy, Yhetee",
-      "skills": ["BLOCK", "CLAWS", "DISTURBING_PRESENCE", "JUGGERNAUT", "LONER_4", "MIGHTY_BLOW"],
+      "skills": [
+        "BLOCK",
+        "CLAWS",
+        "DISTURBING_PRESENCE",
+        "JUGGERNAUT",
+        "LONER_4",
+        "MIGHTY_BLOW"
+      ],
       "specialAbilityName": "Pump Up the Crowd",
       "specialAbilityDescription": "Once per game, when Skrorg eliminates an opponent through a Block Action, Skrorg's controlling coach gains one Team Re-roll until the end of the current Drive.",
-      "playsFor": ["OLD_WORLD_CLASSIC", "WORLDS_EDGE_SUPERLEAGUE"],
-      "availableForRosters": ["BRETONNIAN", "DWARF", "HALFLING", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OGRE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC",
+        "WORLDS_EDGE_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "DWARF",
+        "HALFLING",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OGRE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/SKRORG_SNOWPELT-B.png",
+        "red": "assets/star_icons/SKRORG_SNOWPELT-R.png"
+      }
     },
     {
       "uid": "SKRULL_HALFHEIGHT",
@@ -828,11 +1912,33 @@
       "PA": "3+",
       "AV": "9+",
       "playerType": "Thrower, Dwarf, Undead",
-      "skills": ["ACCURATE", "LONER_4", "NERVES_OF_STEEL", "PASS", "REGENERATION", "SURE_HANDS", "THICK_SKULL"],
+      "skills": [
+        "ACCURATE",
+        "LONER_4",
+        "NERVES_OF_STEEL",
+        "PASS",
+        "REGENERATION",
+        "SURE_HANDS",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Strong Passing Game",
       "specialAbilityDescription": "Once per game, when Skrull performs a Pass Action he may modify the result of the Passing Ability Test by the value of his ST characteristic, to a maximum of 6.",
-      "playsFor": ["SYLVANIAN_SPOTLIGHT", "WORLDS_EDGE_SUPERLEAGUE"],
-      "availableForRosters": ["DWARF", "NECROMANTIC_HORROR", "OGRE", "SHAMBLING_UNDEAD", "TOMB_KINGS", "VAMPIRE"]
+      "playsFor": [
+        "SYLVANIAN_SPOTLIGHT",
+        "WORLDS_EDGE_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "DWARF",
+        "NECROMANTIC_HORROR",
+        "OGRE",
+        "SHAMBLING_UNDEAD",
+        "TOMB_KINGS",
+        "VAMPIRE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/SKRULL_HALFHEIGHT-B.png",
+        "red": "assets/star_icons/SKRULL_HALFHEIGHT-R.png"
+      }
     },
     {
       "uid": "SWIFTVINE_GLIMMERSHARD",
@@ -844,11 +1950,28 @@
       "PA": "5+",
       "AV": "7+",
       "playerType": "Special, Spite",
-      "skills": ["DISTURBING_PRESENCE", "FEND", "LONER_4", "SIDESTEP", "STAB", "STUNTY"],
+      "skills": [
+        "DISTURBING_PRESENCE",
+        "FEND",
+        "LONER_4",
+        "SIDESTEP",
+        "STAB",
+        "STUNTY"
+      ],
       "specialAbilityName": "Furious Outburst",
       "specialAbilityDescription": "Once per half, so long as she is Standing at the start of her activation, Swiftvine can place herself adjacent to a Standing opposition player within 3 squares of her and immediately make a Stab Special Action against them. She then repositions within 3 squares, ending her activation. This counts as the team's Blitz.",
-      "playsFor": ["WOODLAND_LEAGUE"],
-      "availableForRosters": ["GNOME", "HALFLING", "WOOD_ELF"]
+      "playsFor": [
+        "WOODLAND_LEAGUE"
+      ],
+      "availableForRosters": [
+        "GNOME",
+        "HALFLING",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/SWIFTVINE_GLIMMERSHARD-B.png",
+        "red": "assets/star_icons/SWIFTVINE_GLIMMERSHARD-R.png"
+      }
     },
     {
       "uid": "THE_BLACK_GOBBO",
@@ -860,11 +1983,35 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Goblin, Special",
-      "skills": ["BOMBARDIER", "DISTURBING_PRESENCE", "DODGE", "LONER_3", "SIDESTEP", "SNEAKY_GIT", "STAB"],
+      "skills": [
+        "BOMBARDIER",
+        "DISTURBING_PRESENCE",
+        "DODGE",
+        "LONER_3",
+        "SIDESTEP",
+        "SNEAKY_GIT",
+        "STAB"
+      ],
       "specialAbilityName": "Sneakiest of the Lot",
       "specialAbilityDescription": "Teams with the Black Gobbo may declare two Foul Actions per Turn rather than the usual one, provided the Black Gobbo himself performs one of them.",
-      "playsFor": ["BADLANDS_BRAWL", "UNDERWORLD_CHALLENGE"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC", "SKAVEN", "SNOTLING", "UNDERWORLD_DENIZENS"]
+      "playsFor": [
+        "BADLANDS_BRAWL",
+        "UNDERWORLD_CHALLENGE"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC",
+        "SKAVEN",
+        "SNOTLING",
+        "UNDERWORLD_DENIZENS"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/THE_BLACK_GOBBO-B.png",
+        "red": "assets/star_icons/THE_BLACK_GOBBO-R.png"
+      }
     },
     {
       "uid": "THE_MIGHTY_ZUG",
@@ -876,11 +2023,31 @@
       "PA": "6+",
       "AV": "10+",
       "playerType": "Blocker, Human",
-      "skills": ["BLOCK", "LONER_4", "MIGHTY_BLOW", "UNSTEADY"],
+      "skills": [
+        "BLOCK",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "UNSTEADY"
+      ],
       "specialAbilityName": "Crushing Blow",
       "specialAbilityDescription": "Once per game, when an opposition player is Knocked Down as the result of a Block Action performed by Zug, you may apply an additional +1 modifier to the Armour Roll. This modifier may be applied after the Armour Roll has been made.",
-      "playsFor": ["OLD_WORLD_CLASSIC", "WORLDS_EDGE_SUPERLEAGUE"],
-      "availableForRosters": ["AMAZON", "BRETONNIAN", "HUMAN", "IMPERIAL_NOBILITY", "LIZARDMEN", "NORSE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC",
+        "WORLDS_EDGE_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "BRETONNIAN",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "LIZARDMEN",
+        "NORSE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/THE_MIGHTY_ZUG-B.png",
+        "red": "assets/star_icons/THE_MIGHTY_ZUG-R.png"
+      }
     },
     {
       "uid": "THE_SWIFT_TWINS",
@@ -892,11 +2059,38 @@
       "PA": "2+",
       "AV": "9+",
       "playerType": "Blitzer and Thrower, Elf",
-      "skills": ["BLOCK", "LONER_4", "MIGHTY_BLOW", "TACKLE", "ACCURATE", "NERVES_OF_STEEL", "PASS", "SAFE_PASS", "SURE_HANDS"],
+      "skills": [
+        "BLOCK",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "TACKLE",
+        "ACCURATE",
+        "NERVES_OF_STEEL",
+        "PASS",
+        "SAFE_PASS",
+        "SURE_HANDS"
+      ],
       "specialAbilityName": "Working In Tandem",
       "specialAbilityDescription": "Must be hired as a pair. If Lucien performs a Block Action against an opposition player who is also Marked by Valen, Lucien may re-roll a single Block Dice. If Valen performs a Pass Action that targets Lucien, Valen suffers no modifiers to the PA test for the range.",
-      "playsFor": ["ELVEN_KINGDOMS_LEAGUE"],
-      "availableForRosters": ["DARK_ELF", "ELVEN_UNION", "HIGH_ELF", "WOOD_ELF"]
+      "playsFor": [
+        "ELVEN_KINGDOMS_LEAGUE"
+      ],
+      "availableForRosters": [
+        "DARK_ELF",
+        "ELVEN_UNION",
+        "HIGH_ELF",
+        "WOOD_ELF"
+      ],
+      "icon": [
+        {
+          "blue": "assets/star_icons/LUCIEN_SWIFT-B.png",
+          "red": "assets/star_icons/LUCIEN_SWIFT-R.png"
+        },
+        {
+          "blue": "assets/star_icons/VALEN_SWIFT-B.png",
+          "red": "assets/star_icons/VALEN_SWIFT-R.png"
+        }
+      ]
     },
     {
       "uid": "THORSSON_STOUTMEAD",
@@ -908,11 +2102,31 @@
       "PA": "3+",
       "AV": "8+",
       "playerType": "Lineman, Human",
-      "skills": ["BLOCK", "DRUNKARD", "LONER_4", "THICK_SKULL"],
+      "skills": [
+        "BLOCK",
+        "DRUNKARD",
+        "LONER_4",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Beer Barrel Bash",
       "specialAbilityDescription": "Once per Drive, at the start of his activation, Thorsson may select an opposition player within three squares and roll a D6. On a 3+, the selected player is immediately Knocked Down.",
-      "playsFor": ["OLD_WORLD_CLASSIC", "WORLDS_EDGE_SUPERLEAGUE"],
-      "availableForRosters": ["BRETONNIAN", "DWARF", "HUMAN", "IMPERIAL_NOBILITY", "NORSE", "OGRE", "OLD_WORLD_ALLIANCE"]
+      "playsFor": [
+        "OLD_WORLD_CLASSIC",
+        "WORLDS_EDGE_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "BRETONNIAN",
+        "DWARF",
+        "HUMAN",
+        "IMPERIAL_NOBILITY",
+        "NORSE",
+        "OGRE",
+        "OLD_WORLD_ALLIANCE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/THORSSON_STOUTMEAD-B.png",
+        "red": "assets/star_icons/THORSSON_STOUTMEAD-R.png"
+      }
     },
     {
       "uid": "VARAG_GHOUL_CHEWER",
@@ -924,11 +2138,31 @@
       "PA": "5+",
       "AV": "10+",
       "playerType": "Blocker, Orc",
-      "skills": ["BLOCK", "HATRED_UNDEAD", "JUMP_UP", "LONER_4", "MIGHTY_BLOW", "THICK_SKULL", "UNSTEADY"],
+      "skills": [
+        "BLOCK",
+        "HATRED_UNDEAD",
+        "JUMP_UP",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "THICK_SKULL",
+        "UNSTEADY"
+      ],
       "specialAbilityName": "Krump and Smash",
       "specialAbilityDescription": "Once per game, when an opposition player is Knocked Down as a result of a Block Action performed by Varag, he may re-roll the Armour Roll.",
-      "playsFor": ["BADLANDS_BRAWL"],
-      "availableForRosters": ["BLACK_ORC", "CHAOS_DWARF", "GOBLIN", "OGRE", "ORC"]
+      "playsFor": [
+        "BADLANDS_BRAWL"
+      ],
+      "availableForRosters": [
+        "BLACK_ORC",
+        "CHAOS_DWARF",
+        "GOBLIN",
+        "OGRE",
+        "ORC"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/VARAG_GHOUL_CHEWER-B.png",
+        "red": "assets/star_icons/VARAG_GHOUL_CHEWER-R.png"
+      }
     },
     {
       "uid": "WILHELM_CHANEY",
@@ -940,11 +2174,29 @@
       "PA": "4+",
       "AV": "9+",
       "playerType": "Blitzer, Undead, Werewolf",
-      "skills": ["CATCH", "CLAWS", "FRENZY", "LONER_4", "REGENERATION", "WRESTLE"],
+      "skills": [
+        "CATCH",
+        "CLAWS",
+        "FRENZY",
+        "LONER_4",
+        "REGENERATION",
+        "WRESTLE"
+      ],
       "specialAbilityName": "Savage Mauling",
       "specialAbilityDescription": "Once per game, when Wilhelm makes an Injury Roll against an opposition player, he may choose to re-roll the result.",
-      "playsFor": ["SYLVANIAN_SPOTLIGHT"],
-      "availableForRosters": ["NECROMANTIC_HORROR", "TOMB_KINGS", "SHAMBLING_UNDEAD", "VAMPIRE"]
+      "playsFor": [
+        "SYLVANIAN_SPOTLIGHT"
+      ],
+      "availableForRosters": [
+        "NECROMANTIC_HORROR",
+        "TOMB_KINGS",
+        "SHAMBLING_UNDEAD",
+        "VAMPIRE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/WILHELM_CHANEY-B.png",
+        "red": "assets/star_icons/WILHELM_CHANEY-R.png"
+      }
     },
     {
       "uid": "WILLOW_ROSEBARK",
@@ -956,11 +2208,26 @@
       "PA": "5+",
       "AV": "9+",
       "playerType": "Blitzer, Dryad",
-      "skills": ["DAUNTLESS", "LONER_4", "SIDESTEP", "THICK_SKULL"],
+      "skills": [
+        "DAUNTLESS",
+        "LONER_4",
+        "SIDESTEP",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Woodland Fury",
       "specialAbilityDescription": "Once per game, when Willow performs a Block Action that would result in her being Knocked Down, she can choose to re-roll a single Block Dice.",
-      "playsFor": ["WOODLAND_LEAGUE"],
-      "availableForRosters": ["GNOME", "HALFLING", "WOOD_ELF"]
+      "playsFor": [
+        "WOODLAND_LEAGUE"
+      ],
+      "availableForRosters": [
+        "GNOME",
+        "HALFLING",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/WILLOW_ROSEBARK-B.png",
+        "red": "assets/star_icons/WILLOW_ROSEBARK-R.png"
+      }
     },
     {
       "uid": "WITHERGRASP_DOUBLEDROOL",
@@ -972,11 +2239,29 @@
       "PA": "4+",
       "AV": "9+",
       "playerType": "Blocker, Beastman",
-      "skills": ["FOUL_APPEARANCE", "LONER_4", "PREHENSILE_TAIL", "TACKLE", "TENTACLES", "TWO_HEADS", "WRESTLE"],
+      "skills": [
+        "FOUL_APPEARANCE",
+        "LONER_4",
+        "PREHENSILE_TAIL",
+        "TACKLE",
+        "TENTACLES",
+        "TWO_HEADS",
+        "WRESTLE"
+      ],
       "specialAbilityName": "Watch Out!",
       "specialAbilityDescription": "The first time each Drive that Withergrasp is the target of a Block Action performed by an opposition player, he counts as having the Dodge Skill.",
-      "playsFor": ["FAVOURED_OF_NURGLE"],
-      "availableForRosters": ["CHAOS_CHOSEN", "CHAOS_RENEGADES", "NURGLE"]
+      "playsFor": [
+        "FAVOURED_OF_NURGLE"
+      ],
+      "availableForRosters": [
+        "CHAOS_CHOSEN",
+        "CHAOS_RENEGADES",
+        "NURGLE"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/WITHERGRASP_DOUBLEDROOL-B.png",
+        "red": "assets/star_icons/WITHERGRASP_DOUBLEDROOL-R.png"
+      }
     },
     {
       "uid": "ZOLCATH_THE_ZOAT",
@@ -988,11 +2273,33 @@
       "PA": "5+",
       "AV": "10+",
       "playerType": "Big Guy, Zoat",
-      "skills": ["DISTURBING_PRESENCE", "JUGGERNAUT", "LONER_4", "MIGHTY_BLOW", "PREHENSILE_TAIL", "REGENERATION", "SURE_FEET"],
+      "skills": [
+        "DISTURBING_PRESENCE",
+        "JUGGERNAUT",
+        "LONER_4",
+        "MIGHTY_BLOW",
+        "PREHENSILE_TAIL",
+        "REGENERATION",
+        "SURE_FEET"
+      ],
       "specialAbilityName": "Excuse me, are you a Zoat?",
       "specialAbilityDescription": "Once per game, when activated, Zolcath may select an opposition player within 3 squares, causing them to become Distracted immediately.",
-      "playsFor": ["ELVEN_KINGDOMS_LEAGUE", "LUSTRIAN_SUPERLEAGUE"],
-      "availableForRosters": ["AMAZON", "DARK_ELF", "ELVEN_UNION", "HIGH_ELF", "LIZARDMEN", "WOOD_ELF"]
+      "playsFor": [
+        "ELVEN_KINGDOMS_LEAGUE",
+        "LUSTRIAN_SUPERLEAGUE"
+      ],
+      "availableForRosters": [
+        "AMAZON",
+        "DARK_ELF",
+        "ELVEN_UNION",
+        "HIGH_ELF",
+        "LIZARDMEN",
+        "WOOD_ELF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/ZOLCATH_THE_ZOAT-B.png",
+        "red": "assets/star_icons/ZOLCATH_THE_ZOAT-R.png"
+      }
     },
     {
       "uid": "ZZHARG_MADEYE",
@@ -1004,11 +2311,27 @@
       "PA": "3+",
       "AV": "10+",
       "playerType": "Dwarf, Special",
-      "skills": ["CANNONEER", "HAIL_MARY_PASS", "LONER_4", "NERVES_OF_STEEL", "SECRET_WEAPON", "THICK_SKULL"],
+      "skills": [
+        "CANNONEER",
+        "HAIL_MARY_PASS",
+        "LONER_4",
+        "NERVES_OF_STEEL",
+        "SECRET_WEAPON",
+        "THICK_SKULL"
+      ],
       "specialAbilityName": "Blastin' Solves Everything",
       "specialAbilityDescription": "Once per half at activation start, Zzharg may target a standing opposing player within 3 squares and roll a D6. A 3+ hits the intended target; a 2 allows the opposing coach to select an alternative victim within range; a 1 hits Zzharg instead. An Armor Roll follows for the affected player, then his activation ends immediately.",
-      "playsFor": ["FAVOURED_OF_HASHUT"],
-      "availableForRosters": ["CHAOS_CHOSEN", "CHAOS_DWARF"]
+      "playsFor": [
+        "FAVOURED_OF_HASHUT"
+      ],
+      "availableForRosters": [
+        "CHAOS_CHOSEN",
+        "CHAOS_DWARF"
+      ],
+      "icon": {
+        "blue": "assets/star_icons/ZZHARG_MADEYE-B.png",
+        "red": "assets/star_icons/ZZHARG_MADEYE-R.png"
+      }
     }
   ]
 }
