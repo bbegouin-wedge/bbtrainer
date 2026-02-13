@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/gui_phase.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://dxpcgxyp7fp2a" path="res://scenes/ui/welcome/welcome_ui.tscn" id="2_welcome"]
+[ext_resource type="PackedScene" uid="uid://dyhu8l1o0xe6o" path="res://scenes/ui/team_chooser/team_chooser.tscn" id="3_team_chooser"]
+[ext_resource type="PackedScene" uid="uid://lu12l2ogvnfn" path="res://scenes/ui/team_compositor/team_compositor.tscn" id="4_team_compositor"]
+[ext_resource type="PackedScene" uid="uid://bi8uenu2030d1" path="res://scenes/ui/inducements_selector/inducement_selector.tscn" id="5_inducement"]
+
+[node name="GuiPhase" type="Node"]
+script = ExtResource("1_script")
+
+[node name="WelcomeUI" parent="." instance=ExtResource("2_welcome")]
+
+[node name="TeamChooser" parent="." instance=ExtResource("3_team_chooser")]
+
+[node name="TeamCompositor" parent="." instance=ExtResource("4_team_compositor")]
+
+[node name="InducementSelector" parent="." instance=ExtResource("5_inducement")]
