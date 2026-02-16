@@ -156,6 +156,7 @@ class Player:
 	var PA: int  # Passing
 	var AV: int  # Armor Value
 	var skills: Array[String]
+	var base_skills: Array[String]
 	var primary_access: Array[String]
 	var secondary_access: Array[String]
 	var max_quantity: int
@@ -189,6 +190,24 @@ class Player:
 
 	func get_stats_string() -> String:
 		return "MA:%d ST:%d AG:%d PA:%d AV:%d" % [MA, ST, AG, PA, AV]
+
+	func duplicate() -> Player:
+		var copy := Player.new({})
+		copy.uid = uid
+		copy.position_name = position_name
+		copy.cost = cost
+		copy.MA = MA
+		copy.ST = ST
+		copy.AG = AG
+		copy.PA = PA
+		copy.AV = AV
+		copy.skills = skills.duplicate()
+		copy.base_skills = skills.duplicate()
+		copy.primary_access = primary_access.duplicate()
+		copy.secondary_access = secondary_access.duplicate()
+		copy.max_quantity = max_quantity
+		copy.icon = icon
+		return copy
 
 	func get_blue_icon_texture() -> Texture2D:
 		return icon.get_blue_texture()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cj6acr6n1pchv" path="res://scenes/ui/team_compositor/roster_tree.gd" id="1_p7srw"]
 [ext_resource type="Script" uid="uid://pe3o3ok4a1ah" path="res://scenes/ui/team_compositor/validate.gd" id="2_o835y"]
-[ext_resource type="Script" path="res://scenes/ui/inducements_selector/return_button.gd" id="3_ret01"]
+[ext_resource type="Script" uid="uid://dsvwroyjpshrm" path="res://scenes/ui/inducements_selector/return_button.gd" id="3_ret01"]
 
 [sub_resource type="Theme" id="Theme_o835y"]
 

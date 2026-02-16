@@ -4,6 +4,7 @@ extends Node
 var _selectedTeam : BloodBowlData.Team = null;
 var _team_composition: Dictionary = {}
 var _champions_list: Dictionary = {}
+var _expanded_team: Array = []
 
 func selectTeam(selectedTeam: BloodBowlData.Team) -> void: 
 	_selectedTeam = selectedTeam
@@ -38,3 +39,12 @@ func add_star(champion: BloodBowlData.StarPlayer) -> void:
 func remove_star(champion: BloodBowlData.StarPlayer) -> void:
 	_champions_list.erase(champion.uid)
 	EventBus.star_deselected.emit(champion)
+	
+func get_expanded_team() -> Array:
+	return _expanded_team
+	
+func expandTeamComposition() -> void:
+	_expanded_team.clear()
+	for player_ref in _team_composition.keys():
+		for i in range(_team_composition[player_ref]):
+			_expanded_team.append(player_ref.duplicate())

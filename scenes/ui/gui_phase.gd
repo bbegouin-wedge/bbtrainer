@@ -5,6 +5,7 @@ extends Node
 	SceneOrchestrator.Scene.TEAM_CHOOSER: $TeamChooser,
 	SceneOrchestrator.Scene.TEAM_COMPOSITOR: $TeamCompositor,
 	SceneOrchestrator.Scene.INDUCEMENT_SELECTOR: $InducementSelector,
+	SceneOrchestrator.Scene.SKILL_CHOOSER: $SkillChooser,
 }
 
 func _ready() -> void:

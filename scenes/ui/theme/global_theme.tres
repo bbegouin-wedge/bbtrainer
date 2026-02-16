@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=39 format=4 uid="uid://b6ja1dfsxjk21"]
+[gd_resource type="Theme" load_steps=43 format=4 uid="uid://b6ja1dfsxjk21"]
 
 [ext_resource type="Texture2D" uid="uid://bky5o8iy5wnkd" path="res://assets/ui/bouton/empty/bonton-highlight.png" id="1_0tys8"]
 [ext_resource type="Texture2D" uid="uid://dsu5qo24vlc4t" path="res://assets/ui/panel/final-panel.png" id="1_cwain"]
@@ -23,6 +23,34 @@ texture_margin_right = 100.0
 texture_margin_bottom = 100.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2nlg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2ytu"]
+border_color = Color(0.060911864, 0.06091185, 6.016344e-09, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3e3m"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.7792914, 0.7792914, 0.7792912, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.16237316, 0.14834526, 0.1058147, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_offset = Vector2(5, 5)
 
 [sub_resource type="Image" id="Image_y60fg"]
 data = {
@@ -1554,9 +1582,18 @@ texture_margin_bottom = 15.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d7sbs"]
+
 [resource]
 EmptyIronPanel/base_type = &"Panel"
 EmptyIronPanel/styles/panel = SubResource("StyleBoxTexture_16nbq")
+FlatButton/base_type = &"Button"
+FlatButton/colors/font_color = Color(0.0026550456, 0.058376424, 0.029249072, 1)
+FlatButton/font_sizes/font_size = 24
+FlatButton/fonts/font = ExtResource("5_bxjfo")
+FlatButton/styles/focus = SubResource("StyleBoxEmpty_e2nlg")
+FlatButton/styles/hover = SubResource("StyleBoxFlat_o2ytu")
+FlatButton/styles/normal = SubResource("StyleBoxFlat_h3e3m")
 HeaderLarge/font_sizes/font_size = 120
 HeaderLarge/fonts/font = ExtResource("1_ye4f1")
 HeaderMedium/font_sizes/font_size = 64
@@ -1604,3 +1641,5 @@ texturedButton/styles/focus = SubResource("StyleBoxEmpty_u3o33")
 texturedButton/styles/hover = SubResource("StyleBoxTexture_cwain")
 texturedButton/styles/normal = SubResource("StyleBoxTexture_u3o33")
 texturedButton/styles/pressed = SubResource("StyleBoxTexture_tteqs")
+transparentPanel/base_type = &"Panel"
+transparentPanel/styles/panel = SubResource("StyleBoxEmpty_d7sbs")

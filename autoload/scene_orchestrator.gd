@@ -1,16 +1,17 @@
 extends Node
 
-enum Scene { WELCOME, TEAM_CHOOSER, TEAM_COMPOSITOR, INDUCEMENT_SELECTOR, ARENA }
+enum Scene { WELCOME, TEAM_CHOOSER, TEAM_COMPOSITOR, INDUCEMENT_SELECTOR, SKILL_CHOOSER, ARENA }
 
 const SCENE_ORDER := [
 	Scene.WELCOME,
 	Scene.TEAM_CHOOSER,
 	Scene.TEAM_COMPOSITOR,
 	Scene.INDUCEMENT_SELECTOR,
+	Scene.SKILL_CHOOSER,
 	Scene.ARENA,
 ]
 
-const GUI_SCENES := [Scene.WELCOME, Scene.TEAM_CHOOSER, Scene.TEAM_COMPOSITOR, Scene.INDUCEMENT_SELECTOR]
+const GUI_SCENES := [Scene.WELCOME, Scene.TEAM_CHOOSER, Scene.TEAM_COMPOSITOR, Scene.INDUCEMENT_SELECTOR, Scene.SKILL_CHOOSER]
 const GUI_PHASE_PATH := "res://scenes/ui/gui_phase.tscn"
 const ARENA_PHASE_PATH := "res://scenes/arena/arena_phase.tscn"
 
@@ -69,6 +70,8 @@ func _get_game_status(scene_id: Scene) -> GameStatusManager.GameStatus:
 			return GameStatusManager.GameStatus.RECRUIT_PLAYER
 		Scene.INDUCEMENT_SELECTOR:
 			return GameStatusManager.GameStatus.SELECT_INDUCEMENTS
+		Scene.SKILL_CHOOSER:
+			return GameStatusManager.GameStatus.SELECT_SKILLS
 		Scene.ARENA:
 			return GameStatusManager.GameStatus.READY_TO_RUN
 	return GameStatusManager.GameStatus.STARTING

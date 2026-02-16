@@ -8,6 +8,8 @@ signal pitch_orientation_toggled
 signal unit_selected(unit: Node)
 signal unit_deselected
 signal unit_moved(unit: Node, from: Vector2i, to: Vector2i)
+signal unit_right_clicked(unit: Node)
+signal player_selected_for_skill(player: BloodBowlData.Player, index: int)
 
 # --- Team Building
 signal team_selected 

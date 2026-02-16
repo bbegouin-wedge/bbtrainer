@@ -19,9 +19,12 @@ func set_stats(value: UnitStats) -> void:
 		
 
 
-func _on_input_event(_viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		select.manage_click(event)
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
+		EventBus.unit_right_clicked.emit(self)
+		get_viewport().set_input_as_handled()
 
 
 func _on_mouse_entered() -> void:

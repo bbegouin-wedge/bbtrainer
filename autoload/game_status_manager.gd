@@ -4,6 +4,7 @@ enum GameStatus { STARTING,
 CHOOSE_TEAM,
 RECRUIT_PLAYER,
 SELECT_INDUCEMENTS,
+SELECT_SKILLS,
 READY_TO_RUN }
 signal onStateChanged(newStatus)
 
