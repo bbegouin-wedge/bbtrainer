@@ -47,3 +47,18 @@ func displayGeneralSkills() -> void:
 
 func displayAgilitySkills() -> void:
 	display_skills_by_category("AGILITY")
+	
+func displayDeviousSkills() -> void:
+	display_skills_by_category("DEVIOUS")
+	
+func displayStrengthSkills() -> void:
+	display_skills_by_category("STRENGTH")
+
+func displayPasskills() -> void:
+	display_skills_by_category("PASSING")
+
+func displayMutationSills() -> void:
+	display_skills_by_category("MUTATIONS")
+
+func displayTraitsSills() -> void:
+	display_skills_by_category("TRAITS")

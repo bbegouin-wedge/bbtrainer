@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cye7ydmvgd7oo"]
+[gd_scene load_steps=15 format=4 uid="uid://cye7ydmvgd7oo"]
 
 [ext_resource type="Script" uid="uid://djkdmjqcb02rw" path="res://scenes/arena/arena.gd" id="1_xdvfk"]
 [ext_resource type="Script" uid="uid://b4wvny1d7jtdr" path="res://debug/debug_label.gd" id="2_2ml6w"]
@@ -8,7 +8,6 @@
 [ext_resource type="TileSet" uid="uid://dow0ipy00t512" path="res://assets/tuiles_transparentes.tres" id="4_6w4xk"]
 [ext_resource type="Shader" uid="uid://bakrserh25oh4" path="res://assets/shaders/dashed_border.gdshader" id="5_2ml6w"]
 [ext_resource type="Script" uid="uid://d1svoosrq0oop" path="res://scenes/arena/rect_highlighter.gd" id="5_6w4xk"]
-[ext_resource type="PackedScene" uid="uid://bnr26f848l23o" path="res://scenes/unit/unit.tscn" id="5_asdgj"]
 [ext_resource type="Script" uid="uid://c0ogmm76a1w8r" path="res://scenes/arena/play_area.gd" id="5_ii07k"]
 [ext_resource type="Script" uid="uid://7e6qbkjsk4e" path="res://scenes/arena/unit_grid.gd" id="5_u52cf"]
 
@@ -274,9 +273,3 @@ animation_speed = 50.0
 [node name="ArenaUnitGrid" type="Node2D" parent="PlayArea"]
 script = ExtResource("5_u52cf")
 size = Vector2i(26, 15)
-
-[node name="Unit2" parent="." instance=ExtResource("5_asdgj")]
-position = Vector2(350, 489)
-
-[node name="Unit" parent="." instance=ExtResource("5_asdgj")]
-position = Vector2(784.0001, 2009)

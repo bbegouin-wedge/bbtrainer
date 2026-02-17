@@ -34,3 +34,18 @@ func _on_select_general_skill() -> void:
 
 func _on_select_agility_skill() -> void:
 	skillList.displayAgilitySkills()
+	
+func _on_select_devious_skill() -> void:
+	skillList.displayDeviousSkills()
+	
+func _on_select_pass_skill() -> void:
+	skillList.displayPasskills()
+	
+func _on_select_strength_skill() -> void:
+	skillList.displayStrengthSkills()
+	
+func _on_select_mutations_skill() -> void:
+	skillList.displayMutationSills()
+	
+func _on_select_traits_skill() -> void:
+	skillList.displayTraitsSills()

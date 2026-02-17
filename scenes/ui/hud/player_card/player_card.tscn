@@ -1,0 +1,182 @@
+[gd_scene load_steps=9 format=3 uid="uid://5a4kumvw1mbe"]
+
+[ext_resource type="FontFile" uid="uid://bcmmna6iucjsj" path="res://assets/fonts/PermanentMarker-Regular.ttf" id="1_w6yor"]
+[ext_resource type="Texture2D" uid="uid://cptb4rq712fag" path="res://assets/player_icons/Amazon/Blitzer1R.png" id="2_ja1va"]
+[ext_resource type="PackedScene" uid="uid://bq287b502xsqy" path="res://scenes/ui/hud/components/stat_cartridge/stat_cartridge.tscn" id="2_yru5u"]
+[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="3_k5e7n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ja1va"]
+font = ExtResource("1_w6yor")
+font_size = 24
+font_color = Color(0.03948292, 0.13874504, 0.11933521, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_34jnt"]
+font = ExtResource("1_w6yor")
+font_size = 23
+
+[sub_resource type="LabelSettings" id="LabelSettings_pe6q8"]
+font = ExtResource("3_k5e7n")
+
+[sub_resource type="LabelSettings" id="LabelSettings_k5e7n"]
+font = ExtResource("3_k5e7n")
+
+[node name="PlayerCard" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(200, 250)
+offset_right = 463.0
+offset_bottom = 305.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+color = Color(0, 0.05490196, 0.047058824, 0.5294118)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fiche de joueur n8"
+label_settings = SubResource("LabelSettings_ja1va")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="icon" type="Panel" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ja1va")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.5
+theme_override_constants/separation = 4
+
+[node name="Panel2" type="Panel" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.4
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label2" type="Label" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Trois-Quart"
+label_settings = SubResource("LabelSettings_34jnt")
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Amazone"
+label_settings = SubResource("LabelSettings_pe6q8")
+
+[node name="Panel" type="Panel" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="VBoxContainer" type="GridContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Blocage"
+label_settings = SubResource("LabelSettings_k5e7n")
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 20
+columns = 9
+
+[node name="mouv" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_yru5u")]
+layout_mode = 2
+label_text = "Mv"
+stat_value = "4"
+
+[node name="Ag" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_yru5u")]
+layout_mode = 2
+label_text = "Ag"
+stat_value = "2+"
+
+[node name="St" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_yru5u")]
+layout_mode = 2
+label_text = "St"
+stat_value = "3"
+
+[node name="Pa" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_yru5u")]
+layout_mode = 2
+label_text = "Pa"
+stat_value = "4+"
+
+[node name="Av" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_yru5u")]
+layout_mode = 2
+label_text = "Av"
+stat_value = "9+"

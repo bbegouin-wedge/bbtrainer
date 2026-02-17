@@ -16,21 +16,19 @@ func _on_game_phase_changed(new_phase: GameStatusManager.GameStatus) -> void:
 func _spawn_team_in_reserves() -> void:
 	var cells := blue_reserves.get_used_cells()
 	var cell_index := 0
-	var composition := TeamState.get_composition()
+	var expanded_team := TeamState.get_expanded_team()
 
-	for player: BloodBowlData.Player in composition:
-		var count: int = composition[player]
-		for i in count:
-			cell_index = _spawn_unit(cells, cell_index, player.get_blue_icon_texture())
-			if cell_index == -1:
-				return
-
-	for star: BloodBowlData.StarPlayer in TeamState._champions_list.values():
-		cell_index = _spawn_unit(cells, cell_index, star.get_blue_icon_texture())
+	for player: BloodBowlData.Player in expanded_team:
+		cell_index = _spawn_unit(cells, cell_index, player)
 		if cell_index == -1:
 			return
 
-func _spawn_unit(cells: Array[Vector2i], cell_index: int, texture: Texture2D) -> int:
+	for star: BloodBowlData.StarPlayer in TeamState._champions_list.values():
+		cell_index = _spawn_unit(cells, cell_index, null, star.get_blue_icon_texture())
+		if cell_index == -1:
+			return
+
+func _spawn_unit(cells: Array[Vector2i], cell_index: int, player: BloodBowlData.Player = null, texture: Texture2D = null) -> int:
 	if cell_index >= cells.size():
 		push_warning("Plus de place dans les réserves")
 		return -1
@@ -39,5 +37,9 @@ func _spawn_unit(cells: Array[Vector2i], cell_index: int, texture: Texture2D) ->
 	unit.position = to_local(blue_reserves.to_global(tile_center - Vector2(105, 105)))
 	add_child(unit)
 	unit.drag_and_drop.tilemap_layer = play_area
-	unit.skin.texture = texture
+	if player:
+		unit.skin.texture = player.get_blue_icon_texture()
+		unit.set_player(player)
+	elif texture:
+		unit.skin.texture = texture
 	return cell_index + 1

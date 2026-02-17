@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqsu7ooy656dt"]
+[gd_scene load_steps=7 format=3 uid="uid://dqsu7ooy656dt"]
 
 [ext_resource type="Script" uid="uid://dey3gy0ek1rke" path="res://scenes/ui/skill_chooser/team_players.gd" id="1_0k6jv"]
 [ext_resource type="Script" uid="uid://o8wud22e20mx" path="res://scenes/ui/skill_chooser/skill_chooser.gd" id="1_v2wia"]
-[ext_resource type="Script" path="res://scenes/ui/skill_chooser/select_general.gd" id="3_euned"]
 [ext_resource type="Script" uid="uid://dsvwroyjpshrm" path="res://scenes/ui/inducements_selector/return_button.gd" id="3_v2wia"]
 [ext_resource type="Script" uid="uid://pe3o3ok4a1ah" path="res://scenes/ui/team_compositor/validate.gd" id="4_euned"]
-[ext_resource type="Script" path="res://scenes/ui/skill_chooser/select_devious.gd" id="4_js3cj"]
 [ext_resource type="Script" uid="uid://cdrfeppow5dx1" path="res://scenes/ui/skill_chooser/skill_list.gd" id="5_euned"]
 
 [sub_resource type="Theme" id="Theme_js3cj"]
@@ -175,14 +173,12 @@ alignment = 1
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Générales"
-script = ExtResource("3_euned")
 
 [node name="devious" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat"]
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Scélérate
 "
-script = ExtResource("4_js3cj")
 
 [node name="agilité" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat"]
 layout_mode = 2
@@ -278,6 +274,11 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat/générale" to="." method="_on_select_general_skill"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat/devious" to="." method="_on_select_devious_skill"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat/agilité" to="." method="_on_select_agility_skill"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat/force" to="." method="_on_select_strength_skill"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat/passe" to="." method="_on_select_pass_skill"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat/mutations" to="." method="_on_select_mutations_skill"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat/traits" to="." method="_on_select_traits_skill"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Return" to="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Return" method="_on_pressed"]
 [connection signal="button_up" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Validate" to="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Validate" method="_on_button_up"]

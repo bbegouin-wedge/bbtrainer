@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bcmmna6iucjsj" path="res://assets/fonts/PermanentMarker-Regular.ttf" id="5_0kxv4"]
 [ext_resource type="Texture2D" uid="uid://b1nahrh266r4j" path="res://assets/ui/icons/player/ko.png" id="5_8ersf"]
 [ext_resource type="Texture2D" uid="uid://c7ppb4sisls0b" path="res://assets/ui/icons/player/ready.png" id="5_flvcu"]
-[ext_resource type="PackedScene" uid="uid://yrg4u66cgkpg" path="res://scenes/ui/hud/action_button/action_button.tscn" id="5_xeow5"]
+[ext_resource type="PackedScene" uid="uid://yrg4u66cgkpg" path="res://scenes/ui/hud/components/action_button/action_button.tscn" id="5_xeow5"]
 [ext_resource type="Texture2D" uid="uid://blo3rmg0c36ht" path="res://assets/ui/icons/player/prone.png" id="7_kqk7c"]
 [ext_resource type="Texture2D" uid="uid://duulofso64w06" path="res://assets/ui/icons/player/stunned.png" id="7_urefj"]
 [ext_resource type="Texture2D" uid="uid://8eysq5i3itps" path="res://assets/ui/icons/player/injured.png" id="9_kqk7c"]
@@ -43,7 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Actions"
+text = "États du joueur"
 label_settings = SubResource("LabelSettings_pqw5o")
 horizontal_alignment = 1
 

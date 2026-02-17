@@ -23,6 +23,8 @@ func _counter_rotate_units(angle: float) -> void:
 	for child in target.get_children():
 		if child is Unit:
 			child.skin.rotation += angle
+			if child.skill_icon_container:
+				child.skill_icon_container.rotation += angle
 
 func _compute_terrain_center() -> Vector2:
 	var terrain: TileMapLayer = target.get_node("visuals/terrain")
