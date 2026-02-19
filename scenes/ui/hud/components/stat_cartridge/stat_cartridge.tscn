@@ -21,6 +21,8 @@ font_color = Color(0.038397167, 0.038397167, 0.03839716, 1)
 
 [node name="StatCartridge" type="Panel"]
 custom_minimum_size = Vector2(65, 80)
+offset_right = 65.0
+offset_bottom = 80.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_uyok0")
 script = ExtResource("1_qq1xe")
 

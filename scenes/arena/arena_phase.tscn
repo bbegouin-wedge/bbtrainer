@@ -2,22 +2,17 @@
 
 [ext_resource type="Script" uid="uid://xomqmdx0mear" path="res://scenes/arena/arena_phase.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://dvfagydduxs0h" path="res://components/camera_mover.gd" id="2_cam_mover"]
-[ext_resource type="PackedScene" uid="uid://cogdtgtlnc6ll" path="res://scenes/ui/hud/dice_actions/dice_action_panel.tscn" id="2_uht2d"]
 [ext_resource type="Script" uid="uid://cxaqkgwpw53n2" path="res://components/camera_rotator.gd" id="3_cam_rot"]
-[ext_resource type="PackedScene" uid="uid://dnyqrraykddet" path="res://scenes/ui/hud/player_action_panel/player_action_panel.tscn" id="3_pnsml"]
 [ext_resource type="PackedScene" uid="uid://cye7ydmvgd7oo" path="res://scenes/arena/arena.tscn" id="4_arena"]
 [ext_resource type="PackedScene" uid="uid://5a4kumvw1mbe" path="res://scenes/ui/hud/player_card/player_card.tscn" id="4_pnsml"]
+[ext_resource type="PackedScene" uid="uid://5pgom00qvggi" path="res://scenes/ui/hud/bottom_action_bar/bottom_action_bar.tscn" id="6_uht2d"]
+[ext_resource type="PackedScene" uid="uid://34jbo7pgxem4" path="res://scenes/ui/hud/game_panel/game_panel.tscn" id="7_pnsml"]
 
 [node name="ArenaPhase" type="Node2D"]
 script = ExtResource("1_script")
 
-[node name="DiceActionPanel" parent="." instance=ExtResource("2_uht2d")]
-offset = Vector2(350, 0)
-transform = Transform2D(1, 0, 0, 1, 350, 0)
-
-[node name="ActionPanel" parent="." instance=ExtResource("3_pnsml")]
-
 [node name="PlayerCard" parent="." instance=ExtResource("4_pnsml")]
+visible = false
 offset = Vector2(0, 600)
 transform = Transform2D(1, 0, 0, 1, 0, 600)
 
@@ -37,3 +32,7 @@ script = ExtResource("3_cam_rot")
 target = NodePath("../../Arena")
 
 [node name="Arena" parent="." instance=ExtResource("4_arena")]
+
+[node name="BottomActionBar" parent="." instance=ExtResource("6_uht2d")]
+
+[node name="GamePanel" parent="." instance=ExtResource("7_pnsml")]

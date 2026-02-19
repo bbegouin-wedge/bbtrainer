@@ -177,7 +177,7 @@ playArea = NodePath("../PlayArea")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="visuals"]
+[node name="terrain_background" type="TextureRect" parent="visuals"]
 offset_left = -979.0
 offset_top = -954.0
 offset_right = 6437.0

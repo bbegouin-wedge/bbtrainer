@@ -6,6 +6,11 @@ const GRID_HEIGHT := 16
 const TERRAIN_WIDTH := GRID_WIDTH * TILE_SIZE
 const TERRAIN_HEIGHT := GRID_HEIGHT * TILE_SIZE
 
+const TERRAIN_LIMIT_LEFT := -979
+const TERRAIN_LIMIT_TOP := -954
+const TERRAIN_LIMIT_RIGHT := 6437
+const TERRAIN_LIMIT_BOTTOM := 4094
+
 @export var grid_displayed := false
 
 @onready var camera: Camera2D = $Camera2D
@@ -35,3 +40,8 @@ func _setup_camera_for_arena() -> void:
 	var zoom_level: float = min(zoom_x, zoom_y) * 0.8
 	camera.zoom = Vector2(zoom_level, zoom_level)
 	camera.position = viewport_size / (2.0 * zoom_level)
+
+	camera.limit_left = TERRAIN_LIMIT_LEFT
+	camera.limit_top = TERRAIN_LIMIT_TOP
+	camera.limit_right = TERRAIN_LIMIT_RIGHT
+	camera.limit_bottom = TERRAIN_LIMIT_BOTTOM

@@ -50,6 +50,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="spacer2" type="Control" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
@@ -59,8 +60,10 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_u3c5n")
 text = "Joz"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="spacer3" type="Control" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
