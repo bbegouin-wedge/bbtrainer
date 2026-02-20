@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcod0aoik1nkh"]
+[gd_scene load_steps=14 format=3 uid="uid://dcod0aoik1nkh"]
 
 [ext_resource type="PackedScene" uid="uid://yrg4u66cgkpg" path="res://scenes/ui/hud/components/action_button/action_button.tscn" id="1_dm468"]
 [ext_resource type="Texture2D" uid="uid://b04cqkwyegr5a" path="res://assets/ui/icons/dices/1-6.png" id="2_dm468"]
@@ -14,9 +14,22 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2dwq"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2dwq"]
+bg_color = Color(0.12955844, 0.1295585, 0.12955838, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="DiceActionBar" type="Panel"]
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 53.0
+offset_right = -87.0
 offset_bottom = 112.0
 grow_horizontal = 2
 size_flags_vertical = 0
@@ -33,7 +46,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 size_flags_stretch_ratio = 3.0
-color = Color(0, 0.08627451, 0.10980392, 0.5294118)
+color = Color(0, 0.08627451, 0.10980392, 0.8039216)
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
 layout_mode = 1
@@ -66,12 +79,6 @@ size_flags_horizontal = 3
 label_text = "2d6"
 button_icon = ExtResource("3_dm468")
 
-[node name="spacer#2" type="Control" parent="ColorRect/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-
 [node name="1d Block" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("1_dm468")]
 custom_minimum_size = Vector2(65, 100)
 layout_mode = 2
@@ -93,24 +100,12 @@ size_flags_horizontal = 3
 label_text = "3d Block"
 button_icon = ExtResource("6_dm468")
 
-[node name="spacer#3" type="Control" parent="ColorRect/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-
 [node name="1d8" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("1_dm468")]
 custom_minimum_size = Vector2(65, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 label_text = "1d8"
 button_icon = ExtResource("7_dm468")
-
-[node name="spacer#4" type="Control" parent="ColorRect/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
 
 [node name="1d16" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("1_dm468")]
 custom_minimum_size = Vector2(65, 100)
@@ -132,11 +127,15 @@ size_flags_stretch_ratio = 3.0
 
 [node name="Panel" type="Panel" parent="ColorRect/MarginContainer/VBoxContainer2/margin"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e2dwq")
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainer/VBoxContainer2/margin/Panel"]
-layout_mode = 0
-offset_right = 372.0
-offset_bottom = 100.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10

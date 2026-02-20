@@ -15,3 +15,8 @@ func _ready() -> void:
 	if stat_value:
 		_stat_text.text = stat_value
 		_stat_text.visible = true
+
+func set_value(value: String) -> void:
+	stat_value = value
+	if _stat_text:
+		_stat_text.text = value

@@ -23,6 +23,7 @@ GameStatusManager="*res://autoload/game_status_manager.gd"
 TeamState="*res://autoload/team_state.gd"
 EventBus="*res://autoload/event_bus.gd"
 SceneOrchestrator="*res://autoload/scene_orchestrator.gd"
+GuiState="*res://autoload/gui_state.gd"
 
 [display]
 

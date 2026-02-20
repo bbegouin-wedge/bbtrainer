@@ -1,232 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://34jbo7pgxem4"]
+[gd_scene load_steps=9 format=3 uid="uid://34jbo7pgxem4"]
 
-[ext_resource type="FontFile" uid="uid://bcmmna6iucjsj" path="res://assets/fonts/PermanentMarker-Regular.ttf" id="2_qtckg"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_4rato"]
-font = ExtResource("2_qtckg")
-font_size = 24
-
-[sub_resource type="LabelSettings" id="LabelSettings_l44vl"]
-font = ExtResource("2_qtckg")
-font_size = 48
-
-[sub_resource type="LabelSettings" id="LabelSettings_1eluh"]
-font = ExtResource("2_qtckg")
-font_size = 38
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtckg"]
-bg_color = Color(0, 0.08627451, 0.10980392, 0.5294118)
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_qtckg"]
-font = ExtResource("2_qtckg")
-font_size = 32
+[ext_resource type="Texture2D" uid="uid://33akwgqio8kd" path="res://assets/weather/good.png" id="2_1eluh"]
+[ext_resource type="PackedScene" uid="uid://5pgom00qvggi" path="res://scenes/ui/hud/bottom_action_bar/bottom_action_bar.tscn" id="2_4rato"]
+[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="2_l44vl"]
+[ext_resource type="PackedScene" uid="uid://bahl3m2dlgyfk" path="res://scenes/ui/hud/reroll_panel/reroll_panel.tscn" id="10_iqh8y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oalq0"]
-bg_color = Color(0, 0.08627451, 0.10980392, 0.5294118)
+bg_color = Color(0, 0.08627451, 0.10980392, 0.8039216)
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 anti_aliasing_size = 2.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_2pmeh"]
+font = ExtResource("2_l44vl")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_uffqq"]
+font = ExtResource("2_l44vl")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_4kk54"]
+font = ExtResource("2_l44vl")
+font_size = 20
+
 [node name="GamePanel" type="CanvasLayer"]
 
-[node name="Panel2" type="Panel" parent="."]
-visible = false
-custom_minimum_size = Vector2(400, 300)
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -400.0
-offset_bottom = 401.0
-grow_horizontal = 0
-size_flags_horizontal = 3
-theme_type_variation = &"EmptyIronPanel"
-
-[node name="Panel" type="Panel" parent="Panel2"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel2/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel2/Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Panel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Score"
-label_settings = SubResource("LabelSettings_4rato")
-
-[node name="0 - 2" type="Label" parent="Panel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "0 - 2"
-label_settings = SubResource("LabelSettings_l44vl")
-
-[node name="Label2" type="Label" parent="Panel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Tour"
-label_settings = SubResource("LabelSettings_4rato")
-
-[node name="0 - 3" type="Label" parent="Panel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "16 - 15"
-label_settings = SubResource("LabelSettings_1eluh")
-
-[node name="spacerL" type="Control" parent="Panel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="spacerL" type="Control" parent="Panel2/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Panel2/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
-theme_type_variation = &"texturedButton"
-text = "Fin de tour"
-
-[node name="spacerR" type="Control" parent="Panel2/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="spacerL2" type="Control" parent="Panel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 191.0
-grow_vertical = 2
-
-[node name="spacer" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Left Panel" type="Panel" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.5
-theme_override_styles/panel = SubResource("StyleBoxFlat_qtckg")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Left Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/Left Panel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label3" type="Label" parent="VBoxContainer/Left Panel/VBoxContainer/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Chavrouze"
-label_settings = SubResource("LabelSettings_qtckg")
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="VBoxContainer/Left Panel/VBoxContainer/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Rerolls"
-label_settings = SubResource("LabelSettings_qtckg")
-horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/Left Panel/VBoxContainer/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Bribes"
-label_settings = SubResource("LabelSettings_qtckg")
-horizontal_alignment = 1
-
-[node name="spacer2" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Left Panel2" type="Panel" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.5
-theme_override_styles/panel = SubResource("StyleBoxFlat_qtckg")
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/Left Panel2"]
-layout_mode = 0
-offset_left = -1.0
-offset_right = 159.0
-offset_bottom = 335.0
-size_flags_vertical = 3
-
-[node name="Label3" type="Label" parent="VBoxContainer/Left Panel2/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Chavrouze"
-label_settings = SubResource("LabelSettings_qtckg")
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="VBoxContainer/Left Panel2/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Rerolls"
-label_settings = SubResource("LabelSettings_qtckg")
-horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/Left Panel2/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Bribes"
-label_settings = SubResource("LabelSettings_qtckg")
-horizontal_alignment = 1
-
-[node name="spacer3" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 1.5
-
 [node name="TopPanel" type="Panel" parent="."]
-visible = false
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 53.0
-offset_right = -77.0
-offset_bottom = 100.0
+offset_left = 385.0
+offset_right = -322.0
+offset_bottom = 74.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -244,8 +48,71 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="TopPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 0
-text = "Match"
-label_settings = SubResource("LabelSettings_qtckg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopPanel/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_1eluh")
+expand_mode = 3
+
+[node name="Label3" type="Label" parent="TopPanel/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Good weather"
+label_settings = SubResource("LabelSettings_2pmeh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="spacer" type="Control" parent="TopPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Label2" type="Label" parent="TopPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Turn 5/6 "
+label_settings = SubResource("LabelSettings_uffqq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="HBoxContainer" parent="TopPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="playing" type="Label" parent="TopPanel/MarginContainer/HBoxContainer/Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+text = "Chavrouze playing"
+label_settings = SubResource("LabelSettings_4kk54")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="TopPanel/MarginContainer/HBoxContainer/Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_type_variation = &"texturedButonWithIcon"
+theme_override_font_sizes/font_size = 18
+text = "fin de tour"
+
+[node name="spacer2" type="Control" parent="TopPanel/MarginContainer/HBoxContainer/Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="BottomActionBar" parent="." instance=ExtResource("2_4rato")]
+
+[node name="RerollPanel-player-blue" parent="." instance=ExtResource("10_iqh8y")]
+offset = Vector2(0, -200)
+transform = Transform2D(1, 0, 0, 1, 0, -200)
+
+[node name="RerollPanel-player-red" parent="." instance=ExtResource("10_iqh8y")]

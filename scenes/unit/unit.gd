@@ -21,6 +21,9 @@ func set_stats(value: UnitStats) -> void:
 	if not is_node_ready():
 		await ready
 
+func get_player() -> BloodBowlData.Player:
+	return _player
+
 func set_player(player: BloodBowlData.Player) -> void:
 	_player = player
 	_display_added_skills()

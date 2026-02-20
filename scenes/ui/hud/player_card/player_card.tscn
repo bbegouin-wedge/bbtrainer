@@ -1,14 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://5a4kumvw1mbe"]
+[gd_scene load_steps=19 format=3 uid="uid://5a4kumvw1mbe"]
 
+[ext_resource type="Script" uid="uid://cnb4xmq1k3at7" path="res://scenes/ui/hud/player_card/player_card.gd" id="0_script"]
 [ext_resource type="FontFile" uid="uid://bcmmna6iucjsj" path="res://assets/fonts/PermanentMarker-Regular.ttf" id="1_w6yor"]
 [ext_resource type="Texture2D" uid="uid://cptb4rq712fag" path="res://assets/player_icons/Amazon/Blitzer1R.png" id="2_ja1va"]
 [ext_resource type="PackedScene" uid="uid://bq287b502xsqy" path="res://scenes/ui/hud/components/stat_cartridge/stat_cartridge.tscn" id="2_yru5u"]
 [ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="3_k5e7n"]
+[ext_resource type="PackedScene" uid="uid://yrg4u66cgkpg" path="res://scenes/ui/hud/components/action_button/action_button.tscn" id="5_8e63l"]
+[ext_resource type="Texture2D" uid="uid://c7ppb4sisls0b" path="res://assets/ui/icons/player/ready.png" id="6_jw7cl"]
+[ext_resource type="Texture2D" uid="uid://dk0hohg0f2i66" path="res://assets/ui/icons/player/played.png" id="7_ktmar"]
+[ext_resource type="Texture2D" uid="uid://blo3rmg0c36ht" path="res://assets/ui/icons/player/prone.png" id="8_4hwvm"]
+[ext_resource type="Texture2D" uid="uid://b1nahrh266r4j" path="res://assets/ui/icons/player/ko.png" id="9_ljfnf"]
+[ext_resource type="Texture2D" uid="uid://duulofso64w06" path="res://assets/ui/icons/player/stunned.png" id="10_nurfd"]
+[ext_resource type="Texture2D" uid="uid://8eysq5i3itps" path="res://assets/ui/icons/player/injured.png" id="11_xjbw2"]
+[ext_resource type="Texture2D" uid="uid://dpjcb0fjrhohe" path="res://assets/ui/icons/player/gazed.png" id="12_70qvg"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ja1va"]
+[sub_resource type="LabelSettings" id="LabelSettings_8e63l"]
 font = ExtResource("1_w6yor")
 font_size = 24
-font_color = Color(0.03948292, 0.13874504, 0.11933521, 1)
+font_color = Color(0.12225223, 0.12225223, 0.12225223, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_34jnt"]
 font = ExtResource("1_w6yor")
@@ -20,16 +29,23 @@ font = ExtResource("3_k5e7n")
 [sub_resource type="LabelSettings" id="LabelSettings_k5e7n"]
 font = ExtResource("3_k5e7n")
 
+[sub_resource type="LabelSettings" id="LabelSettings_ja1va"]
+font = ExtResource("1_w6yor")
+font_size = 24
+
 [node name="PlayerCard" type="CanvasLayer"]
+script = ExtResource("0_script")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(200, 250)
-offset_right = 463.0
-offset_bottom = 305.0
+offset_left = 1455.0
+offset_top = 216.0
+offset_right = 1918.0
+offset_bottom = 810.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-color = Color(0, 0.05490196, 0.047058824, 0.5294118)
+color = Color(0, 0.08627451, 0.10980392, 0.8039216)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
 layout_mode = 1
@@ -51,8 +67,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Fiche de joueur n8"
-label_settings = SubResource("LabelSettings_ja1va")
+label_settings = SubResource("LabelSettings_8e63l")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
@@ -64,7 +81,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 14
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -143,6 +160,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
 columns = 2
 
 [node name="Label" type="Label" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
@@ -180,3 +199,70 @@ stat_value = "4+"
 layout_mode = 2
 label_text = "Av"
 stat_value = "9+"
+
+[node name="spacer" type="Control" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.1
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/spacer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Actions"
+label_settings = SubResource("LabelSettings_ja1va")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer2" type="GridContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 5
+
+[node name="pret" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("5_8e63l")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "Pret !"
+button_icon = ExtResource("6_jw7cl")
+
+[node name="played" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("5_8e63l")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "Joué"
+button_icon = ExtResource("7_ktmar")
+
+[node name="prone" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("5_8e63l")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = " À terre"
+button_icon = ExtResource("8_4hwvm")
+
+[node name="stunned" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("5_8e63l")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "Sonné"
+button_icon = ExtResource("9_ljfnf")
+
+[node name="ko" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("5_8e63l")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "KO"
+button_icon = ExtResource("10_nurfd")
+
+[node name="Blessé" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("5_8e63l")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "Blessé"
+button_icon = ExtResource("11_xjbw2")
+
+[node name="Distrait" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("5_8e63l")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "distrait"
+button_icon = ExtResource("12_70qvg")

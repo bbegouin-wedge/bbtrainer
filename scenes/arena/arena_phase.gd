@@ -24,6 +24,10 @@ func _process(_delta: float) -> void:
 	grid.visible = grid_displayed
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton \
+			and event.button_index == MOUSE_BUTTON_LEFT \
+			and not event.pressed:
+		GuiState.clear_selection()
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 	if event.is_action_pressed("toggle_grid"):

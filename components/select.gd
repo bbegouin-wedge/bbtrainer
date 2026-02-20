@@ -23,8 +23,14 @@ func _toggle_selection() -> void:
 func select() -> void:
 	sprite.material.set_shader_parameter("width", 3)
 	is_selected = true
+	GuiState.set_selected_unit(get_parent())
 
 func deselect() -> void:
+	is_selected = false
+	sprite.material.set_shader_parameter("width", 0)
+	GuiState.clear_selection()
+
+func force_deselect() -> void:
 	is_selected = false
 	sprite.material.set_shader_parameter("width", 0)
 	

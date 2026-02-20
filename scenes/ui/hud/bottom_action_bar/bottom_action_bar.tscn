@@ -1,53 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://5pgom00qvggi"]
+[gd_scene load_steps=2 format=3 uid="uid://5pgom00qvggi"]
 
-[ext_resource type="PackedScene" uid="uid://dy5np2emr5xgf" path="res://scenes/ui/hud/player_action_panel/action_bar.tscn" id="1_cyirc"]
-[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="1_hy2d4"]
 [ext_resource type="PackedScene" uid="uid://dcod0aoik1nkh" path="res://scenes/ui/hud/dice_actions/dice_action_bar.tscn" id="2_g6fma"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngjq4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hy2d4"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.16924527, 0.16924533, 0.16924518, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngjq4"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.83889705, 0.83889705, 0.8388969, 1)
 
 [node name="BottomActionBar" type="CanvasLayer"]
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="Les Dés" parent="." instance=ExtResource("2_g6fma")]
 anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -158.0
-offset_bottom = 5.0
-grow_horizontal = 2
+offset_top = -114.0
+offset_bottom = 0.0
 grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_colors/font_selected_color = Color(0.08468982, 0.08468992, 0.084690206, 1)
-theme_override_constants/side_margin = 8
-theme_override_constants/tab_separation = 8
-theme_override_fonts/font = ExtResource("1_hy2d4")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ngjq4")
-theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_hy2d4")
-theme_override_styles/tab_selected = SubResource("StyleBoxFlat_ngjq4")
-current_tab = 0
-
-[node name="Les Dés" parent="TabContainer" instance=ExtResource("2_g6fma")]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="Etats de Joueur" parent="TabContainer" instance=ExtResource("1_cyirc")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
