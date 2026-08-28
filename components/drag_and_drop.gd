@@ -16,15 +16,27 @@ signal dropped(starting_position: Vector2)
 ## Dugout ancré au viewport. Un dépôt qui tombe dessus sort l'unité du terrain
 ## au lieu de la reposer sur une case — d'où l'examen en coordonnées écran.
 @export var dugouts: Array[DugoutPanel] = []
+## Nœud grossi pendant le glisser. On ne grossit pas l'unité entière : son origine
+## est le coin de la tuile, elle s'étirerait vers le bas-droite au lieu de gonfler
+## sur place. Le sprite, lui, grandit depuis son centre.
+@export var scaled_node: Node2D
+## Rapport de grossissement, calé sur celui de la vignette venue du dugout.
+@export var drag_scale: float = 1.35
+@export var drag_scale_duration: float = 0.12
 
 var starting_position: Vector2
 var offset := Vector2.ZERO
 var dragging := false
 var ghost: Node2D = null  # Le fantôme qui reste à la position de départ
 
+var _rest_scale := Vector2.ONE
+var _scale_tween: Tween
+
 func _ready() -> void:
 	assert(target, "No target set for DragAndDrop component")
 	target.input_event.connect(_on_target_input_event.unbind(1))
+	if scaled_node:
+		_rest_scale = scaled_node.scale
 	
 func _process(_delta: float) -> void:
 	if dragging and target:
@@ -52,6 +64,7 @@ func _remove_ghost() -> void:
 		
 func _end_dragging() -> void: 
 	dragging = false
+	_tween_scale(1.0)
 	target.remove_from_group("dragging")
 	target.z_index = 0
 	_remove_ghost()
@@ -67,7 +80,8 @@ func _start_dragging() -> void:
 	target.add_to_group("dragging")
 	target.z_index = 99
 	offset = target.global_position - target.get_global_mouse_position()
-	_create_ghost()  # Créer le fantôme au démarrage
+	_create_ghost()  # Créer le fantôme avant le grossissement : il reste à taille réelle
+	_tween_scale(drag_scale)
 	drag_started.emit()
 	
 func _drop() -> void:
@@ -136,3 +150,14 @@ func _on_target_input_event(_viewport: Node, event: InputEvent) -> void:
 
 	elif dragging and event.is_action_released("select"):
 		_drop()
+
+
+func _tween_scale(factor: float) -> void:
+	if scaled_node == null or not is_instance_valid(scaled_node):
+		return
+	if _scale_tween and _scale_tween.is_valid():
+		_scale_tween.kill()
+	_scale_tween = create_tween()
+	_scale_tween.tween_property(scaled_node, "scale", _rest_scale * factor, drag_scale_duration) \
+		.set_trans(Tween.TRANS_CUBIC) \
+		.set_ease(Tween.EASE_OUT)

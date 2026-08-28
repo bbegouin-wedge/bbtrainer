@@ -42,9 +42,10 @@ shape = SubResource("RectangleShape2D_fmv3f")
 script = ExtResource("8_outln")
 sprite = NodePath("../skin")
 
-[node name="drag_and_drop" type="Node" parent="." node_paths=PackedStringArray("target")]
+[node name="drag_and_drop" type="Node" parent="." node_paths=PackedStringArray("target", "scaled_node")]
 script = ExtResource("3_vh40f")
 target = NodePath("..")
+scaled_node = NodePath("../skin")
 
 [node name="select" type="Node" parent="." node_paths=PackedStringArray("sprite", "outline")]
 script = ExtResource("3_bhlit")
