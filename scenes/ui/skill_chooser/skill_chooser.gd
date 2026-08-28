@@ -1,5 +1,12 @@
 extends CanvasLayer
 
+## Pastille de couleur posée sur chaque bouton de catégorie : c'est la légende
+## du code couleur repris par les pastilles de compétences.
+## Le texte des boutons est centré : la plus étroite des gouttières gauches fait
+## 27 px (« Générales »), la pastille doit tenir dedans sans toucher le libellé.
+const CATEGORY_SWATCH_RADIUS := 7.0
+const CATEGORY_SWATCH_CENTER_X := 15.0
+
 var skillList: SkillList
 var team_players: Tree
 var _selected_player: BloodBowlData.Player = null
@@ -10,6 +17,40 @@ func _ready() -> void:
 	team_players = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/player_list/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/team_players
 	EventBus.player_selected_for_skill.connect(_on_player_selected)
 	skillList.skill_toggled.connect(_on_skill_toggled)
+	_decorate_category_buttons()
+
+
+## Chaque bouton de catégorie porte sa catégorie en métadonnée (voir la scène).
+func _decorate_category_buttons() -> void:
+	var container := find_child("skill_cat", true, false)
+	if container == null:
+		push_warning("Conteneur des catégories introuvable : pas de légende de couleurs")
+		return
+	for button in container.get_children():
+		if not button is Button or not button.has_meta("category"):
+			continue
+		button.add_child(_build_category_swatch(button.get_meta("category")))
+
+
+func _build_category_swatch(category_id: String) -> SkillBadgeView:
+	var swatch := SkillBadgeView.new()
+	swatch.radius = CATEGORY_SWATCH_RADIUS
+	swatch.setup_category(category_id)
+	# Décoratif : le libellé du bouton nomme déjà la catégorie, et on ne veut
+	# surtout pas intercepter le clic destiné au bouton.
+	swatch.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	# Positionné par son centre : la boîte du Control est plus large que le disque.
+	var half := swatch.custom_minimum_size.x * 0.5
+	swatch.anchor_left = 0.0
+	swatch.anchor_right = 0.0
+	swatch.anchor_top = 0.5
+	swatch.anchor_bottom = 0.5
+	swatch.offset_left = CATEGORY_SWATCH_CENTER_X - half
+	swatch.offset_right = CATEGORY_SWATCH_CENTER_X + half
+	swatch.offset_top = -half
+	swatch.offset_bottom = half
+	return swatch
 
 func _on_player_selected(player: BloodBowlData.Player, index: int) -> void:
 	_selected_player = player

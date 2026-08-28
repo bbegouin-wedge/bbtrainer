@@ -1,9 +1,10 @@
 class_name Unit
 extends Area2D
 
-const SKILL_ICON_SIZE := 40
-const SKILL_ICONS_PATH := "res://assets/skills/"
-const SKILL_FALLBACK_ICON := "res://assets/skills/OTHER.png"
+const TILE_SIZE := 210.0
+const SKILL_BADGE_RADIUS := 22.0
+# Marge entre le bas de la tuile et la rangée de pastilles.
+const SKILL_BADGE_MARGIN := 8.0
 
 @export var stats: UnitStats : set = set_stats
 @onready var skin: Sprite2D = $skin
@@ -12,7 +13,22 @@ const SKILL_FALLBACK_ICON := "res://assets/skills/OTHER.png"
 @onready var hover: Node = $hover
 
 var _player: BloodBowlData.Player
-var skill_icon_container: Node2D
+var skill_badges: SkillBadgeRow
+
+## Au-delà de ce trajet entre l'appui et le relâchement, le clic droit était un
+## panoramique de caméra, pas un clic. Mesuré à l'écran : en coordonnées monde la
+## caméra se déplace elle-même pendant le geste.
+const RIGHT_CLICK_THRESHOLD := 4.0
+
+## Le clic droit sert à trois choses selon le contexte — panoramique, annulation
+## de glisser, ouverture du panneau d'actions. Ce drapeau n'autorise la troisième
+## que si les deux autres n'ont pas eu lieu.
+var _right_click_opens_panel := false
+var _right_press_screen_position := Vector2.ZERO
+
+
+func _ready() -> void:
+	drag_and_drop.drag_canceled.connect(_on_drag_canceled)
 
 func set_stats(value: UnitStats) -> void:
 	stats = value
@@ -31,42 +47,55 @@ func set_player(player: BloodBowlData.Player) -> void:
 func _display_added_skills() -> void:
 	if _player == null:
 		return
+
 	var added_skills: Array[String] = []
 	for uid in _player.skills:
 		if uid not in _player.base_skills:
 			added_skills.append(uid)
+
 	if added_skills.is_empty():
+		if skill_badges:
+			skill_badges.set_skills([])
 		return
-	var tile_center := Vector2(105, 105)
-	skill_icon_container = Node2D.new()
-	skill_icon_container.position = tile_center
-	add_child(skill_icon_container)
-	for i in added_skills.size():
-		var icon_sprite := Sprite2D.new()
-		var texture := _load_skill_icon(added_skills[i])
-		if texture == null:
-			continue
-		icon_sprite.texture = texture
-		var scale_factor := SKILL_ICON_SIZE / float(texture.get_width())
-		icon_sprite.scale = Vector2(scale_factor, scale_factor)
-		# Position relative au centre de la tuile
-		icon_sprite.position = Vector2(SKILL_ICON_SIZE * i + SKILL_ICON_SIZE / 2.0, SKILL_ICON_SIZE / 2.0) - tile_center
-		skill_icon_container.add_child(icon_sprite)
 
-func _load_skill_icon(skill_uid: String) -> Texture2D:
-	var path := SKILL_ICONS_PATH + skill_uid + ".png"
-	if ResourceLoader.exists(path):
-		return load(path)
-	return load(SKILL_FALLBACK_ICON)
+	if skill_badges == null:
+		skill_badges = SkillBadgeRow.new()
+		skill_badges.radius = SKILL_BADGE_RADIUS
+		skill_badges.max_width = TILE_SIZE
+		skill_badges.position = Vector2(
+			TILE_SIZE * 0.5,
+			TILE_SIZE - SKILL_BADGE_RADIUS - SKILL_BADGE_MARGIN)
+		add_child(skill_badges)
 
+	skill_badges.set_skills(added_skills)
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if not event is InputEventMouseButton:
+		return
+	if event.button_index == MOUSE_BUTTON_LEFT:
 		select.manage_click(event)
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
-		EventBus.unit_right_clicked.emit(self)
-		get_viewport().set_input_as_handled()
+	elif event.button_index == MOUSE_BUTTON_RIGHT:
+		_handle_right_click(event)
+
+
+func _handle_right_click(event: InputEventMouseButton) -> void:
+	if event.pressed:
+		_right_click_opens_panel = true
+		_right_press_screen_position = get_viewport().get_mouse_position()
+		return
+	if not _right_click_opens_panel:
+		return
+	_right_click_opens_panel = false
+	var travelled := _right_press_screen_position.distance_to(get_viewport().get_mouse_position())
+	if travelled > RIGHT_CLICK_THRESHOLD:
+		return
+	EventBus.unit_right_clicked.emit(self)
+	get_viewport().set_input_as_handled()
+
+
+func _on_drag_canceled(_starting_position: Vector2) -> void:
+	_right_click_opens_panel = false
 
 
 func _on_mouse_entered() -> void:

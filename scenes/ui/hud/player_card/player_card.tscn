@@ -164,11 +164,6 @@ theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Label" type="Label" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Blocage"
-label_settings = SubResource("LabelSettings_k5e7n")
-
 [node name="GridContainer" type="GridContainer" parent="ColorRect/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 28

@@ -173,41 +173,48 @@ alignment = 1
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Générales"
+metadata/category = "GENERAL"
 
 [node name="devious" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat"]
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Scélérate
 "
+metadata/category = "DEVIOUS"
 
 [node name="agilité" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat"]
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Agilité
 "
+metadata/category = "AGILITY"
 
 [node name="force" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat"]
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Force
 "
+metadata/category = "STRENGTH"
 
 [node name="passe" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat"]
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Passe"
+metadata/category = "PASSING"
 
 [node name="mutations" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat"]
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Mutation
 "
+metadata/category = "MUTATIONS"
 
 [node name="traits" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/skill_cat"]
 layout_mode = 2
 theme_type_variation = &"texturedButton"
 text = "Traits
 "
+metadata/category = "TRAITS"
 
 [node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/skills_panel/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
