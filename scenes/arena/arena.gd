@@ -1,45 +1,89 @@
 class_name Arena
 extends Node2D
 
+## Le terrain, et lui seul, vit dans le monde mobile. Les réserves, K.O. et
+## blessés sont des états tenus par MatchState et affichés par le dugout, ancré
+## au viewport — d'où l'absence de toute notion de réserve ici.
+
 const UNIT_SCENE = preload("res://scenes/unit/unit.tscn")
 
-@onready var blue_reserves: TileMapLayer = $"visuals/Sidezones-blue/blue-reserves"
-@onready var play_area: PlayArea = $PlayArea
+@onready var play_area: UnitZone = $PlayArea
+
+## Renseignées par ArenaPhase : le terrain doit pouvoir renvoyer une unité au dugout.
+var dugouts: Array[DugoutPanel] = []
+
+@onready var _drop_zones: Array[UnitZone] = [play_area]
+
 
 func _ready() -> void:
 	EventBus.game_phase_changed.connect(_on_game_phase_changed)
 
+
 func _on_game_phase_changed(new_phase: GameStatusManager.GameStatus) -> void:
 	if new_phase == GameStatusManager.GameStatus.READY_TO_RUN:
-		_spawn_team_in_reserves()
+		_start_match()
 
-func _spawn_team_in_reserves() -> void:
-	var cells := blue_reserves.get_used_cells()
-	var cell_index := 0
-	var expanded_team := TeamState.get_expanded_team()
 
-	for player: BloodBowlData.Player in expanded_team:
-		cell_index = _spawn_unit(cells, cell_index, player)
-		if cell_index == -1:
-			return
+## Le terrain démarre vide : c'est au coach de placer son équipe depuis le dugout.
+func _start_match() -> void:
+	_clear_pitch()
+	MatchState.build_from_team_state()
 
-	for star: BloodBowlData.StarPlayer in TeamState._champions_list.values():
-		cell_index = _spawn_unit(cells, cell_index, null, star.get_blue_icon_texture())
-		if cell_index == -1:
-			return
 
-func _spawn_unit(cells: Array[Vector2i], cell_index: int, player: BloodBowlData.Player = null, texture: Texture2D = null) -> int:
-	if cell_index >= cells.size():
-		push_warning("Plus de place dans les réserves")
-		return -1
-	var unit := UNIT_SCENE.instantiate()
-	var tile_center := blue_reserves.map_to_local(cells[cell_index])
-	unit.position = to_local(blue_reserves.to_global(tile_center - Vector2(105, 105)))
+func _clear_pitch() -> void:
+	for entry in MatchState.get_entries():
+		remove_entry_from_pitch(entry)
+	play_area.unit_grid.clear()
+
+
+## Pose le joueur sur la case actuellement survolée. Renvoie faux si elle est hors
+## terrain ou déjà prise — auquel cas rien ne bouge.
+func place_entry_on_hovered_tile(entry: MatchState.Entry) -> bool:
+	return place_entry_on_pitch(entry, play_area.get_hovered_tile())
+
+
+func place_entry_on_pitch(entry: MatchState.Entry, tile: Vector2i) -> bool:
+	if entry == null or not play_area.is_tile_in_bounds(tile):
+		return false
+	if not play_area.is_tile_free_for(tile, entry.unit):
+		return false
+
+	if entry.unit == null:
+		entry.unit = _create_unit(entry)
+	entry.unit.position = to_local(play_area.get_global_top_left_of_tile(tile))
+	play_area.unit_grid.place_unit(tile, entry.unit)
+	MatchState.set_location(entry, MatchState.Location.PITCH)
+	return true
+
+
+func remove_entry_from_pitch(entry: MatchState.Entry) -> void:
+	if entry == null or entry.unit == null:
+		return
+	play_area.unit_grid.remove_unit(entry.unit)
+	entry.unit.queue_free()
+	entry.unit = null
+
+
+func _create_unit(entry: MatchState.Entry) -> Unit:
+	var unit: Unit = UNIT_SCENE.instantiate()
 	add_child(unit)
-	unit.drag_and_drop.tilemap_layer = play_area
+	unit.drag_and_drop.drop_zones = _drop_zones
+	unit.drag_and_drop.dugouts = dugouts
+	unit.drag_and_drop.dropped_in_dugout.connect(_on_unit_dropped_in_dugout.bind(unit))
+
+	var player := entry.get_player()
 	if player:
 		unit.skin.texture = player.get_blue_icon_texture()
 		unit.set_player(player)
-	elif texture:
-		unit.skin.texture = texture
-	return cell_index + 1
+	else:
+		unit.skin.texture = entry.get_icon()
+	return unit
+
+
+## Une unité lâchée sur le dugout quitte le terrain et prend l'état de la boîte.
+func _on_unit_dropped_in_dugout(box: DugoutBox, unit: Unit) -> void:
+	var entry := MatchState.get_entry_for_unit(unit)
+	if entry == null or box.team != entry.team:
+		return
+	remove_entry_from_pitch(entry)
+	MatchState.set_location(entry, box.location)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0srna0hu3i65"]
+[gd_scene load_steps=9 format=3 uid="uid://d0srna0hu3i65"]
 
 [ext_resource type="Script" uid="uid://xomqmdx0mear" path="res://scenes/arena/arena_phase.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://dvfagydduxs0h" path="res://components/camera_mover.gd" id="2_cam_mover"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cye7ydmvgd7oo" path="res://scenes/arena/arena.tscn" id="4_arena"]
 [ext_resource type="PackedScene" uid="uid://5a4kumvw1mbe" path="res://scenes/ui/hud/player_card/player_card.tscn" id="4_pnsml"]
 [ext_resource type="PackedScene" uid="uid://34jbo7pgxem4" path="res://scenes/ui/hud/game_panel/game_panel.tscn" id="7_pnsml"]
+[ext_resource type="Script" path="res://scenes/ui/hud/dugout/dugout_panel.gd" id="8_dugout"]
+[ext_resource type="Script" path="res://components/roster_drag.gd" id="9_rdrag"]
 
 [node name="ArenaPhase" type="Node2D"]
 script = ExtResource("1_script")
@@ -13,10 +15,14 @@ script = ExtResource("1_script")
 [node name="PlayerCard" parent="." instance=ExtResource("4_pnsml")]
 visible = false
 
+[node name="ColorRect" parent="PlayerCard" index="0"]
+offset_left = 1160.0
+offset_top = 360.0
+offset_right = 1623.0
+offset_bottom = 954.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.4, 0.4)
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 
 [node name="GameControlManager" type="Node" parent="."]
 
@@ -31,3 +37,31 @@ target = NodePath("../../Arena")
 [node name="Arena" parent="." instance=ExtResource("4_arena")]
 
 [node name="GamePanel" parent="." instance=ExtResource("7_pnsml")]
+
+[node name="DugoutLayer" type="CanvasLayer" parent="."]
+
+[node name="BlueDugout" type="Control" parent="DugoutLayer"]
+offset_left = 12.0
+offset_top = 350.0
+offset_right = 282.0
+offset_bottom = 952.0
+mouse_filter = 1
+script = ExtResource("8_dugout")
+
+[node name="RedDugout" type="Control" parent="DugoutLayer"]
+offset_left = 1638.0
+offset_top = 350.0
+offset_right = 1908.0
+offset_bottom = 952.0
+mouse_filter = 1
+script = ExtResource("8_dugout")
+team = 1
+
+[node name="DragLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="RosterDrag" type="Node" parent="." node_paths=PackedStringArray("drag_layer", "arena", "dugouts")]
+script = ExtResource("9_rdrag")
+drag_layer = NodePath("../DragLayer")
+arena = NodePath("../Arena")
+dugouts = [NodePath("../DugoutLayer/BlueDugout"), NodePath("../DugoutLayer/RedDugout")]

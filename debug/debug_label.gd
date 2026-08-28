@@ -1,6 +1,6 @@
 extends Label
 
-@export var playArea: PlayArea
+@export var playArea: UnitZone
 @onready var hoveredTileLabel: Label = Label.new()
 
 func _ready():

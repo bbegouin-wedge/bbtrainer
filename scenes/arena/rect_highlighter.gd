@@ -1,7 +1,7 @@
 # dashed_border_rect.gd
 extends ColorRect
 
-@export var playArea: PlayArea
+@export var playArea: UnitZone
 @export var enabled: bool = false
 
 @export_group("Rect Settings")

@@ -2,13 +2,20 @@ class_name DragAndDrop
 extends Node
 
 signal drag_canceled(starting_position: Vector2)
+## L'unité a été lâchée sur une boîte du dugout : elle quitte le terrain.
+signal dropped_in_dugout(box: DugoutBox)
 signal drag_started
 signal dropped(starting_position: Vector2)
 
 @export var enabled: bool = true
 @export var target: Node2D
 @export var ghost_alpha: float = 0.3  # Transparence du fantôme
-@export var tilemap_layer: TileMapLayer
+## Zones où l'unité peut être reposée, essayées dans l'ordre : terrain, réserves.
+## Un dépôt hors de toutes ces zones ramène l'unité à son point de départ.
+@export var drop_zones: Array[UnitZone] = []
+## Dugout ancré au viewport. Un dépôt qui tombe dessus sort l'unité du terrain
+## au lieu de la reposer sur une case — d'où l'examen en coordonnées écran.
+@export var dugouts: Array[DugoutPanel] = []
 
 var starting_position: Vector2
 var offset := Vector2.ZERO
@@ -64,15 +71,52 @@ func _start_dragging() -> void:
 	drag_started.emit()
 	
 func _drop() -> void:
-	if tilemap_layer:
-		var tile := tilemap_layer.local_to_map(tilemap_layer.get_local_mouse_position())
-		if tilemap_layer is PlayArea and not tilemap_layer.is_tile_in_bounds(tile):
-			_cancel_dragging()
+	var screen_point := target.get_viewport().get_mouse_position()
+	for dugout in dugouts:
+		if dugout == null:
+			continue
+		var box := dugout.box_at_screen_point(screen_point)
+		if box:
+			_end_dragging()
+			dropped_in_dugout.emit(box)
 			return
-		var top_left_local := tilemap_layer.map_to_local(tile) - Vector2(105, 105)
-		target.global_position = tilemap_layer.to_global(top_left_local)
+
+	if drop_zones.is_empty():
+		_end_dragging()
+		dropped.emit(starting_position)
+		return
+
+	var zone := _zone_under_mouse()
+	if zone == null:
+		_cancel_dragging()
+		return
+
+	var tile := zone.get_hovered_tile()
+	if not zone.is_tile_free_for(tile, target):
+		_cancel_dragging()
+		return
+
+	_register_on(zone, tile)
+	target.global_position = zone.get_global_top_left_of_tile(tile)
 	_end_dragging()
 	dropped.emit(starting_position)
+
+
+func _zone_under_mouse() -> UnitZone:
+	for zone in drop_zones:
+		if zone and zone.is_tile_in_bounds(zone.get_hovered_tile()):
+			return zone
+	return null
+
+
+## L'unité peut changer de zone (réserves vers terrain et retour) : on la retire
+## des grilles des autres zones avant de l'inscrire dans la nouvelle.
+func _register_on(zone: UnitZone, tile: Vector2i) -> void:
+	for other in drop_zones:
+		if other and other != zone and other.unit_grid:
+			other.unit_grid.remove_unit(target)
+	if zone.unit_grid:
+		zone.unit_grid.place_unit(tile, target)
 	
 	
 func _on_target_input_event(_viewport: Node, event: InputEvent) -> void:
