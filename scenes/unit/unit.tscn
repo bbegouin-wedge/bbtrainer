@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnr26f848l23o"]
+[gd_scene load_steps=10 format=3 uid="uid://bnr26f848l23o"]
 
 [ext_resource type="Texture2D" uid="uid://brii1v5bgvp8d" path="res://assets/player_icons/DarkElf/Blitzer1B.png" id="1_fmv3f"]
 [ext_resource type="Script" uid="uid://b3lj57tauqcch" path="res://scenes/unit/unit.gd" id="1_fvc8g"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dhnrqbom0mh1f" path="res://components/select.gd" id="3_bhlit"]
 [ext_resource type="Script" uid="uid://clj3l2ucue57f" path="res://components/drag_and_drop.gd" id="3_vh40f"]
 [ext_resource type="Script" uid="uid://b0ocx6ljsqkli" path="res://components/hoverable.gd" id="6_3po7s"]
+[ext_resource type="Script" path="res://components/outline.gd" id="8_outln"]
 [ext_resource type="Script" uid="uid://d222mcp0kjqqx" path="res://scenes/unit/unit_stats.gd" id="7_0wuuu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3po7s"]
@@ -37,17 +38,22 @@ visible = false
 position = Vector2(105, 105)
 shape = SubResource("RectangleShape2D_fmv3f")
 
+[node name="outline" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_outln")
+sprite = NodePath("../skin")
+
 [node name="drag_and_drop" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("3_vh40f")
 target = NodePath("..")
 
-[node name="select" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+[node name="select" type="Node" parent="." node_paths=PackedStringArray("sprite", "outline")]
 script = ExtResource("3_bhlit")
 sprite = NodePath("../skin")
+outline = NodePath("../outline")
 
-[node name="hover" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+[node name="hover" type="Node" parent="." node_paths=PackedStringArray("outline")]
 script = ExtResource("6_3po7s")
-sprite = NodePath("../skin")
+outline = NodePath("../outline")
 
 [node name="stats" type="Node" parent="."]
 script = ExtResource("7_0wuuu")
