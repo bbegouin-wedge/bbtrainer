@@ -32,10 +32,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 	if event.is_action_pressed("toggle_grid"):
 		grid_displayed = !grid_displayed
-	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
-		var win_size := DisplayServer.window_get_size()
-		DisplayServer.window_set_size(Vector2i(win_size.y, win_size.x))
-		_setup_camera_for_arena()
+	if event.is_action_pressed("toggle_window_orientation"):
+		_swap_window_orientation()
+
+
+## Utilitaire de développement : inverse les dimensions de la fenêtre pour
+## éprouver la mise en page en portrait. Écoutait KEY_R en brut, c'est-à-dire la
+## même touche que la rotation du terrain (toggle_pitch_orientation) — les deux
+## se déclenchaient ensemble. Déplacé sur F9.
+func _swap_window_orientation() -> void:
+	var window_size := DisplayServer.window_get_size()
+	DisplayServer.window_set_size(Vector2i(window_size.y, window_size.x))
+	_setup_camera_for_arena()
 
 func _setup_camera_for_arena() -> void:
 	var viewport_size := get_viewport().get_visible_rect().size

@@ -3,7 +3,12 @@ extends Node2D
 #
 @export var target: Camera2D
 @export var pan_speed: float = 1.0
-@export var use_middle_mouse: bool = true
+@export var mouse_pan_enabled: bool = true
+## Le clic droit reste le bouton de panoramique : tous les trackpads n'ont pas de
+## bouton du milieu. Les collisions avec l'annulation de glisser et le panneau
+## d'actions sont levées autrement — on ne panoramique pas pendant un glisser, et
+## un clic droit qui a parcouru du chemin n'ouvre pas le panneau.
+@export_enum("Droit:2", "Milieu:3") var pan_button: int = MOUSE_BUTTON_RIGHT
 @export var use_edge_pan: bool = false
 
 # Pan clavier
@@ -20,16 +25,13 @@ var is_panning: bool = false
 var pan_start_position: Vector2
 
 func _input(event: InputEvent):
-	# Pan avec clic du milieu (molette)
-	if use_middle_mouse:
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_RIGHT:
-				if event.pressed:
-					is_panning = true
-					pan_start_position = event.position
-				else:
-					is_panning = false
-		
+	if mouse_pan_enabled and event is InputEventMouseButton and event.button_index == pan_button:
+		# Pendant le glisser d'une unité, le clic droit sert à annuler : il ne
+		# doit pas déclencher un panoramique en même temps.
+		is_panning = event.pressed and not _is_unit_being_dragged()
+		if is_panning:
+			pan_start_position = event.position
+
 	if zoom_enabled and event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			var new_zoom = target.zoom * (1.0 + zoom_step)
@@ -42,6 +44,10 @@ func _input(event: InputEvent):
 			var delta = (event.position - pan_start_position)
 			target.position -= delta / target.zoom
 			pan_start_position = event.position
+
+func _is_unit_being_dragged() -> bool:
+	return get_tree().get_first_node_in_group("dragging") != null
+
 
 func _process(delta):
 	# Pan clavier (diagonal supporté)
