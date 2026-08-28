@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0srna0hu3i65"]
+[gd_scene load_steps=10 format=3 uid="uid://d0srna0hu3i65"]
 
 [ext_resource type="Script" uid="uid://xomqmdx0mear" path="res://scenes/arena/arena_phase.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://dvfagydduxs0h" path="res://components/camera_mover.gd" id="2_cam_mover"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://34jbo7pgxem4" path="res://scenes/ui/hud/game_panel/game_panel.tscn" id="7_pnsml"]
 [ext_resource type="Script" path="res://scenes/ui/hud/dugout/dugout_panel.gd" id="8_dugout"]
 [ext_resource type="Script" path="res://components/roster_drag.gd" id="9_rdrag"]
+[ext_resource type="Script" path="res://scenes/ui/hud/minimap/minimap.gd" id="10_minim"]
 
 [node name="ArenaPhase" type="Node2D"]
 script = ExtResource("1_script")
@@ -65,3 +66,15 @@ script = ExtResource("9_rdrag")
 drag_layer = NodePath("../DragLayer")
 arena = NodePath("../Arena")
 dugouts = [NodePath("../DugoutLayer/BlueDugout"), NodePath("../DugoutLayer/RedDugout")]
+
+[node name="MinimapLayer" type="CanvasLayer" parent="."]
+
+[node name="Minimap" type="Control" parent="MinimapLayer" node_paths=PackedStringArray("camera", "arena_phase", "pitch")]
+offset_left = 12.0
+offset_top = 180.0
+offset_right = 282.0
+offset_bottom = 336.0
+script = ExtResource("10_minim")
+camera = NodePath("../../Camera2D")
+arena_phase = NodePath("../..")
+pitch = NodePath("../../Arena/PlayArea")
