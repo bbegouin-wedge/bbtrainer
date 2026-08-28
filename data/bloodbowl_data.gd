@@ -20,6 +20,14 @@ class Skill:
 		activation = data.get("activation", "")
 		description = data.get("description", "")
 
+class SkillCategory:
+	var id: String
+	var label: String
+
+	func _init(data: Dictionary):
+		id = data.get("id", "")
+		label = data.get("label", "")
+
 # Classe pour stocker les icônes de joueur (versions bleue et rouge)
 class PlayerIcon:
 	var blue: String
@@ -220,35 +228,41 @@ var bloodbowl_version: String
 var edition: String
 var teams: Array[Team] = []
 var skills: Array[Skill] = []
+var skill_categories: Array[SkillCategory] = []
 var star_players: Array[StarPlayer] = []
 
 # Index pour accès rapide
 var teams_by_uid: Dictionary = {}
 var teams_by_name: Dictionary = {}
 var skills_by_uid: Dictionary = {}
+var skill_categories_by_id: Dictionary = {}
 var star_players_by_uid: Dictionary = {}
 
-func load_from_json(json_path: String) -> bool:
-	var file = FileAccess.open(json_path, FileAccess.READ)
+# Lit un fichier JSON et retourne son dictionnaire racine, ou null en cas d'échec.
+func _read_json_dict(json_path: String, what: String) -> Variant:
+	var file := FileAccess.open(json_path, FileAccess.READ)
 	if not file:
-		push_error("Impossible d'ouvrir le fichier: " + json_path)
-		return false
-	
-	var json_text = file.get_as_text()
+		push_error("Impossible d'ouvrir le fichier %s: %s" % [what, json_path])
+		return null
+
+	var json := JSON.new()
+	var error := json.parse(file.get_as_text())
 	file.close()
-	
-	var json = JSON.new()
-	var error = json.parse(json_text)
-	
+
 	if error != OK:
-		push_error("Erreur de parsing JSON: " + json.get_error_message())
+		push_error("Erreur de parsing JSON %s: %s" % [what, json.get_error_message()])
+		return null
+
+	if typeof(json.data) != TYPE_DICTIONARY:
+		push_error("Le JSON %s ne contient pas un dictionnaire racine" % what)
+		return null
+
+	return json.data
+
+func load_from_json(json_path: String) -> bool:
+	var data = _read_json_dict(json_path, "teams")
+	if data == null:
 		return false
-	
-	var data = json.data
-	if typeof(data) != TYPE_DICTIONARY:
-		push_error("Le JSON ne contient pas un dictionnaire racine")
-		return false
-	
 	return parse_data(data)
 
 func parse_data(data: Dictionary) -> bool:
@@ -293,24 +307,8 @@ func get_teams_by_tier(tier: String) -> Array[Team]:
 	return result
 
 func load_skills_from_json(json_path: String) -> bool:
-	var file = FileAccess.open(json_path, FileAccess.READ)
-	if not file:
-		push_error("Impossible d'ouvrir le fichier: " + json_path)
-		return false
-
-	var json_text = file.get_as_text()
-	file.close()
-
-	var json = JSON.new()
-	var error = json.parse(json_text)
-
-	if error != OK:
-		push_error("Erreur de parsing JSON skills: " + json.get_error_message())
-		return false
-
-	var data = json.data
-	if typeof(data) != TYPE_DICTIONARY:
-		push_error("Le JSON skills ne contient pas un dictionnaire racine")
+	var data = _read_json_dict(json_path, "skills")
+	if data == null:
 		return false
 
 	skills.clear()
@@ -328,25 +326,29 @@ func load_skills_from_json(json_path: String) -> bool:
 	print("Chargement réussi: %d compétences" % skills.size())
 	return true
 
+func load_skill_categories_from_json(json_path: String) -> bool:
+	var data = _read_json_dict(json_path, "skill_categories")
+	if data == null:
+		return false
+
+	skill_categories.clear()
+	skill_categories_by_id.clear()
+
+	if not data.has("skill_categories"):
+		push_error("Le JSON ne contient pas de skill_categories")
+		return false
+
+	for category_data in data["skill_categories"]:
+		var category = SkillCategory.new(category_data)
+		skill_categories.append(category)
+		skill_categories_by_id[category.id] = category
+
+	print("Chargement réussi: %d catégories de compétences" % skill_categories.size())
+	return true
+
 func load_star_players_from_json(json_path: String) -> bool:
-	var file = FileAccess.open(json_path, FileAccess.READ)
-	if not file:
-		push_error("Impossible d'ouvrir le fichier: " + json_path)
-		return false
-
-	var json_text = file.get_as_text()
-	file.close()
-
-	var json = JSON.new()
-	var error = json.parse(json_text)
-
-	if error != OK:
-		push_error("Erreur de parsing JSON star_players: " + json.get_error_message())
-		return false
-
-	var data = json.data
-	if typeof(data) != TYPE_DICTIONARY:
-		push_error("Le JSON star_players ne contient pas un dictionnaire racine")
+	var data = _read_json_dict(json_path, "star_players")
+	if data == null:
 		return false
 
 	star_players.clear()
@@ -369,6 +371,15 @@ func get_star_player_by_uid(uid: String) -> StarPlayer:
 
 func get_skill_by_uid(skill_uid: String) -> Skill:
 	return skills_by_uid.get(skill_uid, null)
+
+func get_skill_category(category_id: String) -> SkillCategory:
+	return skill_categories_by_id.get(category_id, null)
+
+func get_skill_category_label(category_id: String) -> String:
+	var category = get_skill_category(category_id)
+	if category:
+		return category.label
+	return category_id
 
 func get_skill_name(skill_uid: String) -> String:
 	var skill = get_skill_by_uid(skill_uid)
