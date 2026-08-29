@@ -159,56 +159,122 @@ func _draw() -> void:
 		else:
 			draw_rect(rect, REACHABLE_FILL, true)
 
-	# Seul le pourtour de la zone est tracé : un contour par case donnerait un
-	# quadrillage, alors que c'est la silhouette de la portée qui informe.
-	for tile: Vector2i in _reachable:
-		var rect := _tile_rect(tile, tile_size)
-		for side: Vector2i in SIDES:
-			if _reachable.has(tile + side):
-				continue
-			draw_line(_side_start(rect, side), _side_end(rect, side), REACHABLE_EDGE, edge_width)
+	# Le pourtour de la zone est tracé comme un chemin fermé et non côté par
+	# côté : c'est ce qui donne des sommets à arrondir, et une épaisseur
+	# constante là où quatre segments séparés se recouvraient aux angles.
+	for loop: PackedVector2Array in _region_loops(tile_size):
+		draw_polyline(_rounded_path(loop, CORNER_RADIUS), REACHABLE_EDGE, edge_width, true)
 
 	if _reachable.has(_hovered):
 		var outline := _rounded_tile_outline(_tile_rect(_hovered, tile_size), hovered_width)
 		draw_polyline(outline, HOVERED_EDGE, hovered_width, true)
 
 
-## Contour arrondi d'une case, en rentrant d'une demi-épaisseur pour que le
-## trait ne déborde pas sur les cases voisines.
-func _rounded_tile_outline(rect: Rect2, width: float) -> PackedVector2Array:
-	var inner := rect.grow(-width * 0.5)
-	var radius := minf(CORNER_RADIUS, minf(inner.size.x, inner.size.y) * 0.5)
-	var points := PackedVector2Array()
-	# Centres des quatre arcs, dans l'ordre du parcours.
-	var corners := [
-		{ "center": Vector2(inner.end.x - radius, inner.position.y + radius), "start": -PI * 0.5 },
-		{ "center": Vector2(inner.end.x - radius, inner.end.y - radius), "start": 0.0 },
-		{ "center": Vector2(inner.position.x + radius, inner.end.y - radius), "start": PI * 0.5 },
-		{ "center": Vector2(inner.position.x + radius, inner.position.y + radius), "start": PI },
-	]
-	for corner: Dictionary in corners:
+## Boucles fermées formant la frontière de la zone, en coordonnées locales.
+##
+## Chaque case expose ses côtés dont le voisin n'est pas atteignable, orientés
+## dans le sens horaire ; les segments se chaînent alors bout à bout. Les trous
+## laissés par les cases occupées ressortent comme des boucles à part.
+func _region_loops(tile_size: Vector2) -> Array:
+	var next_of := {}
+	for tile: Vector2i in _reachable:
+		for side: Vector2i in SIDES:
+			if _reachable.has(tile + side):
+				continue
+			var corners := _side_corners(tile, side)
+			next_of[corners[0]] = corners[1]
+
+	var loops := []
+	while not next_of.is_empty():
+		var start: Vector2i = next_of.keys()[0]
+		var corner_loop: Array[Vector2i] = []
+		var current := start
+		while next_of.has(current):
+			corner_loop.append(current)
+			var following: Vector2i = next_of[current]
+			next_of.erase(current)
+			current = following
+		if corner_loop.size() >= 4:
+			loops.append(_to_local_path(_drop_collinear(corner_loop), tile_size))
+	return loops
+
+
+## Extrémités d'un côté, en indices de coins de grille, dans le sens horaire.
+func _side_corners(tile: Vector2i, side: Vector2i) -> Array:
+	if side.y < 0:
+		return [tile, tile + Vector2i(1, 0)]
+	if side.x > 0:
+		return [tile + Vector2i(1, 0), tile + Vector2i(1, 1)]
+	if side.y > 0:
+		return [tile + Vector2i(1, 1), tile + Vector2i(0, 1)]
+	return [tile + Vector2i(0, 1), tile]
+
+
+## Un sommet aligné entre ses voisins n'est pas un coin : le garder ferait
+## arrondir le milieu des côtés.
+func _drop_collinear(corner_loop: Array[Vector2i]) -> Array[Vector2i]:
+	var kept: Array[Vector2i] = []
+	var count := corner_loop.size()
+	for i in count:
+		var before: Vector2i = corner_loop[(i - 1 + count) % count]
+		var here: Vector2i = corner_loop[i]
+		var after: Vector2i = corner_loop[(i + 1) % count]
+		if (here - before) != (after - here):
+			kept.append(here)
+	return kept
+
+
+func _to_local_path(corner_loop: Array[Vector2i], tile_size: Vector2) -> PackedVector2Array:
+	var path := PackedVector2Array()
+	var origin := pitch.map_to_local(Vector2i.ZERO) - tile_size * 0.5
+	for corner: Vector2i in corner_loop:
+		path.append(origin + Vector2(corner) * tile_size)
+	return path
+
+
+## Remplace chaque sommet d'un polygone fermé par un arc de cercle. Le rayon est
+## rogné à la moitié du plus court côté adjacent, pour ne jamais se croiser.
+func _rounded_path(points: PackedVector2Array, radius: float) -> PackedVector2Array:
+	var count := points.size()
+	if count < 3:
+		return points
+	var path := PackedVector2Array()
+	for i in count:
+		var here := points[i]
+		var before := points[(i - 1 + count) % count]
+		var after := points[(i + 1) % count]
+		var incoming := (here - before)
+		var outgoing := (after - here)
+		var turn := incoming.cross(outgoing)
+		if is_zero_approx(turn):
+			path.append(here)
+			continue
+
+		var r := minf(radius, minf(incoming.length(), outgoing.length()) * 0.5)
+		var from := here - incoming.normalized() * r
+		var to := here + outgoing.normalized() * r
+		var sign := signf(turn)
+		var center := from + incoming.normalized().rotated(sign * PI * 0.5) * r
+		var start_angle := (from - center).angle()
 		for step in CORNER_STEPS + 1:
-			var angle: float = corner["start"] + PI * 0.5 * float(step) / float(CORNER_STEPS)
-			points.append(corner["center"] + Vector2(cos(angle), sin(angle)) * radius)
-	points.append(points[0])
-	return points
+			var angle := start_angle + sign * PI * 0.5 * float(step) / float(CORNER_STEPS)
+			path.append(center + Vector2(cos(angle), sin(angle)) * r)
+	path.append(path[0])
+	return path
 
 
 func _tile_rect(tile: Vector2i, tile_size: Vector2) -> Rect2:
 	return Rect2(pitch.map_to_local(tile) - tile_size * 0.5, tile_size)
 
 
-func _side_start(rect: Rect2, side: Vector2i) -> Vector2:
-	if side.x > 0:
-		return Vector2(rect.end.x, rect.position.y)
-	if side.y > 0:
-		return Vector2(rect.position.x, rect.end.y)
-	return rect.position
-
-
-func _side_end(rect: Rect2, side: Vector2i) -> Vector2:
-	if side.x < 0:
-		return Vector2(rect.position.x, rect.end.y)
-	if side.y < 0:
-		return Vector2(rect.end.x, rect.position.y)
-	return rect.end
+## Contour arrondi d'une case, en rentrant d'une demi-épaisseur pour que le
+## trait ne déborde pas sur les voisines.
+func _rounded_tile_outline(rect: Rect2, width: float) -> PackedVector2Array:
+	var inner := rect.grow(-width * 0.5)
+	var square := PackedVector2Array([
+		inner.position,
+		Vector2(inner.end.x, inner.position.y),
+		inner.end,
+		Vector2(inner.position.x, inner.end.y),
+	])
+	return _rounded_path(square, CORNER_RADIUS)
