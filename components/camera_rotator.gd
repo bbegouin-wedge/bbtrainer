@@ -19,12 +19,10 @@ func _rotate_around_center(angle: float) -> void:
 	target.global_position += pivot_global - new_pivot_global
 	_counter_rotate_units(-angle)
 
-func _counter_rotate_units(angle: float) -> void:
+func _counter_rotate_units(_angle: float) -> void:
 	for child in target.get_children():
 		if child is Unit:
-			child.skin.rotation += angle
-			if child.skill_badges:
-				child.skill_badges.rotation += angle
+			child.keep_visuals_upright()
 
 func _compute_terrain_center() -> Vector2:
 	var terrain: TileMapLayer = target.get_node("visuals/terrain")

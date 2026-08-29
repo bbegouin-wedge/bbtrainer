@@ -68,6 +68,17 @@ func _display_added_skills() -> void:
 		add_child(skill_badges)
 
 	skill_badges.set_skills(added_skills)
+	keep_visuals_upright()
+
+
+## Garde le sprite et les pastilles droits quand l'arène est pivotée. En absolu
+## et non en cumul : une unité créée après une rotation doit naître droite, pas
+## seulement celles présentes au moment où on pivote.
+func keep_visuals_upright() -> void:
+	var arena_rotation: float = get_parent().rotation if get_parent() else 0.0
+	skin.rotation = -arena_rotation
+	if skill_badges:
+		skill_badges.rotation = -arena_rotation
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

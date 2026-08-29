@@ -67,6 +67,8 @@ func remove_entry_from_pitch(entry: MatchState.Entry) -> void:
 func _create_unit(entry: MatchState.Entry) -> Unit:
 	var unit: Unit = UNIT_SCENE.instantiate()
 	add_child(unit)
+	# L'arène peut déjà être pivotée : le jeton doit naître droit.
+	unit.keep_visuals_upright()
 	unit.drag_and_drop.drop_zones = _drop_zones
 	unit.drag_and_drop.dugouts = dugouts
 	unit.drag_and_drop.dropped_in_dugout.connect(_on_unit_dropped_in_dugout.bind(unit))
