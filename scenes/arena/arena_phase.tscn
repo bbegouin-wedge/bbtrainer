@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0srna0hu3i65"]
+[gd_scene load_steps=13 format=3 uid="uid://d0srna0hu3i65"]
 
 [ext_resource type="Script" uid="uid://xomqmdx0mear" path="res://scenes/arena/arena_phase.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://dvfagydduxs0h" path="res://components/camera_mover.gd" id="2_cam_mover"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://components/roster_drag.gd" id="9_rdrag"]
 [ext_resource type="Script" path="res://scenes/ui/hud/minimap/minimap.gd" id="10_minim"]
 [ext_resource type="Script" path="res://scenes/ui/hud/player_strip/player_strip.gd" id="11_strip"]
+[ext_resource type="Script" path="res://scenes/ui/hud/hud_dock/hud_dock.gd" id="12_dock"]
 [ext_resource type="Script" path="res://scenes/ui/hud/player_actions/player_actions.gd" id="13_acts"]
 
 [node name="ArenaPhase" type="Node2D"]
@@ -73,10 +74,10 @@ dugouts = [NodePath("../DugoutLayer/BlueDugout"), NodePath("../DugoutLayer/RedDu
 [node name="MinimapLayer" type="CanvasLayer" parent="."]
 
 [node name="Minimap" type="Control" parent="MinimapLayer" node_paths=PackedStringArray("camera", "arena_phase", "pitch")]
-offset_left = 12.0
-offset_top = 180.0
-offset_right = 282.0
-offset_bottom = 336.0
+offset_left = 1352.0
+offset_top = 776.0
+offset_right = 1622.0
+offset_bottom = 932.0
 script = ExtResource("10_minim")
 camera = NodePath("../../Camera2D")
 arena_phase = NodePath("../..")
@@ -91,6 +92,15 @@ offset_right = 1360.0
 offset_bottom = 1032.0
 mouse_filter = 1
 script = ExtResource("11_strip")
+arena_phase = NodePath("../..")
+
+[node name="HudDock" type="Control" parent="HudLayer" node_paths=PackedStringArray("arena_phase")]
+offset_left = 760.0
+offset_top = 1040.0
+offset_right = 1160.0
+offset_bottom = 1074.0
+mouse_filter = 1
+script = ExtResource("12_dock")
 arena_phase = NodePath("../..")
 
 [node name="PlayerActions" type="Control" parent="HudLayer" node_paths=PackedStringArray("arena_phase")]
