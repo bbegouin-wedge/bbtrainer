@@ -1,6 +1,10 @@
 class_name CameraRotator
 extends Node2D
 
+## Émis après un quart de tour : le cadrage caméra dépend de l'orientation du
+## terrain, et doit être recalculé.
+signal rotated
+
 @export var target: Node2D  # L'Arena à faire tourner
 
 var _terrain_center: Vector2
@@ -18,6 +22,7 @@ func _rotate_around_center(angle: float) -> void:
 	var new_pivot_global = target.to_global(_terrain_center)
 	target.global_position += pivot_global - new_pivot_global
 	_counter_rotate_units(-angle)
+	rotated.emit()
 
 func _counter_rotate_units(_angle: float) -> void:
 	for child in target.get_children():

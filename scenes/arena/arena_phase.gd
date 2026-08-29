@@ -36,6 +36,7 @@ const DEFAULT_VIEW_FRACTION := 0.5
 @onready var _dock: HudDock = $HudLayer/HudDock
 @onready var _minimap: Minimap = $MinimapLayer/Minimap
 @onready var _topbar: Control = $GamePanel/TopPanel
+@onready var _rotator: CameraRotator = $GameControlManager/CameraRotator
 @onready var _staff_panels: Array[StaffPanel] = [
 	$DugoutLayer/BlueStaff,
 	$DugoutLayer/RedStaff,
@@ -46,6 +47,7 @@ var _panels: Dictionary = {}
 
 func _ready() -> void:
 	arena.dugouts = dugouts
+	_rotator.rotated.connect(refresh_camera_framing)
 	_setup_camera_for_arena()
 	call_deferred("_setup_collapsibles")
 
@@ -128,6 +130,23 @@ func _setup_camera_for_arena() -> void:
 	_apply_camera_limits(zoom_level)
 
 
+## Emprise du terrain dans le monde, telle qu'il est orienté. Pivoté d'un quart
+## de tour il occupe une autre région : des limites figées sur l'orientation
+## d'origine laissaient déplacer la vue là où il n'y a plus de terrain.
+func get_pitch_world_rect() -> Rect2:
+	var transform := arena.play_area.global_transform
+	var tile := Vector2(arena.play_area.tile_set.tile_size)
+	var local := Rect2(
+		Vector2(arena.play_area.bounds.position) * tile,
+		Vector2(arena.play_area.bounds.size) * tile)
+	var world := Rect2(transform * local.position, Vector2.ZERO)
+	for corner: Vector2 in [
+			Vector2(local.end.x, local.position.y), local.end,
+			Vector2(local.position.x, local.end.y)]:
+		world = world.expand(transform * corner)
+	return world
+
+
 ## Rectangle d'écran réellement disponible pour le terrain, HUD déduit. Il suit
 ## l'état d'escamotage : c'est la source unique du cadrage caméra et du rectangle
 ## de vue dessiné sur la minimap.
@@ -181,7 +200,8 @@ func _default_zoom(band_size: Vector2) -> float:
 func _position_centering_terrain(band: Rect2, zoom_level: float) -> Vector2:
 	var viewport_center := get_viewport().get_visible_rect().size * 0.5
 	var band_center := band.position + band.size * 0.5
-	var terrain_center := Vector2(TERRAIN_WIDTH, TERRAIN_HEIGHT) * 0.5
+	var pitch := get_pitch_world_rect()
+	var terrain_center := pitch.position + pitch.size * 0.5
 	return terrain_center - (band_center - viewport_center) / zoom_level
 
 
@@ -191,9 +211,10 @@ func _position_centering_terrain(band: Rect2, zoom_level: float) -> Vector2:
 func _apply_camera_limits(zoom_level: float) -> void:
 	var band := get_visible_band()
 	var viewport_size := get_viewport().get_visible_rect().size
-	camera.limit_left = int(-band.position.x / zoom_level)
-	camera.limit_top = int(-band.position.y / zoom_level)
-	camera.limit_right = TERRAIN_WIDTH \
-		+ int((viewport_size.x - band.end.x) / zoom_level)
-	camera.limit_bottom = TERRAIN_HEIGHT \
-		+ int((viewport_size.y - band.end.y) / zoom_level)
+	var pitch := get_pitch_world_rect()
+	camera.limit_left = int(pitch.position.x - band.position.x / zoom_level)
+	camera.limit_top = int(pitch.position.y - band.position.y / zoom_level)
+	camera.limit_right = int(pitch.end.x \
+		+ (viewport_size.x - band.end.x) / zoom_level)
+	camera.limit_bottom = int(pitch.end.y \
+		+ (viewport_size.y - band.end.y) / zoom_level)
