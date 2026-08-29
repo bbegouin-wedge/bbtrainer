@@ -1,16 +1,16 @@
 [gd_scene load_steps=16 format=4 uid="uid://cye7ydmvgd7oo"]
 
-[ext_resource type="Script" uid="uid://djkdmjqcb02rw" path="res://scenes/arena/arena.gd" id="1_xdvfk"]
+[ext_resource type="Script" uid="uid://djkdmjqcb02rw" path="res://io/client/world/arena.gd" id="1_xdvfk"]
 [ext_resource type="Script" uid="uid://b4wvny1d7jtdr" path="res://debug/debug_label.gd" id="2_2ml6w"]
 [ext_resource type="Texture2D" uid="uid://nv4xo8aqda8d" path="res://assets/floor-tilemap.png" id="3_4ag8t"]
 [ext_resource type="TileSet" uid="uid://dq4ck2lqs3scw" path="res://assets/tuiles_terrain.tres" id="3_ii07k"]
 [ext_resource type="Texture2D" uid="uid://dgaf3yu5q2s6g" path="res://assets/terrain-lignes.png" id="3_xgbxb"]
 [ext_resource type="TileSet" uid="uid://dow0ipy00t512" path="res://assets/tuiles_transparentes.tres" id="4_6w4xk"]
 [ext_resource type="Shader" uid="uid://bakrserh25oh4" path="res://assets/shaders/dashed_border.gdshader" id="5_2ml6w"]
-[ext_resource type="Script" uid="uid://d1svoosrq0oop" path="res://scenes/arena/rect_highlighter.gd" id="5_6w4xk"]
-[ext_resource type="Script" uid="uid://c0ogmm76a1w8r" path="res://scenes/arena/unit_zone.gd" id="5_ii07k"]
-[ext_resource type="Script" uid="uid://7e6qbkjsk4e" path="res://scenes/arena/unit_grid.gd" id="5_u52cf"]
-[ext_resource type="Script" path="res://scenes/arena/movement_range.gd" id="6_movrg"]
+[ext_resource type="Script" uid="uid://d1svoosrq0oop" path="res://io/client/world/rect_highlighter.gd" id="5_6w4xk"]
+[ext_resource type="Script" uid="uid://c0ogmm76a1w8r" path="res://io/client/world/unit_zone.gd" id="5_ii07k"]
+[ext_resource type="Script" uid="uid://7e6qbkjsk4e" path="res://io/client/world/unit_grid.gd" id="5_u52cf"]
+[ext_resource type="Script" path="res://io/client/world/movement_range.gd" id="6_movrg"]
 
 [sub_resource type="GDScript" id="GDScript_asdgj"]
 script/source = "extends TileMapLayer

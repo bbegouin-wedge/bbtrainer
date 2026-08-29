@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://d0srna0hu3i65"]
 
-[ext_resource type="Script" uid="uid://xomqmdx0mear" path="res://scenes/arena/arena_phase.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://xomqmdx0mear" path="res://io/client/world/arena_phase.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://dvfagydduxs0h" path="res://io/client/input/camera_mover.gd" id="2_cam_mover"]
 [ext_resource type="Script" uid="uid://cxaqkgwpw53n2" path="res://io/client/input/camera_rotator.gd" id="3_cam_rot"]
-[ext_resource type="PackedScene" uid="uid://cye7ydmvgd7oo" path="res://scenes/arena/arena.tscn" id="4_arena"]
+[ext_resource type="PackedScene" uid="uid://cye7ydmvgd7oo" path="res://io/client/world/arena.tscn" id="4_arena"]
 [ext_resource type="PackedScene" uid="uid://5a4kumvw1mbe" path="res://scenes/ui/hud/player_card/player_card.tscn" id="4_pnsml"]
 [ext_resource type="PackedScene" uid="uid://34jbo7pgxem4" path="res://scenes/ui/hud/game_panel/game_panel.tscn" id="7_pnsml"]
 [ext_resource type="Script" path="res://scenes/ui/hud/dugout/dugout_panel.gd" id="8_dugout"]

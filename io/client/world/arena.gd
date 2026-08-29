@@ -5,7 +5,7 @@ extends Node2D
 ## blessés sont des états tenus par MatchState et affichés par le dugout, ancré
 ## au viewport — d'où l'absence de toute notion de réserve ici.
 
-const UNIT_SCENE = preload("res://scenes/unit/unit.tscn")
+const UNIT_SCENE = preload("res://io/client/world/unit/unit.tscn")
 
 @onready var play_area: UnitZone = $PlayArea
 
