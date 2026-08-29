@@ -226,6 +226,8 @@ Contournement délibéré : `git commit --no-verify`.
 | `make editeur` | ouvre l'éditeur — seul endroit où les points d'arrêt existent |
 | `make check-integrity` | les 10 vérifications sur tout le dépôt (cf. règle 13) |
 | `make check-arch` | les seules règles d'architecture de `core/` (cf. règle 8) |
+| `make test-unit` | les tests unitaires de `tests/unit/` |
+| `make test` | intégrité + tests unitaires |
 | `make check-integrity V=scenes` | une seule vérification, par son nom |
 | `make verbeux` | idem, sortie moteur brute et non filtrée |
 | `make import` | réimporte les assets — une fois après un clone, ou après avoir ajouté des fichiers |
@@ -504,15 +506,22 @@ Toute fonctionnalité livrée doit être couverte par une vérification **conser
 dans le dépôt**, sous `tests/`, lancée par
 `godot --headless res://tests/…`.
 
-Le harnais existe : `make check-integrity`, décrit à la règle 13 et à la
-section « Vérifications ». Il ne porte pour l'instant **que des vérifications
-d'intégrité** — rien n'est cassé — et aucune vérification de comportement :
-c'est le filet du déménagement, pas une suite de tests.
+Deux harnais, deux questions distinctes :
 
-Les tests de règles s'y ajouteront quand `core/` existera : un fichier dans
-`tests/checks/`, une ligne dans `VERIFICATIONS`, et ils tournent avec le reste.
-D'ici là, les scènes de vérification écrites pour valider un comportement se
-**gardent** sous `tests/`, au lieu d'être jetées comme elles l'ont été jusqu'ici.
+- **`make check-integrity`** — le dépôt tient-il ? Références, satellites, scènes
+  chargeables (cf. règle 13). Ne dit rien de la justesse du code.
+- **`make test-unit`** — le code répond-il juste ? Les fichiers
+  `tests/unit/*_test.gd` héritent de `tests/lib/test_case.gd` et déclarent des
+  méthodes `test_*`, découvertes par réflexion : aucune liste à tenir, donc aucun
+  test qu'on oublie d'y inscrire.
+
+`make test` lance les deux.
+
+**Un test qu'on n'a pas vu échouer ne protège rien.** Tout test ajouté doit être
+mis à l'épreuve d'une mutation du code qu'il couvre : on casse volontairement le
+comportement, on vérifie que le test rougit, on rétablit. Les tests de `UnitGrid`
+l'ont été sur deux mutations — `place_unit` qui ne libère plus l'ancienne case,
+et `is_tile_blocked_for` qui oublie qu'une unité ne se bloque pas elle-même.
 
 Trois natures de vérification, et aucune ne se déduit des autres :
 

@@ -32,7 +32,7 @@ La logique n'est pas le risque. Le câblage l'est, et il échoue **en silence** 
 
 ## Plan
 
-**Étape 1 — poser `tests/unit/` et caractériser le comportement actuel.**
+**Étape 1 — poser `tests/unit/` et caractériser le comportement actuel. FAITE.**
 Les tests s'écrivent **avant** la conversion, sur le `UnitGrid` tel qu'il est.
 Écrits après, ils décriraient le nouveau comportement et ne prouveraient rien.
 
@@ -45,9 +45,15 @@ Invariants à figer — ceux qui cassent sans bruit :
 - `unit_grid_changed` part sur `place`, `remove` et `clear` ;
 - `remove_unit` d'une unité absente ne fait rien et n'émet pas.
 
-Ça demande une infrastructure que le harnais n'a pas : `tests/unit/`, un petit
-assembleur d'assertions, une cible `make test-unit`, et `make test` devenant
-« intégrité + unitaires ».
+L'infrastructure est en place : `tests/lib/test_case.gd`, `tests/run_unit.gd`,
+`tests/unit/unit_grid_test.gd`, et les cibles `make test-unit` / `make test`.
+Les six tests passent, et ont été éprouvés sur deux mutations volontaires du
+code — sans quoi ils ne prouveraient rien.
+
+Un comportement figé mérite d'être signalé parce qu'il surprend : **déplacer une
+unité émet `unit_grid_changed` deux fois** — `place_unit` appelle `remove_unit`,
+qui émet, puis émet à son tour. Constaté, pas approuvé : si la conversion le
+change, le test le dira, et il faudra décider si c'est un progrès.
 
 **Étape 2 — convertir et déplacer.** `extends RefCounted`, `size` et l'export
 recâblés en code, `git mv` vers `core/rules/`. `make check-arch` cesse alors de

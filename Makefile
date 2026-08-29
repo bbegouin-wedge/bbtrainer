@@ -16,7 +16,7 @@ JOURNAL := .tests.log
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=
 
-.PHONY: help run debug editeur check-integrity check-arch test verbeux godot import journal
+.PHONY: help run debug editeur check-integrity check-arch test-unit test verbeux godot import journal
 
 help:
 	@echo "Cibles :"
@@ -29,7 +29,8 @@ help:
 	@echo "                            references | data_assets | architecture"
 	@echo "  make verbeux              idem, sortie moteur brute et non filtrée"
 	@echo "  make check-arch           les seules règles d'architecture (core/)"
-	@echo "  make test                 alias de check-integrity"
+	@echo "  make test-unit            les tests unitaires de tests/unit/"
+	@echo "  make test                 intégrité + tests unitaires"
 	@echo "  make import               réimporte les assets (une fois après un clone)"
 	@echo "  make godot                affiche le moteur utilisé"
 	@echo "  make journal              réaffiche le rapport de la dernière exécution"
@@ -87,7 +88,21 @@ check-integrity: godot
 check-arch:
 	@$(MAKE) --no-print-directory check-integrity V=architecture
 
-test: check-integrity
+# Même filtrage que check-integrity, et pour la même raison : le code de sortie
+# vient de Godot, pas du grep.
+test-unit: godot
+	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_unit.gd \
+	  > "$(JOURNAL)" 2>&1; code=$$?; \
+	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
+	grep -E "SCRIPT ERROR" "$(JOURNAL)" || true; \
+	if [ $$code -ne 0 ]; then \
+	  echo "TESTS UNITAIRES : ÉCHEC — sortie complète dans $(JOURNAL)"; \
+	else \
+	  echo "TESTS UNITAIRES : OK"; \
+	fi; \
+	exit $$code
+
+test: check-integrity test-unit
 
 verbeux: godot
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- $(V)
