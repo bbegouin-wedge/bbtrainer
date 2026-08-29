@@ -186,6 +186,25 @@ Directives de travail pour Claude Code sur ce projet.
     l'être de même — **une vérification qu'on n'a pas vue échouer ne protège
     rien**.
 
+14. **Trois vérifications avant de commiter une carte, dans cet ordre** :
+
+    ```bash
+    make test-behaviour   # le code répond-il juste ?
+    make check-arch       # les frontières de core/ tiennent-elles ?
+    make check-integrity  # le dépôt tient-il ?
+    ```
+
+    **`test-behaviour` d'abord**, parce qu'il est le seul à parler du
+    comportement : un dépôt qui tient et dont les frontières sont propres peut
+    parfaitement avoir cessé de fonctionner. Les deux autres ne le verraient
+    pas.
+
+    **Vert veut dire vert, pas « pas d'échec ».** Un lanceur qui ne trouve aucun
+    test annonçait « OK » — 0 vérification, 0 échec. Il échoue désormais. Lire
+    le compte, pas seulement la dernière ligne.
+
+    Aucune carte ne part en `done/` sans ces trois-là.
+
 ---
 
 ## Vérifications à l'installation — une fois par clone
@@ -226,8 +245,8 @@ Contournement délibéré : `git commit --no-verify`.
 | `make editeur` | ouvre l'éditeur — seul endroit où les points d'arrêt existent |
 | `make check-integrity` | les 10 vérifications sur tout le dépôt (cf. règle 13) |
 | `make check-arch` | les seules règles d'architecture de `core/` (cf. règle 8) |
-| `make test-unit` | les tests unitaires de `tests/unit/` |
-| `make test` | intégrité + tests unitaires |
+| `make test-behaviour` | tests de comportement : `tests/unit/` et `tests/integration/` |
+| `make test` | intégrité + tests de comportement |
 | `make check-integrity V=scenes` | une seule vérification, par son nom |
 | `make verbeux` | idem, sortie moteur brute et non filtrée |
 | `make import` | réimporte les assets — une fois après un clone, ou après avoir ajouté des fichiers |
@@ -510,10 +529,15 @@ Deux harnais, deux questions distinctes :
 
 - **`make check-integrity`** — le dépôt tient-il ? Références, satellites, scènes
   chargeables (cf. règle 13). Ne dit rien de la justesse du code.
-- **`make test-unit`** — le code répond-il juste ? Les fichiers
-  `tests/unit/*_test.gd` héritent de `tests/lib/test_case.gd` et déclarent des
-  méthodes `test_*`, découvertes par réflexion : aucune liste à tenir, donc aucun
-  test qu'on oublie d'y inscrire.
+- **`make test-behaviour`** — le code répond-il juste ? Les fichiers
+  `*_test.gd` héritent de `tests/lib/test_case.gd` et déclarent des méthodes
+  `test_*`, découvertes par réflexion : aucune liste à tenir, donc aucun test
+  qu'on oublie d'y inscrire. Deux dossiers, deux portées :
+  - `tests/unit/` — la logique seule, sans arbre de scènes ;
+  - `tests/integration/` — le **câblage**, qui exige de monter une scène. Aucun
+    test unitaire ne le voit : quand l'injection de la grille a été retirée pour
+    l'éprouver, les neuf tests unitaires sont restés verts et seuls les deux
+    tests d'intégration ont rougi.
 
 `make test` lance les deux.
 
