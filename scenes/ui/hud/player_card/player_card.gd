@@ -8,9 +8,7 @@ extends CanvasLayer
 
 const SKILL_BADGE_RADIUS := 14.0
 const SKILL_ENTRY_SEPARATION := 6
-## Écart au jeton, et marge minimale aux bords de l'écran.
-const GAP := 18.0
-const SCREEN_MARGIN := 12.0
+
 
 @export var arena_phase: ArenaPhase
 
@@ -25,10 +23,12 @@ const SCREEN_MARGIN := 12.0
 @onready var _av: StatCartridge = $ColorRect/VBoxContainer/MarginContainer/VBoxContainer/GridContainer/Av
 
 var _unit: Node = null
+var _contextual: ContextualPanel
 
 
 func _ready() -> void:
 	visible = false
+	_contextual = ContextualPanel.attach(self, _root, arena_phase)
 	EventBus.unit_right_clicked.connect(_on_unit_right_clicked)
 	# Sélectionner ou désélectionner referme la fiche : elle appartient au geste
 	# de consultation, pas à celui de commande.
@@ -50,35 +50,14 @@ func _on_unit_right_clicked(unit: Node) -> void:
 	_av.set_value(str(player.AV) + "+")
 	_populate_skills(player)
 	visible = true
-	_place_near_unit()
+	_contextual.show_near(unit)
 
 
 func _close() -> void:
 	_unit = null
 	visible = false
-
-
-func _process(_delta: float) -> void:
-	if visible and _unit:
-		_place_near_unit()
-
-
-## Elle sort du côté opposé au bord le plus proche, pour ne jamais déborder.
-func _place_near_unit() -> void:
-	if arena_phase == null or _unit == null or not is_instance_valid(_unit):
-		return
-	var anchor := arena_phase.world_to_screen(
-		_unit.global_position + Vector2(Unit.TILE_SIZE, Unit.TILE_SIZE) * 0.5)
-	var viewport := _root.get_viewport_rect().size
-	var card_size := _root.size
-
-	var x := anchor.x + GAP
-	if x + card_size.x > viewport.x - SCREEN_MARGIN:
-		x = anchor.x - GAP - card_size.x
-	var y := anchor.y - card_size.y * 0.5
-	_root.position = Vector2(
-		clampf(x, SCREEN_MARGIN, viewport.x - card_size.x - SCREEN_MARGIN),
-		clampf(y, SCREEN_MARGIN, viewport.y - card_size.y - SCREEN_MARGIN))
+	if _contextual:
+		_contextual.dismiss()
 
 
 func _populate_skills(player: BloodBowlData.Player) -> void:

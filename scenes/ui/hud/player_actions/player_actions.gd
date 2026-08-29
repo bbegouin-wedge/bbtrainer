@@ -23,15 +23,15 @@ const ACTIONS := [
 		"blocked_by": "aucune balle sur le terrain" },
 ]
 
-## Écart entre le jeton et le panneau, et marge minimale aux bords de l'écran.
-const GAP := 18.0
-const SCREEN_MARGIN := 12.0
 const GLYPH_SIZE := 10.0
 
 @export var arena_phase: ArenaPhase
 
 var _unit: Node = null
 var _rows: VBoxContainer
+## Placement et apparition sont délégués : la fiche de joueur fait exactement
+## la même chose.
+var _contextual: ContextualPanel
 
 
 func _ready() -> void:
@@ -41,6 +41,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	size = _rows.get_combined_minimum_size() + Vector2(8, 8)
 	custom_minimum_size = size
+	_contextual = ContextualPanel.attach(self, self, arena_phase)
 	EventBus.unit_selected.connect(_on_unit_selected)
 	EventBus.unit_deselected.connect(_on_unit_deselected)
 	# Consulter la fiche referme les actions : les deux panneaux se disputeraient
@@ -76,6 +77,9 @@ func _build_row(action: Dictionary) -> Button:
 	button.focus_mode = Control.FOCUS_NONE
 	var blocked := str(action["blocked_by"]) != ""
 	button.disabled = blocked
+	if not blocked:
+		button.add_theme_stylebox_override("hover", _hover_style())
+		button.add_theme_stylebox_override("pressed", _hover_style())
 	button.tooltip_text = "Indisponible : " + str(action["blocked_by"]) if blocked else ""
 	button.add_theme_color_override("font_color", Color(0.91, 0.89, 0.85, 0.78))
 	button.add_theme_color_override("font_hover_color", Color("e8e4d8"))
@@ -97,43 +101,24 @@ func _build_row(action: Dictionary) -> Button:
 	return button
 
 
+## Survol d'une ligne : le rollover doit être franc, le panneau est petit.
+func _hover_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(1, 1, 1, 0.11)
+	style.set_corner_radius_all(2)
+	return style
+
+
 func _on_unit_selected(unit: Node) -> void:
 	_unit = unit
 	visible = true
-	_place_near_unit()
+	_contextual.show_near(unit)
 
 
 func _on_unit_deselected() -> void:
 	_unit = null
 	visible = false
-
-
-func _process(_delta: float) -> void:
-	# La caméra peut bouger sous le panneau (panoramique, recentrage) : il doit
-	# rester collé à son joueur.
-	if visible and _unit:
-		_place_near_unit()
-
-
-func _place_near_unit() -> void:
-	if arena_phase == null or _unit == null or not is_instance_valid(_unit):
-		return
-	var anchor := arena_phase.world_to_screen(_unit.global_position + _unit_center_offset())
-	var viewport := get_viewport_rect().size
-	var panel_size := size
-
-	# On sort du côté opposé au bord le plus proche.
-	var x := anchor.x + GAP
-	if x + panel_size.x > viewport.x - SCREEN_MARGIN:
-		x = anchor.x - GAP - panel_size.x
-	var y := anchor.y - panel_size.y * 0.5
-	position = Vector2(
-		clampf(x, SCREEN_MARGIN, viewport.x - panel_size.x - SCREEN_MARGIN),
-		clampf(y, SCREEN_MARGIN, viewport.y - panel_size.y - SCREEN_MARGIN))
-
-
-func _unit_center_offset() -> Vector2:
-	return Vector2(Unit.TILE_SIZE, Unit.TILE_SIZE) * 0.5
+	_contextual.dismiss()
 
 
 func _on_action_pressed(action: Action) -> void:

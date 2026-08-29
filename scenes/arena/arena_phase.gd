@@ -137,6 +137,13 @@ func world_to_screen(world: Vector2) -> Vector2:
 	return (world - camera.get_screen_center_position()) * camera.zoom.x + viewport_center
 
 
+## Longueur monde convertie en pixels écran. Les panneaux contextuels s'en
+## servent pour s'écarter du bord du jeton et non de son centre — un jeton fait
+## une tuile entière, soit une centaine de pixels au zoom courant.
+func world_length_to_screen(length: float) -> float:
+	return length * camera.zoom.x
+
+
 ## Amène ce point du monde au centre de la bande visible — pas au centre de
 ## l'écran, qui est masqué par les colonnes quand elles sont déployées.
 func center_camera_on(world: Vector2) -> void:
