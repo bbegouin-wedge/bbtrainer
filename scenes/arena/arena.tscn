@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cye7ydmvgd7oo"]
+[gd_scene load_steps=16 format=4 uid="uid://cye7ydmvgd7oo"]
 
 [ext_resource type="Script" uid="uid://djkdmjqcb02rw" path="res://scenes/arena/arena.gd" id="1_xdvfk"]
 [ext_resource type="Script" uid="uid://b4wvny1d7jtdr" path="res://debug/debug_label.gd" id="2_2ml6w"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://d1svoosrq0oop" path="res://scenes/arena/rect_highlighter.gd" id="5_6w4xk"]
 [ext_resource type="Script" uid="uid://c0ogmm76a1w8r" path="res://scenes/arena/unit_zone.gd" id="5_ii07k"]
 [ext_resource type="Script" uid="uid://7e6qbkjsk4e" path="res://scenes/arena/unit_grid.gd" id="5_u52cf"]
+[ext_resource type="Script" path="res://scenes/arena/movement_range.gd" id="6_movrg"]
 
 [sub_resource type="GDScript" id="GDScript_asdgj"]
 script/source = "extends TileMapLayer
@@ -271,6 +272,11 @@ enabled = true
 border_width = 8.0
 background_color = Color(0.73333335, 0.7058824, 0.1254902, 0.53333336)
 animation_speed = 50.0
+
+[node name="MovementRange" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("pitch", "arena")]
+script = ExtResource("6_movrg")
+pitch = NodePath("..")
+arena = NodePath("../..")
 
 [node name="ArenaUnitGrid" type="Node2D" parent="PlayArea"]
 script = ExtResource("5_u52cf")

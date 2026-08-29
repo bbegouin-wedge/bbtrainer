@@ -9,12 +9,18 @@ extends Control
 
 enum Action { MOVE, PASS, FOUL, SECURE_BALL, HAND_OFF }
 
+## `blocked_by` nomme le prérequis manquant. Une action grisée qui dit pourquoi
+## vaut mieux qu'un bouton qui ne fait rien sans l'avouer.
 const ACTIONS := [
-	{ "id": Action.MOVE,        "label": "Mouvement",          "color": Color("4fa96b") },
-	{ "id": Action.PASS,        "label": "Passe",              "color": Color("1d4e89") },
-	{ "id": Action.FOUL,        "label": "Faute",              "color": Color("9b2226") },
-	{ "id": Action.SECURE_BALL, "label": "Sécuriser la balle", "color": Color("8a5a00") },
-	{ "id": Action.HAND_OFF,    "label": "Transmission",       "color": Color("5b21b6") },
+	{ "id": Action.MOVE, "label": "Mouvement", "color": Color("4fa96b"), "blocked_by": "" },
+	{ "id": Action.PASS, "label": "Passe", "color": Color("1d4e89"),
+		"blocked_by": "aucune balle sur le terrain" },
+	{ "id": Action.FOUL, "label": "Faute", "color": Color("9b2226"),
+		"blocked_by": "aucune équipe adverse" },
+	{ "id": Action.SECURE_BALL, "label": "Sécuriser la balle", "color": Color("8a5a00"),
+		"blocked_by": "aucune balle sur le terrain" },
+	{ "id": Action.HAND_OFF, "label": "Transmission", "color": Color("5b21b6"),
+		"blocked_by": "aucune balle sur le terrain" },
 ]
 
 ## Écart entre le jeton et le panneau, et marge minimale aux bords de l'écran.
@@ -68,14 +74,18 @@ func _build_row(action: Dictionary) -> Button:
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	button.flat = true
 	button.focus_mode = Control.FOCUS_NONE
+	var blocked := str(action["blocked_by"]) != ""
+	button.disabled = blocked
+	button.tooltip_text = "Indisponible : " + str(action["blocked_by"]) if blocked else ""
 	button.add_theme_color_override("font_color", Color(0.91, 0.89, 0.85, 0.78))
 	button.add_theme_color_override("font_hover_color", Color("e8e4d8"))
+	button.add_theme_color_override("font_disabled_color", Color(0.91, 0.89, 0.85, 0.28))
 	button.pressed.connect(_on_action_pressed.bind(action["id"]))
 
 	# Pastille de couleur, dessinée plutôt que texturée — même parti que les
 	# pastilles de compétences.
 	var glyph := ColorRect.new()
-	glyph.color = action["color"]
+	glyph.color = action["color"] if not blocked else Color(action["color"], 0.3)
 	glyph.custom_minimum_size = Vector2(GLYPH_SIZE, GLYPH_SIZE)
 	glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	glyph.set_anchors_preset(Control.PRESET_CENTER_LEFT)
