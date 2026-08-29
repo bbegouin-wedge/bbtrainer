@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<title>Ossature de bbtrainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=JetBrains+Mono:wght@400;600&family=Public+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  --paper: #f3f5f2;
+  --card: #ffffff;
+  --rule: #dde2dc;
+  --ink: #141c17;
+  --ink-soft: #55605a;
+  --ink-faint: #8b948e;
+  --accent: #2f6b3f;
+  --accent-wash: #e6eee7;
+
+  /* Palette reprise du code analysé : les couleurs de catégories de compétences */
+  --grave: #9b2226;
+  --warn: #8a5a00;
+  --calm: #4a5568;
+  --grave-wash: #f7e7e7;
+  --warn-wash: #f7efdf;
+  --calm-wash: #eaecef;
+
+  --shadow: 0 1px 2px rgba(20,32,23,.05), 0 8px 24px -18px rgba(20,32,23,.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121613;
+    --card: #191f1b;
+    --rule: #2b332d;
+    --ink: #e7ebe7;
+    --ink-soft: #a3aca6;
+    --ink-faint: #737d77;
+    --accent: #7fc08e;
+    --accent-wash: #1b2a1f;
+    --grave: #e07a7a;
+    --warn: #d8a54a;
+    --calm: #9aa6b4;
+    --grave-wash: #2a1a1a;
+    --warn-wash: #2a2113;
+    --calm-wash: #1d2228;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121613; --card: #191f1b; --rule: #2b332d;
+  --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+  --accent: #7fc08e; --accent-wash: #1b2a1f;
+  --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+  --grave-wash: #2a1a1a; --warn-wash: #2a2113; --calm-wash: #1d2228;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+.wrap {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 56px 24px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+}
+
+h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; margin: 0; }
+h1 {
+  font-size: clamp(2.1rem, 5vw, 3.1rem);
+  letter-spacing: -.02em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+h2 {
+  font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+  letter-spacing: -.01em;
+  margin-bottom: 4px;
+}
+h3 { font-size: 1.06rem; letter-spacing: -.005em; }
+
+p { margin: 0 0 1em; max-width: 68ch; }
+p:last-child { margin-bottom: 0; }
+
+.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 62ch; }
+
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 14px;
+}
+
+code, .mono { font-family: "JetBrains Mono", monospace; font-size: .88em; }
+code {
+  background: var(--accent-wash);
+  padding: .1em .34em;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+/* ---------- Bandeau de mesures ---------- */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.fact { background: var(--card); padding: 14px 16px; }
+.fact dt {
+  font-family: "JetBrains Mono", monospace;
+  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 5px;
+}
+.fact dd {
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.25rem; font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.fact dd small { font-weight: 400; font-size: .68rem; color: var(--ink-soft); display: block; }
+
+/* ---------- Diagramme ---------- */
+
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  padding: 26px 22px 20px;
+  box-shadow: var(--shadow);
+}
+.diagram svg { width: 100%; height: auto; display: block; }
+
+.layer-box { fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.2; }
+.layer-name { fill: var(--ink); font-family: "Public Sans", sans-serif; font-size: 14px; font-weight: 600; }
+.layer-path { fill: var(--ink-faint); font-family: "JetBrains Mono", monospace; font-size: 10.5px; }
+.layer-size { fill: var(--ink-soft); font-family: "JetBrains Mono", monospace; font-size: 11px; text-anchor: end; }
+.flow { stroke: var(--accent); stroke-width: 1.6; fill: none; }
+.flow-bad { stroke: var(--grave); stroke-width: 2; fill: none; stroke-dasharray: 5 3; }
+.flow-label { fill: var(--grave); font-family: "JetBrains Mono", monospace; font-size: 10.5px; font-weight: 600; }
+.arrow-head { fill: var(--accent); }
+.arrow-head-bad { fill: var(--grave); }
+
+.caption {
+  margin-top: 14px;
+  font-size: .88rem;
+  color: var(--ink-soft);
+  max-width: none;
+}
+
+/* ---------- Constats ---------- */
+
+.findings { display: flex; flex-direction: column; gap: 14px; }
+
+.finding {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--tone);
+  border-radius: 5px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.finding.grave { --tone: var(--grave); --tone-wash: var(--grave-wash); }
+.finding.warn  { --tone: var(--warn);  --tone-wash: var(--warn-wash); }
+.finding.calm  { --tone: var(--calm);  --tone-wash: var(--calm-wash); }
+
+.finding header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.finding h3 { flex: 1 1 auto; }
+.tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--tone); background: var(--tone-wash);
+  padding: .25em .6em; border-radius: 3px; white-space: nowrap;
+}
+.finding p { font-size: .96rem; }
+.evidence {
+  font-family: "JetBrains Mono", monospace;
+  font-size: .8rem;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 8px 11px;
+  margin: 10px 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+.fix {
+  font-size: .93rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
+  margin-top: 12px;
+  color: var(--ink-soft);
+}
+.fix b { color: var(--ink); font-weight: 600; }
+
+/* ---------- Points solides ---------- */
+
+.solid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 14px; }
+.solid > div {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  padding: 16px 18px;
+}
+.solid h3 { font-size: .98rem; margin-bottom: 6px; }
+.solid p { font-size: .9rem; color: var(--ink-soft); }
+
+/* ---------- Plan ---------- */
+
+.plan { counter-reset: step; display: flex; flex-direction: column; gap: 2px; }
+.step {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  padding: 16px 18px;
+  align-items: start;
+}
+.step:first-child { border-radius: 5px 5px 0 0; }
+.step:last-child { border-radius: 0 0 5px 5px; }
+.step::before {
+  content: counter(step);
+  font-family: "Fraunces", serif;
+  font-size: 1.5rem;
+  color: var(--accent);
+  line-height: 1.1;
+}
+.step h3 { font-size: 1rem; margin-bottom: 4px; }
+.step p { font-size: .92rem; color: var(--ink-soft); margin: 0; }
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  font-size: .85rem;
+  color: var(--ink-faint);
+}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Audit d'architecture · Godot 4.7 · GDScript</p>
+    <h1>Ossature de bbtrainer</h1>
+    <p class="lede">Un assistant tactique Blood Bowl : 26 × 15 cases, deux dugouts,
+      un modèle de plateau et une première action jouable. Ce que la structure porte
+      aujourd'hui, et ce qui cédera quand les règles arriveront.</p>
+  </header>
+
+  <section>
+    <p class="eyebrow">Ce que pèse le projet</p>
+    <dl class="facts">
+      <div class="fact"><dt>GDScript</dt><dd>4 868<small>lignes</small></dd></div>
+      <div class="fact"><dt>Classes</dt><dd>31<small>nommées</small></dd></div>
+      <div class="fact"><dt>Autoloads</dt><dd>7<small>états globaux</small></dd></div>
+      <div class="fact"><dt>Signaux morts</dt><dd>6<small>sur 15</small></dd></div>
+      <div class="fact"><dt>Tests</dt><dd>0<small>aucun harnais</small></dd></div>
+      <div class="fact"><dt>Dépôt</dt><dd>81<small>Mio empaquetés</small></dd></div>
+    </dl>
+  </section>
+
+  <section class="diagram">
+    <p class="eyebrow">Les cinq couches, et le sens des dépendances</p>
+    <svg viewBox="0 0 760 430" role="img"
+         aria-label="Diagramme des cinq couches du projet. Les dépendances descendent normalement de l'interface vers les données ; une dépendance remonte du monde vers l'interface.">
+      <!-- Interface -->
+      <rect class="layer-box" x="130" y="10" width="470" height="58" rx="4"/>
+      <text class="layer-name" x="148" y="34">Interface</text>
+      <text class="layer-path" x="148" y="52">scenes/ui/ — flux d'avant-match + HUD de match</text>
+      <text class="layer-size" x="582" y="42">1 861 l.</text>
+
+      <!-- Monde -->
+      <rect class="layer-box" x="130" y="98" width="470" height="58" rx="4"/>
+      <text class="layer-name" x="148" y="122">Monde</text>
+      <text class="layer-path" x="148" y="140">scenes/arena/ + scenes/unit/ — terrain, grille, jetons</text>
+      <text class="layer-size" x="582" y="130">938 l.</text>
+
+      <!-- Composants -->
+      <rect class="layer-box" x="130" y="186" width="470" height="58" rx="4"/>
+      <text class="layer-name" x="148" y="210">Composants</text>
+      <text class="layer-path" x="148" y="228">components/ — glisser, contour, panneau contextuel</text>
+      <text class="layer-size" x="582" y="218">1 082 l.</text>
+
+      <!-- État -->
+      <rect class="layer-box" x="130" y="274" width="470" height="58" rx="4"/>
+      <text class="layer-name" x="148" y="298">État</text>
+      <text class="layer-path" x="148" y="316">autoload/ — TeamState, MatchState, GuiState, EventBus…</text>
+      <text class="layer-size" x="582" y="306">553 l.</text>
+
+      <!-- Données -->
+      <rect class="layer-box" x="130" y="362" width="470" height="58" rx="4"/>
+      <text class="layer-name" x="148" y="386">Données</text>
+      <text class="layer-path" x="148" y="404">data/ — 30 équipes, 111 compétences, 63 stars (JSON)</text>
+      <text class="layer-size" x="582" y="394">395 l.</text>
+
+      <!-- Flèches descendantes (sens normal), à gauche -->
+      <path class="flow" d="M118 39 L100 39 L100 127 L118 127"/>
+      <polygon class="arrow-head" points="118,127 110,123 110,131"/>
+      <path class="flow" d="M118 127 L100 127 L100 215 L118 215"/>
+      <polygon class="arrow-head" points="118,215 110,211 110,219"/>
+      <path class="flow" d="M118 215 L100 215 L100 303 L118 303"/>
+      <polygon class="arrow-head" points="118,303 110,299 110,307"/>
+      <path class="flow" d="M118 303 L100 303 L100 391 L118 391"/>
+      <polygon class="arrow-head" points="118,391 110,387 110,395"/>
+
+      <!-- Dépendance inversée, à droite -->
+      <path class="flow-bad" d="M612 127 L680 127 L680 39 L612 39"/>
+      <polygon class="arrow-head-bad" points="612,39 621,34 621,44"/>
+      <text class="flow-label" x="694" y="76">Arena</text>
+      <text class="flow-label" x="694" y="90">connaît</text>
+      <text class="flow-label" x="694" y="104">le HUD</text>
+    </svg>
+    <p class="caption">Les quatre flèches de gauche sont le sens sain : chaque couche
+      ne connaît que celles du dessous. Celle de droite remonte —
+      <code>Arena.dugouts: Array[DugoutPanel]</code>. Le terrain sait à quoi ressemble
+      son interface.</p>
+  </section>
+
+  <section>
+    <h2>Ce qui tient</h2>
+    <p class="lede" style="margin-bottom:22px">Quatre choix structurants sont justes et
+      méritent d'être préservés dans tout remaniement.</p>
+    <div class="solid">
+      <div>
+        <h3>La couche de données est pure</h3>
+        <p><code>BloodBowlData</code> ne dépend de rien au-dessus d'elle. Les 30 équipes,
+          111 compétences et 63 stars sont chargées une fois, indexées, et jamais mutées
+          par le jeu.</p>
+      </div>
+      <div>
+        <h3>Modèle et géométrie séparés</h3>
+        <p><code>UnitGrid</code> répond « qui occupe cette case » sans connaître un seul
+          pixel ; <code>UnitZone</code> fait la conversion case ↔ monde. C'est cette
+          séparation qui rend calculables portées et adjacences.</p>
+      </div>
+      <div>
+        <h3>Le rendu est procédural</h3>
+        <p>Pastilles, minimap, portée de mouvement, contours : tout est tracé, rien n'est
+          texturé. Net à tout zoom, aucun asset à maintenir, et une échappatoire aux
+          images extraites du jeu officiel.</p>
+      </div>
+      <div>
+        <h3>Le dugout est un état, pas un lieu</h3>
+        <p>Réserves, K.O. et blessés sont des localisations dans <code>MatchState</code>,
+          affichées par une interface ancrée au viewport. Seul le terrain vit dans le
+          monde mobile.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lignes de faille</h2>
+    <p class="lede" style="margin-bottom:22px">Classées par ce qu'elles coûteront quand la
+      balle, l'équipe adverse et les règles arriveront — pas par gravité abstraite.</p>
+
+    <div class="findings">
+
+      <article class="finding grave">
+        <header>
+          <h3>Le monde dépend de l'interface</h3>
+          <span class="tag">Structurel</span>
+        </header>
+        <p>La dépendance pointe à l'envers : le terrain sait ce qu'est un panneau de dugout.
+          Un composant censé être générique connaît lui aussi le HUD.</p>
+        <div class="evidence">scenes/arena/arena.gd:13   var dugouts: Array[DugoutPanel]
+scenes/arena/arena.gd:86   _on_unit_dropped_in_dugout(box: DugoutBox, …)
+components/drag_and_drop.gd:18   @export var dugouts: Array[DugoutPanel]
+scenes/arena/movement_range.gd:56   if action != PlayerActions.Action.MOVE</div>
+        <p>Conséquence immédiate : l'arène ne peut pas tourner sans son HUD, et toute
+          refonte d'interface se propage dans la logique de jeu. Conséquence à venir :
+          chaque nouvelle action devra traverser cette frontière.</p>
+        <p class="fix"><b>Corriger en</b> renversant le flux — le terrain émet une intention
+          (« cette unité a été lâchée en tel point de l'écran ») et un coordinateur décide.
+          <code>ArenaPhase</code> tient déjà ce rôle et connaît légitimement les deux côtés.</p>
+      </article>
+
+      <article class="finding grave">
+        <header>
+          <h3>Aucun harnais de test</h3>
+          <span class="tag">Outillage</span>
+        </header>
+        <p>Toutes les vérifications de cette session — portée de mouvement, états du pointeur,
+          cadrage caméra, contours sous rotation — ont été écrites puis jetées. Rien n'en
+          reste dans le dépôt.</p>
+        <div class="evidence">find . -iname "*test*"  →  Specs.txt seulement</div>
+        <p>Le projet aborde sa phase la plus testable : des règles déterministes sur une
+          grille finie. C'est exactement ce qui se vérifie bien, et exactement ce qui casse
+          en silence.</p>
+        <p class="fix"><b>Corriger en</b> conservant les scènes de vérification dans
+          <code>tests/</code>, lancées par <code>godot --headless res://tests/…</code>.
+          Attention : le mode headless ne fait pas de détection de zone GUI — tout ce qui
+          touche au clic exige une vraie fenêtre.</p>
+      </article>
+
+      <article class="finding warn">
+        <header>
+          <h3><code>ArenaPhase</code> concentre trop de rôles</h3>
+          <span class="tag">Cohésion</span>
+        </header>
+        <p>220 lignes, 17 méthodes : cadrage caméra, escamotage des panneaux, conversions
+          monde ↔ écran, entrées clavier, utilitaire de fenêtre. C'est le point qui grossira
+          à chaque ajout.</p>
+        <div class="evidence">get_visible_band · get_pitch_world_rect · world_to_screen
+world_length_to_screen · center_camera_on · toggle_panel
+is_panel_shown · refresh_camera_framing · _swap_window_orientation …</div>
+        <p class="fix"><b>Corriger en</b> extrayant deux objets : un cadreur de caméra
+          (limites, zoom, conversions) et un gestionnaire de panneaux. Le rôle de
+          coordinateur, lui, est légitime — c'est le seul endroit qui a le droit de
+          connaître le monde et l'interface.</p>
+      </article>
+
+      <article class="finding warn">
+        <header>
+          <h3>Le tableau de roster existe en quatre exemplaires</h3>
+          <span class="tag">Duplication</span>
+        </header>
+        <p>La même construction d'arbre — colonnes, alignements, formatage des compétences
+          et des coûts — est recopiée dans quatre écrans.</p>
+        <div class="evidence">_format_skills présent dans 4 fichiers :
+  team_chooser/team_infos.gd     team_chooser/team_detail.gd
+  team_compositor/roster_tree.gd skill_chooser/team_players.gd</div>
+        <p>Une correction doit être faite quatre fois. Le formatage des coûts y porte déjà
+          la même erreur de division entière dans chaque copie.</p>
+        <p class="fix"><b>Corriger en</b> extrayant une vue de roster partagée, paramétrée
+          par ses colonnes. C'est le remaniement le plus rentable du projet : quatre écrans
+          pour un seul objet.</p>
+      </article>
+
+      <article class="finding warn">
+        <header>
+          <h3><code>components/</code> ne tient pas sa promesse</h3>
+          <span class="tag">Couplage</span>
+        </header>
+        <p>Cinq des treize composants appellent directement des autoloads de jeu. Le
+          répertoire annonce une réutilisabilité qu'il n'a pas.</p>
+        <div class="evidence">drag_and_drop.gd    → GuiState
+roster_drag.gd      → GuiState, MatchState
+select.gd           → GuiState
+skill_badge.gd      → BloodBowlManager
+skill_badge_view.gd → BloodBowlManager</div>
+        <p class="fix"><b>Corriger en</b> assumant la distinction : garder dans
+          <code>components/</code> ce qui est vraiment générique (<code>Collapsible</code>,
+          <code>ColorDot</code>, <code>ContextualPanel</code>) et déplacer le reste près de
+          son domaine. Un nom honnête vaut mieux qu'une abstraction fictive.</p>
+      </article>
+
+      <article class="finding calm">
+        <header>
+          <h3>Deux sources de vérité pour la phase de jeu</h3>
+          <span class="tag">Redondance</span>
+        </header>
+        <p><code>GameStatusManager</code> ne fait que refléter passivement
+          <code>SceneOrchestrator</code>. Ses méthodes d'écriture ne sont jamais appelées,
+          son signal n'a aucun abonné : seule son énumération sert encore.</p>
+        <div class="evidence">_changeStatus()   0 appel
+onStateChanged    0 abonné
+GameStatusManager référencé depuis 2 fichiers (l'enum seul)</div>
+        <p class="fix"><b>Corriger en</b> déplaçant l'énumération dans
+          <code>SceneOrchestrator</code>, qui décide déjà des transitions, et en supprimant
+          l'autoload.</p>
+      </article>
+
+      <article class="finding calm">
+        <header>
+          <h3>Six signaux morts et deux conventions de nommage</h3>
+          <span class="tag">Entretien</span>
+        </header>
+        <p>Six des quinze signaux de l'<code>EventBus</code> n'ont ni émetteur ni abonné.
+          Ils décrivent une intention passée, pas le système actuel — et se lisent comme
+          une API disponible.</p>
+        <div class="evidence">grid_visibility_toggled  pitch_orientation_toggled  unit_moved
+game_started  turn_changed  scene_change_requested
+
+TeamState : selectTeam, getSelectedTeam, expandTeamComposition…
+            (camelCase, quand tout le reste est en snake_case)</div>
+        <p class="fix"><b>Corriger en</b> supprimant ce qui n'est pas branché — un signal
+          se rajoute en une ligne le jour où il sert — et en alignant <code>TeamState</code>
+          sur la convention du reste.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Ordre d'attaque</h2>
+    <p class="lede" style="margin-bottom:22px">Chaque étape prépare la suivante, et les deux
+      premières conditionnent tout ce qui vient après.</p>
+    <div class="plan">
+      <div class="step">
+        <div>
+          <h3>Poser un harnais de test</h3>
+          <p>Avant d'écrire des règles, se donner de quoi les vérifier. Les scènes de
+            vérification existent déjà — il s'agit de les garder plutôt que de les jeter.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Renverser la dépendance monde → interface</h3>
+          <p>Le terrain émet, le coordinateur décide. Sans ça, chaque action de jeu ajoutée
+            traversera la frontière et l'épaissira.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Introduire la balle</h3>
+          <p>Un nœud, une case, un porteur éventuel. C'est le verrou unique de trois actions
+            sur cinq : Passe, Sécuriser et Transmission. <code>UnitGrid</code> sait déjà
+            répondre « qui est ici ».</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Extraire la vue de roster</h3>
+          <p>Quatre copies pour un seul objet. À faire avant que l'équipe adverse n'en
+            réclame une cinquième.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Ouvrir la seconde équipe</h3>
+          <p>Elle conditionne la Faute, les tours, les blocages, et transforme la colonne
+            droite du HUD en autre chose qu'un décor. C'est le plus gros chantier restant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Relevé effectué sur la branche <code>main</code>, commit <code>24edb6c</code>.
+      Chiffres mesurés sur le code, non estimés : volumes par répertoire, usages de signaux
+      et d'autoloads, duplications comptées fichier par fichier.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

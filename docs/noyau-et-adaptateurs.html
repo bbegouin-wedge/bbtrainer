@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<title>Noyau et adaptateurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=JetBrains+Mono:wght@400;600&family=Public+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  --paper: #f3f5f2; --card: #ffffff; --rule: #dde2dc;
+  --ink: #141c17; --ink-soft: #55605a; --ink-faint: #8b948e;
+  --accent: #2f6b3f; --accent-wash: #e6eee7;
+  --core: #1d4e89; --core-wash: #e4ecf6;
+  --grave: #9b2226; --warn: #8a5a00; --calm: #4a5568;
+  --grave-wash: #f7e7e7; --warn-wash: #f7efdf;
+  --shadow: 0 1px 2px rgba(20,32,23,.05), 0 8px 24px -18px rgba(20,32,23,.4);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121613; --card: #191f1b; --rule: #2b332d;
+    --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+    --accent: #7fc08e; --accent-wash: #1b2a1f;
+    --core: #7fa8dd; --core-wash: #17222f;
+    --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+    --grave-wash: #2a1a1a; --warn-wash: #2a2113;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121613; --card: #191f1b; --rule: #2b332d;
+  --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+  --accent: #7fc08e; --accent-wash: #1b2a1f;
+  --core: #7fa8dd; --core-wash: #17222f;
+  --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+  --grave-wash: #2a1a1a; --warn-wash: #2a2113;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: "Public Sans", system-ui, sans-serif; line-height: 1.65; font-size: 16px;
+}
+.wrap { max-width: 940px; margin: 0 auto; padding: 56px 24px 96px;
+        display: flex; flex-direction: column; gap: 52px; }
+
+h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); letter-spacing: -.02em; line-height: 1.08; text-wrap: balance; }
+h2 { font-size: clamp(1.35rem, 2.6vw, 1.7rem); letter-spacing: -.01em; margin-bottom: 4px; }
+h3 { font-size: 1.05rem; letter-spacing: -.005em; }
+p { margin: 0 0 1em; max-width: 68ch; }
+p:last-child { margin-bottom: 0; }
+.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 62ch; }
+.eyebrow { font-family: "JetBrains Mono", monospace; font-size: .68rem; letter-spacing: .14em;
+           text-transform: uppercase; color: var(--ink-faint); margin: 0 0 14px; }
+code { font-family: "JetBrains Mono", monospace; font-size: .88em;
+       background: var(--accent-wash); padding: .1em .34em; border-radius: 3px; color: var(--ink); }
+
+.panel { background: var(--card); border: 1px solid var(--rule); border-radius: 5px;
+         padding: 24px 22px; box-shadow: var(--shadow); }
+.panel svg { width: 100%; height: auto; display: block; }
+.caption { margin-top: 16px; font-size: .88rem; color: var(--ink-soft); max-width: none; }
+
+.core-box { fill: var(--core-wash); stroke: var(--core); stroke-width: 1.6; }
+.adapter-box { fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.2; }
+.log-box { fill: var(--warn-wash); stroke: var(--warn); stroke-width: 1.2; }
+.t-title { font-family: "Public Sans", sans-serif; font-size: 13px; font-weight: 600; fill: var(--ink); }
+.t-sub { font-family: "JetBrains Mono", monospace; font-size: 9.5px; fill: var(--ink-faint); }
+.t-core { font-family: "Fraunces", serif; font-size: 17px; font-weight: 600; fill: var(--core); }
+.wire { stroke: var(--accent); stroke-width: 1.5; fill: none; }
+.wire-log { stroke: var(--warn); stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
+.wire-label { font-family: "JetBrains Mono", monospace; font-size: 9.5px; fill: var(--ink-soft); }
+.head { fill: var(--accent); }
+.head-log { fill: var(--warn); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.cards > div { background: var(--card); border: 1px solid var(--rule);
+               border-left: 3px solid var(--tone, var(--accent)); border-radius: 5px; padding: 16px 18px; }
+.cards h3 { font-size: .98rem; margin-bottom: 6px; }
+.cards p { font-size: .9rem; color: var(--ink-soft); }
+.cards .core-tone { --tone: var(--core); }
+
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 5px; background: var(--card); }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: "JetBrains Mono", monospace; font-size: .64rem; letter-spacing: .1em;
+     text-transform: uppercase; color: var(--ink-faint); font-weight: 400; }
+tr:last-child td { border-bottom: 0; }
+td.path { font-family: "JetBrains Mono", monospace; font-size: .82rem; white-space: nowrap; }
+td .where { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: .66rem;
+            padding: .18em .5em; border-radius: 3px; white-space: nowrap; }
+.w-core { background: var(--core-wash); color: var(--core); }
+.w-adapt { background: var(--accent-wash); color: var(--accent); }
+.w-drop { background: var(--grave-wash); color: var(--grave); }
+
+pre { font-family: "JetBrains Mono", monospace; font-size: .82rem; line-height: 1.6;
+      background: var(--card); border: 1px solid var(--rule); border-radius: 5px;
+      padding: 16px 18px; overflow-x: auto; margin: 0; color: var(--ink-soft); }
+pre b { color: var(--ink); font-weight: 600; }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px;
+         background: var(--rule); border: 1px solid var(--rule); border-radius: 5px; overflow: hidden; }
+.fact { background: var(--card); padding: 14px 16px; }
+.fact dt { font-family: "JetBrains Mono", monospace; font-size: .62rem; letter-spacing: .1em;
+           text-transform: uppercase; color: var(--ink-faint); margin-bottom: 5px; }
+.fact dd { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 1.2rem; font-weight: 600;
+           font-variant-numeric: tabular-nums; }
+.fact dd small { font-weight: 400; font-size: .68rem; color: var(--ink-soft); display: block; }
+
+.rule-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.rule-list li { position: relative; padding-left: 30px; font-size: .95rem;
+                color: var(--ink-soft); max-width: 68ch; }
+.rule-list li::before { content: "—"; position: absolute; left: 0; top: 0;
+                        color: var(--accent); font-weight: 600; }
+.rule-list b { color: var(--ink); font-weight: 600; }
+
+footer { border-top: 1px solid var(--rule); padding-top: 20px; font-size: .85rem; color: var(--ink-faint); }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Architecture cible · bbtrainer · Godot 4.7</p>
+    <h1>Noyau et adaptateurs</h1>
+    <p class="lede">Un noyau de règles qui ne connaît ni écran, ni réseau, ni fichier.
+      Tout le reste s'y branche : la vue Godot, l'autorité serveur, le journal de parties,
+      et plus tard l'IA. Une seule implémentation des règles, quatre façons de s'en servir.</p>
+  </header>
+
+  <section class="panel">
+    <p class="eyebrow">Le noyau au centre, les adaptateurs autour</p>
+    <svg viewBox="0 0 780 470" role="img"
+         aria-label="Le noyau de règles au centre reçoit des commandes et émet des événements. Autour : le client Godot, l'autorité locale pour le solo, l'autorité serveur pour le multijoueur, le journal d'événements qui alimente le rejeu et l'IA, et les données statiques.">
+
+      <!-- Noyau -->
+      <rect class="core-box" x="270" y="175" width="240" height="120" rx="6"/>
+      <text class="t-core" x="390" y="212" text-anchor="middle">Noyau de règles</text>
+      <text class="t-sub" x="390" y="234" text-anchor="middle">grille · portées · adjacence · dés</text>
+      <text class="t-sub" x="390" y="250" text-anchor="middle">aucun Node, aucune E/S</text>
+      <text class="t-sub" x="390" y="274" text-anchor="middle" style="fill:var(--core)">Commande → Événements</text>
+
+      <!-- Client Godot -->
+      <rect class="adapter-box" x="30" y="40" width="200" height="62" rx="4"/>
+      <text class="t-title" x="46" y="64">Client Godot</text>
+      <text class="t-sub" x="46" y="82">vue · saisie · animation</text>
+      <text class="t-sub" x="46" y="95">scenes/ · components/</text>
+
+      <!-- Autorité locale -->
+      <rect class="adapter-box" x="30" y="200" width="200" height="62" rx="4"/>
+      <text class="t-title" x="46" y="224">Autorité locale</text>
+      <text class="t-sub" x="46" y="242">mode solo · trainer</text>
+      <text class="t-sub" x="46" y="255">en processus</text>
+
+      <!-- Autorité serveur -->
+      <rect class="adapter-box" x="30" y="360" width="200" height="62" rx="4"/>
+      <text class="t-title" x="46" y="384">Autorité serveur</text>
+      <text class="t-sub" x="46" y="402">godot --headless</text>
+      <text class="t-sub" x="46" y="415">arbitre · tire les dés</text>
+
+      <!-- Données -->
+      <rect class="adapter-box" x="550" y="40" width="200" height="62" rx="4"/>
+      <text class="t-title" x="566" y="64">Données statiques</text>
+      <text class="t-sub" x="566" y="82">30 équipes · 111 compétences</text>
+      <text class="t-sub" x="566" y="95">data/*.json — lecture seule</text>
+
+      <!-- Journal -->
+      <rect class="log-box" x="550" y="200" width="200" height="62" rx="4"/>
+      <text class="t-title" x="566" y="224">Journal d'événements</text>
+      <text class="t-sub" x="566" y="242">graine + commandes + jets</text>
+      <text class="t-sub" x="566" y="255">une partie ≈ quelques Kio</text>
+
+      <!-- IA / rejeu -->
+      <rect class="log-box" x="550" y="360" width="200" height="62" rx="4"/>
+      <text class="t-title" x="566" y="384">Rejeu &amp; IA</text>
+      <text class="t-sub" x="566" y="402">analyse d'après-match</text>
+      <text class="t-sub" x="566" y="415">auto-jeu, sans rendu</text>
+
+      <!-- Liens gauche -->
+      <path class="wire" d="M230 71 L250 71 L250 205 L268 205"/>
+      <polygon class="head" points="268,205 260,201 260,209"/>
+      <text class="wire-label" x="256" y="132">intentions</text>
+
+      <path class="wire" d="M230 231 L268 231"/>
+      <polygon class="head" points="268,231 260,227 260,235"/>
+
+      <path class="wire" d="M230 391 L250 391 L250 265 L268 265"/>
+      <polygon class="head" points="268,265 260,261 260,269"/>
+      <text class="wire-label" x="256" y="330">commandes</text>
+
+      <!-- Retour du noyau vers le client -->
+      <path class="wire" d="M268 288 L246 288 L246 118 L130 118 L130 106"/>
+      <polygon class="head" points="130,106 126,114 134,114"/>
+      <text class="wire-label" x="140" y="134">événements</text>
+
+      <!-- Liens droite -->
+      <path class="wire" d="M512 205 L530 205 L530 71 L548 71"/>
+      <polygon class="head" points="512,205 520,201 520,209"/>
+      <text class="wire-label" x="536" y="140">lecture</text>
+
+      <path class="wire-log" d="M512 231 L548 231"/>
+      <polygon class="head-log" points="548,231 540,227 540,235"/>
+
+      <path class="wire-log" d="M650 262 L650 358"/>
+      <polygon class="head-log" points="650,358 646,350 654,350"/>
+
+      <path class="wire-log" d="M550 391 L530 391 L530 288 L512 288"/>
+      <polygon class="head-log" points="512,288 520,284 520,292"/>
+      <text class="wire-label" x="424" y="330">auto-jeu</text>
+    </svg>
+    <p class="caption">Le noyau ne dépend de personne — toutes les flèches vont vers lui ou
+      en sortent, aucune ne le traverse. C'est ce qui permet de le faire tourner sans fenêtre,
+      sans réseau, et des milliers de fois par seconde.</p>
+  </section>
+
+  <section>
+    <h2>Le noyau</h2>
+    <p>Du GDScript ordinaire, sans <code>Node2D</code>, sans <code>_draw</code>, sans
+      <code>_input</code>, sans <code>load()</code>. Il reçoit une commande, la valide contre
+      l'état, tire les dés dont elle a besoin, et rend une liste d'événements. Il ne mute rien
+      d'autre que son propre état.</p>
+    <p><code>UnitGrid</code> en est déjà la graine : il répond « qui occupe cette case » sans
+      connaître un pixel. Il faut l'entourer du reste — portées, adjacence, zones de tackle,
+      jets — en résistant à la tentation de le laisser regarder l'écran.</p>
+    <ul class="rule-list" style="margin-top:18px">
+      <li><b>Interdit dedans :</b> tout ce qui touche à l'affichage, au réseau, au disque,
+        au temps qui passe, ou à <code>randi()</code> non semé.</li>
+      <li><b>Obligatoire :</b> une graine explicite. Même graine, mêmes commandes, mêmes
+        événements — c'est ce qui rend le rejeu exact et les tests reproductibles.</li>
+      <li><b>Conséquence :</b> il se teste sans fenêtre, ce qui débloque le harnais qui
+        manque aujourd'hui au projet.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Ce qui circule</h2>
+    <p class="lede" style="margin-bottom:20px">Deux types seulement. Une commande est une
+      intention, elle peut être refusée. Un événement est un fait, il s'est produit.</p>
+    <pre><b>Commande</b>  (client → autorité)
+  { type: MOVE, unit: 7, path: [(12,7), (13,6), (14,6)] }
+
+<b>Événements</b>  (autorité → tous les clients, ordonnés)
+  { UNIT_MOVED,   unit: 7, from: (12,7), to: (13,6) }
+  { DODGE_ROLLED, unit: 7, target: 4, die: 3, success: false }
+  { UNIT_FELL,    unit: 7, at: (13,6) }
+  { ARMOUR_ROLLED,unit: 7, target: 9, dice: [4,6], broken: true }
+  { UNIT_STUNNED, unit: 7 }
+  { TURNOVER,     team: BLUE }</pre>
+    <p style="margin-top:18px">Renvoyer l'état complet serait plus simple, mais le client
+      recevrait « voici le nouveau monde » sans savoir ce qui s'est passé — impossible à
+      animer, et <strong>on perdrait le récit</strong>. Or à Blood Bowl le récit est le jeu :
+      c'est le double-1 sur l'esquive qui fait la partie.</p>
+    <p>Un instantané complet reste nécessaire à la connexion et à la reconnexion. L'état
+      tenant dans quelques kilo-octets, c'est sans conséquence.</p>
+  </section>
+
+  <section>
+    <h2>Les adaptateurs</h2>
+    <div class="cards">
+      <div class="core-tone">
+        <h3>Client Godot</h3>
+        <p>Traduit les clics en commandes et les événements en animations. Il fait tourner
+          une copie du noyau, non pour arbitrer mais pour griser les coups illégaux avant
+          même d'envoyer.</p>
+      </div>
+      <div>
+        <h3>Autorité locale</h3>
+        <p>Le mode solo devient une partie contre une autorité en processus. Même noyau,
+          même flux : aucun second chemin de code à maintenir.</p>
+      </div>
+      <div>
+        <h3>Autorité serveur</h3>
+        <p>Le même projet en <code>--headless</code>. Il arbitre, tire les dés, diffuse les
+          événements. Seul le transport le distingue de l'autorité locale.</p>
+      </div>
+      <div>
+        <h3>Journal &amp; IA</h3>
+        <p>Écrit graine, commandes et jets. Suffit à rejouer toute partie — et à en faire un
+          jeu de données, ou un terrain d'auto-jeu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Où va le code actuel</h2>
+    <p class="lede" style="margin-bottom:20px">La migration ne part pas de zéro : une bonne
+      part du modèle est déjà séparée de sa vue.</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Aujourd'hui</th><th>Destination</th><th>Ce qu'il faut en faire</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="path">UnitGrid</td>
+            <td><span class="where w-core">noyau</span></td>
+            <td>Déjà pur. Cesser de le faire hériter de <code>Node</code>.</td>
+          </tr>
+          <tr>
+            <td class="path">MatchState</td>
+            <td><span class="where w-core">noyau</span></td>
+            <td>Devient l'état de partie du noyau. Perd son statut d'autoload : le serveur
+              en tient plusieurs à la fois.</td>
+          </tr>
+          <tr>
+            <td class="path">BloodBowlData</td>
+            <td><span class="where w-adapt">adaptateur</span></td>
+            <td>Chargement JSON en lecture seule, injecté dans le noyau plutôt qu'appelé
+              par lui.</td>
+          </tr>
+          <tr>
+            <td class="path">MovementRange</td>
+            <td><span class="where w-core">noyau</span> + <span class="where w-adapt">vue</span></td>
+            <td>Scinder : le calcul d'atteignabilité au noyau, le tracé et le clic au client.</td>
+          </tr>
+          <tr>
+            <td class="path">UnitZone</td>
+            <td><span class="where w-adapt">vue</span></td>
+            <td>Conversion case ↔ pixel : purement cliente.</td>
+          </tr>
+          <tr>
+            <td class="path">Unit (Area2D)</td>
+            <td><span class="where w-adapt">vue</span></td>
+            <td>Reste une représentation, reconstructible depuis l'état. Jamais l'inverse.</td>
+          </tr>
+          <tr>
+            <td class="path">EventBus</td>
+            <td><span class="where w-adapt">vue</span></td>
+            <td>Reste le bus de l'interface. À ne pas confondre avec les événements de
+              règles, qui sont des données, pas des signaux.</td>
+          </tr>
+          <tr>
+            <td class="path">GameStatusManager</td>
+            <td><span class="where w-drop">à supprimer</span></td>
+            <td>Miroir passif de <code>SceneOrchestrator</code>, déjà sans usage.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ce que ça coûte à l'exécution</h2>
+    <p class="lede" style="margin-bottom:20px">Mesuré sur ce projet, Godot 4.7 en
+      <code>--headless</code>, au repos.</p>
+    <dl class="facts">
+      <div class="fact"><dt>Noyau seul</dt><dd>156<small>Mio résidents</small></dd></div>
+      <div class="fact"><dt>Arène complète</dt><dd>221<small>Mio résidents</small></dd></div>
+      <div class="fact"><dt>Démarrage</dt><dd>0,7<small>seconde</small></dd></div>
+      <div class="fact"><dt>CPU au repos</dt><dd>1<small>% d'un cœur</small></dd></div>
+    </dl>
+    <ul class="rule-list" style="margin-top:20px">
+      <li><b>156 Mio, c'est le plancher du moteur</b>, pas ton code. Il ne dépend presque pas
+        de ce que fait la partie.</li>
+      <li><b>Un processus par partie serait ruineux :</b> 100 parties simultanées feraient
+        15 Gio. Un seul processus hébergeant N parties est la bonne unité — l'état d'une
+        partie pèse quelques kilo-octets.</li>
+      <li><b>Les 65 Mio d'écart</b> entre noyau et arène sont des textures que le serveur n'a
+        aucune raison de charger. Ne jamais instancier <code>arena_phase.tscn</code> côté
+        autorité.</li>
+      <li><b>Baisser la cadence.</b> Un serveur au tour par tour n'a pas besoin de
+        60 images par seconde : <code>Engine.max_fps</code> bas ramène le repos près de zéro.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Et l'IA</h2>
+    <p>Oui, cette architecture y mène — mais le journal des parties jouées n'est pas le
+      chemin principal, et il vaut mieux le savoir tout de suite.</p>
+    <p>Logger tes propres parties te donnera un jeu de données <strong>petit et biaisé</strong> :
+      quelques centaines de matchs, tous du même style de jeu. C'est précieux pour analyser
+      <em>tes</em> décisions — ce qui est exactement la promesse d'un trainer — mais mince
+      pour entraîner un agent.</p>
+    <p>Ce qui rend l'IA atteignable, c'est <strong>l'auto-jeu</strong>, et c'est le noyau sans
+      E/S qui le permet. Une partie qui n'a ni fenêtre, ni animation, ni attente de réseau se
+      joue en millisecondes ; on en fait des millions. Un moteur de règles enchevêtré dans des
+      nœuds Godot cadencés à 60 images par seconde ne le peut pas — c'est la différence entre
+      un projet d'IA faisable et un projet qui ne démarre jamais.</p>
+    <p>Le journal reste central pour trois autres raisons : il rend chaque partie
+      <strong>rejouable exactement</strong> (graine + commandes suffisent), il sert de
+      <strong>jeu de tests de non-régression</strong> quand les règles évoluent, et il fournit
+      l'analyse d'après-match qui est de toute façon la fonctionnalité produit.</p>
+    <p>À regarder avant de partir de zéro : il existe une compétition d'IA Blood Bowl
+      (<em>Bot Bowl</em>) et un cadre Python associé, avec un jeu de règles implémenté et des
+      agents de référence. Vérifie l'état du projet, mais s'en inspirer — ne serait-ce que
+      pour la forme de l'interface état/action — t'épargnerait des mois.</p>
+  </section>
+
+  <footer>
+    <p>Mesures relevées sur la branche <code>main</code>, commit <code>24edb6c</code>,
+      Godot 4.7.2 en <code>--headless</code> sur macOS. Mémoire résidente et CPU échantillonnés
+      après stabilisation, sur 5 secondes au repos.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
