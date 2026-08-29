@@ -28,8 +28,8 @@ const ACTIONS := [
 ## polices du projet, dont les réglages d'import portent l'anticrénelage et le
 ## positionnement sous-pixel, à une taille lisible.
 const FONT_PATH := "res://assets/fonts/Oregano-Regular.ttf"
-const FONT_SIZE := 17
-const ROW_HEIGHT := 30
+const FONT_SIZE := 20
+const ROW_HEIGHT := 34
 const GLYPH_RADIUS := 5.0
 ## Écart entre la pastille et son libellé, et marge latérale de la ligne.
 const GLYPH_GAP := 10
@@ -162,14 +162,25 @@ func _on_unit_selected(unit: Node) -> void:
 	_unit = unit
 	visible = true
 	_contextual.show_near(unit)
+	GuiState.set_pointer_mode(GuiState.PointerMode.CHOOSING_ACTION)
 
 
 func _on_unit_deselected() -> void:
 	_unit = null
+	_close()
+
+
+## L'action choisie, le panneau s'efface : il recouvrait justement les cases
+## qu'on s'apprête à viser. L'unité reste sélectionnée.
+func _on_action_pressed(action: Action) -> void:
+	var unit := _unit
+	_close()
+	if unit:
+		EventBus.player_action_requested.emit(action, unit)
+
+
+func _close() -> void:
 	visible = false
 	_contextual.dismiss()
-
-
-func _on_action_pressed(action: Action) -> void:
-	if _unit:
-		EventBus.player_action_requested.emit(action, _unit)
+	if GuiState.get_pointer_mode() == GuiState.PointerMode.CHOOSING_ACTION:
+		GuiState.set_pointer_mode(GuiState.PointerMode.BROWSE)
