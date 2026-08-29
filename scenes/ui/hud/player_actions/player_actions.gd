@@ -23,7 +23,21 @@ const ACTIONS := [
 		"blocked_by": "aucune balle sur le terrain" },
 ]
 
-const GLYPH_SIZE := 10.0
+## Le thème ne définit rien pour un Button simple : ces lignes tombaient sur la
+## police de secours de Godot à sa taille par défaut. On impose donc une des
+## polices du projet, dont les réglages d'import portent l'anticrénelage et le
+## positionnement sous-pixel, à une taille lisible.
+const FONT_PATH := "res://assets/fonts/Oregano-Regular.ttf"
+const FONT_SIZE := 17
+const ROW_HEIGHT := 30
+const GLYPH_RADIUS := 5.0
+## Écart entre la pastille et son libellé, et marge latérale de la ligne.
+const GLYPH_GAP := 10
+const ROW_PADDING := 10
+
+const TEXT_COLOR := Color(0.91, 0.89, 0.85, 0.80)
+const TEXT_HOVER := Color("e8e4d8")
+const TEXT_DISABLED := Color(0.91, 0.89, 0.85, 0.28)
 
 @export var arena_phase: ArenaPhase
 
@@ -32,6 +46,7 @@ var _rows: VBoxContainer
 ## Placement et apparition sont délégués : la fiche de joueur fait exactement
 ## la même chose.
 var _contextual: ContextualPanel
+var _font: Font
 
 
 func _ready() -> void:
@@ -39,7 +54,7 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	_build()
 	await get_tree().process_frame
-	size = _rows.get_combined_minimum_size() + Vector2(8, 8)
+	size = _rows.get_combined_minimum_size() + Vector2(14, 14)
 	custom_minimum_size = size
 	_contextual = ContextualPanel.attach(self, self, arena_phase)
 	EventBus.unit_selected.connect(_on_unit_selected)
@@ -57,12 +72,12 @@ func _build() -> void:
 	style.border_color = Color("2b4450")
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(3)
-	style.set_content_margin_all(3)
+	style.set_content_margin_all(6)
 	panel.add_theme_stylebox_override("panel", style)
 	add_child(panel)
 
 	_rows = VBoxContainer.new()
-	_rows.add_theme_constant_override("separation", 2)
+	_rows.add_theme_constant_override("separation", 3)
 	panel.add_child(_rows)
 
 	for action: Dictionary in ACTIONS:
@@ -70,35 +85,69 @@ func _build() -> void:
 
 
 func _build_row(action: Dictionary) -> Button:
-	var button := Button.new()
-	button.text = "   " + str(action["label"])
-	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	button.flat = true
-	button.focus_mode = Control.FOCUS_NONE
 	var blocked := str(action["blocked_by"]) != ""
+
+	# Le contenu est ancré dans le bouton, pas empilé dedans : sa taille minimale
+	# ne compte donc pas le libellé, il faut la calculer.
+	var font := _label_font()
+	var text_width := font.get_string_size(
+		str(action["label"]), HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE).x
+
+	var button := Button.new()
+	button.custom_minimum_size = Vector2(
+		ROW_PADDING * 2.0 + GLYPH_RADIUS * 2.0 + GLYPH_GAP + text_width, ROW_HEIGHT)
+	button.flat = true
 	button.disabled = blocked
+	button.focus_mode = Control.FOCUS_NONE
+	button.tooltip_text = "Indisponible : " + str(action["blocked_by"]) if blocked else ""
 	if not blocked:
 		button.add_theme_stylebox_override("hover", _hover_style())
 		button.add_theme_stylebox_override("pressed", _hover_style())
-	button.tooltip_text = "Indisponible : " + str(action["blocked_by"]) if blocked else ""
-	button.add_theme_color_override("font_color", Color(0.91, 0.89, 0.85, 0.78))
-	button.add_theme_color_override("font_hover_color", Color("e8e4d8"))
-	button.add_theme_color_override("font_disabled_color", Color(0.91, 0.89, 0.85, 0.28))
 	button.pressed.connect(_on_action_pressed.bind(action["id"]))
 
-	# Pastille de couleur, dessinée plutôt que texturée — même parti que les
-	# pastilles de compétences.
-	var glyph := ColorRect.new()
-	glyph.color = action["color"] if not blocked else Color(action["color"], 0.3)
-	glyph.custom_minimum_size = Vector2(GLYPH_SIZE, GLYPH_SIZE)
-	glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	glyph.set_anchors_preset(Control.PRESET_CENTER_LEFT)
-	glyph.offset_left = 8.0
-	glyph.offset_right = 8.0 + GLYPH_SIZE
-	glyph.offset_top = -GLYPH_SIZE * 0.5
-	glyph.offset_bottom = GLYPH_SIZE * 0.5
-	button.add_child(glyph)
+	# Pastille et libellé sont posés dans un HBox : l'ancienne version décalait
+	# le texte par des espaces et posait la pastille en absolu par-dessus, d'où
+	# les deux qui se touchaient.
+	var row := HBoxContainer.new()
+	row.set_anchors_preset(Control.PRESET_FULL_RECT)
+	row.offset_left = ROW_PADDING
+	row.offset_right = -ROW_PADDING
+	row.add_theme_constant_override("separation", GLYPH_GAP)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	button.add_child(row)
+
+	var dot := ColorDot.new()
+	dot.radius = GLYPH_RADIUS
+	dot.color = action["color"] if not blocked else Color(action["color"], 0.3)
+	dot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(dot)
+
+	var label := Label.new()
+	label.text = str(action["label"])
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.add_theme_font_override("font", font)
+	label.add_theme_font_size_override("font_size", FONT_SIZE)
+	label.add_theme_color_override("font_color", TEXT_DISABLED if blocked else TEXT_COLOR)
+	row.add_child(label)
+
+	# Le libellé étant un nœud à part, le survol du bouton ne le recolore pas
+	# tout seul.
+	if not blocked:
+		button.mouse_entered.connect(
+			func(): label.add_theme_color_override("font_color", TEXT_HOVER))
+		button.mouse_exited.connect(
+			func(): label.add_theme_color_override("font_color", TEXT_COLOR))
 	return button
+
+
+## Police du projet plutôt que celle de secours : ses réglages d'import portent
+## l'anticrénelage gris et le positionnement sous-pixel.
+func _label_font() -> Font:
+	if _font == null:
+		_font = load(FONT_PATH) as Font
+	return _font
 
 
 ## Survol d'une ligne : le rollover doit être franc, le panneau est petit.
