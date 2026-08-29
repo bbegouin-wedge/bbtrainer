@@ -1,0 +1,73 @@
+# Vérifications du projet — cf. CLAUDE.md.
+#
+# `make check-integrity` est le filet : il vérifie que rien n'est cassé dans
+# TOUT le dépôt — configuration, satellites, scripts, ressources, données,
+# scènes, références, assets. Il ne vérifie pas que le jeu est juste.
+#
+# Obligatoire avant et après toute refacto ou déplacement de fichiers.
+
+SHELL := /bin/bash
+
+# Chemin du moteur. Surchargeable : make check-integrity GODOT=/chemin/vers/Godot
+GODOT ?= $(shell command -v godot 2>/dev/null || echo $(HOME)/Applications/godot/Godot_v4.5.1-stable_linux.x86_64)
+
+JOURNAL := .tests.log
+
+# Vérification à lancer seule : make check-integrity V=scenes
+V ?=
+
+.PHONY: help check-integrity check-arch test verbeux godot import journal
+
+help:
+	@echo "Cibles :"
+	@echo "  make check-integrity      intégrité de tout le projet (10 vérifications)"
+	@echo "  make check-integrity V=x  une seule : projet | appariement | classes |"
+	@echo "                            scripts | ressources | donnees | scenes |"
+	@echo "                            references | assets | architecture"
+	@echo "  make verbeux              idem, sortie moteur brute et non filtrée"
+	@echo "  make check-arch           les seules règles d'architecture (core/)"
+	@echo "  make test                 alias de check-integrity"
+	@echo "  make import               réimporte les assets (une fois après un clone)"
+	@echo "  make godot                affiche le moteur utilisé"
+	@echo "  make journal              réaffiche le rapport de la dernière exécution"
+	@echo ""
+	@echo "Moteur : $(GODOT)"
+
+godot:
+	@test -x "$(GODOT)" || { \
+	  echo "Godot introuvable ou non exécutable : $(GODOT)"; \
+	  echo "Indiquer le binaire : make check-integrity GODOT=/chemin/vers/Godot_v4.x_linux.x86_64"; \
+	  exit 1; }
+	@"$(GODOT)" --version
+
+import: godot
+	@"$(GODOT)" --headless --path "$(CURDIR)" --import
+
+# La sortie brute du moteur contient 199 lignes d'erreurs préexistantes
+# (TileSet, shader) qui ne sont pas des échecs : le rapport est donc préfixé par
+# le harnais, et seul ce préfixe est affiché. Le code de sortie vient de Godot,
+# jamais du grep — un grep sans correspondance sort en 1 et déguiserait un
+# succès en échec.
+check-integrity: godot
+	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- $(V) \
+	  > "$(JOURNAL)" 2>&1; code=$$?; \
+	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
+	grep -E "SCRIPT ERROR" "$(JOURNAL)" || true; \
+	if [ $$code -ne 0 ]; then \
+	  echo "INTÉGRITÉ : ÉCHEC — sortie complète du moteur dans $(JOURNAL)"; \
+	else \
+	  echo "INTÉGRITÉ : OK"; \
+	fi; \
+	exit $$code
+
+# Règle 8 de CLAUDE.md. Sous-ensemble de check-integrity, qui l'exécute aussi.
+check-arch:
+	@$(MAKE) --no-print-directory check-integrity V=architecture
+
+test: check-integrity
+
+verbeux: godot
+	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- $(V)
+
+journal:
+	@test -f "$(JOURNAL)" && cat "$(JOURNAL)" || echo "Aucune exécution enregistrée."
