@@ -50,6 +50,8 @@ func _on_action_requested(action: int, unit: Node) -> void:
 	_entry = entry
 	_reachable = _compute_reachable(pitch.unit_grid.get_tile_of(unit), entry.get_player().MA, unit)
 	set_process(true)
+	# La portée dessine son propre survol : le surligneur de case ferait double.
+	GuiState.set_pointer_mode(GuiState.PointerMode.TARGETING)
 	queue_redraw()
 
 
@@ -60,6 +62,8 @@ func cancel() -> void:
 	_reachable.clear()
 	_hovered = Vector2i(-1, -1)
 	set_process(false)
+	if GuiState.get_pointer_mode() == GuiState.PointerMode.TARGETING:
+		GuiState.set_pointer_mode(GuiState.PointerMode.BROWSE)
 	queue_redraw()
 
 
