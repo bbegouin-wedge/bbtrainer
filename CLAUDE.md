@@ -113,6 +113,45 @@ Directives de travail pour Claude Code sur ce projet.
     check-integrity` doit passer **avant** de commencer un déplacement de
     fichiers, et **après chaque lot** — jamais seulement à la fin.
 
+    **Ce qu'on appelle une refacto.**
+
+    Une modification qui change la **structure** sans changer le
+    **comportement**. Si le comportement change, ce n'est pas une refacto :
+    c'est un `feat` ou un `fix`, et le filet n'y suffit pas.
+
+    **Le déclencheur est la nature du changement, pas son volume.** La
+    vérification est obligatoire dès qu'un changement touche à **l'identité ou
+    à l'emplacement** de quelque chose :
+
+    - un fichier déplacé, renommé ou supprimé — script, scène, ressource, asset ;
+    - un `class_name` ajouté, renommé ou supprimé ;
+    - un autoload ajouté, renommé ou déplacé, ou `project.godot` modifié ;
+    - un chemin `res://` édité — dans du code, dans une scène ou dans un JSON ;
+    - un dossier créé ou renommé.
+
+    **Un seul fichier suffit.** Déplacer un unique script sans son `.uid` met en
+    défaut 170 références : le volume n'y est pour rien.
+
+    **Le garde-fou quantitatif**, pour les fois où la question ne s'est pas
+    posée — c'est une refacto même si on ne se l'était pas formulé, dès que le
+    lot atteint :
+
+    | Seuil | Pourquoi celui-là |
+    |---|---|
+    | **3 fichiers** déplacés, renommés ou supprimés | en dessous, le lot A du déménagement n'existe pas : ses plus petits lots en font une vingtaine |
+    | **10 fichiers** modifiés | au-delà, le diff ne se relit plus d'un regard |
+    | **200 lignes** déplacées d'un fichier vers un autre | l'ordre de grandeur de l'extraction du calcul de portée hors de `movement_range.gd` (280 l.) |
+
+    Ces trois chiffres n'ont d'autre justification que l'usage de ce projet.
+    Ils sont un plancher, pas une autorisation d'attendre de les atteindre.
+
+    **Ce que ce n'est pas** : renommer une variable locale, changer le corps
+    d'une fonction, ajuster une constante. Le filet ne les verrait pas de toute
+    façon — il vérifie que le dépôt tient, pas que le code est juste.
+
+    **Dans le doute, on lance.** 1,9 seconde, mesuré : décider si c'en est une
+    coûte plus cher que vérifier.
+
     **Avant, pas seulement après** : un filet qu'on n'a pas vu vert avant de
     toucher au dépôt ne prouve rien. En cas d'échec on ne saura pas départager
     ce que le déménagement a cassé de ce qui l'était déjà, et c'est précisément
