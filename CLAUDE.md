@@ -165,15 +165,15 @@ Directives de travail pour Claude Code sur ce projet.
 
     | Vérification | Ce qu'elle attrape |
     |---|---|
-    | `projet` | scène principale, icône et les 7 autoloads : chemin existant *et* singleton monté sous `/root` |
-    | `appariement` | un `.uid` ou un `.import` orphelin — le `mv` qui laisse le satellite derrière |
+    | `project` | scène principale, icône et les 7 autoloads : chemin existant *et* singleton monté sous `/root` |
+    | `pairing` | un `.uid` ou un `.import` orphelin — le `mv` qui laisse le satellite derrière |
     | `classes` | deux fichiers déclarant le même `class_name` (GDScript n'a pas d'espace de noms) |
     | `scripts` | chaque `.gd` se charge — erreur de syntaxe, `preload` mort |
-    | `ressources` | chaque `.tres`, `.gdshader`, `.res` se charge — thème, TileSet, shaders |
-    | `donnees` | chaque JSON s'analyse — une virgule de trop et le jeu démarre vide |
+    | `resources` | chaque `.tres`, `.gdshader`, `.res` se charge — thème, TileSet, shaders |
+    | `json` | chaque JSON s'analyse — une virgule de trop et le jeu démarre vide |
     | `scenes` | les 23 `.tscn` se chargent, s'instancient et vivent une frame |
     | `references` | chaque `res://` désigne un fichier, chaque `uid://` **résout vers un fichier présent** |
-    | `assets` | les 452 chemins d'icônes écrits dans les JSON, qu'aucun grep du code ne voit |
+    | `data_assets` | les 452 chemins d'icônes écrits dans les JSON, qu'aucun grep du code ne voit |
     | `architecture` | les deux interdits de `core/` (cf. règle 8) |
 
     **Ce qu'elle ne couvre pas**, et qu'il ne faut pas lui prêter : elle vérifie

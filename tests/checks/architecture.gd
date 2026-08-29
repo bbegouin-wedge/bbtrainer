@@ -15,88 +15,88 @@ extends RefCounted
 ##    rien n'empêche mécaniquement ces appels — c'est ici, et nulle part
 ##    ailleurs, qu'ils se voient.
 
-const Fichiers := preload("res://tests/lib/fichiers.gd")
-const RACINE := "res://core"
+const Files := preload("res://tests/lib/files.gd")
+const ROOT := "res://core"
 
 
-func executer(_arbre: SceneTree, rapport) -> void:
-	var fichiers := Fichiers.lister(".gd", RACINE)
-	if fichiers.is_empty():
-		rapport.note("core/ ne contient aucun script — l'organisation cible n'est pas encore posée")
+func run(_tree: SceneTree, report) -> void:
+	var files := Files.list_files(".gd", ROOT)
+	if files.is_empty():
+		report.note("core/ ne contient aucun script — l'organisation cible n'est pas encore posée")
 		return
-	var interdits := _noms_interdits()
-	for chemin in fichiers:
-		_verifier_heritage(rapport, chemin)
-		_verifier_dependances(rapport, chemin, interdits)
-	rapport.ok("architecture", "%d script(s) de core/ vérifiés" % fichiers.size())
+	var forbidden := _forbidden_names()
+	for path in files:
+		_check_inheritance(report, path)
+		_check_dependencies(report, path, forbidden)
+	report.ok("architecture", "%d script(s) de core/ vérifiés" % files.size())
 
 
 ## Le type natif dont hérite le script, quelle que soit la longueur de la
 ## chaîne d'héritage.
-func _verifier_heritage(rapport, chemin: String) -> void:
-	var script := ResourceLoader.load(chemin) as GDScript
+func _check_inheritance(report, path: String) -> void:
+	var script := ResourceLoader.load(path) as GDScript
 	if script == null:
 		return
 	var base := script.get_instance_base_type()
 	if ClassDB.is_parent_class(base, "Node"):
-		rapport.ko("architecture", "%s hérite de %s : pas de Node dans core/" % [chemin, base])
+		report.fail("architecture", "%s hérite de %s : pas de Node dans core/" % [path, base])
 
 
-func _verifier_dependances(rapport, chemin: String, interdits: Dictionary) -> void:
-	var texte := Fichiers.lire(chemin)
-	_verifier_chemins(rapport, chemin, texte)
-	_verifier_identifiants(rapport, chemin, _code_nu(texte), interdits)
+func _check_dependencies(report, path: String, forbidden: Dictionary) -> void:
+	var text := Files.read(path)
+	_check_paths_in(report, path, text)
+	_check_identifiers(report, path, _bare_code(text), forbidden)
 
 
 ## Les chemins vivent dans des chaînes — impossible de retirer les chaînes comme
 ## pour les identifiants. On saute donc les lignes de commentaire, qui sont le
 ## seul cas réaliste de chemin cité sans être utilisé.
-func _verifier_chemins(rapport, chemin: String, texte: String) -> void:
-	var motif := RegEx.create_from_string("res://[^\"'\\s\\)\\],]+")
-	for ligne in texte.split("\n"):
-		if ligne.strip_edges().begins_with("#"):
+func _check_paths_in(report, path: String, text: String) -> void:
+	var pattern := RegEx.create_from_string("res://[^\"'\\s\\)\\],]+")
+	for line in text.split("\n"):
+		if line.strip_edges().begins_with("#"):
 			continue
-		_verifier_ligne(rapport, chemin, motif, ligne)
+		_check_line(report, path, pattern, line)
 
 
-func _verifier_ligne(rapport, chemin: String, motif: RegEx, ligne: String) -> void:
-	for trouve in motif.search_all(ligne):
-		var cite: String = trouve.get_string()
-		if not cite.begins_with(RACINE + "/"):
-			rapport.ko("architecture", "%s cite %s, hors de core/" % [chemin, cite])
+func _check_line(report, path: String, pattern: RegEx, line: String) -> void:
+	for match in pattern.search_all(line):
+		var cite: String = match.get_string()
+		if not cite.begins_with(ROOT + "/"):
+			report.fail("architecture", "%s cite %s, hors de core/" % [path, cite])
 
 
-func _verifier_identifiants(rapport, chemin: String, code: String, interdits: Dictionary) -> void:
-	for nom in interdits:
-		var motif := RegEx.create_from_string("\\b" + nom + "\\b")
-		if motif.search(code) != null:
-			rapport.ko("architecture", "%s utilise %s (%s)" % [chemin, nom, interdits[nom]])
+func _check_identifiers(report, path: String, code: String, forbidden: Dictionary) -> void:
+	for name in forbidden:
+		var pattern := RegEx.create_from_string("\\b" + name + "\\b")
+		if pattern.search(code) != null:
+			report.fail("architecture", "%s utilise %s (%s)" % [path, name, forbidden[name]])
 
 
 ## Les autoloads, et tous les `class_name` déclarés hors de `core/`.
-func _noms_interdits() -> Dictionary:
-	var interdits := {}
-	for reglage in ProjectSettings.get_property_list():
-		var cle: String = reglage["name"]
-		if cle.begins_with("autoload/"):
-			interdits[cle.trim_prefix("autoload/")] = "autoload"
-	_relever_classes_externes(interdits)
-	return interdits
+func _forbidden_names() -> Dictionary:
+	var forbidden := {}
+	for setting in ProjectSettings.get_property_list():
+		var key: String = setting["name"]
+		if key.begins_with("autoload/"):
+			forbidden[key.trim_prefix("autoload/")] = "autoload"
+	_collect_external_classes(forbidden)
+	return forbidden
 
 
-func _relever_classes_externes(interdits: Dictionary) -> void:
-	var motif := RegEx.create_from_string("(?m)^class_name\\s+([A-Za-z_][A-Za-z0-9_]*)")
-	for chemin in Fichiers.lister(".gd"):
-		if chemin.begins_with(RACINE + "/"):
+func _collect_external_classes(forbidden: Dictionary) -> void:
+	var pattern := RegEx.create_from_string("(?m)^class_name\\s+([A-Za-z_][A-Za-z0-9_]*)")
+	for path in Files.list_files(".gd"):
+		if path.begins_with(ROOT + "/"):
 			continue
-		var trouve := motif.search(Fichiers.lire(chemin))
-		if trouve != null:
-			interdits[trouve.get_string(1)] = "class_name déclaré dans " + chemin
+		var match := pattern.search(Files.read(path))
+		if match != null:
+			forbidden[match.get_string(1)] = "class_name déclaré dans " + path
 
 
 ## Retire chaînes puis commentaires : un nom cité dans une phrase de
 ## documentation n'est pas une dépendance. Les chaînes partent en premier, pour
 ## qu'un `#` à l'intérieur de l'une d'elles n'ouvre pas un faux commentaire.
-func _code_nu(texte: String) -> String:
-	var sans_chaines := RegEx.create_from_string("\"[^\"\\n]*\"|'[^'\\n]*'").sub(texte, "", true)
-	return RegEx.create_from_string("#[^\\n]*").sub(sans_chaines, "", true)
+func _bare_code(text: String) -> String:
+	var without_strings := RegEx.create_from_string("\"[^\"\\n]*\"|'[^'\\n]*'").sub(text, "", true)
+	return RegEx.create_from_string("#[^\\n]*").sub(without_strings, "", true)

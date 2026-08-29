@@ -6,31 +6,31 @@ extends RefCounted
 ## aucun `_ready()`. C'est l'instanciation qui attrape un script cassé, un
 ## `@export` vidé par un déplacement, ou un nœud attendu et absent.
 
-const Fichiers := preload("res://tests/lib/fichiers.gd")
+const Files := preload("res://tests/lib/files.gd")
 
 
-func executer(arbre: SceneTree, rapport) -> void:
-	var scenes := Fichiers.lister(".tscn")
-	for chemin in scenes:
-		await _verifier(arbre, rapport, chemin)
-	rapport.note("%d scène(s) chargée(s) et instanciée(s)" % scenes.size())
+func run(tree: SceneTree, report) -> void:
+	var scenes := Files.list_files(".tscn")
+	for path in scenes:
+		await _check(tree, report, path)
+	report.note("%d scène(s) chargée(s) et instanciée(s)" % scenes.size())
 
 
-func _verifier(arbre: SceneTree, rapport, chemin: String) -> void:
-	var packed := ResourceLoader.load(chemin) as PackedScene
+func _check(tree: SceneTree, report, path: String) -> void:
+	var packed := ResourceLoader.load(path) as PackedScene
 	if packed == null:
-		rapport.ko("scène", "%s ne se charge pas" % chemin)
+		report.fail("scenes", "%s ne se charge pas" % path)
 		return
-	var noeud := packed.instantiate()
-	if noeud == null:
-		rapport.ko("scène", "%s ne s'instancie pas" % chemin)
+	var node := packed.instantiate()
+	if node == null:
+		report.fail("scenes", "%s ne s'instancie pas" % path)
 		return
-	await _faire_vivre(arbre, noeud)
-	rapport.ok("scène", chemin)
+	await _bring_to_life(tree, node)
+	report.ok("scenes", path)
 
 
-func _faire_vivre(arbre: SceneTree, noeud: Node) -> void:
-	arbre.root.add_child(noeud)
-	await arbre.process_frame
-	noeud.queue_free()
-	await arbre.process_frame
+func _bring_to_life(tree: SceneTree, node: Node) -> void:
+	tree.root.add_child(node)
+	await tree.process_frame
+	node.queue_free()
+	await tree.process_frame

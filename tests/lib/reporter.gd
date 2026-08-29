@@ -7,19 +7,19 @@ extends RefCounted
 ## peut ni supprimer ni confondre avec un échec. Le préfixe est ce qui permet au
 ## Makefile de filtrer sans rien perdre.
 
-var _echecs: Array[String] = []
+var _failures: Array[String] = []
 var _total := 0
 
 
-func ok(verification: String, detail: String) -> void:
+func ok(check: String, detail: String) -> void:
 	_total += 1
-	print("[ok]   %s : %s" % [verification, detail])
+	print("[ok]   %s : %s" % [check, detail])
 
 
-func ko(verification: String, detail: String) -> void:
+func fail(check: String, detail: String) -> void:
 	_total += 1
-	_echecs.append("%s : %s" % [verification, detail])
-	print("[KO]   %s : %s" % [verification, detail])
+	_failures.append("%s : %s" % [check, detail])
+	print("[KO]   %s : %s" % [check, detail])
 
 
 ## Information portée au rapport sans verdict — ce qui n'est pas vérifiable.
@@ -27,11 +27,11 @@ func note(detail: String) -> void:
 	print("[note] %s" % detail)
 
 
-func a_echoue() -> bool:
-	return not _echecs.is_empty()
+func has_failures() -> bool:
+	return not _failures.is_empty()
 
 
-func resume() -> void:
-	print("[----] %d vérification(s), %d échec(s)" % [_total, _echecs.size()])
-	for e in _echecs:
+func summary() -> void:
+	print("[----] %d vérification(s), %d échec(s)" % [_total, _failures.size()])
+	for e in _failures:
 		print("[KO]   %s" % e)

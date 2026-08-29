@@ -9,43 +9,43 @@ extends SceneTree
 ##
 ## Sortie 0 si tout passe, 1 sinon.
 
-const VERIFICATIONS := {
-	"projet": "res://tests/checks/projet.gd",
-	"appariement": "res://tests/checks/appariement.gd",
+const CHECKS := {
+	"project": "res://tests/checks/project.gd",
+	"pairing": "res://tests/checks/pairing.gd",
 	"classes": "res://tests/checks/classes.gd",
 	"scripts": "res://tests/checks/scripts.gd",
-	"ressources": "res://tests/checks/ressources.gd",
-	"donnees": "res://tests/checks/donnees.gd",
+	"resources": "res://tests/checks/resources.gd",
+	"json": "res://tests/checks/json.gd",
 	"scenes": "res://tests/checks/scenes.gd",
 	"references": "res://tests/checks/references.gd",
-	"assets": "res://tests/checks/assets_donnees.gd",
+	"data_assets": "res://tests/checks/data_assets.gd",
 	"architecture": "res://tests/checks/architecture.gd",
 }
 
 
 func _initialize() -> void:
-	var rapport = preload("res://tests/lib/reporter.gd").new()
-	for nom in _demandees():
-		await _executer(nom, rapport)
-	rapport.resume()
-	quit(1 if rapport.a_echoue() else 0)
+	var report = preload("res://tests/lib/reporter.gd").new()
+	for name in _requested():
+		await _run_check(name, report)
+	report.summary()
+	quit(1 if report.has_failures() else 0)
 
 
 ## Sans argument, tout est vérifié. `make check-integrity V=scenes` n'en lance qu'une.
-func _demandees() -> Array:
-	var demandes := OS.get_cmdline_user_args()
-	if demandes.is_empty():
-		return VERIFICATIONS.keys()
-	var retenues := []
-	for nom in demandes:
-		if VERIFICATIONS.has(nom):
-			retenues.append(nom)
+func _requested() -> Array:
+	var requested := OS.get_cmdline_user_args()
+	if requested.is_empty():
+		return CHECKS.keys()
+	var kept := []
+	for name in requested:
+		if CHECKS.has(name):
+			kept.append(name)
 		else:
-			push_error("Vérification inconnue : %s" % nom)
-	return retenues
+			push_error("Vérification inconnue : %s" % name)
+	return kept
 
 
-func _executer(nom: String, rapport) -> void:
-	print("[####] %s" % nom)
-	var verification = load(VERIFICATIONS[nom]).new()
-	await verification.executer(self, rapport)
+func _run_check(name: String, report) -> void:
+	print("[####] %s" % name)
+	var check = load(CHECKS[name]).new()
+	await check.run(self, report)
