@@ -16,11 +16,13 @@ JOURNAL := .tests.log
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=
 
-.PHONY: help run check-integrity check-arch test verbeux godot import journal
+.PHONY: help run debug editeur check-integrity check-arch test verbeux godot import journal
 
 help:
 	@echo "Cibles :"
 	@echo "  make run                  lance le jeu"
+	@echo "  make debug                idem, avec le débogueur stdout et le mode verbeux"
+	@echo "  make editeur              ouvre l'éditeur (seul endroit avec points d'arrêt)"
 	@echo "  make check-integrity      intégrité de tout le projet (10 vérifications)"
 	@echo "  make check-integrity V=x  une seule : projet | appariement | classes |"
 	@echo "                            scripts | ressources | donnees | scenes |"
@@ -47,6 +49,19 @@ ARGS ?=
 
 run: godot
 	@"$(GODOT)" --path "$(CURDIR)" $(ARGS)
+
+# Jeu + débogueur stdout local et sortie verbeuse. Les aides visuelles se
+# demandent par ARGS, elles sont trop bavardes pour être posées par défaut :
+#   make debug ARGS="--debug-collisions"            les Area2D des unités
+#   make debug ARGS="--debug-canvas-item-redraw"    chaque _draw() clignote
+debug: godot
+	@"$(GODOT)" --path "$(CURDIR)" -d --verbose $(ARGS)
+
+# L'éditeur — seul endroit où les points d'arrêt existent. Pour attacher un jeu
+# lancé par `make run` à un éditeur ouvert :
+#   make run ARGS="--remote-debug tcp://127.0.0.1:6007"
+editeur: godot
+	@"$(GODOT)" --path "$(CURDIR)" -e
 
 import: godot
 	@"$(GODOT)" --headless --path "$(CURDIR)" --import

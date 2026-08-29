@@ -183,6 +183,8 @@ Contournement délibéré : `git commit --no-verify`.
 | Commande | Ce qu'elle fait |
 |---|---|
 | `make run` | lance le jeu (`ARGS="--fullscreen"` pour passer des options au moteur) |
+| `make debug` | idem, avec le débogueur stdout et le mode verbeux |
+| `make editeur` | ouvre l'éditeur — seul endroit où les points d'arrêt existent |
 | `make check-integrity` | les 10 vérifications sur tout le dépôt (cf. règle 13) |
 | `make check-arch` | les seules règles d'architecture de `core/` (cf. règle 8) |
 | `make check-integrity V=scenes` | une seule vérification, par son nom |
