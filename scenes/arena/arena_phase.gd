@@ -79,6 +79,13 @@ func get_visible_band() -> Rect2:
 			maxf(1.0, viewport_size.y - HUD_MARGIN_TOP - HUD_MARGIN_BOTTOM)))
 
 
+## Position à l'écran d'un point du monde, caméra comprise. Sert aux panneaux
+## contextuels, qui doivent rester collés à leur joueur.
+func world_to_screen(world: Vector2) -> Vector2:
+	var viewport_center := get_viewport().get_visible_rect().size * 0.5
+	return (world - camera.get_screen_center_position()) * camera.zoom.x + viewport_center
+
+
 ## Zoom tel que la bande visible couvre DEFAULT_VIEW_FRACTION de l'aire du terrain.
 func _default_zoom(band_size: Vector2) -> float:
 	var terrain_area := float(TERRAIN_WIDTH) * float(TERRAIN_HEIGHT)
