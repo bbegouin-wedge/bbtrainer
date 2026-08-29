@@ -67,14 +67,14 @@ team = 1
 offset_left = 12.0
 offset_top = 708.0
 offset_right = 282.0
-offset_bottom = 894.0
+offset_bottom = 866.0
 script = ExtResource("14_staff")
 
 [node name="RedStaff" type="PanelContainer" parent="DugoutLayer"]
 offset_left = 1638.0
 offset_top = 708.0
 offset_right = 1908.0
-offset_bottom = 894.0
+offset_bottom = 866.0
 script = ExtResource("14_staff")
 team = 1
 
@@ -90,10 +90,10 @@ dugouts = [NodePath("../DugoutLayer/BlueDugout"), NodePath("../DugoutLayer/RedDu
 [node name="MinimapLayer" type="CanvasLayer" parent="."]
 
 [node name="Minimap" type="Control" parent="MinimapLayer" node_paths=PackedStringArray("camera", "arena_phase", "pitch")]
-offset_left = 1352.0
-offset_top = 776.0
-offset_right = 1622.0
-offset_bottom = 932.0
+offset_left = 1638.0
+offset_top = 878.0
+offset_right = 1908.0
+offset_bottom = 1034.0
 script = ExtResource("10_minim")
 camera = NodePath("../../Camera2D")
 arena_phase = NodePath("../..")
