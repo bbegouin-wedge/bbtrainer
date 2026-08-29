@@ -22,7 +22,10 @@ const TEAM_COLORS := {
 }
 
 const UNIT_RADIUS := 4.0
-const VIEW_RECT_WIDTH := 1.5
+## Épaisseur entière et tracé anticrénelé : à 1,5 px sans lissage, le trait
+## pouvait retomber entre deux pixels et disparaître selon la position de la
+## caméra, alors même qu'il tenait dans la carte.
+const VIEW_RECT_WIDTH := 2.0
 ## Découpage tactique du terrain, en cases : ligne médiane, lignes d'en-but,
 ## et les deux lignes qui délimitent les zones larges.
 const HALFWAY_COLUMN := 13
@@ -71,8 +74,10 @@ func _draw() -> void:
 	draw_rect(pitch_rect, PITCH_COLOR, true)
 	_draw_pitch_lines()
 	_draw_units()
-	_draw_view_rect()
+	# La bordure de la carte passe AVANT l'emprise caméra : tracée après, elle
+	# recouvrait le cadre dès qu'il longeait le bord — c'est-à-dire au zoom large.
 	draw_rect(pitch_rect, BORDER_COLOR, false, 1.0)
+	_draw_view_rect()
 
 
 func _draw_pitch_lines() -> void:
@@ -111,7 +116,9 @@ func _draw_view_rect() -> void:
 	var view := get_view_rect_on_map()
 	if view.size.x <= 0.0 or view.size.y <= 0.0:
 		return
-	draw_rect(view, VIEW_RECT_COLOR, false, VIEW_RECT_WIDTH)
+	# Rentré d'une demi-épaisseur pour rester entier quand il épouse le bord.
+	draw_rect(view.grow(-VIEW_RECT_WIDTH * 0.5), VIEW_RECT_COLOR, false,
+		VIEW_RECT_WIDTH, true)
 
 
 ## Emprise de la caméra telle qu'elle est tracée sur la carte, bornée au terrain.
