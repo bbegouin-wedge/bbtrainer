@@ -62,8 +62,7 @@ func cancel() -> void:
 	_reachable.clear()
 	_hovered = Vector2i(-1, -1)
 	set_process(false)
-	if GuiState.get_pointer_mode() == GuiState.PointerMode.TARGETING:
-		GuiState.set_pointer_mode(GuiState.PointerMode.BROWSE)
+	GuiState.release_pointer_mode(GuiState.PointerMode.TARGETING)
 	queue_redraw()
 
 

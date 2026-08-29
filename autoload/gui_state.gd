@@ -1,10 +1,9 @@
 extends Node
 
-## Ce que le curseur est en train de faire. Le surligneur de case ne doit
-## s'afficher que pendant l'exploration : quand un panneau d'actions est ouvert
-## on choisit une commande, pas une case ; et pendant un ciblage, c'est la
-## portée qui dessine son propre retour.
-enum PointerMode { BROWSE, CHOOSING_ACTION, TARGETING }
+## Ce que le curseur est en train de faire. Le surligneur de case indique une
+## DESTINATION : il n'a de sens que lorsqu'on s'apprête à poser un joueur
+## quelque part — en ciblant un déplacement, ou en le faisant glisser.
+enum PointerMode { BROWSE, CHOOSING_ACTION, TARGETING, DRAGGING }
 
 signal pointer_mode_changed(mode: PointerMode)
 
@@ -44,6 +43,16 @@ func get_pointer_mode() -> PointerMode:
 	return _pointer_mode
 
 
-## Vrai quand le curseur explore librement le terrain.
-func is_browsing() -> bool:
-	return _pointer_mode == PointerMode.BROWSE
+## Vrai quand le curseur désigne une case de destination.
+func wants_tile_cursor() -> bool:
+	return _pointer_mode == PointerMode.TARGETING or _pointer_mode == PointerMode.DRAGGING
+
+
+## Rend le mode, mais seulement si on est bien celui qui l'a pris — sans quoi un
+## panneau pourrait rendre un mode posé par un autre. Le repos n'est pas toujours
+## l'exploration : une unité sélectionnée laisse son panneau d'actions ouvert.
+func release_pointer_mode(from: PointerMode) -> void:
+	if _pointer_mode != from:
+		return
+	set_pointer_mode(
+		PointerMode.CHOOSING_ACTION if _selected_unit else PointerMode.BROWSE)

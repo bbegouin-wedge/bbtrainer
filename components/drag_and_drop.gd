@@ -64,6 +64,7 @@ func _remove_ghost() -> void:
 		
 func _end_dragging() -> void: 
 	dragging = false
+	GuiState.release_pointer_mode(GuiState.PointerMode.DRAGGING)
 	_tween_scale(1.0)
 	target.remove_from_group("dragging")
 	target.z_index = 0
@@ -78,6 +79,8 @@ func _start_dragging() -> void:
 	dragging = true
 	starting_position = target.global_position
 	target.add_to_group("dragging")
+	# Même geste que depuis le dugout : on vise une case de destination.
+	GuiState.set_pointer_mode(GuiState.PointerMode.DRAGGING)
 	target.z_index = 99
 	offset = target.global_position - target.get_global_mouse_position()
 	_create_ghost()  # Créer le fantôme avant le grossissement : il reste à taille réelle

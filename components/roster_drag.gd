@@ -47,6 +47,7 @@ func begin(entry: MatchState.Entry) -> void:
 	_proxy.modulate.a = 0.85
 	drag_layer.add_child(_proxy)
 	set_process(true)
+	GuiState.set_pointer_mode(GuiState.PointerMode.DRAGGING)
 
 
 func _process(_delta: float) -> void:
@@ -70,6 +71,7 @@ func _finish(screen_point: Vector2) -> void:
 	var entry := _entry
 	_entry = null
 	set_process(false)
+	GuiState.release_pointer_mode(GuiState.PointerMode.DRAGGING)
 	if _proxy:
 		_proxy.queue_free()
 		_proxy = null

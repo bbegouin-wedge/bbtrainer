@@ -184,3 +184,4 @@ func _close() -> void:
 	_contextual.dismiss()
 	if GuiState.get_pointer_mode() == GuiState.PointerMode.CHOOSING_ACTION:
 		GuiState.set_pointer_mode(GuiState.PointerMode.BROWSE)
+

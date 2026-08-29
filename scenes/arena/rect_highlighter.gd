@@ -62,8 +62,9 @@ func _ready():
 	_update_shader()
 	GuiState.pointer_mode_changed.connect(_on_pointer_mode_changed.unbind(1))
 
-## Il ne se montre que si le curseur explore le terrain, et qu'il est bien
-## dessus : sinon il restait figé sur sa dernière case valide.
+## Il ne se montre que lorsqu'on désigne une destination — ciblage ou glisser —
+## et seulement si le curseur est bien sur le terrain : sinon il restait figé
+## sur sa dernière case valide.
 func _process(_delta: float) -> void:	
 	if !enabled:
 		return
@@ -71,11 +72,11 @@ func _process(_delta: float) -> void:
 	var on_pitch := playArea.is_tile_in_bounds(playArea.get_hovered_tile())
 	if on_pitch:
 		position = playArea.get_top_left_tile_coords()
-	visible = on_pitch and GuiState.is_browsing()
+	visible = on_pitch and GuiState.wants_tile_cursor()
 
 func _on_pointer_mode_changed() -> void:
-	if enabled:
-		visible = GuiState.is_browsing()
+	if enabled and not GuiState.wants_tile_cursor():
+		visible = false
 
 func _update_shader():
 	if not shader_material:
