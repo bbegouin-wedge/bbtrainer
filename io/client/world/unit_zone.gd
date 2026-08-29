@@ -3,14 +3,11 @@ extends TileMapLayer
 
 ## Zone de dépôt : un calque de tuiles doublé d'un UnitGrid qui dit qui occupe quoi.
 ##
-## Sert aussi bien au terrain qu'aux boîtes de réserve — d'où les deux façons de
-## délimiter les cases valides, le terrain n'ayant aucune tuile peinte tandis que
-## les réserves sont définies par les leurs.
+## Une seule zone existe aujourd'hui — le terrain. Les réserves, K.O. et blessés
+## sont des états de MatchState affichés par le HUD, pas des lieux du monde : les
+## calques latéraux de arena.tscn sont purement visuels.
 
 @export var unit_grid: UnitGrid
-## Cases valides déduites des tuiles réellement peintes (réserves) plutôt que de
-## unit_grid.size (terrain, calque logique sans tuile).
-@export var use_painted_cells: bool = false
 
 var bounds: Rect2i
 
@@ -18,7 +15,7 @@ var bounds: Rect2i
 func _ready() -> void:
 	if unit_grid:
 		bounds = Rect2i(Vector2i.ZERO, unit_grid.size)
-	elif not use_painted_cells:
+	else:
 		push_warning("UnitZone sans UnitGrid : aucune case ne sera valide")
 
 
@@ -37,8 +34,6 @@ func get_global_top_left_of_tile(tile: Vector2i) -> Vector2:
 
 
 func is_tile_in_bounds(tile: Vector2i) -> bool:
-	if use_painted_cells:
-		return get_cell_source_id(tile) != -1
 	return bounds.has_point(tile)
 
 
