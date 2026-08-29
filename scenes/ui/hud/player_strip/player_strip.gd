@@ -128,7 +128,10 @@ func _on_card_pressed(entry: MatchState.Entry) -> void:
 		return
 	GuiState.set_selected_unit(entry.unit)
 	if arena_phase:
-		arena_phase.center_camera_on(entry.unit.global_position)
+		# Le centre du jeton, pas le coin de sa tuile — et par to_global, pour
+		# rester juste quand l'arène est pivotée.
+		arena_phase.center_camera_on(
+			entry.unit.to_global(Vector2(Unit.TILE_SIZE, Unit.TILE_SIZE) * 0.5))
 
 
 func _on_selection_changed() -> void:

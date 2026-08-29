@@ -83,8 +83,11 @@ func _set_reveal_offset(value: Vector2) -> void:
 func _place() -> void:
 	if _arena_phase == null or _unit == null or not is_instance_valid(_unit):
 		return
+	# to_global et non global_position + offset : l'écart du coin de la tuile à
+	# son centre doit tourner AVEC l'unité. Ajouté en coordonnées monde, il
+	# pointait à côté dès que l'arène pivotait.
 	var anchor := _arena_phase.world_to_screen(
-		_unit.global_position + Vector2(Unit.TILE_SIZE, Unit.TILE_SIZE) * 0.5)
+		_unit.to_global(Vector2(Unit.TILE_SIZE, Unit.TILE_SIZE) * 0.5))
 	var viewport := _panel.get_viewport_rect().size
 	var panel_size := _panel.size
 	# Demi-jeton à l'écran : c'est de son bord qu'il faut s'écarter, pas de son
