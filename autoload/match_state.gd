@@ -16,11 +16,31 @@ enum Team { BLUE, RED }
 ## État d'un joueur sur le terrain. Rien ne le pilote encore — c'est le bandeau
 ## de joueurs qui le donne à lire, en attendant les règles de tour.
 enum Condition { READY, PLAYED, PRONE, STUNNED }
+## Le banc : ce qu'une équipe engage en dehors de ses joueurs. Les relances ne
+## figurent pas dans allowedStaff — toute équipe y a droit, à son propre coût.
+enum Staff { REROLLS, APOTHECARY, CHEERLEADERS, COACH_ASSISTANTS }
+
+## Correspondance avec les clés de allowedStaff dans teams_fr.json.
+const STAFF_KEYS := {
+	Staff.APOTHECARY: "APOTHECARY",
+	Staff.CHEERLEADERS: "CHEERLEADERS",
+	Staff.COACH_ASSISTANTS: "COACH_ASSISTANTS",
+}
+const STAFF_MAX := {
+	Staff.REROLLS: 8,
+	Staff.APOTHECARY: 1,
+	Staff.CHEERLEADERS: 12,
+	Staff.COACH_ASSISTANTS: 12,
+}
+const STAFF_ORDER := [
+	Staff.REROLLS, Staff.APOTHECARY, Staff.CHEERLEADERS, Staff.COACH_ASSISTANTS,
+]
 
 const DUGOUT_LOCATIONS := [Location.RESERVES, Location.KO, Location.INJURED]
 
 signal roster_changed
 signal entry_location_changed(entry: Entry, from: Location, to: Location)
+signal staff_changed
 
 
 class Entry:
@@ -64,12 +84,19 @@ class Entry:
 
 
 var _entries: Array[Entry] = []
+## Effectifs de banc par équipe, et l'équipe engagée de chaque côté — c'est elle
+## qui dit quel staff est autorisé.
+var _staff: Dictionary = {}
+var _teams: Dictionary = {}
 
 
 ## Construit l'effectif du match depuis l'équipe composée. Tout le monde commence
 ## en réserve : le terrain est vide tant que le coach n'a rien placé.
 func build_from_team_state() -> void:
 	_entries.clear()
+	_staff.clear()
+	_teams.clear()
+	_teams[Team.BLUE] = TeamState.getSelectedTeam()
 	var number := 1
 	for player: BloodBowlData.Player in TeamState.get_expanded_team():
 		_entries.append(Entry.new(number, Team.BLUE, player))
@@ -78,6 +105,49 @@ func build_from_team_state() -> void:
 		_entries.append(Entry.new(number, Team.BLUE, null, star))
 		number += 1
 	roster_changed.emit()
+
+
+func get_team(team: Team) -> BloodBowlData.Team:
+	return _teams.get(team, null)
+
+
+## Les relances sont toujours permises ; le reste dépend de allowedStaff.
+func is_staff_allowed(team: Team, kind: Staff) -> bool:
+	if kind == Staff.REROLLS:
+		return get_team(team) != null
+	var roster := get_team(team)
+	if roster == null:
+		return false
+	return STAFF_KEYS[kind] in roster.allowed_staff
+
+
+func get_staff(team: Team, kind: Staff) -> int:
+	return _staff.get(team, {}).get(kind, 0)
+
+
+func set_staff(team: Team, kind: Staff, value: int) -> void:
+	if not is_staff_allowed(team, kind):
+		return
+	var clamped := clampi(value, 0, int(STAFF_MAX[kind]))
+	if get_staff(team, kind) == clamped:
+		return
+	if not _staff.has(team):
+		_staff[team] = {}
+	_staff[team][kind] = clamped
+	staff_changed.emit()
+
+
+func add_staff(team: Team, kind: Staff, delta: int) -> void:
+	set_staff(team, kind, get_staff(team, kind) + delta)
+
+
+static func staff_label(kind: Staff) -> String:
+	match kind:
+		Staff.REROLLS: return "Relances"
+		Staff.APOTHECARY: return "Apothicaire"
+		Staff.CHEERLEADERS: return "Pom-pom girls"
+		Staff.COACH_ASSISTANTS: return "Assistants"
+	return ""
 
 
 func get_entries() -> Array[Entry]:
@@ -115,7 +185,10 @@ func get_entry_for_unit(unit: Node) -> Entry:
 
 func clear() -> void:
 	_entries.clear()
+	_staff.clear()
+	_teams.clear()
 	roster_changed.emit()
+	staff_changed.emit()
 
 
 func set_condition(entry: Entry, condition: Condition) -> void:

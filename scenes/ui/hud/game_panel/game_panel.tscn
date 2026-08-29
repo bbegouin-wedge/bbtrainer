@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://34jbo7pgxem4"]
+[gd_scene load_steps=7 format=3 uid="uid://34jbo7pgxem4"]
 
 [ext_resource type="Texture2D" uid="uid://33akwgqio8kd" path="res://assets/weather/good.png" id="2_1eluh"]
 [ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="2_l44vl"]
-[ext_resource type="PackedScene" uid="uid://bahl3m2dlgyfk" path="res://scenes/ui/hud/reroll_panel/reroll_panel.tscn" id="10_iqh8y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oalq0"]
 bg_color = Color(0, 0.08627451, 0.10980392, 0.8039216)
@@ -108,10 +107,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="RerollPanel-player-blue" parent="." instance=ExtResource("10_iqh8y")]
-offset = Vector2(47, -374)
-transform = Transform2D(1, 0, 0, 1, 47, -374)
-
-[node name="RerollPanel-player-red" parent="." instance=ExtResource("10_iqh8y")]
-offset = Vector2(1673, -374)
-transform = Transform2D(1, 0, 0, 1, 1673, -374)

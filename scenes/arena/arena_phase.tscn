@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0srna0hu3i65"]
+[gd_scene load_steps=14 format=3 uid="uid://d0srna0hu3i65"]
 
 [ext_resource type="Script" uid="uid://xomqmdx0mear" path="res://scenes/arena/arena_phase.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://dvfagydduxs0h" path="res://components/camera_mover.gd" id="2_cam_mover"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scenes/ui/hud/minimap/minimap.gd" id="10_minim"]
 [ext_resource type="Script" path="res://scenes/ui/hud/player_strip/player_strip.gd" id="11_strip"]
 [ext_resource type="Script" path="res://scenes/ui/hud/hud_dock/hud_dock.gd" id="12_dock"]
+[ext_resource type="Script" path="res://scenes/ui/hud/dugout/staff_panel.gd" id="14_staff"]
 [ext_resource type="Script" path="res://scenes/ui/hud/player_actions/player_actions.gd" id="13_acts"]
 
 [node name="ArenaPhase" type="Node2D"]
@@ -47,19 +48,34 @@ target = NodePath("../../Arena")
 
 [node name="BlueDugout" type="Control" parent="DugoutLayer"]
 offset_left = 12.0
-offset_top = 350.0
+offset_top = 96.0
 offset_right = 282.0
-offset_bottom = 952.0
+offset_bottom = 700.0
 mouse_filter = 1
 script = ExtResource("8_dugout")
 
 [node name="RedDugout" type="Control" parent="DugoutLayer"]
 offset_left = 1638.0
-offset_top = 350.0
+offset_top = 96.0
 offset_right = 1908.0
-offset_bottom = 952.0
+offset_bottom = 700.0
 mouse_filter = 1
 script = ExtResource("8_dugout")
+team = 1
+
+[node name="BlueStaff" type="PanelContainer" parent="DugoutLayer"]
+offset_left = 12.0
+offset_top = 708.0
+offset_right = 282.0
+offset_bottom = 894.0
+script = ExtResource("14_staff")
+
+[node name="RedStaff" type="PanelContainer" parent="DugoutLayer"]
+offset_left = 1638.0
+offset_top = 708.0
+offset_right = 1908.0
+offset_bottom = 894.0
+script = ExtResource("14_staff")
 team = 1
 
 [node name="DragLayer" type="CanvasLayer" parent="."]

@@ -34,6 +34,10 @@ const DEFAULT_VIEW_FRACTION := 0.5
 @onready var _dock: HudDock = $HudLayer/HudDock
 @onready var _minimap: Minimap = $MinimapLayer/Minimap
 @onready var _topbar: Control = $GamePanel/TopPanel
+@onready var _staff_panels: Array[StaffPanel] = [
+	$DugoutLayer/BlueStaff,
+	$DugoutLayer/RedStaff,
+]
 
 ## Panneaux escamotables, par clé du dock. Chacun sait glisser hors de son bord.
 var _panels: Dictionary = {}
@@ -47,18 +51,25 @@ func _ready() -> void:
 ## Différé d'une frame : Collapsible mémorise la position au repos de chaque
 ## panneau, il faut donc que la mise en page ait eu lieu.
 func _setup_collapsibles() -> void:
+	# Une clé peut piloter plusieurs panneaux : le banc s'escamote des deux côtés
+	# d'un seul bouton, alors que chaque dugout garde le sien.
 	_panels = {
-		"blue": Collapsible.attach(self, dugouts[0], Collapsible.Edge.LEFT),
-		"red": Collapsible.attach(self, dugouts[1], Collapsible.Edge.RIGHT),
-		"topbar": Collapsible.attach(self, _topbar, Collapsible.Edge.TOP),
-		"strip": Collapsible.attach(self, _strip, Collapsible.Edge.BOTTOM),
-		"minimap": Collapsible.attach(self, _minimap, Collapsible.Edge.BOTTOM),
+		"blue": [Collapsible.attach(self, dugouts[0], Collapsible.Edge.LEFT)],
+		"red": [Collapsible.attach(self, dugouts[1], Collapsible.Edge.RIGHT)],
+		"topbar": [Collapsible.attach(self, _topbar, Collapsible.Edge.TOP)],
+		"strip": [Collapsible.attach(self, _strip, Collapsible.Edge.BOTTOM)],
+		"minimap": [Collapsible.attach(self, _minimap, Collapsible.Edge.BOTTOM)],
+		"staff": [
+			Collapsible.attach(self, _staff_panels[0], Collapsible.Edge.LEFT),
+			Collapsible.attach(self, _staff_panels[1], Collapsible.Edge.RIGHT),
+		],
 	}
 	_dock.populate([
 		{ "key": "blue", "label": "Dugout bleu" },
 		{ "key": "red", "label": "Dugout rouge" },
 		{ "key": "topbar", "label": "Tour" },
 		{ "key": "strip", "label": "Joueurs" },
+		{ "key": "staff", "label": "Banc" },
 		{ "key": "minimap", "label": "Carte" },
 	])
 
@@ -66,12 +77,13 @@ func _setup_collapsibles() -> void:
 func toggle_panel(key: String) -> void:
 	if not _panels.has(key):
 		return
-	_panels[key].toggle()
+	for panel: Collapsible in _panels[key]:
+		panel.toggle()
 	refresh_camera_framing()
 
 
 func is_panel_shown(key: String) -> bool:
-	return _panels.has(key) and not _panels[key].collapsed
+	return _panels.has(key) and not _panels[key][0].collapsed
 
 
 ## Escamoter ne recalcule pas le zoom : à aire visible constante, on ne verrait
@@ -119,8 +131,10 @@ func _setup_camera_for_arena() -> void:
 ## de vue dessiné sur la minimap.
 func get_visible_band() -> Rect2:
 	var viewport_size := get_viewport().get_visible_rect().size
-	var left := HUD_MARGIN_LEFT if is_panel_shown("blue") else 0.0
-	var right := HUD_MARGIN_RIGHT if is_panel_shown("red") else 0.0
+	# La colonne de gauche est occupée dès que le dugout OU le banc y est déployé,
+	# les deux partageant la même bande.
+	var left := HUD_MARGIN_LEFT if is_panel_shown("blue") or is_panel_shown("staff") else 0.0
+	var right := HUD_MARGIN_RIGHT if is_panel_shown("red") or is_panel_shown("staff") else 0.0
 	var top := HUD_MARGIN_TOP if is_panel_shown("topbar") else 0.0
 	var bottom := HUD_MARGIN_STRIP if is_panel_shown("strip") else 0.0
 	return Rect2(
