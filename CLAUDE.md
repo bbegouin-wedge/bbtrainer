@@ -311,26 +311,26 @@ use_cases/                  # orchestration. Connaît core/, ignore Godot.
   compose_team.gd  choose_skills.gd  recruit_inducements.gd
   start_match.gd  move_unit.gd  set_player_location.gd  compute_movement_range.gd
 
-io/                         # tout ce qui touche le moteur, l'écran, le disque
-  bootstrap/                main.tscn/.gd  gui_phase.tscn/.gd
-                            scene_orchestrator.gd  event_bus.gd      (autoloads)
-  persistence/              json_catalog_loader.gd  data/*.json
-  presentation/
-    gui_state.gd                                                     (autoload)
+io/                         # les adaptateurs — l'écran n'en est qu'un
+  client/                   # traduit les clics en commandes, les événements en animations
+    bootstrap/              main.tscn/.gd  gui_phase.tscn/.gd
+                            scene_orchestrator.gd  gui_state.gd        (autoloads)
+    input/                  select.gd  hoverable.gd  drag_and_drop.gd
+                            roster_drag.gd  camera_mover.gd  camera_rotator.gd
+    world/                  arena.tscn/.gd  arena_phase.tscn/.gd  unit_zone.gd
+                            movement_range_view.gd  rect_highlighter.gd
+                            outline.gd  unit/
+    widgets/                action_button/ no_label_button/ stat_cartridge/
+                            skill_badge/ collapsible.gd contextual_panel.gd
+                            color_dot.gd
     pregame/                welcome/ team_chooser/ team_compositor/
                             skill_chooser/ inducements/
     match/                  hud_dock/ player_card/ player_strip/ minimap/
                             dugout/ player_actions/ dice_actions/
                             game_panel/ reroll_panel/
-    widgets/                action_button/ no_label_button/ stat_cartridge/
-                            skill_badge/ collapsible.gd contextual_panel.gd
-                            color_dot.gd
     theme/                  global_theme.tres
-  world/                    arena.tscn/.gd  arena_phase.tscn/.gd  unit_zone.gd
-                            movement_range_view.gd  rect_highlighter.gd
-                            outline.gd  unit/
-  input/                    select.gd  drag_and_drop.gd  roster_drag.gd
-                            hoverable.gd  camera_mover.gd  camera_rotator.gd
+  persistence/              json_catalog_loader.gd  data/*.json
+  bus/                      event_bus.gd                               (autoload)
 
 assets/  debug/
 ```
@@ -348,6 +348,13 @@ headless sans fenêtre, et donc c'est ce qui rend le harnais de test atteignable
 (cf. « Tests »). Un `extends Node` dans `core/` est une violation, même s'il
 compile — et c'est désormais `make check-arch` qui le refuse, avec l'interdiction
 faite à `core/` de citer quoi que ce soit hors de `core/`.
+
+**`io/` n'est pas l'écran, c'est la frontière.** Le client Godot en est un
+adaptateur, le stockage un autre ; l'autorité serveur, le réseau et le journal
+décrits par `docs/noyau-et-adaptateurs.html` en seront d'autres, à côté de
+`client/` et non dedans. Nommer ce niveau `presentation/` ou `gui/` aurait
+confondu un adaptateur avec la couche entière, et n'aurait laissé aucune place
+où mettre les suivants.
 
 **Une seule direction** : `io/` → `use_cases/` → `core/`. L'inversion relevée
 par l'audit (`Arena` connaît `DugoutPanel`) est la dette que cette organisation
