@@ -411,10 +411,18 @@ aujourd'hui. Leur contenu se trouve pour l'essentiel dans `bloodbowl_data.gd`,
   un UID neuf et les références des scènes pointent dans le vide. Réécrire
   ensuite les `res://` des `.tscn`, `.tres`, `.gd` et de `project.godot` ; les
   `uid://` n'ont pas à bouger.
-- **`make import` n'est pas nécessaire après un déplacement** — mesuré : le
-  registre des UID se repointe seul au chargement dès lors que le `.uid` a suivi
-  son fichier. Un `.uid` resté en arrière, lui, est signalé par la vérification
-  d'appariement.
+- **`make import` est obligatoire après un déplacement, avant de croire le
+  filet.** Le registre des UID garde les anciens chemins tant qu'il n'est pas
+  reconstruit : un lot déplaçant trois scènes a produit 12 échecs qui ont tous
+  disparu à l'import, dont un autoload prétendument non monté — un dégât
+  collatéral, pas une casse.
+
+  Ce point a d'abord été documenté à l'envers, sur la foi d'une mesure faite sur
+  **un seul script** : celle-ci passait au vert sans import, parce qu'un script
+  a un `.uid` qui voyage avec lui. Une scène n'en a pas — son UID est écrit dans
+  le `.tscn`, et la correspondance chemin ↔ UID ne vit que dans le cache. La
+  leçon générale : **une mesure sur un cas ne fait pas une règle**, surtout
+  quand le cas est le plus simple des deux.
 
 ### L'horizon — noyau et adaptateurs
 
