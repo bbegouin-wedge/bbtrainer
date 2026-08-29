@@ -16,10 +16,11 @@ JOURNAL := .tests.log
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=
 
-.PHONY: help check-integrity check-arch test verbeux godot import journal
+.PHONY: help run check-integrity check-arch test verbeux godot import journal
 
 help:
 	@echo "Cibles :"
+	@echo "  make run                  lance le jeu"
 	@echo "  make check-integrity      intégrité de tout le projet (10 vérifications)"
 	@echo "  make check-integrity V=x  une seule : projet | appariement | classes |"
 	@echo "                            scripts | ressources | donnees | scenes |"
@@ -39,6 +40,13 @@ godot:
 	  echo "Indiquer le binaire : make check-integrity GODOT=/chemin/vers/Godot_v4.x_linux.x86_64"; \
 	  exit 1; }
 	@"$(GODOT)" --version
+
+# Lance le jeu dans une vraie fenêtre. `make run ARGS="--fullscreen"` passe des
+# options au moteur ; ARGS reste vide par défaut.
+ARGS ?=
+
+run: godot
+	@"$(GODOT)" --path "$(CURDIR)" $(ARGS)
 
 import: godot
 	@"$(GODOT)" --headless --path "$(CURDIR)" --import
