@@ -13,8 +13,10 @@ extends "res://tests/lib/test_case.gd"
 ## prévu à l'étape 3 de la carte.
 
 
+## La grille n'est plus un Node : rien à libérer, mais la taille se donne à la
+## construction là où elle venait d'un @export renseigné dans la scène.
 func _grid() -> UnitGrid:
-	return track(UnitGrid.new()) as UnitGrid
+	return UnitGrid.new(Pitch.SIZE)
 
 
 func _unit() -> Node:

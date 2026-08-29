@@ -8,6 +8,10 @@ extends RefCounted
 
 var failures: Array[String] = []
 
+## Posé par le lanceur. Nul pour un test unitaire qui n'en a pas besoin ;
+## indispensable à un test d'intégration, qui doit monter une scène.
+var tree: SceneTree = null
+
 var _current := ""
 var _tracked: Array[Object] = []
 
@@ -28,8 +32,19 @@ func track(object: Object) -> Object:
 func cleanup() -> void:
 	for object in _tracked:
 		if is_instance_valid(object) and not object is RefCounted:
+			if object is Node and (object as Node).is_inside_tree():
+				(object as Node).get_parent().remove_child(object)
 			object.free()
 	_tracked.clear()
+
+
+## Monte une scène, lui laisse une frame pour vivre, et la libère au nettoyage.
+func mount(scene_path: String) -> Node:
+	var node := (load(scene_path) as PackedScene).instantiate()
+	tree.root.add_child(node)
+	await tree.process_frame
+	track(node)
+	return node
 
 
 func check(condition: bool, message: String) -> void:

@@ -2,12 +2,8 @@ class_name ArenaPhase
 extends Node2D
 
 const TILE_SIZE := 210
-const GRID_WIDTH := 26
-## 15, pas 16 : c'est la taille réelle de la grille (voir ArenaUnitGrid).
-## L'écart faussait le calcul de zoom de 7 %.
-const GRID_HEIGHT := 15
-const TERRAIN_WIDTH := GRID_WIDTH * TILE_SIZE
-const TERRAIN_HEIGHT := GRID_HEIGHT * TILE_SIZE
+const TERRAIN_WIDTH := Pitch.SIZE.x * TILE_SIZE
+const TERRAIN_HEIGHT := Pitch.SIZE.y * TILE_SIZE
 
 ## Bandes d'écran mangées par le HUD quand ses panneaux sont déployés. Le terrain
 ## se cadre dans ce qu'il reste, pas dans le viewport entier — sinon ses bords

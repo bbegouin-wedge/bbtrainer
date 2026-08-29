@@ -16,7 +16,7 @@ JOURNAL := .tests.log
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=
 
-.PHONY: help run debug editeur check-integrity check-arch test-unit test verbeux godot import journal
+.PHONY: help run debug editeur check-integrity check-arch test-behaviour test verbeux godot import journal
 
 help:
 	@echo "Cibles :"
@@ -29,7 +29,7 @@ help:
 	@echo "                            references | data_assets | architecture"
 	@echo "  make verbeux              idem, sortie moteur brute et non filtrée"
 	@echo "  make check-arch           les seules règles d'architecture (core/)"
-	@echo "  make test-unit            les tests unitaires de tests/unit/"
+	@echo "  make test-behaviour       tests de comportement (unit + integration)"
 	@echo "  make test                 intégrité + tests unitaires"
 	@echo "  make import               réimporte les assets (une fois après un clone)"
 	@echo "  make godot                affiche le moteur utilisé"
@@ -85,24 +85,34 @@ check-integrity: godot
 	exit $$code
 
 # Règle 8 de CLAUDE.md. Sous-ensemble de check-integrity, qui l'exécute aussi.
-check-arch:
-	@$(MAKE) --no-print-directory check-integrity V=architecture
+# Recette propre plutôt qu'un appel à check-integrity : ce dernier concluait
+# « INTÉGRITÉ : OK » sur un make check-arch, ce qui répond à une autre question.
+check-arch: godot
+	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- architecture \
+	  > "$(JOURNAL)" 2>&1; code=$$?; \
+	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
+	if [ $$code -ne 0 ]; then \
+	  echo "ARCHITECTURE : ÉCHEC — sortie complète dans $(JOURNAL)"; \
+	else \
+	  echo "ARCHITECTURE : OK"; \
+	fi; \
+	exit $$code
 
 # Même filtrage que check-integrity, et pour la même raison : le code de sortie
 # vient de Godot, pas du grep.
-test-unit: godot
-	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_unit.gd \
+test-behaviour: godot
+	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_behaviour.gd \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
 	grep -E "SCRIPT ERROR" "$(JOURNAL)" || true; \
 	if [ $$code -ne 0 ]; then \
-	  echo "TESTS UNITAIRES : ÉCHEC — sortie complète dans $(JOURNAL)"; \
+	  echo "TESTS DE COMPORTEMENT : ÉCHEC — sortie complète dans $(JOURNAL)"; \
 	else \
-	  echo "TESTS UNITAIRES : OK"; \
+	  echo "TESTS DE COMPORTEMENT : OK"; \
 	fi; \
 	exit $$code
 
-test: check-integrity test-unit
+test: check-integrity test-behaviour
 
 verbeux: godot
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- $(V)

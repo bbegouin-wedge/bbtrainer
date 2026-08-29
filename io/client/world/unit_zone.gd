@@ -7,16 +7,22 @@ extends TileMapLayer
 ## sont des états de MatchState affichés par le HUD, pas des lieux du monde : les
 ## calques latéraux de arena.tscn sont purement visuels.
 
-@export var unit_grid: UnitGrid
+## Posée par l'arène via attach_grid(), plus par la scène : un RefCounted ne se
+## désigne pas par un NodePath.
+var unit_grid: UnitGrid
 
 var bounds: Rect2i
 
 
-func _ready() -> void:
-	if unit_grid:
-		bounds = Rect2i(Vector2i.ZERO, unit_grid.size)
-	else:
-		push_warning("UnitZone sans UnitGrid : aucune case ne sera valide")
+## Pose la grille ET recalcule les limites dans le même geste.
+##
+## Ce n'est pas du confort : en Godot, `_ready()` remonte des enfants vers les
+## parents. Une zone qui calculerait ses limites dans son propre `_ready()` le
+## ferait AVANT que l'arène ait pu lui donner sa grille — le terrain démarrerait
+## sans une seule case valide, et rien ne le dirait.
+func attach_grid(grid: UnitGrid) -> void:
+	unit_grid = grid
+	bounds = Rect2i(Vector2i.ZERO, grid.size)
 
 
 func get_tile_from_global(global: Vector2) -> Vector2i:

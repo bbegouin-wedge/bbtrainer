@@ -1,7 +1,6 @@
 extends "res://tests/lib/test_case.gd"
 
-## Caractérise les limites d'une UnitZone avant la suppression de
-## `use_painted_cells` (carte 2 du kanban).
+## Caractérise les limites d'une UnitZone.
 ##
 ## Ce drapeau n'est posé à `true` par aucune scène : le chemin « cases peintes »
 ## n'a jamais été emprunté. Ces tests doivent donc passer à l'identique avant et
@@ -9,11 +8,8 @@ extends "res://tests/lib/test_case.gd"
 
 
 func _zone(size: Vector2i) -> UnitZone:
-	var grid := track(UnitGrid.new()) as UnitGrid
-	grid.size = size
 	var zone := track(UnitZone.new()) as UnitZone
-	zone.unit_grid = grid
-	zone._ready()
+	zone.attach_grid(UnitGrid.new(size))
 	return zone
 
 
@@ -30,8 +26,9 @@ func test_outside_the_grid_is_out_of_bounds() -> void:
 	is_false(zone.is_tile_in_bounds(Vector2i(-1, 0)), "une coordonnée négative est dehors")
 
 
-## Sans grille, aucune case n'est valide — et la zone le signale.
+## Une zone à qui personne n'a donné de grille n'a aucune case valide. C'est le
+## symptôme qu'aurait produit le piège du `_ready()` remontant : le terrain
+## s'affiche, et rien ne s'y dépose.
 func test_a_zone_without_grid_has_no_valid_tile() -> void:
 	var zone := track(UnitZone.new()) as UnitZone
-	zone._ready()
 	is_false(zone.is_tile_in_bounds(Vector2i(0, 0)), "aucune case sans grille")

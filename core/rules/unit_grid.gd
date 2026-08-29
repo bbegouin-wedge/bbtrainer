@@ -1,5 +1,5 @@
 class_name UnitGrid
-extends Node
+extends RefCounted
 
 ## Modèle logique d'une zone : quelle unité occupe quelle case.
 ##
@@ -9,12 +9,17 @@ extends Node
 
 signal unit_grid_changed
 
-## Utilisé par UnitZone pour ses limites quand la zone n'a pas de cases peintes
-## (le terrain). Sans objet pour une zone déduite de ses cases (les réserves).
-@export var size: Vector2i
+## Étendue de la grille, en cases. Donnée à la construction : elle venait
+## d'un @export renseigné dans arena.tscn, où rien ne garantissait qu'elle
+## corresponde aux règles.
+var size: Vector2i
 
 var _unit_by_tile: Dictionary = {}
 var _tile_by_unit: Dictionary = {}
+
+
+func _init(p_size := Vector2i.ZERO) -> void:
+	size = p_size
 
 
 ## Place l'unité sur la case, en la retirant d'abord de sa case précédente.
