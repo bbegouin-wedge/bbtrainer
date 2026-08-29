@@ -411,6 +411,10 @@ aujourd'hui. Leur contenu se trouve pour l'essentiel dans `bloodbowl_data.gd`,
   un UID neuf et les références des scènes pointent dans le vide. Réécrire
   ensuite les `res://` des `.tscn`, `.tres`, `.gd` et de `project.godot` ; les
   `uid://` n'ont pas à bouger.
+- **`make import` n'est pas nécessaire après un déplacement** — mesuré : le
+  registre des UID se repointe seul au chargement dès lors que le `.uid` a suivi
+  son fichier. Un `.uid` resté en arrière, lui, est signalé par la vérification
+  d'appariement.
 
 ### L'horizon — noyau et adaptateurs
 
@@ -424,6 +428,17 @@ frontière client/serveur qu'aucun code ne franchit encore.
 ---
 
 ## Règles de codage
+
+### Langue — code en anglais, commentaires en français
+
+Identifiants, noms de fichiers et de dossiers en **anglais** : c'est la
+convention déjà tenue par le code de jeu (`UnitGrid`, `get_player`,
+`movement_range`), et celle de l'API de Godot avec laquelle il se mélange à
+chaque ligne.
+
+Commentaires et documentation en **français**, comme le reste du projet — c'est
+la langue dans laquelle on raisonne ici, et un commentaire sert à transmettre un
+raisonnement.
 
 ### Taille des fonctions — règle obligatoire
 
