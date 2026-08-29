@@ -108,10 +108,23 @@ func _unit_center_offset() -> Vector2:
 
 
 func _draw_view_rect() -> void:
-	var view := _visible_pitch_rect()
-	if view.size == Vector2.ZERO:
+	var view := get_view_rect_on_map()
+	if view.size.x <= 0.0 or view.size.y <= 0.0:
 		return
-	draw_rect(_project_rect(view), VIEW_RECT_COLOR, false, VIEW_RECT_WIDTH)
+	draw_rect(view, VIEW_RECT_COLOR, false, VIEW_RECT_WIDTH)
+
+
+## Emprise de la caméra telle qu'elle est tracée sur la carte, bornée au terrain.
+##
+## Sans cette borne, au zoom le plus large la vue déborde le terrain : le
+## rectangle sortait alors entièrement de la carte — ses quatre bords au-delà
+## des siens, donc plus rien de visible dedans, et un tracé par-dessus
+## l'interface voisine.
+func get_view_rect_on_map() -> Rect2:
+	var view := _visible_pitch_rect().intersection(_pitch_local_rect())
+	if view.size.x <= 0.0 or view.size.y <= 0.0:
+		return Rect2()
+	return _project_rect(view)
 
 
 func _gui_input(event: InputEvent) -> void:
