@@ -15,10 +15,9 @@ comportement.
 
 La logique n'est pas le risque. Le câblage l'est, et il échoue **en silence** :
 
-1. **`size` vit dans la scène.** `arena.tscn` porte `size = Vector2i(26, 15)`
-   sur le nœud `ArenaUnitGrid`. En `RefCounted`, cette propriété n'a plus où
-   être écrite. Perdue, `unit_zone.gd:20` calcule `bounds = Rect2i(ZERO, ZERO)`
-   et plus aucune case n'est valide — sans erreur, juste un `push_warning`.
+1. ~~**`size` vit dans la scène.**~~ **Levé par la décision D2** : la taille
+   monte dans `core/rules/pitch.gd`. Il n'y a plus de valeur dans la scène,
+   donc plus de valeur à perdre.
 2. **L'export est câblé par `NodePath`.** `arena.tscn` : `unit_grid =
    NodePath("ArenaUnitGrid")`. Un `RefCounted` ne peut pas être désigné ainsi ;
    ce câblage doit devenir du code. C'est le vrai coût, pas le `extends`.
@@ -28,7 +27,39 @@ La logique n'est pas le risque. Le câblage l'est, et il échoue **en silence** 
 
 À corriger au passage : **la taille du terrain a deux sources de vérité**.
 `arena_phase.gd:5-8` déclare `GRID_WIDTH := 26` / `GRID_HEIGHT := 15`, et
-`arena.tscn` porte la même dimension, invisible depuis le code.
+`arena.tscn` porte la même dimension, invisible depuis le code. La décision D2
+les remplace toutes deux.
+
+## Décisions
+
+**D1 — `arena.gd` construit la grille et l'injecte dans `UnitZone`.**
+Il en est déjà le seul mutateur : `place_unit` (l.54), `remove_unit` (l.62),
+`clear` (l.36) — le propriétaire est désigné par l'usage. Laisser `UnitZone`
+créer la sienne coûterait une ligne de moins et fermerait une porte :
+`arena.gd:15` tient déjà `_drop_zones: Array[UnitZone] = [play_area]`, un
+tableau d'un seul élément qui attend les réserves. Le jour où deux zones doivent
+s'accorder sur qui occupe quoi, une grille par zone est ce qu'il ne faut pas.
+
+**D2 — la taille du terrain monte dans `core/rules/pitch.gd`.**
+
+```gdscript
+const SIZE := Vector2i(26, 15)
+```
+
+26 × 15 est une **règle de Blood Bowl**, pas un réglage d'affichage.
+`arena.gd` construira `UnitGrid.new(Pitch.SIZE)`, `arena_phase.gd` lira
+`Pitch.SIZE` au lieu de redéclarer `GRID_WIDTH`/`GRID_HEIGHT`, et `arena.tscn`
+cessera de porter `size`. Un fichier plutôt qu'une constante isolée : c'est là
+qu'iront les zones d'en-but et les limites de placement.
+
+`TILE_SIZE = 210` reste dans `io/` — c'est du pixel, pas de la règle.
+
+**D3 — il n'y a pas d'autres zones.** `arena.tscn` ne contient qu'un seul
+`UnitZone` (`PlayArea`) et une seule `UnitGrid`. Les calques latéraux
+(`blue-reserves`, `red-KO`, `blue-injuries`…) sont de simples `TileMapLayer`
+sans script, purement visuels : réserves et K.O. sont des états de `MatchState`
+affichés par le HUD. La question ne se pose donc pas, et le drapeau
+`use_painted_cells` qui la portait était du code mort — supprimé par la carte 2.
 
 ## Plan
 
@@ -63,20 +94,12 @@ ne rien vérifier.
 Un test d'intégration qui monte `arena.tscn` et vérifie que la zone de jeu
 reçoit une grille de 26 × 15. Le harnais sait déjà instancier les scènes.
 
-## Questions ouvertes
-
-- **Qui construit la grille et la donne à `UnitZone`** ? `arena.gd` dans son
-  `_ready()`, ou `UnitZone` qui la crée lui-même ? La première option garde une
-  seule grille pour plusieurs zones, la seconde simplifie le câblage.
-- **D'où vient `size`** ? Des constantes de `arena_phase.gd` — ce qui supprime
-  la duplication mais fait dépendre le monde de son coordinateur — ou d'un
-  `@export` porté par `UnitZone`, qui laisse la valeur dans la scène.
-- **Les autres zones** (réserves, KO, blessés) déduisent leurs limites de leurs
-  cases peintes et n'utilisent pas `size`. Vérifier qu'aucune ne casse.
-
 ## Terminé quand
 
-- `core/rules/unit_grid.gd` existe, `make check-arch` le vérifie et passe ;
+- `core/rules/unit_grid.gd` et `core/rules/pitch.gd` existent, `make check-arch`
+  les vérifie et passe ;
+- `arena_phase.gd` ne déclare plus `GRID_WIDTH`/`GRID_HEIGHT`, et `arena.tscn`
+  ne porte plus `size` : une seule source de vérité pour la taille du terrain ;
 - `make test-unit` couvre les cinq invariants ci-dessus et passe ;
 - `make check-integrity` passe ;
 - le jeu lancé par `make run` permet toujours de déposer un joueur sur le
