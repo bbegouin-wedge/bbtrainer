@@ -34,6 +34,14 @@ func force_deselect() -> void:
 	_refresh_outline()
 
 
+## Pendant symétrique : allume la sélection sans rappeler GuiState, qui est déjà
+## en train de la poser. Sans lui, une sélection venue d'ailleurs que du clic —
+## le bandeau de joueurs, par exemple — n'allumerait aucun contour.
+func force_select() -> void:
+	is_selected = true
+	_refresh_outline()
+
+
 func manage_click(event: InputEvent) -> void:
 	if event.pressed:
 		_mouse_down_position = sprite.get_global_mouse_position()

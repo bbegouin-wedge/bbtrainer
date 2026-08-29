@@ -86,6 +86,15 @@ func world_to_screen(world: Vector2) -> Vector2:
 	return (world - camera.get_screen_center_position()) * camera.zoom.x + viewport_center
 
 
+## Amène ce point du monde au centre de la bande visible — pas au centre de
+## l'écran, qui est masqué par les colonnes quand elles sont déployées.
+func center_camera_on(world: Vector2) -> void:
+	var band := get_visible_band()
+	var band_center := band.position + band.size * 0.5
+	var viewport_center := get_viewport().get_visible_rect().size * 0.5
+	camera.position = world - (band_center - viewport_center) / camera.zoom.x
+
+
 ## Zoom tel que la bande visible couvre DEFAULT_VIEW_FRACTION de l'aire du terrain.
 func _default_zoom(band_size: Vector2) -> float:
 	var terrain_area := float(TERRAIN_WIDTH) * float(TERRAIN_HEIGHT)

@@ -7,6 +7,8 @@ func set_selected_unit(unit: Unit) -> void:
 	if _selected_unit and _selected_unit != unit:
 		_selected_unit.select.force_deselect()
 	_selected_unit = unit
+	if unit:
+		unit.select.force_select()
 	EventBus.unit_selected.emit(unit)
 
 

@@ -13,6 +13,9 @@ enum Location { RESERVES, PITCH, KO, INJURED }
 ## Côté du terrain. Seul BLUE a un effectif aujourd'hui ; RED existe pour que les
 ## vues sachent déjà quoi filtrer le jour où la seconde équipe arrivera.
 enum Team { BLUE, RED }
+## État d'un joueur sur le terrain. Rien ne le pilote encore — c'est le bandeau
+## de joueurs qui le donne à lire, en attendant les règles de tour.
+enum Condition { READY, PLAYED, PRONE, STUNNED }
 
 const DUGOUT_LOCATIONS := [Location.RESERVES, Location.KO, Location.INJURED]
 
@@ -26,6 +29,7 @@ class Entry:
 	var number: int
 	var team: Team = Team.BLUE
 	var location: Location = Location.RESERVES
+	var condition: Condition = Condition.READY
 	## Présence sur le terrain ; nulle partout ailleurs.
 	var unit: Node = null
 
@@ -112,6 +116,22 @@ func get_entry_for_unit(unit: Node) -> Entry:
 func clear() -> void:
 	_entries.clear()
 	roster_changed.emit()
+
+
+func set_condition(entry: Entry, condition: Condition) -> void:
+	if entry.condition == condition:
+		return
+	entry.condition = condition
+	roster_changed.emit()
+
+
+static func condition_label(condition: Condition) -> String:
+	match condition:
+		Condition.READY: return "Prêt"
+		Condition.PLAYED: return "Joué"
+		Condition.PRONE: return "À terre"
+		Condition.STUNNED: return "Sonné"
+	return ""
 
 
 static func location_label(location: Location) -> String:
