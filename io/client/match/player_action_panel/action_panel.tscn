@@ -1,0 +1,421 @@
+[gd_scene load_steps=15 format=3 uid="uid://ct8itjqv17blp"]
+
+[ext_resource type="Texture2D" uid="uid://cqdab4go4vfvt" path="res://assets/ui/panel/inner-stone-panel.png" id="2_h06vk"]
+[ext_resource type="Texture2D" uid="uid://bkfntf3ogdav6" path="res://assets/parchemin.png" id="2_hfnf2"]
+[ext_resource type="Texture2D" uid="uid://bu6c0qikxi0sp" path="res://assets/ui/panel/grimoire.png" id="3_h06vk"]
+[ext_resource type="Texture2D" uid="uid://dk0hohg0f2i66" path="res://assets/ui/icons/player/played.png" id="4_0kxv4"]
+[ext_resource type="FontFile" uid="uid://bcmmna6iucjsj" path="res://assets/fonts/PermanentMarker-Regular.ttf" id="5_0kxv4"]
+[ext_resource type="Texture2D" uid="uid://b1nahrh266r4j" path="res://assets/ui/icons/player/ko.png" id="5_8ersf"]
+[ext_resource type="Texture2D" uid="uid://c7ppb4sisls0b" path="res://assets/ui/icons/player/ready.png" id="5_flvcu"]
+[ext_resource type="PackedScene" uid="uid://yrg4u66cgkpg" path="res://io/client/widgets/action_button/action_button.tscn" id="5_xeow5"]
+[ext_resource type="Texture2D" uid="uid://blo3rmg0c36ht" path="res://assets/ui/icons/player/prone.png" id="7_kqk7c"]
+[ext_resource type="Texture2D" uid="uid://duulofso64w06" path="res://assets/ui/icons/player/stunned.png" id="7_urefj"]
+[ext_resource type="Texture2D" uid="uid://8eysq5i3itps" path="res://assets/ui/icons/player/injured.png" id="9_kqk7c"]
+[ext_resource type="Texture2D" uid="uid://dpjcb0fjrhohe" path="res://assets/ui/icons/player/gazed.png" id="11_ghqmb"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_h06vk"]
+
+[sub_resource type="Theme" id="Theme_qrwsm"]
+
+[node name="ActionPanel" type="CanvasLayer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 1920.0
+offset_top = 780.0
+offset_right = 1920.0
+offset_bottom = 784.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_hfnf2")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer/TextureRect2"]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 384.0
+offset_bottom = 540.0
+size_flags_vertical = 3
+theme_type_variation = &"EmptyIronPanel"
+
+[node name="Button" type="Button" parent="VBoxContainer/TextureRect2/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -36.5
+offset_right = 59.5
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"texturedButton"
+text = "rollxdf
+"
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_hfnf2")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer/TextureRect"]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 384.0
+offset_bottom = 540.0
+size_flags_vertical = 3
+theme_type_variation = &"EmptyIronPanel"
+
+[node name="bottomActionPanel" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 780.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="spacerLeft" type="Control" parent="bottomActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="leftpanel" type="Panel" parent="bottomActionPanel"]
+visible = false
+z_index = 3
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme_type_variation = &"EmptyIronPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="bottomActionPanel/leftpanel"]
+layout_mode = 0
+offset_right = 470.0
+offset_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 60
+
+[node name="GridContainer" type="GridContainer" parent="bottomActionPanel/leftpanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="bottomActionPanel/leftpanel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"texturedButton"
+
+[node name="Button2" type="Button" parent="bottomActionPanel/leftpanel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"emptyButton"
+
+[node name="Button" type="Button" parent="bottomActionPanel/leftpanel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"emptyButton"
+
+[node name="TextureRect2" type="TextureRect" parent="bottomActionPanel"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+size_flags_stretch_ratio = 1.5
+mouse_filter = 2
+texture = ExtResource("2_h06vk")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="rightpanel" type="Panel" parent="bottomActionPanel/TextureRect2"]
+z_index = 3
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+size_flags_stretch_ratio = 4.0
+mouse_filter = 2
+theme_type_variation = &"EmptyIronPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="bottomActionPanel/TextureRect2/rightpanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="GridContainer" type="GridContainer" parent="bottomActionPanel/TextureRect2/rightpanel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PanelTitle" type="Label" parent="bottomActionPanel/TextureRect2/rightpanel/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Stats"
+
+[node name="spacerLeft2" type="Control" parent="bottomActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="bottomActionPanel"]
+visible = false
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+texture = ExtResource("2_h06vk")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="rightpanel" type="Panel" parent="bottomActionPanel/TextureRect"]
+z_index = 3
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+size_flags_stretch_ratio = 4.0
+theme_type_variation = &"EmptyIronPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="bottomActionPanel/TextureRect/rightpanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="GridContainer" type="GridContainer" parent="bottomActionPanel/TextureRect/rightpanel/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+offset_right = 105.0
+offset_bottom = 1086.0
+size_flags_vertical = 10
+
+[node name="spacer#1" type="Control" parent="VBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Panel" type="Panel" parent="VBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxLine_h06vk")
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+color = Color(0, 0.08627451, 0.10980392, 0.5294118)
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("3_h06vk")
+expand_mode = 4
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="pret" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("5_xeow5")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "Pret !"
+button_icon = ExtResource("5_flvcu")
+
+[node name="played" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("5_xeow5")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "Joué"
+button_icon = ExtResource("4_0kxv4")
+
+[node name="spacer#2" type="Control" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="prone" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("5_xeow5")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = " À terre"
+button_icon = ExtResource("7_kqk7c")
+
+[node name="stunned" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("5_xeow5")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "Sonné"
+button_icon = ExtResource("5_8ersf")
+
+[node name="spacer#1" type="Control" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ko" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("5_xeow5")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "KO"
+button_icon = ExtResource("7_urefj")
+
+[node name="Blessé" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("5_xeow5")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "Blessé"
+button_icon = ExtResource("9_kqk7c")
+
+[node name="spacer#3" type="Control" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Distrait" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("5_xeow5")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+label_text = "distrait"
+button_icon = ExtResource("11_ghqmb")
+
+[node name="spacer#4" type="Control" parent="VBoxContainer2/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_right = 322.0
+offset_bottom = 323.0
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_0kxv4")
+tab_alignment = 1
+current_tab = 0
+
+[node name="Etats" type="MarginContainer" parent="Panel/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 0
+
+[node name="État" type="GridContainer" parent="Panel/TabContainer/Etats"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Pret" type="Button" parent="Panel/TabContainer/Etats/État"]
+layout_mode = 2
+theme = SubResource("Theme_qrwsm")
+theme_type_variation = &"texturedButonWithIcon"
+text = "Pret"
+
+[node name="Joué" type="Button" parent="Panel/TabContainer/Etats/État"]
+layout_mode = 2
+theme = SubResource("Theme_qrwsm")
+theme_type_variation = &"texturedButonWithIcon"
+text = "joué"
+
+[node name="A terre" type="Button" parent="Panel/TabContainer/Etats/État"]
+layout_mode = 2
+theme = SubResource("Theme_qrwsm")
+theme_type_variation = &"texturedButonWithIcon"
+text = "A terre"
+
+[node name="Sonné" type="Button" parent="Panel/TabContainer/Etats/État"]
+layout_mode = 2
+theme = SubResource("Theme_qrwsm")
+theme_type_variation = &"texturedButonWithIcon"
+text = "Sonné"
+
+[node name="KO" type="Button" parent="Panel/TabContainer/Etats/État"]
+layout_mode = 2
+theme = SubResource("Theme_qrwsm")
+theme_type_variation = &"texturedButonWithIcon"
+text = "KO"
+
+[node name="Blessé" type="Button" parent="Panel/TabContainer/Etats/État"]
+layout_mode = 2
+theme = SubResource("Theme_qrwsm")
+theme_type_variation = &"texturedButonWithIcon"
+text = "Blessé"
+
+[node name="Statistiques" type="Panel" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="Panel/TabContainer/Statistiques"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 49.0
+text = "statistiques
+"

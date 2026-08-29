@@ -12,7 +12,7 @@ const SCENE_ORDER := [
 ]
 
 const GUI_SCENES := [Scene.WELCOME, Scene.TEAM_CHOOSER, Scene.TEAM_COMPOSITOR, Scene.INDUCEMENT_SELECTOR, Scene.SKILL_CHOOSER]
-const GUI_PHASE_PATH := "res://scenes/ui/gui_phase.tscn"
+const GUI_PHASE_PATH := "res://io/client/bootstrap/gui_phase.tscn"
 const ARENA_PHASE_PATH := "res://io/client/world/arena_phase.tscn"
 
 var _current_scene: Scene = Scene.WELCOME
