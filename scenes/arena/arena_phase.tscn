@@ -103,18 +103,18 @@ pitch = NodePath("../../Arena/PlayArea")
 
 [node name="PlayerStrip" type="Control" parent="HudLayer" node_paths=PackedStringArray("arena_phase")]
 offset_left = 560.0
-offset_top = 944.0
+offset_top = 904.0
 offset_right = 1360.0
-offset_bottom = 1032.0
+offset_bottom = 992.0
 mouse_filter = 1
 script = ExtResource("11_strip")
 arena_phase = NodePath("../..")
 
 [node name="HudDock" type="Control" parent="HudLayer" node_paths=PackedStringArray("arena_phase")]
 offset_left = 760.0
-offset_top = 1040.0
+offset_top = 1000.0
 offset_right = 1160.0
-offset_bottom = 1074.0
+offset_bottom = 1034.0
 mouse_filter = 1
 script = ExtResource("12_dock")
 arena_phase = NodePath("../..")

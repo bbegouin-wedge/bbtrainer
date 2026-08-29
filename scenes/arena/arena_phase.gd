@@ -16,7 +16,9 @@ const TERRAIN_HEIGHT := GRID_HEIGHT * TILE_SIZE
 const HUD_MARGIN_LEFT := 282.0
 const HUD_MARGIN_RIGHT := 282.0
 const HUD_MARGIN_TOP := 74.0
-const HUD_MARGIN_STRIP := 128.0
+## Le bandeau et le dock sont remontés de 46 px : collés au bord bas d'une
+## fenêtre sans bordure de 1080 px, ils tombaient sous le Dock du système.
+const HUD_MARGIN_STRIP := 176.0
 
 ## Part de l'aire du terrain visible au démarrage. Le terrain entier tenait à
 ## l'écran, ce qui ne laissait rien à explorer et rendait la navigation inutile.
