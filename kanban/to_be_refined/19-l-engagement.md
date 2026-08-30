@@ -2,9 +2,26 @@
 
 ## Objectif
 
-Le début de mi-temps : mise en place des deux équipes, coup de pied, table
-d'engagement. C'est ce qui manque pour qu'une partie démarre toute seule, sans
-qu'un humain place les joueurs.
+**Remplir** les phases que la carte 24 aura créées : mise en place des deux
+équipes, coup de pied, table d'engagement. C'est ce qui manque pour qu'une partie
+démarre toute seule, sans qu'un humain place les joueurs.
+
+## Ce que la carte 24 lui lègue
+
+Le squelette existe : `Phase::Setup { placing }`, `Phase::Kickoff`,
+`Phase::HalfTime`, et les transitions entre elles. Cette carte n'a plus à
+**créer** ces moments, seulement à leur donner leur contenu.
+
+Deux choses en découlent :
+
+- **Le coup d'envoi est sous-découpé**, et ce n'est pas un choix de conception :
+  `skills_fr.json` le prouve — *« durant la Séquence de Début d'Engagement, après
+  que le Coup d'Envoi Dévie mais **avant que l'Événement de Coup d'Envoi** ne
+  soit lancé »*. Une compétence agit entre les deux moments ; ils doivent donc
+  être distincts et observables.
+- **`Setup` attend ses placements.** La carte 24 ne lui donne qu'un « j'ai
+  fini » ; les onze placements arrivent avec le roster (carte 22), et leurs
+  règles ici.
 
 ## Le contenu
 
@@ -27,7 +44,10 @@ est une vraie compétence de coach, et un agent qui la subit part perdant.
 - **La mise en place est-elle une suite de commandes** (un placement à la fois,
   cohérent avec le pas atomique de la carte 15) **ou une commande unique**
   portant les onze positions ? Le pas atomique est cohérent, mais la légalité
-  d'un placement dépend de l'ensemble final.
+  d'un placement dépend de l'**ensemble final** — trois sur la ligne de mêlée,
+  deux par large couloir au plus. Un placement isolé n'est donc que
+  provisoirement légal, et c'est le « j'ai fini » qui valide l'ensemble. C'est un
+  vrai problème de conception, pas un détail de forme.
 - **Les résultats d'engagement les plus perturbants** (invasion du terrain,
   ballon renvoyé, blitz surprise) sont-ils tous du lot, ou en garde-t-on
   quelques-uns pour plus tard ?
