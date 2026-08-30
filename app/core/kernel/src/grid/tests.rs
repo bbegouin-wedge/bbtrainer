@@ -46,6 +46,8 @@ fn vider_vide_les_deux_index() {
     let mut g = grille();
     let u = unite(1);
     g.place(u, Tile::new(2, 2));
+    assert!(g.has_unit(u), "l'unité est connue avant le vidage");
+
     g.clear();
 
     assert_eq!(g.unit_at(Tile::new(2, 2)), None);
