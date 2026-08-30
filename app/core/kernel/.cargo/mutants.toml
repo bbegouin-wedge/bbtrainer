@@ -1,0 +1,15 @@
+# Ce que la mutation n'a pas à muter, et pourquoi.
+#
+# `Die::prealloc` dit combien de dés on tire d'avance. Trois mutations y
+# survivent — la remplacer par 0, par 1, ou supprimer le cas du d6 — et c'est
+# NORMAL : la réserve se prolonge toute seule, donc la taille du pré-tirage
+# n'est observable par aucun appelant. C'est très exactement la propriété A3 de
+# la carte 13, et sa transparence est démontrée par un test.
+#
+# Autrement dit, ces trois mutants survivent parce que la conception est juste.
+# Les tuer demanderait un test qui affirme `prealloc() == 10_000` — un test
+# d'une constante de réglage, qu'il faudrait corriger à chaque ajustement, et
+# qui ne protégerait rien.
+#
+# `prealloc` est un réglage de performance, pas un comportement.
+exclude_re = ["Die::prealloc"]

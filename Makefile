@@ -190,7 +190,11 @@ check-arch: godot import
 check-mutations:
 	@command -v cargo-mutants >/dev/null || \
 	  { echo "cargo-mutants introuvable — cargo install cargo-mutants --locked"; exit 1; }
-	@( cd app/core && cargo mutants -d kernel --no-shuffle $(if $(M),-f "$(M)",) ) \
+	@# --config explicite : cargo-mutants le chercherait sinon à la racine de
+	@# l'espace de travail, où un lecteur du Makefile ne saurait pas qu'il existe.
+	@# Le fichier vit à côté du code qu'il concerne et dit pourquoi il exclut.
+	@( cd app/core && cargo mutants -d kernel --no-shuffle \
+	   --config kernel/.cargo/mutants.toml $(if $(M),-f "$(M)",) ) \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^(MISSED|TIMEOUT|[0-9]+ mutants tested)" "$(JOURNAL)" || true; \
 	if ! grep -qE "^[1-9][0-9]* mutants tested" "$(JOURNAL)"; then \
