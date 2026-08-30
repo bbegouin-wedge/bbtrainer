@@ -119,6 +119,12 @@ Ici la panique le rend impossible sans qu'on ait rien à surveiller.
 égaler le nombre de tests écrits. Un test vert à cette phase est un test à
 réécrire, pas à garder.
 
+**Le seul trou connu du filet : `#[should_panic]` nu.** Il est satisfait par
+n'importe quelle panique, y compris celle du `todo!()`. Un test qui l'utilise
+passe donc au vert en phase 4 sans rien vérifier, et pourrait le rester à
+jamais. Toujours écrire `#[should_panic(expected = "…")]` avec un fragment du
+message attendu — la carte 13 s'est fait prendre deux fois là-dessus.
+
 Une règle de la phase 2 sans test est un manquement, pas un arbitrage : si la
 règle ne se teste pas, c'est la conception qu'il faut revoir.
 
@@ -160,12 +166,27 @@ et vérifie qu'un test rougit. Une mutation qui survit est un test manquant : le
 code fait quelque chose que rien ne vérifie. C'est la version mécanique de
 *« un test qu'on n'a pas vu échouer ne protège rien »*.
 
+**Une mutation qui survit n'est pas toujours un test manquant.** Elle peut être
+la preuve qu'une propriété tient : sur la carte 13, trois mutations de la taille
+de pré-tirage des dés survivent parce que cette taille n'est observable par
+personne — ce qui était précisément la propriété à démontrer. Une exclusion se
+justifie alors dans `.cargo/mutants.toml`, **avec son raisonnement écrit
+dedans**. Elle se justifie, elle ne se subit pas : le doute par défaut reste
+« il manque un test ».
+
 Il est limité au module que la carte a touché (`--file`). Sans ce filtre il
 recompile et relance la suite une fois par mutation sur tout le noyau, et une
 vérification qui prend des minutes finit par se sauter. Le filtre a son prix,
 écrit ici pour ne pas l'oublier : **une régression que la carte causerait
 ailleurs y échapperait.** Une passe complète, sans filtre, vaut d'être lancée de
 temps en temps — pas à chaque carte.
+
+**Un piège de `cargo llvm-cov`, rencontré et cher payé.** Si le résumé annonce
+une ligne non couverte que le rapport détaillé — texte, HTML ou LCOV — ne montre
+nulle part, chercher une **queue divergente** : une fonction qui finit par
+`panic!` produit une ligne fantôme dans le résumé. La réécrire en une expression
+la fait disparaître. Sans ce raccourci, on interroge l'outil pendant une
+demi-heure.
 
 **Et si la carte ajoute de l'état au noyau : étendre le scénario d'empreinte**
 de la carte 12. Ce contrôle compare deux processus et attrape n'importe quelle
@@ -194,6 +215,17 @@ Ce qui mérite d'y figurer :
   le bon arbitrage.
 - **Ce qui a démenti une hypothèse.** C'est le plus précieux et le plus vite
   oublié.
+
+**Et parfois dans une autre carte.** Une découverte ne va pas toujours dans la
+carte qui l'a faite : ce qu'elle contraint en aval va dans la carte concernée, et
+ce qui vaut pour tout le projet va dans `CLAUDE.md` ou dans ce fichier. La
+carte 13 a ainsi écrit dans la carte 14 (l'absence de `Clone` sur les dés, qui
+lui impose de nommer sa copie), dans la carte 16 (la table des symboles du dé de
+blocage, sourcée mais applicable là-bas), et ici même (le trou du
+`#[should_panic]`, le piège de la couverture).
+
+Le test : *qui aura besoin de le savoir, et quand ?* Une leçon rangée dans la
+carte qui l'a apprise mais utile trois cartes plus loin ne sera pas relue.
 
 Les cartes 9 et 12 de `done/` sont l'étalon. Elles ne décrivent pas ce qu'il
 fallait faire — elles racontent ce qu'on a découvert en le faisant : le nul

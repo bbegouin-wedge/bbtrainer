@@ -41,6 +41,32 @@ relance, donc l'agent **apprend** la gestion des relances au lieu de la subir.
   c'est une raison de garder l'état plat.
 - **Aucune référence de nœud**, déjà acquis avec `UnitId`.
 
+## Ce que la carte 13 lui lègue
+
+**`Dice` n'est pas `Clone`, délibérément.** Un `#[derive(Clone)]` sur `Match` ne
+compilera donc pas, et c'est voulu : c'est le garde-fou de A5. Le stratège
+clonera un jour l'état pour dérouler des tours qui n'ont pas lieu, et s'il en
+clonait les dés, ses simulations verraient **les dés qui vont réellement
+sortir** — il jouerait en connaissant l'avenir, sans que rien ne le signale.
+
+Cette carte doit donc **nommer l'opération de copie** plutôt que la dériver :
+
+```rust
+/// Le seul moyen d'obtenir un état pour un déroulé : copie tout, sauf les dés,
+/// qu'il refait depuis une graine de déroulé.
+fn fork_for_rollout(&self, rollout_seed: u64) -> Self
+```
+
+La carte 13 ne fournit que l'empêchement ; l'implémentation est ici.
+
+**`Dice::new(seed)` existe et est autonome.** La carte 13 s'était écrite autour
+d'un `Match::new(seed)` qui n'existait pas encore. C'est cette carte qui branche
+les dés dans l'état de partie.
+
+**L'annulation d'un tour n'a pas besoin de cloner.** Les curseurs des réserves
+sont des index : on les note et on les repose. Rien ne l'exerce encore, donc rien
+ne l'implémente — la couverture le signalerait, et ce serait juste.
+
 ## Rapport à la carte 11
 
 La carte 11 (« Extraire l'état de partie ») demande où va le contenu de

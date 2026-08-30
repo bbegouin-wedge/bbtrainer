@@ -9,7 +9,25 @@ un blocage pose jusqu'à trois questions au coach avant d'être résolu.
 
 - **La force** et son calcul : assistances offensives et défensives, d'où
   découle le nombre de dés (1, 2 ou 3) et **qui les choisit**.
-- **Le dé de blocage** — sa propre réserve (carte 13), pas un d6.
+- **La table des symboles du dé de blocage**, sourcée et laissée ici par la
+  carte 13 :
+
+  | Face | Résultat |
+  |---|---|
+  | 1 | Crâne |
+  | 2 | Double chute |
+  | 3 | Repoussé |
+  | 4 | Repoussé |
+  | 5 | Trébuchement |
+  | 6 | Mis à terre |
+
+  **Le noyau des dés ne connaît que des nombres.** `Dice::roll(Die::Block)` rend
+  un entier de 1 à 6 ; la traduction en symbole est une règle du jeu, donc elle
+  vit ici. Bénéfice au test : une réserve écrite à la main s'écrit `[1, 1]` et se
+  lit « deux crânes ».
+
+  Le dé de blocage a bien sa propre réserve malgré ses six faces : sans elle,
+  chaque blocage décalerait la suite des esquives et des jets d'armure.
 - **La poussée** : cases de recul admissibles, poussée en chaîne quand la case
   est occupée, sortie de terrain.
 - **Le suivi** : l'attaquant avance ou non, à son choix.
@@ -41,6 +59,9 @@ obligatoire.
   n'a pas de jet d'armure et sa table de blessure diffère.
 - **L'apothicaire** intercepte la blessure. Hors périmètre, mais le point
   d'accroche doit-il exister dès maintenant, ou la carte 20 le posera-t-elle ?
+- **Le nombre de dés et qui les choisit** : la table des symboles est sourcée,
+  mais pas la règle qui dit combien de dés on jette selon l'écart de force, ni
+  celui qui choisit le résultat quand l'avantage est au défenseur.
 
 ## Terminé quand
 

@@ -727,9 +727,19 @@ Deux harnais, deux questions distinctes :
 
 **Un test qu'on n'a pas vu échouer ne protège rien.** Tout test ajouté doit être
 mis à l'épreuve d'une mutation du code qu'il couvre : on casse volontairement le
-comportement, on vérifie que le test rougit, on rétablit. Les tests de `UnitGrid`
-l'ont été sur deux mutations — `place_unit` qui ne libère plus l'ancienne case,
-et `is_tile_blocked_for` qui oublie qu'une unité ne se bloque pas elle-même.
+comportement, on vérifie que le test rougit, on rétablit. Sur le noyau Rust,
+`make check-mutations` le fait mécaniquement (cf. règle 15) ; ailleurs, ça reste
+à la main. Les tests de `UnitGrid` l'ont été sur deux mutations — `place_unit`
+qui ne libère plus l'ancienne case, et `is_tile_blocked_for` qui oublie qu'une
+unité ne se bloque pas elle-même.
+
+**`#[should_panic]` nu ne vérifie rien.** Il est satisfait par n'importe quelle
+panique — celle qu'on attend, mais aussi celle d'un `todo!()`, d'un index hors
+bornes ou d'un `unwrap` sur autre chose. Toujours
+`#[should_panic(expected = "…")]` avec un fragment du message. Deux tests de la
+carte 13 passaient au vert contre une implémentation entièrement absente : c'est
+le sixième « OK sans rien vérifier » de ce dépôt, et le premier attrapé par un
+dispositif plutôt que par hasard.
 
 Trois natures de vérification, et aucune ne se déduit des autres :
 
