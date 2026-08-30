@@ -21,5 +21,5 @@ func _ready():
 func _on_button_clicked(team_uid: String):
 	var team = BloodBowlManager.get_team(team_uid)
 	team_selected.emit(team)
-	TeamState.selectTeam(team)
+	TeamState.select_team(team)
 	print("%s a été cliqué!" % team_uid)

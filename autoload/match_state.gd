@@ -92,12 +92,12 @@ func build_from_team_state() -> void:
 	_entries.clear()
 	_staff.clear()
 	_teams.clear()
-	_teams[Team.BLUE] = TeamState.getSelectedTeam()
+	_teams[Team.BLUE] = TeamState.get_selected_team()
 	var number := 1
 	for player: BloodBowlData.Player in TeamState.get_expanded_team():
 		_entries.append(Entry.new(number, Team.BLUE, player))
 		number += 1
-	for star: BloodBowlData.StarPlayer in TeamState._champions_list.values():
+	for star: BloodBowlData.StarPlayer in TeamState.get_stars():
 		_entries.append(Entry.new(number, Team.BLUE, null, star))
 		number += 1
 	roster_changed.emit()

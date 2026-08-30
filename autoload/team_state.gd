@@ -1,50 +1,55 @@
 extends Node
 
+## Porte la composition d'équipe et prévient les écrans quand elle change.
+##
+## Il ne contient plus de logique : elle vit dans `TeamComposition`, côté noyau.
+## Ce qui reste ici est ce qu'un noyau ne peut pas faire — connaître l'`EventBus`.
 
-var _selectedTeam : BloodBowlData.Team = null;
-var _team_composition: Dictionary = {}
-var _champions_list: Dictionary = {}
-var _expanded_team: Array = []
+var composition := TeamComposition.new()
 
-func selectTeam(selectedTeam: BloodBowlData.Team) -> void: 
-	_selectedTeam = selectedTeam
-	_team_composition = {}
-	for player in _selectedTeam.available_players:
-		_team_composition[player] = 0
-	EventBus.team_selected.emit(_selectedTeam)
-	
-func getSelectedTeam() -> BloodBowlData.Team:
-	return _selectedTeam
-	
-func recruitPlayer(recruit: BloodBowlData.Player) -> void:
-	if recruit not in _team_composition.keys(): 
-		_team_composition[recruit] = 0;
-	_team_composition[recruit] = _team_composition[recruit] + 1;
 
-func firePlayer(recruit: BloodBowlData.Player) -> void:
-	if _team_composition[recruit] == 0:
-		return
-	_team_composition[recruit] = _team_composition[recruit] - 1;
+func select_team(selected_team: BloodBowlData.Team) -> void:
+	composition.select_team(selected_team)
+	EventBus.team_selected.emit(selected_team)
 
-func getPlayerCount(ofType: BloodBowlData.Player) -> int:
-	return _team_composition[ofType]
+
+func get_selected_team() -> BloodBowlData.Team:
+	return composition.get_selected_team()
+
+
+func recruit_player(recruit: BloodBowlData.Player) -> void:
+	composition.recruit_player(recruit)
+
+
+func fire_player(recruit: BloodBowlData.Player) -> void:
+	composition.fire_player(recruit)
+
+
+func get_player_count(of_type: BloodBowlData.Player) -> int:
+	return composition.get_player_count(of_type)
+
 
 func get_composition() -> Dictionary:
-	return _team_composition
-	
+	return composition.get_composition()
+
+
 func add_star(champion: BloodBowlData.StarPlayer) -> void:
-	_champions_list[champion.uid]=champion
+	composition.add_star(champion)
 	EventBus.star_selected.emit(champion)
 
+
 func remove_star(champion: BloodBowlData.StarPlayer) -> void:
-	_champions_list.erase(champion.uid)
+	composition.remove_star(champion)
 	EventBus.star_deselected.emit(champion)
-	
+
+
+func get_stars() -> Array:
+	return composition.get_stars()
+
+
 func get_expanded_team() -> Array:
-	return _expanded_team
-	
-func expandTeamComposition() -> void:
-	_expanded_team.clear()
-	for player_ref in _team_composition.keys():
-		for i in range(_team_composition[player_ref]):
-			_expanded_team.append(player_ref.duplicate())
+	return composition.get_expanded_team()
+
+
+func expand_team_composition() -> void:
+	composition.expand_team_composition()

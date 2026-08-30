@@ -7,7 +7,7 @@ func _ready():
 	
 func _on_game_phase_changed(phase:  SceneOrchestrator.GameStatus):
 	if phase == SceneOrchestrator.GameStatus.SELECT_SKILLS:
-		TeamState.expandTeamComposition()
+		TeamState.expand_team_composition()
 		_populate_tree(TeamState.get_expanded_team());
 
 

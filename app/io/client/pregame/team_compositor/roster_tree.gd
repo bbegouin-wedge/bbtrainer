@@ -4,7 +4,7 @@ var tree: Tree
 
 func _ready():
 #	var team = BloodBowlManager.get_team("OLD_WORLD_ALLIANCE")
-#	TeamState.selectTeam(team)
+#	TeamState.select_team(team)
 	_setup_tree()
 	EventBus.team_selected.connect(_on_team_selected)
 	
@@ -99,12 +99,12 @@ func _format_skills(skill_uids: Array[String]) -> String:
 
 
 func _on_button_clicked(item: TreeItem, column: int, id: int, mouse_button_index: int) -> void:
-	var player = TeamState.getSelectedTeam().get_player_by_index(id)
+	var player = TeamState.get_selected_team().get_player_by_index(id)
 	if column == 8: 
-		TeamState.recruitPlayer(player)
+		TeamState.recruit_player(player)
 	if column == 9: 
-		TeamState.firePlayer(player)
+		TeamState.fire_player(player)
 		# Mettre à jour la colonne 10                                                                                                                        
 		
-	var count = TeamState.getPlayerCount(player)                                                                                                         
+	var count = TeamState.get_player_count(player)                                                                                                         
 	item.set_text(10, str(count))     
