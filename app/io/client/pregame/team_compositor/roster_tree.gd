@@ -78,7 +78,7 @@ func _populate_tree(team: BloodBowlData.Team):
 		item.add_button(9, butonIconMinus, buttonId)
 		item.set_icon_max_width(8, 64)  # Limite la largeur pour cette cellule         
 		
-		var playerIcon = player.get_red_icon_texture()
+		var playerIcon = Icons.red(player)
 		if playerIcon:
 			item.set_icon(0, playerIcon)
 			item.set_icon_max_width(0, 32)

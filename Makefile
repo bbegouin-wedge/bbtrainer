@@ -21,7 +21,7 @@ CARGO_TARGET := .build
 LIB          := bin/libbbtrainer_gdextension.so
 
 STAMP       := .godot/.import-stamp
-IMPORT_SCAN := app autoload data tests project.godot
+IMPORT_SCAN := app autoload tests project.godot
 
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=

@@ -2,14 +2,6 @@
 class_name BloodBowlData
 extends Resource
 
-## Racine sous laquelle vivent les images citées par les JSON.
-##
-## Les données portent un chemin relatif — « assets/team_icons/humans.png » —
-## et ignorent où ce dossier vit dans le projet. C'est ce qui a permis de le
-## déplacer sous le client sans réécrire une seule ligne des 348 chemins de
-## teams_fr.json.
-const ASSETS_ROOT := "res://app/io/client/"
-
 # Classes de données
 
 class Skill:
@@ -49,15 +41,6 @@ class PlayerIcon:
 			blue = ""
 			red = ""
 
-	func get_blue_texture() -> Texture2D:
-		if blue.is_empty():
-			return null
-		return load(ASSETS_ROOT + blue)
-
-	func get_red_texture() -> Texture2D:
-		if red.is_empty():
-			return null
-		return load(ASSETS_ROOT + red)
 
 class StarPlayer:
 	var uid: String
@@ -107,12 +90,6 @@ class StarPlayer:
 		else:
 			icon = PlayerIcon.new(icon_data)
 
-	func get_blue_icon_texture() -> Texture2D:
-		if icon is PlayerIcon:
-			return icon.get_blue_texture()
-		elif icon is Array and icon.size() > 0:
-			return icon[0].get_blue_texture()
-		return null
 
 class Team:
 	var uid: String
@@ -157,10 +134,6 @@ class Team:
 	func get_player_by_index(player_idx: int) -> Player:
 		return available_players[player_idx]
 
-	func get_icon_texture() -> Texture2D:
-		if icon.is_empty():
-			return null
-		return load(ASSETS_ROOT + icon)
 
 class Player:
 	var uid: String
@@ -225,11 +198,6 @@ class Player:
 		copy.icon = icon
 		return copy
 
-	func get_blue_icon_texture() -> Texture2D:
-		return icon.get_blue_texture()
-
-	func get_red_icon_texture() -> Texture2D:
-		return icon.get_red_texture()
 	
 # Données principales
 var bloodbowl_version: String

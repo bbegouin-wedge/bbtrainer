@@ -9,7 +9,7 @@ func load_data():
 	data = BloodBowlData.new()
 
 	# Charger les équipes depuis le fichier JSON
-	var teams_path = "res://data/teams_fr.json"
+	var teams_path = "res://app/io/persistence/teams_fr.json"
 	if data.load_from_json(teams_path):
 		print("Données Blood Bowl chargées avec succès!")
 		data.print_summary()
@@ -17,19 +17,19 @@ func load_data():
 		push_error("Échec du chargement des données Blood Bowl")
 
 	# Charger les compétences depuis le fichier JSON
-	var skills_path = "res://data/skills_fr.json"
+	var skills_path = "res://app/io/persistence/skills_fr.json"
 	if data.load_skills_from_json(skills_path):
 		print("Compétences Blood Bowl chargées avec succès!")
 	else:
 		push_error("Échec du chargement des compétences Blood Bowl")
 
 	# Charger les catégories de compétences depuis le fichier JSON
-	var categories_path = "res://data/skill_cat_fr.json"
+	var categories_path = "res://app/io/persistence/skill_cat_fr.json"
 	if not data.load_skill_categories_from_json(categories_path):
 		push_error("Échec du chargement des catégories de compétences")
 
 	# Charger les star players depuis le fichier JSON
-	var star_players_path = "res://data/star_players_fr.json"
+	var star_players_path = "res://app/io/persistence/star_players_fr.json"
 	if data.load_star_players_from_json(star_players_path):
 		print("Star Players Blood Bowl chargés avec succès!")
 	else:

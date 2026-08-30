@@ -102,7 +102,7 @@ func _build_card(entry: MatchState.Entry) -> Control:
 	card.add_child(state_bar)
 
 	var icon := TextureRect.new()
-	icon.texture = entry.get_icon()
+	icon.texture = Icons.entry(entry)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE

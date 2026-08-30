@@ -9,7 +9,7 @@ extends RefCounted
 
 const Files := preload("res://tests/lib/files.gd")
 const KEYS := ["icon", "blue", "red"]
-const SOURCES := ["res://data/teams_fr.json", "res://data/star_players_fr.json"]
+const SOURCES := ["res://app/io/persistence/teams_fr.json", "res://app/io/persistence/star_players_fr.json"]
 ## Doit rester d'accord avec BloodBowlData.ASSETS_ROOT — c'est justement ce
 ## que cette vérification atteste.
 const ASSETS_ROOT := "res://app/io/client/"

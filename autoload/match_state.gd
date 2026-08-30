@@ -77,10 +77,6 @@ class Entry:
 			return _star.name
 		return _player.position_name if _player else "?"
 
-	func get_icon() -> Texture2D:
-		if _star:
-			return _star.get_blue_icon_texture()
-		return _player.get_blue_icon_texture() if _player else null
 
 
 var _entries: Array[Entry] = []

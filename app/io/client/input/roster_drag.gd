@@ -39,7 +39,7 @@ func begin(entry: MatchState.Entry) -> void:
 		return
 	_entry = entry
 	_proxy = TextureRect.new()
-	_proxy.texture = entry.get_icon()
+	_proxy.texture = Icons.entry(entry)
 	_proxy.size = PROXY_SIZE
 	_proxy.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_proxy.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

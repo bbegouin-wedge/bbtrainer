@@ -41,7 +41,7 @@ func _on_unit_right_clicked(unit: Node) -> void:
 	if player == null:
 		return
 	_unit = unit
-	_icon.texture = player.get_blue_icon_texture()
+	_icon.texture = Icons.blue(player)
 	_position_label.text = player.position_name
 	_mv.set_value(str(player.MA))
 	_st.set_value(str(player.ST))

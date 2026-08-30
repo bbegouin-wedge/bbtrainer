@@ -62,7 +62,7 @@ func _populate_tree(team: Array):
 		item.set_metadata(1, count)
 
 		# Icône du joueur
-		var icon = player_ref.get_red_icon_texture()
+		var icon = Icons.red(player_ref)
 		if icon:
 			item.set_icon(0, icon)
 			item.set_icon_max_width(0, 32)

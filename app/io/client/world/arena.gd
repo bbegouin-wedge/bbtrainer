@@ -76,10 +76,10 @@ func _create_unit(entry: MatchState.Entry) -> Unit:
 
 	var player := entry.get_player()
 	if player:
-		unit.skin.texture = player.get_blue_icon_texture()
+		unit.skin.texture = Icons.blue(player)
 		unit.set_player(player)
 	else:
-		unit.skin.texture = entry.get_icon()
+		unit.skin.texture = Icons.entry(entry)
 	return unit
 
 

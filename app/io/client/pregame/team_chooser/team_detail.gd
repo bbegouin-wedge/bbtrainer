@@ -57,7 +57,7 @@ func _populate_tree(team: BloodBowlData.Team):
 		item.set_text_alignment(7, HORIZONTAL_ALIGNMENT_CENTER)  # Coût
 
 		# Icône du joueur
-		var icon = player.get_red_icon_texture()
+		var icon = Icons.red(player)
 		if icon:
 			item.set_icon(0, icon)
 			item.set_icon_max_width(0, 32)

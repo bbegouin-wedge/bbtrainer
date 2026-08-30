@@ -6,7 +6,7 @@ func _ready():
 	for t in teams:
 		var but = Button.new()
 		but.text = t.name
-		var texture = t.get_icon_texture()
+		var texture = Icons.team(t)
 		if texture is Texture2D:
 			# Godot 4 : modifier via ImageTexture
 			var image = texture.get_image()

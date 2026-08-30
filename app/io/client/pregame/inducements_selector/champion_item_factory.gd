@@ -24,7 +24,7 @@ static func create(sp: BloodBowlData.StarPlayer) -> PanelContainer:
 	texture_rect.custom_minimum_size = Vector2(ICON_SIZE, ICON_SIZE)
 	texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	var tex = sp.get_blue_icon_texture()
+	var tex = Icons.blue(sp)
 	if tex:
 		texture_rect.texture = tex
 	icon_container.add_child(texture_rect)

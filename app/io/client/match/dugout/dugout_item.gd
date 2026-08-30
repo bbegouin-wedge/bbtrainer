@@ -55,7 +55,7 @@ func setup(match_entry: MatchState.Entry) -> void:
 func _refresh() -> void:
 	if entry == null:
 		return
-	_icon.texture = entry.get_icon()
+	_icon.texture = Icons.entry(entry)
 	_number.text = str(entry.number)
 	tooltip_text = "%d — %s" % [entry.number, entry.get_display_name()]
 
