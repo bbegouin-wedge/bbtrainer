@@ -236,6 +236,51 @@ Directives de travail pour Claude Code sur ce projet.
 
     Aucune carte ne part en `done/` sans ces trois-là.
 
+15. **Workflow « Carte du noyau » — automatique** : toute carte qui touche
+    `app/core/kernel/` suit `.claude/workflows/carte-du-noyau.md`. Il n'est pas
+    activé à la demande comme le workflow « feature » de la règle 6, et il
+    **remplace la règle 3** pour ces cartes-là — sa phase 1 en est une version
+    plus complète.
+
+    **Pourquoi celui-ci est obligatoire quand l'autre est facultatif** : une
+    erreur d'interface se voit à l'écran, à la première exécution. Une erreur du
+    noyau se voit une saison plus tard, dans une partie qui ne se rejoue pas, ou
+    dans un agent qui a appris une règle fausse pendant un million de parties.
+
+    Huit phases, trois gués — la liste des règles, la conception, la clôture :
+
+    | | Phase | Ce qu'elle produit |
+    |---|---|---|
+    | 1 | Le contexte | La carte, ce que le noyau contient déjà, les cartes amont qui la contraignent |
+    | 2 | Les règles métier | Une liste où **chaque règle cite sa source** · *gué* |
+    | 3 | La conception | Les types et signatures, corps `todo!()`, et **ce qui devient `pub`** · *gué* |
+    | 4 | Les tests | Des tests qu'on a **vus échouer** contre les `todo!()` |
+    | 5 | L'implémentation | Le vert, et rien de plus |
+    | 6 | Les vérifications | Les quatre commandes |
+    | 7 | Consigner | Ce qu'on a appris, écrit **dans** la carte |
+    | 8 | Clore | Validation, commit, carte en `done/` · *gué* |
+
+    **La quatrième vérification est nouvelle.** `make check-mutations` demande
+    si les tests **peuvent** échouer — les trois autres le supposent. Elle casse
+    le noyau une mutation à la fois et regarde si un test rougit ; une mutation
+    qui survit est un test manquant. C'est ce que « un test qu'on n'a pas vu
+    échouer ne protège rien » exigeait jusqu'ici à la main.
+
+    **La phase 7 est celle qu'on saute et qu'il ne faut pas sauter.** Les six
+    premières consomment la carte, aucune n'y écrit. Or ce qui fait la valeur
+    des cartes 9 et 12 n'est pas ce qu'elles prescrivaient — c'est ce qu'elles
+    ont consigné : le nul qu'aucun test ne voyait, le test qui passait sans rien
+    vérifier, les trois empreintes divergentes. Cette qualité était accidentelle
+    ; la phase 7 existe pour qu'elle cesse de l'être.
+
+    **Ce que le workflow ne garantit pas**, et qu'aucune vérification ne
+    rattrape : que les règles implémentées soient les bonnes. Les quatre
+    commandes ne lisent pas le livre de règles. C'est tout le rôle de la
+    phase 2, et la raison pour laquelle une règle y est écrite avec sa source ou
+    n'y est pas écrite. Une règle de Blood Bowl inventée de bonne foi produit du
+    code juste qui fait la mauvaise chose — et rien, dans tout ce dispositif, ne
+    le verra.
+
 ---
 
 ## Vérifications à l'installation — une fois par clone
@@ -277,6 +322,8 @@ Contournement délibéré : `git commit --no-verify`.
 | `make check-integrity` | les 10 vérifications sur tout le dépôt (cf. règle 13) |
 | `make build-core` | compile le noyau Rust en GDExtension et dépose le `.so` |
 | `make check-arch` | les seules règles d'architecture de `core/` (cf. règle 8) |
+| `make check-mutations` | les tests du noyau peuvent-ils échouer ? (cf. règle 15) |
+| `make check-mutations M=grid.rs` | seulement le module touché par la carte |
 | `make test-behaviour` | tests de comportement : le noyau Rust, puis `tests/unit/` et `tests/integration/` |
 | `make test` | intégrité + tests de comportement |
 | `make check-integrity V=scenes` | une seule vérification, par son nom |
@@ -376,6 +423,7 @@ visibles, il ne les empêche pas.
 | artefacts | `CARGO_TARGET_DIR=.build`, le `.so` déposé dans `bin/` — **hors de `app/`** |
 | tests | `cargo test -p bbtrainer_kernel`, lancé par `make test-behaviour` |
 | couverture | 100 % exigé, vérifié par `make check-arch` (cf. règle 8) |
+| mutation | `make check-mutations` — une mutation qui survit est un test manquant (cf. règle 15) |
 
 **Pourquoi les artefacts sortent de `app/`** : un `target/` sous `res://`
 casserait trois choses d'un coup — l'importeur de Godot le scannerait, le
