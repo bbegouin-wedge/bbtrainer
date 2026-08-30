@@ -18,7 +18,7 @@ JOURNAL := .tests.log
 # anciens chemins et le filet crie au loup : le lot du monde a produit 12 échecs
 # fantômes qui ont tous disparu à l'import.
 CARGO_TARGET := .build
-LIB          := bin/libbbtrainer_core.so
+LIB          := bin/libbbtrainer_gdextension.so
 
 STAMP       := .godot/.import-stamp
 IMPORT_SCAN := app autoload data tests project.godot
@@ -87,7 +87,9 @@ editeur: godot build-core
 build-core:
 	@command -v cargo >/dev/null || { echo "cargo introuvable — installer la chaîne Rust"; exit 1; }
 	@CARGO_TARGET_DIR=$(CARGO_TARGET) cargo build --manifest-path app/core/Cargo.toml
-	@mkdir -p bin && cp $(CARGO_TARGET)/debug/libbbtrainer_core.so $(LIB)
+	@mkdir -p bin && rm -f bin/*.so && cp $(CARGO_TARGET)/debug/libbbtrainer_gdextension.so $(LIB)
+	@# rm -f avant la recopie : un renommage de paquet laisserait sinon l'ancienne
+	@# bibliothèque dans bin/, ignorée par git donc invisible, et trompeuse.
 
 import: build-core
 	@if [ ! -f "$(STAMP)" ] || \
@@ -116,7 +118,23 @@ check-integrity: godot import
 # Règle 8 de CLAUDE.md. Sous-ensemble de check-integrity, qui l'exécute aussi.
 # Recette propre plutôt qu'un appel à check-integrity : ce dernier concluait
 # « INTÉGRITÉ : OK » sur un make check-arch, ce qui répond à une autre question.
+# La couverture du noyau fait partie des règles d'architecture, et non des tests :
+# si le noyau est couvrable à 100 %, c'est précisément PARCE QU'il n'a aucune
+# dépendance au moteur. La couverture mesure la propriété que la frontière existe
+# pour garantir. Elle ne dit rien de la justesse des assertions — c'est le rôle
+# des mutations (cf. CLAUDE.md).
 check-arch: godot import
+	@CARGO_TARGET_DIR=$(CARGO_TARGET) cargo llvm-cov --manifest-path app/core/Cargo.toml \
+	  -p bbtrainer_kernel --summary-only --fail-under-lines 100 > "$(JOURNAL)" 2>&1; code=$$?; \
+	grep -E "^TOTAL" "$(JOURNAL)" | sed 's/^/[couv] /' || true; \
+	if [ $$code -ne 0 ]; then \
+	  echo "COUVERTURE DU NOYAU : ÉCHEC — chaque ligne du noyau doit être couverte"; \
+	  grep -E "^error" "$(JOURNAL)" | head -2; \
+	  exit $$code; \
+	fi
+	@# Le code de sortie vient de cargo, jamais du tube : avec un pipe, le shell
+	@# rend celui du DERNIER maillon. La première version de cette recette
+	@# annonçait « ARCHITECTURE : OK » sur une couverture de 94,55 %.
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- architecture \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
@@ -129,7 +147,14 @@ check-arch: godot import
 
 # Même filtrage que check-integrity, et pour la même raison : le code de sortie
 # vient de Godot, pas du grep.
+# Les tests du noyau Rust d'abord : ils répondent à la même question — « le code
+# répond-il juste ? » — dans l'autre langue. Une cible séparée découperait ce qui
+# ne se découpe pas.
 test-behaviour: godot import
+	@CARGO_TARGET_DIR=$(CARGO_TARGET) cargo test --manifest-path app/core/Cargo.toml \
+	  -p bbtrainer_kernel --quiet 2>&1 | grep -E "^(test result|error|---- )" || true
+	@CARGO_TARGET_DIR=$(CARGO_TARGET) cargo test --manifest-path app/core/Cargo.toml \
+	  -p bbtrainer_kernel --quiet > /dev/null 2>&1 || { echo "NOYAU RUST : ÉCHEC"; exit 1; }
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_behaviour.gd \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \

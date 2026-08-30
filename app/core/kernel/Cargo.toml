@@ -1,0 +1,7 @@
+[package]
+name = "bbtrainer_kernel"
+version = "0.1.0"
+edition = "2021"
+
+# AUCUNE dépendance vers godot, et c'est le point : le noyau ignore le moteur.
+[dependencies]

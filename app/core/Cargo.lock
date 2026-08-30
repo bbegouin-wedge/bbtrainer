@@ -3,11 +3,16 @@
 version = 4
 
 [[package]]
-name = "bbtrainer_core"
+name = "bbtrainer_gdextension"
 version = "0.1.0"
 dependencies = [
+ "bbtrainer_kernel",
  "godot",
 ]
+
+[[package]]
+name = "bbtrainer_kernel"
+version = "0.1.0"
 
 [[package]]
 name = "gdextension-api"

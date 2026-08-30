@@ -4,5 +4,5 @@ compatibility_minimum = 4.2
 reloadable = true
 
 [libraries]
-linux.debug.x86_64 = "res://bin/libbbtrainer_core.so"
-linux.release.x86_64 = "res://bin/libbbtrainer_core.so"
+linux.debug.x86_64 = "res://bin/libbbtrainer_gdextension.so"
+linux.release.x86_64 = "res://bin/libbbtrainer_gdextension.so"

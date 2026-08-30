@@ -1,0 +1,14 @@
+[package]
+name = "bbtrainer_gdextension"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# api-4-5 : gdext vise Godot 4.6 par défaut, et refuse de s'initialiser sur un
+# moteur plus ancien. Cette ligne doit suivre la version du moteur — le message
+# d'erreur de gdext la nomme explicitement quand elles divergent.
+godot = { version = "0.5", features = ["api-4-5"] }
+bbtrainer_kernel = { path = "../kernel" }

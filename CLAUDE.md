@@ -40,6 +40,22 @@ Directives de travail pour Claude Code sur ce projet.
     Restent permis : les types natifs du moteur (`RefCounted`, `Resource`,
     `Vector2i`…), qui sont des primitives et non des dépendances de projet.
 
+    **Et la couverture du noyau Rust, qui doit être de 100 %.** `make check-arch`
+    lance `cargo llvm-cov --fail-under-lines 100` sur `app/core/kernel/` :
+    chaque ligne du noyau doit être exécutée par un test.
+
+    **Pourquoi dans check-arch et pas dans les tests** : si le noyau est
+    couvrable intégralement, c'est précisément **parce qu'**il n'a aucune
+    dépendance au moteur. La couverture mesure la propriété que la frontière
+    existe pour garantir — une ligne devenue incouvrable est le premier signe
+    que quelque chose d'extérieur s'est invité dans le noyau.
+
+    **Ce que 100 % ne dit pas** : que les assertions sont justes. On atteint 100 %
+    avec des tests qui n'affirment rien. La couverture garantit qu'aucune ligne
+    n'a été oubliée ; c'est la mise à l'épreuve par mutation (cf. « Tests ») qui
+    garantit que les tests protègent. Les deux se complètent, aucune ne remplace
+    l'autre.
+
     **Sa portée est celle de `app/core/`**, qui contient aujourd'hui deux
     fichiers. Tant qu'il était vide, la cible passait sans rien vérifier — et le
     disait dans son rapport, un vert muet valant moins que pas de vérification
@@ -246,7 +262,7 @@ Contournement délibéré : `git commit --no-verify`.
 | `make check-integrity` | les 10 vérifications sur tout le dépôt (cf. règle 13) |
 | `make build-core` | compile le noyau Rust en GDExtension et dépose le `.so` |
 | `make check-arch` | les seules règles d'architecture de `core/` (cf. règle 8) |
-| `make test-behaviour` | tests de comportement : `tests/unit/` et `tests/integration/` |
+| `make test-behaviour` | tests de comportement : le noyau Rust, puis `tests/unit/` et `tests/integration/` |
 | `make test` | intégrité + tests de comportement |
 | `make check-integrity V=scenes` | une seule vérification, par son nom |
 | `make verbeux` | idem, sortie moteur brute et non filtrée |
@@ -324,12 +340,27 @@ L'audit d'architecture — lignes de faille et ordre d'attaque — est dans
 le remplace. Un répertoire séparé aurait suggéré deux noyaux — il n'y en a
 qu'un.
 
+```
+app/core/
+  Cargo.toml         [workspace]
+  kernel/            les règles — AUCUNE dépendance godot
+  gdextension/       la frontière — dépend de kernel et de godot
+  rules/             le GDScript résiduel, qui s'efface
+  bbtrainer.gdextension
+```
+
+**La frontière est tenue par le compilateur.** `kernel` n'a pas `godot` dans son
+`Cargo.toml`, donc il ne *peut pas* l'appeler : un `use godot::prelude::*;` glissé
+dans le noyau produit `error[E0433]: use of unresolved module or unlinked crate
+godot`. C'est la première frontière du projet qui ne repose pas sur la
+discipline — `check-arch` en GDScript ne fait que rendre les violations
+visibles, il ne les empêche pas.
+
 | | |
 |---|---|
-| dossier | `app/core/` — `Cargo.toml`, `src/`, et `rules/*.gd` encore présents |
-| paquet | `bbtrainer_core` — le nom du dossier et celui du crate sont indépendants, et « core » prêterait à confusion avec la bibliothèque standard |
-| frontière | `app/core/bbtrainer.gdextension`, la seule porte entre GDScript et Rust |
 | artefacts | `CARGO_TARGET_DIR=.build`, le `.so` déposé dans `bin/` — **hors de `app/`** |
+| tests | `cargo test -p bbtrainer_kernel`, lancé par `make test-behaviour` |
+| couverture | 100 % exigé, vérifié par `make check-arch` (cf. règle 8) |
 
 **Pourquoi les artefacts sortent de `app/`** : un `target/` sous `res://`
 casserait trois choses d'un coup — l'importeur de Godot le scannerait, le
@@ -582,7 +613,9 @@ Deux harnais, deux questions distinctes :
 
 - **`make check-integrity`** — le dépôt tient-il ? Références, satellites, scènes
   chargeables (cf. règle 13). Ne dit rien de la justesse du code.
-- **`make test-behaviour`** — le code répond-il juste ? Les fichiers
+- **`make test-behaviour`** — le code répond-il juste ? Il lance d'abord
+  `cargo test` sur le noyau Rust, puis les tests GDScript : même question, deux
+  langues, une seule commande. Les fichiers
   `*_test.gd` héritent de `tests/lib/test_case.gd` et déclarent des méthodes
   `test_*`, découvertes par réflexion : aucune liste à tenir, donc aucun test
   qu'on oublie d'y inscrire. Deux dossiers, deux portées :
