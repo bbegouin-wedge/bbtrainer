@@ -12,10 +12,11 @@
 //! déterministe ; il prouve que ce qu'il exerce l'est, et attrapera n'importe
 //! quelle cause future — horloge, générateur non semé, structure non ordonnée.
 
-use bbtrainer_kernel::{Dice, Die, Grid, GridEvent, Tile, UnitId};
+use bbtrainer_kernel::{Command, Dice, Die, Grid, GridEvent, Match, Team, Tile, UnitId};
 
 /// Fixe : c'est le principe même de l'empreinte.
 const GRAINE_DES: u64 = 20_260_830;
+const GRAINE_MATCH: u64 = 1_312;
 
 fn trace(events: &[GridEvent]) -> String {
     events
@@ -61,6 +62,26 @@ fn imprimer_l_empreinte() {
             .join(",");
         morceaux.push(format!("{die:?}={tirages}"));
     }
+
+    // Le match, ajouté par la carte 14. Même motif que pour les dés : le
+    // scénario doit suivre l'état du noyau, sinon le contrôle couvre une part
+    // décroissante de ce qu'il prétend garantir, en restant vert.
+    //
+    // La suite exerce les deux natures de refus et les deux d'événement, pour
+    // que l'empreinte change si l'une d'elles se met à répondre autrement.
+    let mut partie = Match::new(GRAINE_MATCH);
+    let scenario = [
+        (Team::Blue, Command::EndTurn),
+        (Team::Red, Command::Ask),
+        (Team::Red, Command::EndTurn),
+        (Team::Blue, Command::Answer(true)),
+        (Team::Blue, Command::EndTurn),
+        (Team::Red, Command::EndTurn),
+    ];
+    for (par, commande) in scenario {
+        morceaux.push(format!("{:?}", partie.submit(par, commande)));
+    }
+    morceaux.push(format!("T{}/{:?}", partie.turn(), partie.to_act()));
 
     println!("EMPREINTE={}", morceaux.join(" / "));
 }

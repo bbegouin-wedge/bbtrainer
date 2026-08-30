@@ -5,7 +5,9 @@
 //! fichier, ni connaître un pixel.
 
 pub mod dice;
+pub mod game;
 pub mod grid;
 
 pub use dice::{Dice, Die};
+pub use game::{Command, Event, Match, Pending, Question, Rejected, Team};
 pub use grid::{Grid, GridEvent, Tile, UnitId};
