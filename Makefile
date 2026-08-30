@@ -26,7 +26,11 @@ IMPORT_SCAN := app autoload tests project.godot
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=
 
-.PHONY: help run debug editeur build-core check-integrity check-arch test-behaviour test verbeux godot import journal
+# Filtre de mutation : make check-mutations M=grid.rs — glob de fichier, relatif
+# au crate du noyau. Sans lui, tout le noyau est muté.
+M ?=
+
+.PHONY: help run debug editeur build-core check-integrity check-arch check-mutations test-behaviour test verbeux godot import journal
 
 help:
 	@echo "Cibles :"
@@ -40,6 +44,8 @@ help:
 	@echo "                            references | data_assets | architecture"
 	@echo "  make verbeux              idem, sortie moteur brute et non filtrée"
 	@echo "  make check-arch           les seules règles d'architecture (core/)"
+	@echo "  make check-mutations      les tests du noyau peuvent-ils échouer ?"
+	@echo "  make check-mutations M=x  seulement le module x (ex: M=grid.rs)"
 	@echo "  make test-behaviour       tests de comportement (unit + integration)"
 	@echo "  make test                 intégrité + tests de comportement"
 	@echo "  make godot                affiche le moteur utilisé"
@@ -159,6 +165,42 @@ check-arch: godot import
 	  echo "ARCHITECTURE : ÉCHEC — sortie complète dans $(JOURNAL)"; \
 	else \
 	  echo "ARCHITECTURE : OK"; \
+	fi; \
+	exit $$code
+
+# La seule vérification qui interroge les TESTS et non le code : peuvent-ils
+# échouer ? Elle casse le noyau une mutation à la fois et regarde si un test
+# rougit. Une mutation qui survit est un test manquant — le code fait quelque
+# chose que rien ne vérifie. C'est la version mécanique de « un test qu'on n'a
+# pas vu échouer ne protège rien » (CLAUDE.md, « Tests »).
+#
+# À lancer APRÈS les trois autres : elle ne dit rien d'une suite qui n'est pas
+# déjà verte. Sans M= elle mute tout le noyau ; avec, seulement le module que la
+# carte a touché — cf. .claude/workflows/carte-du-noyau.md, phase 6, qui écrit
+# aussi le prix de ce filtre : une régression causée ailleurs y échapperait.
+#
+# --no-shuffle : l'ordre des mutations est stable d'une exécution à l'autre,
+# pour la même raison que le noyau l'est.
+#
+# Le garde-fou du vide, ajouté après l'avoir vu manquer : un filtre M= qui ne
+# correspond à aucun fichier fait dire « 0 mutants » à cargo-mutants, qui sort
+# alors en 0. La cible annonçait « MUTATION : OK » sans avoir muté quoi que ce
+# soit — le cinquième « OK sans rien vérifier » de ce dépôt, évité avant d'être
+# commis. Un compte nul est désormais un échec, code 2.
+check-mutations:
+	@command -v cargo-mutants >/dev/null || \
+	  { echo "cargo-mutants introuvable — cargo install cargo-mutants --locked"; exit 1; }
+	@( cd app/core && cargo mutants -d kernel --no-shuffle $(if $(M),-f "$(M)",) ) \
+	  > "$(JOURNAL)" 2>&1; code=$$?; \
+	grep -E "^(MISSED|TIMEOUT|[0-9]+ mutants tested)" "$(JOURNAL)" || true; \
+	if ! grep -qE "^[1-9][0-9]* mutants tested" "$(JOURNAL)"; then \
+	  echo "MUTATION : ÉCHEC — aucune mutation produite, la vérification n'a rien vérifié"; \
+	  exit 2; \
+	fi; \
+	if [ $$code -ne 0 ]; then \
+	  echo "MUTATION : ÉCHEC — une mutation a survécu, donc un test manque"; \
+	else \
+	  echo "MUTATION : OK"; \
 	fi; \
 	exit $$code
 

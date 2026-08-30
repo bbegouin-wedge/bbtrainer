@@ -14,3 +14,6 @@ bin/
 # dérogations privées sont locaux à la machine. Seul config.json est partagé.
 .impeccable/hook.cache.json
 .impeccable/config.local.json
+
+# cargo-mutants dépose son rapport là où il est lancé.
+app/core/mutants.out*/
