@@ -383,6 +383,41 @@ harnais le parcourrait à chaque vérification (`DirAccess` voit les fichiers m�
 sous un `.gdignore`), et le test de fraîcheur du réimport se déclencherait à
 chaque `cargo build`.
 
+### Ce dont le noyau a le droit de dépendre
+
+Trois critères, dans cet ordre :
+
+| Critère | Ce qu'il écarte |
+|---|---|
+| **Pureté** | aucune E/S, aucune horloge, aucun fil d'exécution |
+| **Déterminisme** | tout ce qui varie d'une exécution à l'autre à entrée égale |
+| **Portabilité** | le noyau se compile dans la GDExtension, la boucle d'entraînement, et peut-être un serveur |
+
+`nutype` et `serde` passent — du calcul pur. `serde_json` aussi : c'est un
+format, pas un accès disque. `rand` sera **nécessaire** pour les dés, mais avec
+un générateur semé et épinglé, jamais celui du système. Sont écartés le disque,
+l'horloge, les fils, et `burn` que `docs/noyau-et-apprenant.html` nomme
+explicitement.
+
+**Le danger n'est pas venu d'un crate mais de la bibliothèque standard.**
+`HashMap` sème son hachage au hasard à chaque processus : `occupied_tiles()`
+rendait un ordre différent à chaque exécution, sur un noyau sans la moindre
+dépendance externe. D'où `BTreeMap` — l'ordre des clés, stable par construction
+et en prime signifiant.
+
+Une règle qui n'aurait parlé que des dépendances aurait laissé passer celui-là.
+
+**`make check-arch` le vérifie**, en lançant une empreinte de scénario dans
+**deux processus** et en comparant. Deux appels dans le même processus ne
+prouveraient rien — le hachage n'y est semé qu'une fois, et donnerait deux fois
+le même ordre sur un noyau pourtant non déterministe. La vérification échoue
+aussi si aucune empreinte n'est produite : sinon deux sorties vides seraient
+égales.
+
+Sa portée est celle de son scénario : elle ne prouve pas que tout le noyau est
+déterministe, mais elle attrapera n'importe quelle cause future — horloge,
+générateur non semé, structure non ordonnée.
+
 **La version d'API est épinglée** : `features = ["api-4-5"]` dans `Cargo.toml`.
 gdext vise Godot 4.6 par défaut et **refuse de s'initialiser** sur un moteur plus
 ancien. Cette ligne doit suivre la version du moteur ; le message d'erreur de

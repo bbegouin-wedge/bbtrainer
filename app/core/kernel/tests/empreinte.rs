@@ -1,0 +1,50 @@
+//! Empreinte d'un scénario, pour comparer deux exécutions.
+//!
+//! Le test ne vérifie rien à lui seul : il imprime. C'est `make check-arch` qui
+//! le lance **dans deux processus** et compare les sorties.
+//!
+//! Deux processus, et pas deux appels dans le même : `HashMap` ne sème son
+//! hachage qu'une fois par processus, si bien qu'une double exécution locale
+//! aurait donné deux fois le même ordre — et laissé passer un noyau non
+//! déterministe.
+//!
+//! Sa portée est celle de son scénario. Il ne prouve pas que tout le noyau est
+//! déterministe ; il prouve que ce qu'il exerce l'est, et attrapera n'importe
+//! quelle cause future — horloge, générateur non semé, structure non ordonnée.
+
+use bbtrainer_kernel::{Grid, GridEvent, Tile, UnitId};
+
+fn trace(events: &[GridEvent]) -> String {
+    events
+        .iter()
+        .map(|e| match e {
+            GridEvent::Left { unit, tile } => format!("L{:?}{},{}", unit, tile.x, tile.y),
+            GridEvent::Landed { unit, tile } => format!("A{:?}{},{}", unit, tile.x, tile.y),
+            GridEvent::Cleared => "C".to_string(),
+        })
+        .collect::<Vec<_>>()
+        .join("|")
+}
+
+#[test]
+fn imprimer_l_empreinte() {
+    let mut grid = Grid::new(Tile::new(26, 15));
+    let mut morceaux: Vec<String> = Vec::new();
+
+    for i in 0..12u64 {
+        let unite = UnitId::new(i * 7 % 13);
+        let case = Tile::new((i * 5 % 26) as i32, (i * 3 % 15) as i32);
+        morceaux.push(trace(&grid.place(unite, case)));
+    }
+    morceaux.push(trace(&grid.remove(UnitId::new(7))));
+    morceaux.push(
+        grid.occupied_tiles()
+            .iter()
+            .map(|t| format!("{},{}", t.x, t.y))
+            .collect::<Vec<_>>()
+            .join(" "),
+    );
+    morceaux.push(trace(&grid.clear()));
+
+    println!("EMPREINTE={}", morceaux.join(" / "));
+}

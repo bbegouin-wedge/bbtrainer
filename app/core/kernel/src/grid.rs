@@ -10,10 +10,10 @@
 //!   liaison de reproduire fidèlement le comportement observable ;
 //! - elle ignore `Vector2i` : `Tile` est local, converti à la frontière.
 
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 /// Une case, en coordonnées de grille. Aucun pixel ici.
-#[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub struct Tile {
     pub x: i32,
     pub y: i32,
@@ -31,7 +31,7 @@ impl Tile {
 /// correspondance avec les nœuds du moteur. Reprendre ici l'identifiant
 /// d'instance de Godot aurait simplifié la frontière, au prix d'un noyau qui
 /// porte la trace de son adaptateur.
-#[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub struct UnitId(u64);
 
 impl UnitId {
@@ -56,16 +56,21 @@ pub enum GridEvent {
 #[derive(Debug)]
 pub struct Grid {
     size: Tile,
-    unit_by_tile: HashMap<Tile, UnitId>,
-    tile_by_unit: HashMap<UnitId, Tile>,
+    /// `BTreeMap` et non `HashMap` : ce dernier sème son hachage au hasard à
+    /// chaque processus, si bien que l'ordre de `occupied_tiles()` variait d'une
+    /// exécution à l'autre. Un noyau rejouable ne peut pas se le permettre — et
+    /// l'ordre des clés est en prime signifiant, les cases sortant triées par
+    /// coordonnée.
+    unit_by_tile: BTreeMap<Tile, UnitId>,
+    tile_by_unit: BTreeMap<UnitId, Tile>,
 }
 
 impl Grid {
     pub fn new(size: Tile) -> Self {
         Self {
             size,
-            unit_by_tile: HashMap::new(),
-            tile_by_unit: HashMap::new(),
+            unit_by_tile: BTreeMap::new(),
+            tile_by_unit: BTreeMap::new(),
         }
     }
 

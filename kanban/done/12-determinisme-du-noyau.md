@@ -57,18 +57,38 @@ Sont écartés le disque, l'horloge, les fils, et `burn` que le document nomme.
 mais de la bibliothèque standard. Une règle qui ne parlerait que des crates
 aurait laissé passer celui-ci.
 
-## Questions ouvertes
+## Les deux questions, tranchées
 
-- **Comment vérifier le déterminisme automatiquement ?** Un test qui compare
-  deux exécutions dans le même processus ne verrait rien — le hachage n'est semé
-  qu'une fois par processus. Il faut lancer deux processus et comparer, ou
-  interdire `HashMap` dans le noyau par `check-arch`.
-- **`check-arch` doit-il refuser `HashMap` ?** C'est le pendant de l'interdit
-  sur `FileAccess` : un contrôle mécanique plutôt qu'une intention.
+**Comment vérifier automatiquement ?** Une empreinte de scénario, imprimée par
+un test, lancée dans **deux processus** et comparée par `make check-arch`.
+
+C'est la réponse contre-intuitive : un test qui compare deux exécutions **dans
+le même processus** ne verrait rien, le hachage n'y étant semé qu'une fois. Il
+donnerait deux fois le même ordre sur un noyau pourtant non déterministe.
+
+**`check-arch` doit-il refuser `HashMap` ?** Non. Ce serait un **indice à la
+place d'une preuve** : un `HashMap` dont l'ordre ne sort jamais est légitime, et
+un interdit ne dirait rien d'une horloge ou d'un générateur non semé.
+L'empreinte couvre ce que son scénario exerce — c'est sa limite, écrite — mais
+elle attrape n'importe quelle cause. Si le noyau grossit beaucoup, l'interdit
+mécanique redeviendra un bon filet d'appoint.
+
+## Ce que les trois épreuves ont montré
+
+**`BTreeMap` corrige.** Trois processus, trois empreintes identiques.
+
+**L'empreinte aurait attrapé le défaut.** Remise en `HashMap` : trois processus,
+trois empreintes différentes, et `check-arch` sort en 2 avec « deux exécutions
+du même scénario divergent ».
+
+**Le garde-fou du vide tient.** Test d'empreinte retiré : « aucune empreinte
+produite, la vérification n'a rien vérifié », code 2. Sans lui, deux sorties
+vides auraient été égales — le quatrième « OK sans rien vérifier » de la série,
+évité cette fois avant de le commettre.
 
 ## Terminé quand
 
-- deux exécutions du même scénario rendent la même sortie, prouvé par une
-  vérification automatique ;
-- la règle des dépendances admissibles est écrite dans `CLAUDE.md` ;
-- `cargo test` couvre toujours 100 % du noyau.
+- [x] deux exécutions du même scénario rendent la même sortie, prouvé par
+  `make check-arch` — et vu échouer sur le code d'avant ;
+- [x] la règle des dépendances admissibles est écrite dans `CLAUDE.md` ;
+- [x] `cargo test` couvre toujours 100 % du noyau.

@@ -135,6 +135,23 @@ check-arch: godot import
 	@# Le code de sortie vient de cargo, jamais du tube : avec un pipe, le shell
 	@# rend celui du DERNIER maillon. La première version de cette recette
 	@# annonçait « ARCHITECTURE : OK » sur une couverture de 94,55 %.
+	@# Déterminisme : la même empreinte doit sortir de DEUX PROCESSUS distincts.
+	@# Deux appels dans le même processus ne prouveraient rien — HashMap ne sème
+	@# son hachage qu'une fois par processus, et donnerait deux fois le même
+	@# ordre sur un noyau pourtant non déterministe.
+	@a=$$(CARGO_TARGET_DIR=$(CARGO_TARGET) cargo test --manifest-path app/core/Cargo.toml \
+	      -p bbtrainer_kernel --test empreinte -- --nocapture 2>/dev/null | grep "^EMPREINTE="); \
+	b=$$(CARGO_TARGET_DIR=$(CARGO_TARGET) cargo test --manifest-path app/core/Cargo.toml \
+	      -p bbtrainer_kernel --test empreinte -- --nocapture 2>/dev/null | grep "^EMPREINTE="); \
+	if [ -z "$$a" ]; then \
+	  echo "DÉTERMINISME : ÉCHEC — aucune empreinte produite, la vérification n'a rien vérifié"; \
+	  exit 1; \
+	fi; \
+	if [ "$$a" != "$$b" ]; then \
+	  echo "DÉTERMINISME : ÉCHEC — deux exécutions du même scénario divergent"; \
+	  exit 1; \
+	fi; \
+	echo "[det]  empreinte identique sur deux processus"
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- architecture \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
