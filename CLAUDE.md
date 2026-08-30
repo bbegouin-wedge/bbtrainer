@@ -351,6 +351,7 @@ io/                         # les adaptateurs — l'écran n'en est qu'un
     world/                  arena.tscn/.gd  arena_phase.tscn/.gd  unit_zone.gd
                             movement_range_view.gd  rect_highlighter.gd
                             outline.gd  unit/
+    debug/                  debug_label.gd
     widgets/                action_button/ no_label_button/ stat_cartridge/
                             skill_badge/ collapsible.gd contextual_panel.gd
                             color_dot.gd
@@ -363,7 +364,7 @@ io/                         # les adaptateurs — l'écran n'en est qu'un
   persistence/              json_catalog_loader.gd  data/*.json
   bus/                      event_bus.gd                               (autoload)
 
-assets/  debug/
+assets/                     # hors de app/ : ressources communes, cf. « La racine »
 ```
 
 ### Ce que chaque couche a le droit de connaître

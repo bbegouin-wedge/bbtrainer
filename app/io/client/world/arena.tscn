@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=4 uid="uid://cye7ydmvgd7oo"]
 
 [ext_resource type="Script" uid="uid://djkdmjqcb02rw" path="res://app/io/client/world/arena.gd" id="1_xdvfk"]
-[ext_resource type="Script" uid="uid://b4wvny1d7jtdr" path="res://debug/debug_label.gd" id="2_2ml6w"]
+[ext_resource type="Script" uid="uid://b4wvny1d7jtdr" path="res://app/io/client/debug/debug_label.gd" id="2_2ml6w"]
 [ext_resource type="Texture2D" uid="uid://nv4xo8aqda8d" path="res://assets/floor-tilemap.png" id="3_4ag8t"]
 [ext_resource type="TileSet" uid="uid://dq4ck2lqs3scw" path="res://assets/tuiles_terrain.tres" id="3_ii07k"]
 [ext_resource type="Texture2D" uid="uid://dgaf3yu5q2s6g" path="res://assets/terrain-lignes.png" id="3_xgbxb"]
