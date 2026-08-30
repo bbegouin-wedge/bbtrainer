@@ -54,7 +54,7 @@ func _ready():
 		return
 	custom_minimum_size = rect_size
 	
-	var shader = load("res://assets/shaders/dashed_border.gdshader")
+	var shader = load("res://app/io/client/assets/shaders/dashed_border.gdshader")
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
 	material = shader_material

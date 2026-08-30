@@ -27,7 +27,7 @@ const ACTIONS := [
 ## police de secours de Godot à sa taille par défaut. On impose donc une des
 ## polices du projet, dont les réglages d'import portent l'anticrénelage et le
 ## positionnement sous-pixel, à une taille lisible.
-const FONT_PATH := "res://assets/fonts/Oregano-Regular.ttf"
+const FONT_PATH := "res://app/io/client/assets/fonts/Oregano-Regular.ttf"
 const FONT_SIZE := 20
 const ROW_HEIGHT := 34
 const GLYPH_RADIUS := 5.0

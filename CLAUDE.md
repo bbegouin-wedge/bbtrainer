@@ -296,8 +296,7 @@ minimap sont tracés, pas texturés.
 
 | | |
 |---|---|
-| `app/` | le code de l'application : `core/`, `io/`, et `use_cases/` à venir |
-| `assets/` | images, polices, shaders — communs, hors de `app/` |
+| `app/` | l'application : `core/`, `io/` — assets compris — et `use_cases/` à venir |
 | `tests/` | les deux harnais. Ils observent l'application, ils n'en font pas partie |
 | `autoload/`, `data/` | **hors cible**, à migrer : ni l'un ni l'autre n'est un simple déplacement |
 | `docs/`, `kanban/` | audit d'architecture et cartes |
@@ -364,7 +363,13 @@ io/                         # les adaptateurs — l'écran n'en est qu'un
   persistence/              json_catalog_loader.gd  data/*.json
   bus/                      event_bus.gd                               (autoload)
 
-assets/                     # hors de app/ : ressources communes, cf. « La racine »
+    assets/                 images, polices, shaders, tuiles
+
+Les données citent leurs images par un chemin **relatif à `app/io/client/`** —
+« assets/team_icons/humans.png ». La racine est une constante du code
+(`BloodBowlData.ASSETS_ROOT`), pas une chaîne des JSON : c'est ce qui a permis
+de déplacer 3 700 fichiers sans réécrire un seul des 348 chemins de
+`teams_fr.json`.
 ```
 
 ### Ce que chaque couche a le droit de connaître

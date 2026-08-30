@@ -1,7 +1,7 @@
 class_name ChampionItemFactory
 
 const ICON_SIZE := 96
-const FONT_PATH := "res://assets/fonts/SedgwickAve-Regular.ttf"
+const FONT_PATH := "res://app/io/client/assets/fonts/SedgwickAve-Regular.ttf"
 
 static func create(sp: BloodBowlData.StarPlayer) -> PanelContainer:
 	var panel := PanelContainer.new()

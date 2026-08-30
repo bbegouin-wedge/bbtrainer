@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq7auu754xjxw"]
 
-[ext_resource type="Texture2D" uid="uid://dk0hohg0f2i66" path="res://assets/ui/icons/player/played.png" id="1_0ay7c"]
+[ext_resource type="Texture2D" uid="uid://dk0hohg0f2i66" path="res://app/io/client/assets/ui/icons/player/played.png" id="1_0ay7c"]
 [ext_resource type="Script" uid="uid://dd88lr3mt51xn" path="res://app/io/client/widgets/action_button/no_label_button.gd" id="1_njlu4"]
 
 [node name="NoLabelButton" type="Panel"]

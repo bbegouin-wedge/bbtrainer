@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://bahl3m2dlgyfk"]
 
-[ext_resource type="FontFile" uid="uid://bcmmna6iucjsj" path="res://assets/fonts/PermanentMarker-Regular.ttf" id="1_k3vqt"]
-[ext_resource type="FontFile" uid="uid://c3tc10kwe3n2s" path="res://assets/fonts/Oregano-Italic.ttf" id="2_uxyor"]
+[ext_resource type="FontFile" uid="uid://bcmmna6iucjsj" path="res://app/io/client/assets/fonts/PermanentMarker-Regular.ttf" id="1_k3vqt"]
+[ext_resource type="FontFile" uid="uid://c3tc10kwe3n2s" path="res://app/io/client/assets/fonts/Oregano-Italic.ttf" id="2_uxyor"]
 [ext_resource type="PackedScene" uid="uid://cq7auu754xjxw" path="res://app/io/client/widgets/action_button/no_label_button.tscn" id="3_kvssq"]
-[ext_resource type="Texture2D" uid="uid://ramap8465smi" path="res://assets/ui/utils/plus.png" id="4_gtcjs"]
-[ext_resource type="Texture2D" uid="uid://bx2pxad4qwvrj" path="res://assets/ui/utils/moins.png" id="5_jtuqk"]
+[ext_resource type="Texture2D" uid="uid://ramap8465smi" path="res://app/io/client/assets/ui/utils/plus.png" id="4_gtcjs"]
+[ext_resource type="Texture2D" uid="uid://bx2pxad4qwvrj" path="res://app/io/client/assets/ui/utils/moins.png" id="5_jtuqk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yum17"]
 bg_color = Color(0, 0.08627451, 0.10980392, 0.8039216)

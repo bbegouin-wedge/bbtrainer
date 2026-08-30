@@ -10,6 +10,9 @@ extends RefCounted
 const Files := preload("res://tests/lib/files.gd")
 const KEYS := ["icon", "blue", "red"]
 const SOURCES := ["res://data/teams_fr.json", "res://data/star_players_fr.json"]
+## Doit rester d'accord avec BloodBowlData.ASSETS_ROOT — c'est justement ce
+## que cette vérification atteste.
+const ASSETS_ROOT := "res://app/io/client/"
 
 
 func run(_tree: SceneTree, report) -> void:
@@ -17,7 +20,7 @@ func run(_tree: SceneTree, report) -> void:
 	for source in SOURCES:
 		_collect(source, paths)
 	for relatif in paths:
-		if not FileAccess.file_exists("res://" + relatif):
+		if not FileAccess.file_exists(ASSETS_ROOT + relatif):
 			report.fail("data_assets", "%s cité par %s est absent" % [relatif, paths[relatif]])
 	report.ok("data_assets", "%d chemin(s) distincts vérifiés dans les données" % paths.size())
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://34jbo7pgxem4"]
 
-[ext_resource type="Texture2D" uid="uid://33akwgqio8kd" path="res://assets/weather/good.png" id="2_1eluh"]
-[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="2_l44vl"]
+[ext_resource type="Texture2D" uid="uid://33akwgqio8kd" path="res://app/io/client/assets/weather/good.png" id="2_1eluh"]
+[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://app/io/client/assets/fonts/SedgwickAve-Regular.ttf" id="2_l44vl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oalq0"]
 bg_color = Color(0, 0.08627451, 0.10980392, 0.8039216)

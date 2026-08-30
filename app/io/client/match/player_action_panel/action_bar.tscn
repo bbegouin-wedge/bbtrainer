@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://dy5np2emr5xgf"]
 
 [ext_resource type="PackedScene" uid="uid://yrg4u66cgkpg" path="res://app/io/client/widgets/action_button/action_button.tscn" id="2_p2ol4"]
-[ext_resource type="Texture2D" uid="uid://c7ppb4sisls0b" path="res://assets/ui/icons/player/ready.png" id="3_67ldc"]
-[ext_resource type="Texture2D" uid="uid://dk0hohg0f2i66" path="res://assets/ui/icons/player/played.png" id="4_cduoq"]
-[ext_resource type="Texture2D" uid="uid://blo3rmg0c36ht" path="res://assets/ui/icons/player/prone.png" id="5_tmc77"]
-[ext_resource type="Texture2D" uid="uid://b1nahrh266r4j" path="res://assets/ui/icons/player/ko.png" id="6_qn3sk"]
-[ext_resource type="Texture2D" uid="uid://duulofso64w06" path="res://assets/ui/icons/player/stunned.png" id="7_6n6sy"]
-[ext_resource type="Texture2D" uid="uid://8eysq5i3itps" path="res://assets/ui/icons/player/injured.png" id="8_8wmgt"]
-[ext_resource type="Texture2D" uid="uid://dpjcb0fjrhohe" path="res://assets/ui/icons/player/gazed.png" id="9_5xcnh"]
+[ext_resource type="Texture2D" uid="uid://c7ppb4sisls0b" path="res://app/io/client/assets/ui/icons/player/ready.png" id="3_67ldc"]
+[ext_resource type="Texture2D" uid="uid://dk0hohg0f2i66" path="res://app/io/client/assets/ui/icons/player/played.png" id="4_cduoq"]
+[ext_resource type="Texture2D" uid="uid://blo3rmg0c36ht" path="res://app/io/client/assets/ui/icons/player/prone.png" id="5_tmc77"]
+[ext_resource type="Texture2D" uid="uid://b1nahrh266r4j" path="res://app/io/client/assets/ui/icons/player/ko.png" id="6_qn3sk"]
+[ext_resource type="Texture2D" uid="uid://duulofso64w06" path="res://app/io/client/assets/ui/icons/player/stunned.png" id="7_6n6sy"]
+[ext_resource type="Texture2D" uid="uid://8eysq5i3itps" path="res://app/io/client/assets/ui/icons/player/injured.png" id="8_8wmgt"]
+[ext_resource type="Texture2D" uid="uid://dpjcb0fjrhohe" path="res://app/io/client/assets/ui/icons/player/gazed.png" id="9_5xcnh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjcwa"]
 content_margin_left = 10.0

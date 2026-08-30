@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://dxpcgxyp7fp2a"]
 
-[ext_resource type="Texture2D" uid="uid://chdllyk8hmjn5" path="res://assets/fancy_background.JPG" id="1_xya4t"]
+[ext_resource type="Texture2D" uid="uid://chdllyk8hmjn5" path="res://app/io/client/assets/fancy_background.JPG" id="1_xya4t"]
 [ext_resource type="Script" uid="uid://yx02dctxcx2c" path="res://app/io/client/pregame/welcome/welcome_ui.gd" id="1_y60fg"]
-[ext_resource type="Texture2D" uid="uid://by6np01aehe4x" path="res://assets/ui/panel/stone-panel-hd2.png" id="3_lfq8m"]
-[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="5_o5ykb"]
+[ext_resource type="Texture2D" uid="uid://by6np01aehe4x" path="res://app/io/client/assets/ui/panel/stone-panel-hd2.png" id="3_lfq8m"]
+[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://app/io/client/assets/fonts/SedgwickAve-Regular.ttf" id="5_o5ykb"]
 [ext_resource type="Theme" uid="uid://b6ja1dfsxjk21" path="res://app/io/client/theme/global_theme.tres" id="7_i54xn"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lfq8m"]

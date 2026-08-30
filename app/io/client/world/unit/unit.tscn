@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://bnr26f848l23o"]
 
-[ext_resource type="Texture2D" uid="uid://brii1v5bgvp8d" path="res://assets/player_icons/DarkElf/Blitzer1B.png" id="1_fmv3f"]
+[ext_resource type="Texture2D" uid="uid://brii1v5bgvp8d" path="res://app/io/client/assets/player_icons/DarkElf/Blitzer1B.png" id="1_fmv3f"]
 [ext_resource type="Script" uid="uid://b3lj57tauqcch" path="res://app/io/client/world/unit/unit.gd" id="1_fvc8g"]
-[ext_resource type="Shader" uid="uid://co6ihpld44rvp" path="res://assets/shaders/fade_outline.gdshader" id="2_0wuuu"]
+[ext_resource type="Shader" uid="uid://co6ihpld44rvp" path="res://app/io/client/assets/shaders/fade_outline.gdshader" id="2_0wuuu"]
 [ext_resource type="Script" uid="uid://dhnrqbom0mh1f" path="res://app/io/client/input/select.gd" id="3_bhlit"]
 [ext_resource type="Script" uid="uid://clj3l2ucue57f" path="res://app/io/client/input/drag_and_drop.gd" id="3_vh40f"]
 [ext_resource type="Script" uid="uid://b0ocx6ljsqkli" path="res://app/io/client/input/hoverable.gd" id="6_3po7s"]

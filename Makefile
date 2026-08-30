@@ -18,7 +18,7 @@ JOURNAL := .tests.log
 # anciens chemins et le filet crie au loup : le lot du monde a produit 12 échecs
 # fantômes qui ont tous disparu à l'import.
 STAMP       := .godot/.import-stamp
-IMPORT_SCAN := app autoload data tests assets project.godot
+IMPORT_SCAN := app autoload data tests project.godot
 
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=

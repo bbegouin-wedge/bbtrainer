@@ -2,6 +2,14 @@
 class_name BloodBowlData
 extends Resource
 
+## Racine sous laquelle vivent les images citées par les JSON.
+##
+## Les données portent un chemin relatif — « assets/team_icons/humans.png » —
+## et ignorent où ce dossier vit dans le projet. C'est ce qui a permis de le
+## déplacer sous le client sans réécrire une seule ligne des 348 chemins de
+## teams_fr.json.
+const ASSETS_ROOT := "res://app/io/client/"
+
 # Classes de données
 
 class Skill:
@@ -44,12 +52,12 @@ class PlayerIcon:
 	func get_blue_texture() -> Texture2D:
 		if blue.is_empty():
 			return null
-		return load("res://" + blue)
+		return load(ASSETS_ROOT + blue)
 
 	func get_red_texture() -> Texture2D:
 		if red.is_empty():
 			return null
-		return load("res://" + red)
+		return load(ASSETS_ROOT + red)
 
 class StarPlayer:
 	var uid: String
@@ -152,7 +160,7 @@ class Team:
 	func get_icon_texture() -> Texture2D:
 		if icon.is_empty():
 			return null
-		return load("res://" + icon)
+		return load(ASSETS_ROOT + icon)
 
 class Player:
 	var uid: String

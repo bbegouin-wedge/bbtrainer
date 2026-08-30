@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bq287b502xsqy"]
 
-[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="1_8ftue"]
+[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://app/io/client/assets/fonts/SedgwickAve-Regular.ttf" id="1_8ftue"]
 [ext_resource type="Script" uid="uid://b1kig3xugpnfl" path="res://app/io/client/widgets/stat_cartridge/stat_cartridge.gd" id="1_qq1xe"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uyok0"]

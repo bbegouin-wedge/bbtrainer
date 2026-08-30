@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://bop2wwj4rkqp5" path="res://app/io/client/pregame/team_chooser/vertical_team_list.gd" id="2_8fpco"]
 [ext_resource type="Script" uid="uid://cop6c4143s5wv" path="res://app/io/client/pregame/team_chooser/team_infos.gd" id="3_8fpco"]
 [ext_resource type="Script" uid="uid://pr165hdrbjts" path="res://app/io/client/pregame/team_chooser/team_detail_name.gd" id="3_pcw4c"]
-[ext_resource type="Texture2D" uid="uid://by6np01aehe4x" path="res://assets/ui/panel/stone-panel-hd2.png" id="6_g5y1w"]
+[ext_resource type="Texture2D" uid="uid://by6np01aehe4x" path="res://app/io/client/assets/ui/panel/stone-panel-hd2.png" id="6_g5y1w"]
 [ext_resource type="Script" uid="uid://cgc4w126kr36p" path="res://app/io/client/pregame/team_chooser/tc_next_button.gd" id="7_pcw4c"]
-[ext_resource type="Texture2D" uid="uid://pb53j6gwhjdc" path="res://assets/ui/panel/panel-transparent-2.png" id="7_vswy1"]
-[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="8_kgh58"]
+[ext_resource type="Texture2D" uid="uid://pb53j6gwhjdc" path="res://app/io/client/assets/ui/panel/panel-transparent-2.png" id="7_vswy1"]
+[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://app/io/client/assets/fonts/SedgwickAve-Regular.ttf" id="8_kgh58"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_61y2x"]
 texture = ExtResource("6_g5y1w")

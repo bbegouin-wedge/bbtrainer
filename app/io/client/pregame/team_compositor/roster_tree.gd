@@ -71,10 +71,10 @@ func _populate_tree(team: BloodBowlData.Team):
 		item.set_text_alignment(8, HORIZONTAL_ALIGNMENT_CENTER)  # Coût
 		item.set_text_alignment(9, HORIZONTAL_ALIGNMENT_CENTER)  # Coût
 		item.set_text_alignment(10, HORIZONTAL_ALIGNMENT_CENTER)  # Coût
-		var butonIcon = preload("res://assets/ui/icons/plus.png")                                                                                                   
+		var butonIcon = preload("res://app/io/client/assets/ui/icons/plus.png")                                                                                                   
 		item.add_button(8, butonIcon, buttonId)
 		# Icône du joueur
-		var butonIconMinus = preload("res://assets/ui/icons/minus.png")     
+		var butonIconMinus = preload("res://app/io/client/assets/ui/icons/minus.png")     
 		item.add_button(9, butonIconMinus, buttonId)
 		item.set_icon_max_width(8, 64)  # Limite la largeur pour cette cellule         
 		
