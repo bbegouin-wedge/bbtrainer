@@ -48,10 +48,28 @@ La carte 14 ne l'a pas tranché — l'attente y était implicitement celle du co
 actif. Le cas du blocage à un dé où le défenseur choisit le résultat le rend
 obligatoire.
 
+## Ce que la carte 14 lui lègue
+
+**« Qui répond ? » est déjà résolu.** `Pending` porte un champ `coach`, jamais
+déduit du tour courant. La carte 14 l'a imposé en sourçant `SIDESTEP` (*« au lieu
+que l'entraîneur adverse choisisse où ce joueur est Repoussé… »*) et `TAUNT`
+(*« l'entraîneur de ce joueur peut choisir de faire Suivre le joueur adverse »*)
+— deux compétences qui **transfèrent la propriété d'une décision**.
+
+**Cette carte supprime l'échafaudage.** `Command::Ask`, `Command::Answer` et
+`Question::Confirm` n'existent que pour exercer le mécanisme d'attente en
+l'absence de toute règle qui en produise. Les vraies questions du blocage — quel
+dé, quelle case de poussée, suivre ou non, relancer — les remplacent.
+
+**Un événement de jet doit identifier chaque dé séparément.** Contrainte tirée de
+`PRO` par la carte 14 : *« il peut tenter de relancer **un seul dé** […] dans le
+cadre d'un jet de dés multiples »*. On ne peut pas désigner « le deuxième des
+trois » si les dés sortent en bloc. C'est ici que ça se paie, puisque le blocage
+est le premier jet multiple du jeu.
+
 ## Questions ouvertes
 
-- **Qui répond ?** L'état d'attente doit nommer l'équipe attendue, sinon le
-  choix du dé quand il revient au défenseur n'est pas représentable.
+- ~~**Qui répond ?**~~ Résolu par la carte 14 : `Pending.coach`.
 - **La poussée en chaîne** est-elle une suite de commandes ou une résolution
   unique ? Elle peut cascader sur plusieurs joueurs, et chaque maillon peut
   ouvrir un choix de direction.

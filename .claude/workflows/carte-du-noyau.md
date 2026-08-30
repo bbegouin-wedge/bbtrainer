@@ -115,9 +115,18 @@ vérifiaient rien : un lanceur qui ne trouvait aucun test, un contrôle de
 couverture derrière un tube, un test qui plantait avant sa première assertion.
 Ici la panique le rend impossible sans qu'on ait rien à surveiller.
 
-**On lance les tests, et on montre qu'ils échouent.** Le nombre d'échecs doit
-égaler le nombre de tests écrits. Un test vert à cette phase est un test à
-réécrire, pas à garder.
+**On lance les tests, et on montre qu'ils échouent.**
+
+**Un test vert à cette phase est un test à examiner**, pas automatiquement un
+test à jeter. Deux causes possibles, et une seule est un défaut :
+
+- il n'appelle rien, donc ne vérifie rien — à réécrire ;
+- il couvre du code que la phase 3 a réellement écrit. Une conception contient
+  parfois de vraies implémentations triviales : `Team::other()`, sur la carte 14,
+  est un `match` de deux lignes qu'il aurait été absurde de laisser en `todo!()`.
+
+Formulée trop absolument — « un test vert est un test à réécrire » — la règle
+aurait fait jeter un bon test.
 
 **Le seul trou connu du filet : `#[should_panic]` nu.** Il est satisfait par
 n'importe quelle panique, y compris celle du `todo!()`. Un test qui l'utilise
