@@ -1,0 +1,565 @@
+<title>Noyau et apprenant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #f3f5f2; --card: #ffffff; --rule: #dde2dc;
+  --ink: #141c17; --ink-soft: #55605a; --ink-faint: #8b948e;
+  --accent: #2f6b3f; --accent-wash: #e6eee7;
+  --core: #1d4e89; --core-wash: #e4ecf6;
+  --grave: #9b2226; --warn: #8a5a00; --calm: #4a5568;
+  --grave-wash: #f7e7e7; --warn-wash: #f7efdf;
+  --shadow: 0 1px 2px rgba(20,32,23,.05), 0 8px 24px -18px rgba(20,32,23,.4);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121613; --card: #191f1b; --rule: #2b332d;
+    --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+    --accent: #7fc08e; --accent-wash: #1b2a1f;
+    --core: #7fa8dd; --core-wash: #17222f;
+    --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+    --grave-wash: #2a1a1a; --warn-wash: #2a2113;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121613; --card: #191f1b; --rule: #2b332d;
+  --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+  --accent: #7fc08e; --accent-wash: #1b2a1f;
+  --core: #7fa8dd; --core-wash: #17222f;
+  --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+  --grave-wash: #2a1a1a; --warn-wash: #2a2113;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: "Public Sans", system-ui, sans-serif; line-height: 1.65; font-size: 16px;
+}
+.wrap { max-width: 940px; margin: 0 auto; padding: 56px 24px 96px;
+        display: flex; flex-direction: column; gap: 52px; }
+section { display: flex; flex-direction: column; gap: 18px; }
+h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); letter-spacing: -.02em; line-height: 1.08; text-wrap: balance; }
+h2 { font-size: clamp(1.35rem, 2.6vw, 1.7rem); letter-spacing: -.01em; text-wrap: balance; }
+h3 { font-size: 1.05rem; letter-spacing: -.005em; }
+p { margin: 0; max-width: 68ch; }
+.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 62ch; }
+.eyebrow { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .68rem; letter-spacing: .14em;
+           text-transform: uppercase; color: var(--ink-faint); margin: 0; }
+code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .88em;
+       background: var(--accent-wash); padding: .1em .34em; border-radius: 3px; color: var(--ink); }
+strong { font-weight: 600; }
+
+.panel { background: var(--card); border: 1px solid var(--rule); border-radius: 5px;
+         padding: 24px 22px; box-shadow: var(--shadow); }
+figure { margin: 0; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { margin-top: 16px; font-size: .88rem; color: var(--ink-soft); }
+
+.core-box { fill: var(--core-wash); stroke: var(--core); stroke-width: 1.6; }
+.adapter-box { fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.2; }
+.log-box { fill: var(--warn-wash); stroke: var(--warn); stroke-width: 1.2; }
+.t-title { font-family: "Public Sans", sans-serif; font-size: 13px; font-weight: 600; fill: var(--ink); }
+.t-sub { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9.5px; fill: var(--ink-faint); }
+.t-core { font-family: "Fraunces", Georgia, serif; font-size: 17px; font-weight: 600; fill: var(--core); }
+.t-lane { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: .1em;
+          text-transform: uppercase; fill: var(--ink-faint); }
+.wire { stroke: var(--accent); stroke-width: 1.5; fill: none; }
+.wire-log { stroke: var(--warn); stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
+.wire-soft { stroke: var(--ink-faint); stroke-width: 1.2; fill: none; }
+.head { fill: var(--accent); }
+.head-log { fill: var(--warn); }
+.wire-label { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9.5px; fill: var(--ink-soft); }
+
+.scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 5px; background: var(--card); }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .64rem; letter-spacing: .1em;
+     text-transform: uppercase; color: var(--ink-faint); font-weight: 400; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.path { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .82rem; white-space: nowrap; }
+td.num { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums;
+         white-space: nowrap; }
+.where { display: inline-block; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .66rem;
+         padding: .18em .5em; border-radius: 3px; white-space: nowrap; }
+.w-core { background: var(--core-wash); color: var(--core); }
+td.w-done, td.w-todo { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .7rem;
+         letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+td.w-done { color: var(--accent); }
+td.w-todo { color: var(--ink-faint); }
+.w-adapt { background: var(--accent-wash); color: var(--accent); }
+.w-log { background: var(--warn-wash); color: var(--warn); }
+
+.flow { display: flex; flex-direction: column; gap: 16px; }
+.flow > li { list-style: none; background: var(--card); border: 1px solid var(--rule); border-radius: 5px;
+             padding: 16px 18px 16px 52px; position: relative; }
+.flow { padding: 0; margin: 0; counter-reset: step; }
+.flow > li::before { counter-increment: step; content: counter(step);
+  font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .72rem; color: var(--accent);
+  background: var(--accent-wash); border-radius: 3px; width: 22px; height: 22px;
+  display: grid; place-items: center; position: absolute; left: 16px; top: 17px; }
+.flow h3 { margin-bottom: 4px; }
+.flow p { font-size: .92rem; color: var(--ink-soft); }
+.chain { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .78rem;
+         color: var(--ink-soft); margin-top: 8px; }
+
+.open > li { margin-bottom: 10px; }
+ul.open { padding-left: 20px; margin: 0; }
+ul.open li { max-width: 68ch; }
+
+.foot { font-size: .82rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 20px; }
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Infrastructure d'apprentissage · bbTrainer</p>
+  <h1>Noyau et apprenant</h1>
+  <p class="lede">Le même moteur de règles sert le jeu et l'entraînement. Les onze composants
+  qui l'entourent, ce que chacun fait, et le seul objet qui traverse d'un monde à l'autre.</p>
+</header>
+
+<section>
+  <h2>La carte, en une image</h2>
+  <div class="panel">
+    <figure>
+      <svg viewBox="0 0 900 400" role="img" aria-label="Le noyau de règles au centre ; la boucle d'entraînement à gauche et le jeu Godot à droite lui envoient tous deux des commandes et en reçoivent des événements ; un fichier de poids passe de l'entraînement au jeu, et un journal est écrit par le noyau.">
+        <defs>
+          <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head" points="0,0 10,5 0,10"></polygon>
+          </marker>
+          <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head-log" points="0,0 10,5 0,10"></polygon>
+          </marker>
+          <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head-soft" points="0,0 10,5 0,10"></polygon>
+          </marker>
+        </defs>
+
+        <rect class="log-box" x="380" y="26" width="140" height="52" rx="4"></rect>
+        <text class="t-title" x="450" y="48" text-anchor="middle">journal</text>
+        <text class="t-sub" x="450" y="64" text-anchor="middle">graine + commandes</text>
+
+        <rect class="adapter-box" x="40" y="140" width="230" height="104" rx="4"></rect>
+        <text class="t-title" x="155" y="176" text-anchor="middle">Boucle d'entraînement</text>
+        <text class="t-sub" x="155" y="196" text-anchor="middle">768 parties de front</text>
+        <text class="t-sub" x="155" y="212" text-anchor="middle">sans fenêtre, sans Godot</text>
+
+        <rect class="core-box" x="335" y="130" width="230" height="124" rx="4"></rect>
+        <text class="t-core" x="450" y="172" text-anchor="middle">kernel</text>
+        <text class="t-sub" x="450" y="196" text-anchor="middle">les règles · Rust</text>
+        <text class="t-sub" x="450" y="212" text-anchor="middle">dés semés · zéro E/S</text>
+        <text class="t-sub" x="450" y="232" text-anchor="middle">ne connaît personne</text>
+
+        <rect class="adapter-box" x="630" y="140" width="230" height="104" rx="4"></rect>
+        <text class="t-title" x="745" y="176" text-anchor="middle">Le jeu Godot</text>
+        <text class="t-sub" x="745" y="196" text-anchor="middle">clics, animations, coach</text>
+        <text class="t-sub" x="745" y="212" text-anchor="middle">une fenêtre, une partie</text>
+
+        <line class="wire" x1="270" y1="172" x2="329" y2="172" marker-end="url(#a1)"></line>
+        <text class="wire-label" x="300" y="164" text-anchor="middle">commandes</text>
+        <line class="wire" x1="335" y1="212" x2="276" y2="212" marker-end="url(#a1)"></line>
+        <text class="wire-label" x="300" y="230" text-anchor="middle">événements</text>
+
+        <line class="wire" x1="630" y1="172" x2="571" y2="172" marker-end="url(#a1)"></line>
+        <text class="wire-label" x="600" y="164" text-anchor="middle">commandes</text>
+        <line class="wire" x1="565" y1="212" x2="624" y2="212" marker-end="url(#a1)"></line>
+        <text class="wire-label" x="600" y="230" text-anchor="middle">événements</text>
+
+        <path class="wire-log" d="M 450 130 L 450 84" marker-end="url(#a2)"></path>
+        <text class="wire-label" x="466" y="110" text-anchor="start">écrit chaque partie</text>
+
+        <rect class="log-box" x="380" y="308" width="140" height="52" rx="4"></rect>
+        <text class="t-title" x="450" y="330" text-anchor="middle">poids.bin</text>
+        <text class="t-sub" x="450" y="346" text-anchor="middle">le réseau entraîné</text>
+
+        <path class="wire-log" d="M 155 244 L 155 334 L 374 334" marker-end="url(#a2)"></path>
+        <path class="wire-log" d="M 520 334 L 745 334 L 745 250" marker-end="url(#a2)"></path>
+        <text class="wire-label" x="450" y="386" text-anchor="middle">le seul objet qui traverse de l'entraînement au jeu</text>
+      </svg>
+      <figcaption>Les deux mondes n'ont aucun code en commun sauf le noyau — et rien ne circule
+      entre eux qu'un fichier de poids. C'est ce qui garantit que le coach conseille sur les
+      règles exactes du jeu où il est embarqué, et non sur une copie qui aurait dérivé.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <h2>Les onze composants</h2>
+  <p>Trois familles : le noyau, ce qui l'entraîne, ce qui le joue. La colonne « ignore »
+  est la plus importante — c'est elle qui empêche l'infrastructure de se nouer sur
+  elle-même.</p>
+  <p>Pour le noyau, cette colonne n'est pas une consigne : <code>kernel/Cargo.toml</code>
+  n'a pas <code>godot</code> dans ses dépendances, donc un appel au moteur glissé dans les
+  règles ne compile pas. Et <code>make check-arch</code> exige <strong>100 % de couverture
+  du noyau</strong> — rangée dans l'architecture et non dans les tests, parce qu'un noyau
+  n'est couvrable en entier que s'il ne dépend de rien d'extérieur : la couverture mesure
+  la propriété que la frontière existe pour garantir.</p>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Composant</th><th>Rôle</th><th>Connaît</th><th>Ignore</th><th>État</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="path">app/core/kernel <span class="where w-core">noyau</span></td>
+          <td>Reçoit une commande, la valide, tire les dés, rend une liste d'événements. Ne mute que son propre état.</td>
+          <td>Rien</td>
+          <td>Godot, burn, le disque, l'horloge</td>
+          <td class="w-done">fait</td>
+        </tr>
+        <tr>
+          <td class="path">encoder <span class="where w-core">noyau</span></td>
+          <td>Traduit un état en 132 plans de 26 × 15, plus le masque des ~3 000 actions légales.</td>
+          <td>le noyau</td>
+          <td>Le réseau, l'algorithme d'apprentissage</td>
+          <td class="w-todo">à écrire</td>
+        </tr>
+        <tr>
+          <td class="path">envs <span class="where w-adapt">entraînement</span></td>
+          <td>Avance 768 parties de front dans une seule boucle, et les remet à zéro quand elles finissent.</td>
+          <td>le noyau, <code>encoder</code></td>
+          <td>Le réseau — il ne fait qu'attendre des actions</td>
+          <td class="w-todo">à écrire</td>
+        </tr>
+        <tr>
+          <td class="path">net <span class="where w-adapt">entraînement</span></td>
+          <td>Deux modèles : la politique π(action | état, <em>intention</em>) et la valeur V(état) → probabilité de victoire.</td>
+          <td>Des tenseurs</td>
+          <td>Les règles de Blood Bowl</td>
+          <td class="w-todo">à écrire</td>
+        </tr>
+        <tr>
+          <td class="path">learner <span class="where w-adapt">entraînement</span></td>
+          <td>PPO : calcule l'avantage, écrête la mise à jour, écrit les points de reprise.</td>
+          <td><code>net</code></td>
+          <td>Les règles, l'affichage</td>
+          <td class="w-todo">à écrire</td>
+        </tr>
+        <tr>
+          <td class="path">journal <span class="where w-log">trace</span></td>
+          <td>Écrit graine + commandes de chaque partie, et une ligne de résumé par match.</td>
+          <td>le noyau</td>
+          <td>Tout le reste</td>
+          <td class="w-todo">à écrire</td>
+        </tr>
+        <tr>
+          <td class="path">league <span class="where w-adapt">mesure</span></td>
+          <td>Fait jouer l'agent contre l'aléatoire, le bot scriptable et des points de reprise gelés. Calcule Elo et calibration.</td>
+          <td>le noyau, <code>net</code></td>
+          <td>L'apprenant — elle ne fait que constater</td>
+          <td class="w-todo">à écrire</td>
+        </tr>
+        <tr>
+          <td class="path">bot <span class="where w-adapt">mesure</span></td>
+          <td>Adversaire à heuristiques, sans apprentissage. L'étalon fixe et l'adversaire jouable du premier jour.</td>
+          <td>le noyau</td>
+          <td>Le réseau</td>
+          <td class="w-todo">à écrire</td>
+        </tr>
+        <tr>
+          <td class="path">strategist <span class="where w-adapt">inférence</span></td>
+          <td>Déroule les cinq intentions jusqu'à la fin du tour, garde celle que V juge la meilleure, replanifie sur divergence.</td>
+          <td>le noyau, <code>net</code></td>
+          <td>Godot, l'entraînement</td>
+          <td class="w-todo">à écrire</td>
+        </tr>
+        <tr>
+          <td class="path">app/core/gdextension <span class="where w-adapt">frontière</span></td>
+          <td>La seule porte entre GDScript et Rust. Elle exposera <code>submit()</code>, <code>legal_commands()</code>, <code>snapshot()</code> et le conseil du coach.</td>
+          <td>Tout le Rust</td>
+          <td>Rien — c'est la couche qui a le droit de tout voir</td>
+          <td class="w-done">fait</td>
+        </tr>
+        <tr>
+          <td class="path">app/io/ <span class="where w-adapt">jeu</span></td>
+          <td>Les écrans et l'arène, en GDScript. Traduit les clics en commandes et les événements en animations.</td>
+          <td>La GDExtension</td>
+          <td>Les règles — il ne les rejoue jamais</td>
+          <td class="w-done">fait</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Les dés — cinq réserves, tirées d'avance</h2>
+  <p>Le noyau ne tire pas un dé quand il en a besoin : il déroule ses suites à la
+  construction du match, depuis la graine, et les consomme ensuite dans l'ordre. Une
+  réserve par type de dé.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Réserve</th><th>Pré-tirage</th><th>Ce qu'elle sert</th></tr></thead>
+      <tbody>
+        <tr><td class="path">d6</td><td class="num">10 000</td><td>esquives, course, ramassage, armure, blessure, engagement</td></tr>
+        <tr><td class="path">dé de blocage</td><td class="num">100</td><td>les blocages — six faces, mais des symboles en proportions inégales</td></tr>
+        <tr><td class="path">d8</td><td class="num">100</td><td>rebonds et déviations</td></tr>
+        <tr><td class="path">d12</td><td class="num">100</td><td>tables secondaires</td></tr>
+        <tr><td class="path">d16</td><td class="num">100</td><td>la table de blessure</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Chaque réserve garde son générateur à côté : un match qui dépasse prolonge sa suite,
+  et la valeur obtenue est exactement celle qu'un pré-tirage plus large aurait donnée.
+  Il n'y a donc pas de plafond, et l'épuisement n'est pas un cas particulier.</p>
+  <p><strong>Le découpage par type cloisonne.</strong> Ajouter une règle qui consomme un d8
+  ne décale pas la suite des d6 : les types de dés ne se contaminent plus entre eux. À
+  l'intérieur d'un type, le décalage subsiste — une règle qui consomme un d6 de plus au
+  tour 2 décale tous les d6 suivants de ce match.</p>
+  <p>Deux conséquences de mise en œuvre. Les <strong>fonctions de dés s'écrivent à la
+  main</strong> : <code>ChaCha8</code> garantit la stabilité de son flux brut entre
+  versions, pas celle des distributions de <code>rand</code> — s'appuyer sur elles
+  casserait tous les journaux en silence au prochain changement de version. Et une réserve
+  <strong>se fabrique à la main pour un test</strong> : « donne-moi 1, 1, 6, 6 » devient un
+  test de règle trivial à écrire et à relire.</p>
+</section>
+
+<section>
+  <h2>Ce qu'une commande dit, et quand le noyau s'arrête</h2>
+  <p><strong>Une commande de déplacement vaut un pas vers une case adjacente.</strong> Le
+  noyau n'invente jamais de chemin — il arbitre le pas qu'on lui soumet. Le chemin compte à
+  Blood Bowl : passer par la gauche ou par la droite change les esquives à tenter, et on
+  veut parfois délibérément la route risquée pour finir collé à quelqu'un. Un noyau qui
+  choisirait le chemin porterait une décision tactique déguisée en règle.</p>
+  <p>C'est aussi la seule unité que les deux commandeurs peuvent former de la même façon :
+  le réseau désigne une case sur la carte d'actions, l'humain clique une case. L'aide au
+  tracé qui décompose un clic lointain en pas reste dans <code>app/io/</code>, hors du
+  noyau.</p>
+  <p><strong>Le noyau est interruptible.</strong> La plupart des règles demandent l'accord
+  d'un coach en cours de résolution : quel dé de blocage retenir, dans quelle direction
+  pousser, suivre ou non, et surtout utiliser une relance après un jet raté. Le noyau passe
+  alors en <em>état d'attente</em>, et <code>legal_commands()</code> ne rend plus que les
+  réponses possibles. Le flux reste uniforme — toujours <code>submit(commande) →
+  événements</code>, pour l'humain comme pour l'IA.</p>
+  <p>La conséquence pour l'apprentissage vaut d'être dite : le masque de légalité contient
+  les choix de dé et de relance, donc <strong>l'agent apprend la gestion des relances</strong>
+  au lieu de la subir. Une politique de relance câblée dans le noyau lui aurait retiré une
+  des vraies compétences du jeu.</p>
+</section>
+
+<section>
+  <h2>La boucle d'entraînement</h2>
+  <p>Un seul processus, aucun fil à synchroniser, exécution reproductible à graine fixée.
+  Le simulateur n'est jamais le goulot : avancer 768 parties d'un pas coûte le tiers de
+  ce que coûte la passe de réseau qui suit.</p>
+  <div class="panel">
+    <figure>
+      <svg viewBox="0 0 900 300" role="img" aria-label="Une boucle de collecte en quatre étapes — 768 parties, encodeur, réseau, avancée du noyau — qui se referme sur elle-même ; toutes les 2048 décisions, les trajectoires descendent vers l'apprenant PPO qui renvoie de nouveaux poids au réseau.">
+        <defs>
+          <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head" points="0,0 10,5 0,10"></polygon>
+          </marker>
+          <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head-log" points="0,0 10,5 0,10"></polygon>
+          </marker>
+        </defs>
+
+        <path class="wire" d="M 780 56 L 780 26 L 120 26 L 120 50" marker-end="url(#b1)"></path>
+        <text class="wire-label" x="450" y="18" text-anchor="middle">un pas de toutes les parties ≈ 4 ms</text>
+
+        <rect class="core-box" x="30" y="56" width="180" height="64" rx="4"></rect>
+        <text class="t-title" x="120" y="82" text-anchor="middle">768 parties</text>
+        <text class="t-sub" x="120" y="100" text-anchor="middle">envs · état courant</text>
+
+        <rect class="core-box" x="250" y="56" width="180" height="64" rx="4"></rect>
+        <text class="t-title" x="340" y="82" text-anchor="middle">encodeur</text>
+        <text class="t-sub" x="340" y="100" text-anchor="middle">132 plans + masque</text>
+
+        <rect class="adapter-box" x="470" y="56" width="180" height="64" rx="4"></rect>
+        <text class="t-title" x="560" y="82" text-anchor="middle">réseau</text>
+        <text class="t-sub" x="560" y="100" text-anchor="middle">politique · ≈ 3 ms</text>
+
+        <rect class="core-box" x="690" y="56" width="180" height="64" rx="4"></rect>
+        <text class="t-title" x="780" y="82" text-anchor="middle">core avance</text>
+        <text class="t-sub" x="780" y="100" text-anchor="middle">dés · ≈ 1 ms</text>
+
+        <line class="wire" x1="210" y1="88" x2="244" y2="88" marker-end="url(#b1)"></line>
+        <line class="wire" x1="430" y1="88" x2="464" y2="88" marker-end="url(#b1)"></line>
+        <line class="wire" x1="650" y1="88" x2="684" y2="88" marker-end="url(#b1)"></line>
+
+        <path class="wire-log" d="M 780 120 L 780 194" marker-end="url(#b2)"></path>
+        <text class="wire-label" x="792" y="162" text-anchor="start">trajectoires</text>
+
+        <rect class="adapter-box" x="440" y="200" width="400" height="64" rx="4"></rect>
+        <text class="t-title" x="640" y="226" text-anchor="middle">apprenant PPO</text>
+        <text class="t-sub" x="640" y="244" text-anchor="middle">avantage · écrêtage · 4 passages de gradient</text>
+
+        <path class="wire" d="M 520 200 L 520 126" marker-end="url(#b1)"></path>
+        <text class="wire-label" x="508" y="162" text-anchor="end">nouveaux poids</text>
+
+        <text class="t-lane" x="30" y="290">toutes les 2048 décisions, on s'arrête et on apprend</text>
+      </svg>
+      <figcaption>Le GPU attend environ un quart du temps que les parties avancent. C'est le prix
+      assumé de la simplicité : aucun acteur asynchrone, aucune trajectoire périmée, et un
+      débogueur qui suit la pile de bout en bout.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <h2>Le stratège — la seule pièce qui ne s'entraîne pas</h2>
+  <p>C'est ici que vit le découpage stratégie / tactique. La <strong>tactique</strong> est la
+  politique, réévaluée à chaque coup par construction. La <strong>stratégie</strong> est le choix
+  de l'intention — et elle ne se choisit pas par un réseau, mais par un déroulement suivi d'un
+  <code>argmax</code>. Un stratège sans paramètres ne peut ni diverger, ni s'effondrer, ni
+  attendre qu'un autre étage soit prêt.</p>
+  <div class="panel">
+    <figure>
+      <svg viewBox="0 0 900 430" role="img" aria-label="Depuis la position courante, cinq intentions sont déroulées jusqu'à la fin du tour ; la fonction de valeur note chaque position de fin de tour et le maximum désigne l'intention retenue ; une flèche de retour indique une replanification dès qu'un dé fait diverger le réel de la prévision.">
+        <defs>
+          <marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head" points="0,0 10,5 0,10"></polygon>
+          </marker>
+          <marker id="c2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head-log" points="0,0 10,5 0,10"></polygon>
+          </marker>
+        </defs>
+
+        <rect class="core-box" x="20" y="164" width="160" height="64" rx="4"></rect>
+        <text class="t-title" x="100" y="190" text-anchor="middle">position courante</text>
+        <text class="t-sub" x="100" y="208" text-anchor="middle">état réel du match</text>
+
+        <text class="t-lane" x="250" y="22">déroulés jusqu'à la fin du tour</text>
+
+        <rect class="adapter-box" x="250" y="30" width="250" height="48" rx="4"></rect>
+        <text class="t-title" x="266" y="60" text-anchor="start">marquer</text>
+        <rect class="adapter-box" x="250" y="100" width="250" height="48" rx="4"></rect>
+        <text class="t-title" x="266" y="130" text-anchor="start">sécuriser le ballon</text>
+        <rect class="adapter-box" x="250" y="170" width="250" height="48" rx="4"></rect>
+        <text class="t-title" x="266" y="200" text-anchor="start">éliminer</text>
+        <rect class="adapter-box" x="250" y="240" width="250" height="48" rx="4"></rect>
+        <text class="t-title" x="266" y="270" text-anchor="start">temporiser</text>
+        <rect class="adapter-box" x="250" y="310" width="250" height="48" rx="4"></rect>
+        <text class="t-title" x="266" y="340" text-anchor="start">récupérer le ballon</text>
+
+        <path class="wire" d="M 180 190 C 215 190, 215 54, 244 54" marker-end="url(#c1)"></path>
+        <path class="wire" d="M 180 192 C 215 192, 215 124, 244 124" marker-end="url(#c1)"></path>
+        <path class="wire" d="M 180 194 L 244 194" marker-end="url(#c1)"></path>
+        <path class="wire" d="M 180 198 C 215 198, 215 264, 244 264" marker-end="url(#c1)"></path>
+        <path class="wire" d="M 180 200 C 215 200, 215 334, 244 334" marker-end="url(#c1)"></path>
+
+        <path class="wire-soft" d="M 500 54 C 530 54, 530 186, 554 186"></path>
+        <path class="wire-soft" d="M 500 124 C 530 124, 530 190, 554 190"></path>
+        <path class="wire-soft" d="M 500 194 L 554 194"></path>
+        <path class="wire-soft" d="M 500 264 C 530 264, 530 198, 554 198"></path>
+        <path class="wire-soft" d="M 500 334 C 530 334, 530 202, 554 202"></path>
+
+        <rect class="core-box" x="560" y="164" width="140" height="64" rx="4"></rect>
+        <text class="t-title" x="630" y="190" text-anchor="middle">V(fin de tour)</text>
+        <text class="t-sub" x="630" y="208" text-anchor="middle">% de victoire</text>
+
+        <line class="wire" x1="700" y1="196" x2="734" y2="196" marker-end="url(#c1)"></line>
+        <text class="wire-label" x="717" y="186" text-anchor="middle">argmax</text>
+
+        <rect class="adapter-box" x="740" y="164" width="140" height="64" rx="4"></rect>
+        <text class="t-title" x="810" y="190" text-anchor="middle">intention retenue</text>
+        <text class="t-sub" x="810" y="208" text-anchor="middle">+ marge d'hystérésis</text>
+
+        <path class="wire-log" d="M 810 228 L 810 396 L 100 396 L 100 234" marker-end="url(#c2)"></path>
+        <text class="wire-label" x="450" y="388" text-anchor="middle">replanifie dès qu'un dé fait diverger le réel de la prévision, et à chaque fin d'activation</text>
+      </svg>
+      <figcaption>Cinq déroulements coûtent 125 passes de réseau, soit moins d'une seconde de GPU
+      pour un match entier — un prix négligeable parce qu'on ne le paie qu'à l'inférence, jamais
+      pendant les millions de parties d'entraînement. <strong>Les déroulements tirent dans une
+      réserve de dés séparée</strong>, dérivée de leur propre graine : puiser dans celle du match
+      leur montrerait les dés qui vont réellement sortir, et l'agent choisirait le plan qui gagne
+      avec ceux-là. Il jouerait en connaissant l'avenir, et son niveau mesuré serait une
+      illusion.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <h2>Ce que le jeu en voit</h2>
+  <p>Trois parcours, et un seul point d'entrée pour les trois. La GDExtension expose une
+  poignée de fonctions ; <code>io/</code> ne connaît rien d'autre du monde Rust.</p>
+  <ol class="flow">
+    <li>
+      <h3>Un humain déplace un joueur</h3>
+      <p>Le réseau n'intervient pas du tout. C'est le chemin qui existera avant toute IA,
+      et il ne change jamais ensuite.</p>
+      <p class="chain">clic → io/ → submit({MOVE, unit, path}) → core → [UNIT_MOVED, DODGE_ROLLED, …] → animations</p>
+    </li>
+    <li>
+      <h3>L'adversaire IA joue son tour</h3>
+      <p>Le stratège travaille sur une <em>copie</em> du noyau — il déroule des tours qui
+      n'ont pas lieu. Seule la commande retenue est soumise au vrai match.</p>
+      <p class="chain">core → strategist → 5 déroulés (copie) → V → intention → π → submit(commande) → animations</p>
+    </li>
+    <li>
+      <h3>Le coach conseille</h3>
+      <p>Exactement le même calcul, mais rien n'est exécuté : on affiche l'écart de valeur
+      entre le coup envisagé par l'humain et le meilleur trouvé. C'est là que la <strong>calibration</strong>
+      de V devient le produit — « 12 % » doit vouloir dire douze pour cent, pas « moins bien ».</p>
+      <p class="chain">position → V(coup humain) vs V(meilleur coup) → « ce coup te coûte 12 % » + l'intention qu'il sert</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2>Les chiffres qui commandent</h2>
+  <p>Mesurés sur cette machine — 8 cœurs, Radeon RX 9070, Godot 4.5.1 — ou calculés à partir
+  d'eux. Ce sont eux qui ont tranché chaque choix ci-dessus, pas des préférences.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Grandeur</th><th>Valeur</th><th>Ce qu'elle a décidé</th></tr></thead>
+      <tbody>
+        <tr><td>Opérations de grille en GDScript</td><td class="num">1,15 M/s</td>
+            <td>Un noyau GDScript aurait tenu pour l'auto-jeu simple, mais pas pour la recherche : Rust rend les deux possibles</td></tr>
+        <tr><td>Une partie complète, noyau Rust</td><td class="num">0,2 – 2 ms</td>
+            <td>Le simulateur cesse d'être le goulot ; l'orchestration peut rester synchrone</td></tr>
+        <tr><td>Observation encodée, en <code>u8</code></td><td class="num">51 Ko</td>
+            <td>par décision — donc 82 To pour un million de parties : stocker les observations est exclu</td></tr>
+        <tr><td>Journal d'une partie</td><td class="num">6,5 Ko</td>
+            <td>6,5 Go le million : on garde tout, et le journal devient le test de non-régression du moteur</td></tr>
+        <tr><td>Un million de parties, sans recherche</td><td class="num">3 – 4 h</td>
+            <td>Une expérience coûte une nuit : on a le droit de se tromper souvent</td></tr>
+        <tr><td>Un million de parties, recherche dans la boucle</td><td class="num">≈ 2 semaines</td>
+            <td>La recherche est repoussée à l'inférence, où elle ne coûte qu'une seconde par match</td></tr>
+        <tr><td>Facteur de branchement d'un tour d'équipe</td><td class="num">≈ 10<sup>13</sup></td>
+            <td>Chercher sur le tour entier est exclu ; d'où les intentions, qui en échantillonnent cinq</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Ce qui n'est pas encore décidé</h2>
+  <ul class="open">
+    <li><strong>Où vivent les caisses d'entraînement.</strong> L'espace de travail Cargo est
+    aujourd'hui <code>app/core/</code>, avec <code>kernel</code> et <code>gdextension</code>.
+    <code>envs</code>, <code>net</code> et <code>learner</code> y seraient des membres de plus,
+    sous un dossier qui s'appelle « noyau » — ou l'espace de travail remonte. Cargo et Godot
+    veulent chacun voir leur racine, et ils ne veulent pas la même.</li>
+    <li><strong>Le vocabulaire des intentions.</strong> Cinq sont posées à titre d'exemple. La
+    liste est un plafond : l'agent ne pourra jamais vouloir ce qui n'y figure pas.</li>
+    <li><strong>La récompense propre à chaque intention.</strong> Elle est façonnée par nature,
+    donc exposée au piège classique — l'agent optimise ce qu'on écrit. Le cadre reste à fixer.</li>
+    <li><strong>La couverture des positions humaines.</strong> L'auto-jeu ne visite que les
+    positions où le réseau se met lui-même ; un humain se met ailleurs. Le coach a besoin de ces
+    états-là, et rien dans l'infrastructure actuelle ne les produit.</li>
+    <li><strong>À qui le noyau pose sa question.</strong> L'état d'attente suppose aujourd'hui
+    le coach actif. Un blocage à un dé rend le choix du résultat au défenseur : l'attente devra
+    nommer l'équipe attendue.</li>
+    <li><strong>La couverture à 100 % tiendra-t-elle ?</strong> Elle porte sur 87 lignes
+    aujourd'hui. Un moteur de règles avec ses dés et ses dix compétences en fera des milliers,
+    et l'exigence façonnera la manière d'écrire — à réexaminer quand ça pèsera, pas avant.</li>
+    <li><strong>Le sondage <code>burn</code> sur wgpu.</strong> Deux jours sur un problème dont
+    on connaît la réponse, avant la première ligne d'entraînement. C'est la pièce la plus opaque
+    de la pile — celle où l'on ne saurait pas dire si l'erreur vient de soi ou du pilote.</li>
+  </ul>
+</section>
+
+<p class="foot">Décisions arrêtées lors des sessions des 29 et 30 août 2026. À cette date le
+noyau Rust existe : <code>kernel</code> tient 87 lignes couvertes à 100 %, la grille y est portée
+et branchée derrière la GDExtension, et les tests de comportement GDScript passent inchangés
+contre elle. Tout le reste du tableau est à écrire. Chiffres GDScript mesurés sur l'ancien
+<code>app/core/rules/unit_grid.gd</code>, Godot 4.5.1 en <code>--headless</code> ; les autres sont
+des ordres de grandeur calculés, à confirmer sur le noyau Rust quand il aura des règles à
+arbitrer.</p>
+
+</div>
