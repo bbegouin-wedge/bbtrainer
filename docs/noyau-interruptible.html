@@ -1,0 +1,476 @@
+<title>Le noyau interruptible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #f3f5f2; --card: #ffffff; --rule: #dde2dc;
+  --ink: #141c17; --ink-soft: #55605a; --ink-faint: #8b948e;
+  --accent: #2f6b3f; --accent-wash: #e6eee7;
+  --core: #1d4e89; --core-wash: #e4ecf6;
+  --grave: #9b2226; --warn: #8a5a00; --calm: #4a5568;
+  --grave-wash: #f7e7e7; --warn-wash: #f7efdf;
+  --shadow: 0 1px 2px rgba(20,32,23,.05), 0 8px 24px -18px rgba(20,32,23,.4);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121613; --card: #191f1b; --rule: #2b332d;
+    --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+    --accent: #7fc08e; --accent-wash: #1b2a1f;
+    --core: #7fa8dd; --core-wash: #17222f;
+    --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+    --grave-wash: #2a1a1a; --warn-wash: #2a2113;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121613; --card: #191f1b; --rule: #2b332d;
+  --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+  --accent: #7fc08e; --accent-wash: #1b2a1f;
+  --core: #7fa8dd; --core-wash: #17222f;
+  --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+  --grave-wash: #2a1a1a; --warn-wash: #2a2113;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink);
+       font-family: "Public Sans", system-ui, sans-serif; line-height: 1.65; font-size: 16px; }
+.wrap { max-width: 940px; margin: 0 auto; padding: 56px 24px 96px;
+        display: flex; flex-direction: column; gap: 52px; }
+section { display: flex; flex-direction: column; gap: 18px; }
+h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); letter-spacing: -.02em; line-height: 1.08; text-wrap: balance; }
+h2 { font-size: clamp(1.35rem, 2.6vw, 1.7rem); letter-spacing: -.01em; text-wrap: balance; }
+h3 { font-size: 1.02rem; letter-spacing: -.005em; }
+p { margin: 0; max-width: 68ch; }
+.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 62ch; }
+.eyebrow { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .68rem; letter-spacing: .14em;
+           text-transform: uppercase; color: var(--ink-faint); margin: 0; }
+code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .88em;
+       background: var(--accent-wash); padding: .1em .34em; border-radius: 3px; color: var(--ink); }
+strong { font-weight: 600; }
+blockquote { margin: 0; padding: 2px 0 2px 18px; border-left: 2px solid var(--accent);
+             color: var(--ink-soft); font-style: italic; max-width: 66ch; }
+blockquote cite { display: block; font-style: normal; font-size: .8rem; color: var(--ink-faint);
+                  margin-top: 6px; font-family: "JetBrains Mono", ui-monospace, monospace; }
+pre { margin: 0; background: var(--card); border: 1px solid var(--rule); border-radius: 5px;
+      padding: 18px 20px; overflow-x: auto; font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: .8rem; line-height: 1.7; color: var(--ink); }
+pre .c { color: var(--ink-faint); }
+pre .k { color: var(--core); font-weight: 500; }
+pre .q { color: var(--grave); font-weight: 500; }
+
+.panel { background: var(--card); border: 1px solid var(--rule); border-radius: 5px;
+         padding: 24px 22px; box-shadow: var(--shadow); }
+figure { margin: 0; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { margin-top: 16px; font-size: .88rem; color: var(--ink-soft); }
+
+.core-box { fill: var(--core-wash); stroke: var(--core); stroke-width: 1.4; }
+.adapter-box { fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.2; }
+.grave-box { fill: var(--grave-wash); stroke: var(--grave); stroke-width: 1.2; }
+.t-title { font-family: "Public Sans", sans-serif; font-size: 13px; font-weight: 600; fill: var(--ink); }
+.t-small { font-family: "Public Sans", sans-serif; font-size: 11px; fill: var(--ink); }
+.t-sub { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9.5px; fill: var(--ink-faint); }
+.t-lane { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: .1em;
+          text-transform: uppercase; fill: var(--ink-faint); }
+.wire { stroke: var(--accent); stroke-width: 1.5; fill: none; }
+.wire-grave { stroke: var(--grave); stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
+.head { fill: var(--accent); }
+.head-grave { fill: var(--grave); }
+.wire-label { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9.5px; fill: var(--ink-soft); }
+
+.scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 5px; background: var(--card); }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .64rem; letter-spacing: .1em;
+     text-transform: uppercase; color: var(--ink-faint); font-weight: 400; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.path { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .82rem; white-space: nowrap; }
+td.num { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.where { display: inline-block; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .66rem;
+         padding: .18em .5em; border-radius: 3px; white-space: nowrap; }
+.w-ok { background: var(--accent-wash); color: var(--accent); }
+.w-todo { background: var(--core-wash); color: var(--core); }
+.w-bad { background: var(--grave-wash); color: var(--grave); }
+
+ul { padding-left: 20px; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+li { max-width: 68ch; }
+.foot { font-size: .82rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 20px; }
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Conception du noyau · bbTrainer</p>
+  <h1>Le noyau interruptible</h1>
+  <p class="lede">Comment un moteur de règles s'arrête au milieu d'un calcul pour
+  demander l'avis d'un coach, sans perdre sa place — et pourquoi il n'a rien à
+  jeter quand le tour s'achève.</p>
+</header>
+
+<section>
+  <h2>Le problème</h2>
+  <p>Une résolution de blocage s'interrompt six fois, à six profondeurs
+  différentes du même calcul :</p>
+<pre><span class="c">calcul de force et des soutiens</span>
+  <span class="k">jeter</span> 1, 2 ou 3 dés de blocage
+    <span class="q">« quel dé retiens-tu ? »</span>
+    <span class="q">« relances-tu ? »</span>
+  <span class="k">appliquer</span> Repoussé
+    <span class="q">« vers quelle case ? »</span>
+    <span class="c">poussée en chaîne — récursif</span>
+    <span class="q">« poursuis-tu ? »</span>
+  <span class="k">jet</span> d'armure
+    <span class="q">« utilises-tu telle compétence ? »</span>
+  <span class="k">jet</span> de blessure
+    <span class="q">« relances-tu ? »</span></pre>
+  <p>À chacune, l'état doit être <strong>sérialisable et copiable</strong> — sans
+  quoi ni le journal, ni la reprise, ni les déroulés du stratège ne fonctionnent.
+  Ça élimine d'emblée les coroutines : l'état suspendu d'un <code>await</code> est
+  une structure engendrée par le compilateur, qu'on ne peut ni écrire ni cloner.</p>
+</section>
+
+<section>
+  <h2>L'invariant, et ce qu'il fait disparaître</h2>
+  <blockquote>
+    La pile ne contient que des <strong>conséquences</strong>. Les intentions
+    vivent dans <code>legal_commands()</code>.
+  </blockquote>
+  <p>Aucun pas ne représente jamais « le Coach fera X ensuite ». Le déplacement
+  restant n'est pas un programme empilé — c'est une suite de commandes que le
+  Coach soumet, un pas de case à la fois. « Activer le joueur suivant » n'est pas
+  empilé non plus.</p>
+  <p>La conséquence est massive : <strong>un turnover n'a rien à tronquer.</strong>
+  La pile contient le jet d'armure du joueur qui vient de chuter, et rien d'autre.
+  Elle se vide toute seule ; ce que le turnover interrompt, c'est ce que
+  <code>legal_commands()</code> proposera ensuite.</p>
+  <blockquote>
+    Lorsqu'un Turnover survient, tout jet qui doit être effectué suite à
+    l'événement qui l'a provoqué est immédiatement effectué. […] l'activation du
+    joueur actuel se termine, et le Tour de son Coach prend aussitôt fin.
+    <cite>livre de règles, p. 32</cite>
+  </blockquote>
+  <p>Sans l'invariant, il aurait fallu une opération de troncature — garder le
+  sommet, jeter le dessous — qui n'est pas une opération de pile, et qui n'aurait
+  existé que pour réparer une erreur de conception en amont.</p>
+</section>
+
+<section>
+  <h2>Deux mécanismes, un point de contact</h2>
+  <div class="panel">
+    <figure>
+      <svg viewBox="0 0 900 320" role="img" aria-label="À gauche, une machine à états porte la structure du match — mi-temps, drive, round, tour, activation. À droite, une pile porte la résolution de ce qui découle d'un fait. Le turnover est la seule flèche qui va de la pile vers la machine à états.">
+        <defs>
+          <marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head" points="0,0 10,5 0,10"></polygon>
+          </marker>
+          <marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head-grave" points="0,0 10,5 0,10"></polygon>
+          </marker>
+        </defs>
+
+        <text class="t-lane" x="40" y="30">la structure — une machine à états</text>
+        <rect class="core-box" x="40" y="46" width="330" height="200" rx="4"></rect>
+        <text class="t-small" x="60" y="76">mi-temps 1 · 2</text>
+        <text class="t-small" x="80" y="102">drive — placement, coup d'envoi, événement</text>
+        <text class="t-small" x="100" y="128">round 1 … 8</text>
+        <text class="t-small" x="120" y="154">tour — attaque, puis défense</text>
+        <text class="t-small" x="140" y="180">activation d'un joueur</text>
+        <text class="t-sub" x="60" y="218">ce qui est PERMIS ensuite</text>
+        <text class="t-sub" x="60" y="234">→ legal_commands()</text>
+
+        <text class="t-lane" x="530" y="30">la résolution — une pile de conséquences</text>
+        <rect class="adapter-box" x="530" y="46" width="330" height="200" rx="4"></rect>
+        <rect class="grave-box" x="556" y="66" width="278" height="26" rx="3"></rect>
+        <text class="t-sub" x="568" y="83">JetArmure { unit: 7 }</text>
+        <rect class="adapter-box" x="556" y="100" width="278" height="26" rx="3"></rect>
+        <text class="t-sub" x="568" y="117">Chute { unit: 7, at: (13,6) }</text>
+        <rect class="adapter-box" x="556" y="134" width="278" height="26" rx="3"></rect>
+        <text class="t-sub" x="568" y="151">ResoudreEsquive { unit: 7, vers: (13,6) }</text>
+        <text class="t-sub" x="556" y="192">↑ sommet — le prochain pas exécuté</text>
+        <text class="t-sub" x="556" y="218">ce qui DÉCOULE de ce qui a eu lieu</text>
+        <text class="t-sub" x="556" y="234">chaque pas porte ses données</text>
+
+        <line class="wire" x1="370" y1="120" x2="524" y2="120" marker-end="url(#m1)"></line>
+        <text class="wire-label" x="447" y="112" text-anchor="middle">une commande admise</text>
+        <text class="wire-label" x="447" y="136" text-anchor="middle">empile une résolution</text>
+
+        <path class="wire-grave" d="M 690 246 L 690 286 L 205 286 L 205 250" marker-end="url(#m2)"></path>
+        <text class="wire-label" x="447" y="304" text-anchor="middle">turnover — la seule flèche en retour : le tour est fini, mais la pile finit de se vider</text>
+      </svg>
+      <figcaption>La machine à états dit ce qui est permis ; la pile déroule ce qui
+      découle. Le turnover est leur unique point de contact — et il ne touche pas à
+      la pile.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <h2>L'automate à pile</h2>
+  <p>Un pas est une donnée. Il <strong>porte tout ce dont il a besoin</strong> —
+  <code>ApplyPush { unit, from, to }</code> — plutôt que de lire un contexte
+  partagé. La pile est alors sérialisable, copiable et comparable, et un pas se
+  teste en l'exécutant isolément. Le prix : quand une valeur sert à trois pas
+  suivants, on la recopie dans les trois au moment de les empiler.</p>
+  <p>La boucle est minuscule : dépiler, exécuter, empiler ce que ça produit,
+  recommencer — jusqu'à ce que la pile soit vide ou qu'un pas demande une
+  réponse.</p>
+  <p>Deux propriétés qu'on n'avait pas cherchées et qu'on garde :</p>
+  <ul>
+    <li><strong>La récursion est naturelle.</strong> Une poussée en chaîne pousse
+    l'occupant de la case, qui peut en pousser un autre. Une machine à états plate
+    ne l'exprime pas ; c'est même l'exemple canonique de ce qu'une pile ajoute.</li>
+    <li><strong>La pile est une explication.</strong> On peut l'afficher —
+    « résolution du blocage › application de la poussée › direction demandée ».
+    Pour le débogage, pour le journal, et pour le coach qui demande <em>pourquoi</em>
+    on lui pose cette question.</li>
+  </ul>
+  <p>Le coût, écrit pour ne pas l'oublier : c'est un interpréteur qu'on écrit, avec
+  sa propre sémantique à tester en plus des règles. Et l'ordre d'empilement
+  s'inverse — on empile à l'envers de l'exécution, source de bogues classique, à
+  neutraliser par un <code>push_all</code> qui inverse.</p>
+</section>
+
+<section>
+  <h2>Les points d'ancrage sont des moments, pas des résolutions</h2>
+  <p>C'est la précision qui a coûté le plus à trouver, et ce sont les compétences
+  elles-mêmes qui la donnent. Trois d'entre elles s'appliquent à l'esquive — et
+  <strong>à trois instants différents</strong> :</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Compétence</th><th>Ce qu'elle dit</th><th>Son moment</th></tr></thead>
+      <tbody>
+        <tr><td class="path">Tentacules</td><td><em>« Lorsqu'un joueur adverse tente d'Esquiver […] ce joueur peut utiliser cette Compétence »</em> — jet opposé de Force</td><td><strong>avant</strong> le test ; elle peut l'empêcher</td></tr>
+        <tr><td class="path">Tacle</td><td><em>« il ne peut pas utiliser la Compétence Esquive »</em></td><td><strong>pendant le calcul</strong> — filtre sur une <em>autre</em> compétence</td></tr>
+        <tr><td class="path">Tacle Plongeant</td><td><em>« après que le Test d'Agilité ait été lancé et que tous les modificateurs et relances aient été appliqués […] appliquez immédiatement un modificateur »</em></td><td><strong>après</strong> le jet, les modificateurs <em>et</em> les relances</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Une compétence <strong>date son propre moment</strong>, dans son texte. Le
+  catalogue des points d'ancrage ne se devine pas : il se lit.</p>
+  <p><strong>Et un type de résolution existe parce que quelque chose s'y
+  accroche</strong> — une compétence, une décision de coach, ou une règle qui le
+  référence depuis ailleurs. Sur les <strong>135 intitulés</strong> du chapitre
+  central du livre, <strong>26</strong> sont cités par au moins une compétence.
+  Nommer les 135 produirait 109 types que rien n'intercepte : autant de pas à
+  empiler, sérialiser, couvrir de tests et soumettre à la mutation, pour rien.</p>
+  <p>La recherche des compétences applicables est bon marché : le masque de
+  compétences d'un joueur tient dans un <code>u128</code>, et un masque
+  pré-calculé par moment donne les applicables en un <em>et</em> binaire par joueur
+  concerné.</p>
+</section>
+
+<section>
+  <h2>Le pipeline de jet, corrigé</h2>
+  <p>Un jet est une résolution comme les autres, et il en contient. Le livre
+  décrit sa machinerie <strong>une seule fois</strong>, dans ses principes
+  généraux, et toutes les règles la réutilisent — c'est ce qu'aucune carte du
+  kanban ne portait.</p>
+  <div class="panel">
+    <figure>
+      <svg viewBox="0 0 900 250" role="img" aria-label="Le pipeline d'un jet : jeter le groupe, choisir un dé, appliquer les modificateurs, comparer au résultat requis, offrir la relance, puis un second point de modificateurs après la relance. Un chemin séparé montre que le 1 et le 6 naturels court-circuitent modificateurs et résultat requis.">
+        <defs>
+          <marker id="r1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head" points="0,0 10,5 0,10"></polygon>
+          </marker>
+          <marker id="r2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head-grave" points="0,0 10,5 0,10"></polygon>
+          </marker>
+        </defs>
+        <rect class="core-box" x="14" y="76" width="128" height="52" rx="4"></rect>
+        <text class="t-small" x="78" y="98" text-anchor="middle">jeter le groupe</text>
+        <text class="t-sub" x="78" y="115" text-anchor="middle">1 à 3 dés</text>
+
+        <rect class="core-box" x="166" y="76" width="128" height="52" rx="4"></rect>
+        <text class="t-small" x="230" y="98" text-anchor="middle">choisir un dé</text>
+        <text class="t-sub" x="230" y="115" text-anchor="middle">si groupe</text>
+
+        <rect class="adapter-box" x="318" y="76" width="128" height="52" rx="4"></rect>
+        <text class="t-small" x="382" y="98" text-anchor="middle">modificateurs</text>
+        <text class="t-sub" x="382" y="115" text-anchor="middle">jamais &gt; 6</text>
+
+        <rect class="core-box" x="470" y="76" width="128" height="52" rx="4"></rect>
+        <text class="t-small" x="534" y="98" text-anchor="middle">résultat requis</text>
+        <text class="t-sub" x="534" y="115" text-anchor="middle">3+, 4+…</text>
+
+        <rect class="adapter-box" x="622" y="76" width="128" height="52" rx="4"></rect>
+        <text class="t-small" x="686" y="98" text-anchor="middle">relance ?</text>
+        <text class="t-sub" x="686" y="115" text-anchor="middle">une seule fois</text>
+
+        <rect class="grave-box" x="774" y="76" width="112" height="52" rx="4"></rect>
+        <text class="t-small" x="830" y="94" text-anchor="middle">modificateurs</text>
+        <text class="t-small" x="830" y="110" text-anchor="middle">post-relance</text>
+        <text class="t-sub" x="830" y="124" text-anchor="middle">Tacle Plongeant</text>
+
+        <line class="wire" x1="142" y1="102" x2="160" y2="102" marker-end="url(#r1)"></line>
+        <line class="wire" x1="294" y1="102" x2="312" y2="102" marker-end="url(#r1)"></line>
+        <line class="wire" x1="446" y1="102" x2="464" y2="102" marker-end="url(#r1)"></line>
+        <line class="wire" x1="598" y1="102" x2="616" y2="102" marker-end="url(#r1)"></line>
+        <line class="wire" x1="750" y1="102" x2="768" y2="102" marker-end="url(#r1)"></line>
+
+        <path class="wire-grave" d="M 686 128 L 686 168 L 230 168 L 230 134" marker-end="url(#r2)"></path>
+        <text class="wire-label" x="458" y="162" text-anchor="middle">la relance rejette les dés — jamais deux fois le même, quelle qu'en soit la source</text>
+
+        <path class="wire" d="M 78 128 L 78 210 L 830 210 L 830 134" marker-end="url(#r1)"></path>
+        <text class="wire-label" x="454" y="204" text-anchor="middle">1 naturel = échec · 6 naturel = réussite — ni modificateur ni résultat requis ne s'appliquent</text>
+      </svg>
+      <figcaption>Le dernier bloc est la correction : Tacle Plongeant applique un
+      modificateur <em>après</em> la relance, et peut donc retourner une réussite en
+      échec. Un pipeline qui finirait sur la relance ne saurait pas l'exprimer.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <h2>L'esquive, déroulée</h2>
+  <p>Une dizaine de compétences s'y accrochent — Esquive, Tacle, Tacle Plongeant,
+  Tentacules, Queue Préhensile, Deux Têtes, Minus, Esquive en Force, Poursuite,
+  Clé de Bras — réparties sur quatre moments.</p>
+<pre><span class="c">// commande : le joueur 7 fait un pas de (12,7) vers (13,6)</span>
+<span class="k">empiler</span> ResoudreEsquive { unit: 7, de: (12,7), vers: (13,6) }
+
+  <span class="c">moment : AVANT_ESQUIVE</span>
+    → Tentacules applicable        <span class="q">« utilises-tu Tentacules ? »</span>
+      <span class="c">si oui : jet opposé de Force — peut annuler le pas</span>
+
+  <span class="c">moment : CALCUL_DES_MODIFICATEURS</span>
+    → Tacle retire Esquive des relances disponibles
+    → Queue Préhensile, Deux Têtes, Minus contribuent
+
+  <span class="c">moment : LE_JET</span>            <span class="c">— le pipeline ci-dessus</span>
+    <span class="k">jeter</span> d6 · modificateurs · naturels · résultat requis
+    → Esquive applicable           <span class="q">« relances-tu ? »</span>
+
+  <span class="c">moment : APRÈS_RELANCE</span>
+    → Tacle Plongeant applicable   <span class="q">« utilises-tu Tacle Plongeant ? »</span>
+      <span class="c">modificateur appliqué APRÈS la relance</span>
+
+  <span class="c">échec →</span> <span class="k">empiler</span> Chute { unit: 7 }
+              <span class="k">empiler</span> JetArmure { unit: 7 }
+              <span class="k">signaler</span> turnover à la machine à états</pre>
+</section>
+
+<section>
+  <h2>Le blocage, déroulé</h2>
+  <p>La résolution la plus dense du jeu : <strong>31 compétences</strong> la
+  touchent, soit près d'un tiers des 111. Le livre en décrit les étapes en prose,
+  sans les numéroter — contrairement à l'action de passe, qu'il numérote.</p>
+<pre><span class="c">// commande : le joueur 4 bloque le joueur 11</span>
+<span class="k">empiler</span> ResoudreBlocage { attaquant: 4, cible: 11 }
+
+  <span class="c">moment : SOUTIENS</span>
+    <span class="c">soutien offensif : marque la cible ET n'est marqué par personne</span>
+    <span class="c">soutien défensif : marque l'attaquant ET n'est marqué par personne</span>
+    → compétences qui modifient la Force
+
+  <span class="c">moment : NOMBRE_DE_DÉS</span>
+    <span class="c">force égale → 1 dé · supérieure → 2 · plus du double → 3</span>
+    <span class="c">le Coach du plus fort choisit le résultat</span>
+
+  <span class="c">moment : CHOIX_DU_DÉ</span>       <span class="q">« quel dé retiens-tu ? »</span>
+    <span class="c">le propriétaire de la question dépend de l'écart de force,</span>
+    <span class="c">PAS du tour courant</span>
+    → relances applicables         <span class="q">« relances-tu ? »</span>
+
+  <span class="c">moment : APPLICATION_DU_RÉSULTAT</span>
+    Attaquant Plaqué  → l'attaquant est Plaqué
+    Les Deux Plaqués  → les deux, sauf Blocage / Lutte  <span class="q">« utilises-tu ? »</span>
+    Repoussé          → <span class="q">« vers quelle case ? »</span> — récursif si occupée
+    Bousculé          → Repoussé, sauf compétences
+    Défenseur Plaqué  → Repoussé puis Plaqué
+
+  <span class="c">moment : POURSUITE</span>          <span class="q">« poursuis-tu ? »</span>
+    → Fend l'interdit · Provocation la force
+
+  <span class="c">moment : ARMURE puis BLESSURE</span>
+    <span class="c">pas de relance d'équipe ici — le livre l'exclut nommément</span></pre>
+  <p><strong>Le choix du dé n'appartient pas toujours au coach actif.</strong>
+  Quand le défenseur est le plus fort, c'est lui qui choisit — ce qui confirme, sur
+  un troisième cas, que le propriétaire d'une décision ne se déduit pas du tour.</p>
+</section>
+
+<section>
+  <h2>Les composantes du noyau</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Composante</th><th>Ce qu'elle possède</th><th>État</th></tr></thead>
+      <tbody>
+        <tr><td class="path">dice</td><td>les réserves pré-tirées, une par type</td><td><span class="where w-bad">à corriger : D3 et D12</span></td></tr>
+        <tr><td class="path">roll</td><td>groupe, choix, modificateurs, naturels, résultat requis, relance, modificateurs post-relance</td><td><span class="where w-bad">manquant</span></td></tr>
+        <tr><td class="path">machine</td><td>l'automate à pile : le pas, la boucle, la suspension</td><td><span class="where w-bad">manquant</span></td></tr>
+        <tr><td class="path">clock</td><td>mi-temps, drive, round, tour — les deux découpages</td><td><span class="where w-todo">carte 24</span></td></tr>
+        <tr><td class="path">game</td><td>commandes, événements, refus, attente</td><td><span class="where w-ok">fait</span></td></tr>
+        <tr><td class="path">grid</td><td>qui occupe quelle case</td><td><span class="where w-ok">fait</span></td></tr>
+        <tr><td class="path">pitch</td><td>ligne de mêlée, larges couloirs, en-buts</td><td><span class="where w-todo">à écrire</span></td></tr>
+        <tr><td class="path">roster</td><td>joueurs, profils, états, localisations, masque de compétences</td><td><span class="where w-todo">carte 22</span></td></tr>
+        <tr><td class="path">resolutions</td><td>les ~26 résolutions chargées et leurs moments</td><td><span class="where w-todo">cartes 15 à 19</span></td></tr>
+        <tr><td class="path">skills</td><td>l'index moment → compétences, et l'ordre</td><td><span class="where w-todo">carte 20</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Ce qui a été décidé sur les compétences</h3>
+  <ul>
+    <li><strong>Optionnelles par défaut</strong> — <em>« Un joueur n'est pas obligé
+    d'utiliser une Compétence s'il ne le souhaite pas »</em> (p. 69). Une douzaine,
+    marquées d'un astérisque, sont obligatoires.</li>
+    <li><strong>Une question par compétence</strong>, dans l'ordre — et non une
+    question par moment listant les combinaisons.</li>
+    <li><strong>L'ordre par défaut est déterministe</strong> — d'abord le coach
+    actif, puis l'adversaire, et à propriétaire égal un rang déclaré. Chaque point
+    d'ancrage peut le surcharger, et chaque surcharge porte sa source ou la mention
+    explicite qu'elle est un arbitrage. <strong>Le livre ne donne aucune règle
+    générale d'ordre</strong> : c'est le seul endroit du projet où l'on invente.</li>
+    <li><strong>La configuration « s'applique d'office / demande toujours » vit
+    chez le client</strong>, pas dans le noyau. Le noyau demande toujours ; le
+    journal enregistre toutes les décisions, même automatiques, et se rejoue donc à
+    l'identique quelle que soit la configuration du relecteur.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Ce qui reste ouvert</h2>
+  <ul>
+    <li><strong>Les astérisques manquent aux données.</strong> Le livre marque
+    d'un astérisque une douzaine de compétences obligatoires — <em>Cerveau Lent</em>,
+    <em>Ivrogne</em>, <em>Prendre Racine</em>, <em>Sauvagerie Animale</em>… ce sont
+    les traits handicapants, ceux qu'on ne décline pas. <code>skills_fr.json</code>
+    n'en porte aucun : l'information qui distingue obligatoire d'optionnel est
+    perdue à l'extraction.</li>
+    <li><strong>Trois divergences de vocabulaire</strong> entre les deux sources
+    françaises du projet, qu'il faudra trancher avant d'écrire des noms dans le
+    code :
+      <div class="scroll" style="margin-top:8px">
+        <table>
+          <thead><tr><th>Concept</th><th>Le livre</th><th><code>skills_fr.json</code></th></tr></thead>
+          <tbody>
+            <tr><td>période entre deux coups d'envoi</td><td>Phase</td><td>Engagement</td></tr>
+            <tr><td>la personne qui joue</td><td>Coach</td><td>entraîneur</td></tr>
+            <tr><td rowspan="5">les cinq résultats du dé de blocage</td><td>Attaquant Plaqué</td><td>Crâne</td></tr>
+            <tr><td>Les Deux Plaqués</td><td>Double Chute</td></tr>
+            <tr><td>Repoussé</td><td>Repoussé</td></tr>
+            <tr><td>Bousculé</td><td>Trébuchement</td></tr>
+            <tr><td>Défenseur Plaqué</td><td>Mis À Terre</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+    <li><strong>Le catalogue des ~26 résolutions</strong> reste à dériver, moment
+    par moment. Deux sont déroulées ici ; ce sont les deux plus denses, et elles ont
+    déjà révélé un point d'ancrage post-relance qu'aucune des deux ne montrait
+    seule.</li>
+    <li><strong>Le coût pour l'apprentissage</strong> n'est pas mesuré. Estimation :
+    on passerait de ~1 600 décisions par match à ~2 500 avec les décisions de
+    compétence. C'est une estimation, pas une mesure — elle demande un moteur qui
+    joue.</li>
+  </ul>
+</section>
+
+<p class="foot">Conception arrêtée le 30 août 2026, sur <code>references/lrb.pdf</code>
+— <em>Livre de Règles Bonifiées</em> Saison 3 — et <code>app/io/persistence/skills_fr.json</code>
+(111 compétences). Les comptages sont mesurés sur ces deux fichiers. Comme tout
+document de conception, celui-ci n'a aucun test qui le contredit : c'est une
+hypothèse, et la première carte qui la dément aura raison contre elle.</p>
+
+</div>
