@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=3 uid="uid://d0srna0hu3i65"]
+
+[ext_resource type="Script" uid="uid://xomqmdx0mear" path="res://app/io/client/world/arena_phase.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dvfagydduxs0h" path="res://app/io/client/input/camera_mover.gd" id="2_cam_mover"]
+[ext_resource type="Script" uid="uid://cxaqkgwpw53n2" path="res://app/io/client/input/camera_rotator.gd" id="3_cam_rot"]
+[ext_resource type="PackedScene" uid="uid://cye7ydmvgd7oo" path="res://app/io/client/world/arena.tscn" id="4_arena"]
+[ext_resource type="PackedScene" uid="uid://5a4kumvw1mbe" path="res://app/io/client/match/player_card/player_card.tscn" id="4_pnsml"]
+[ext_resource type="PackedScene" uid="uid://34jbo7pgxem4" path="res://app/io/client/match/game_panel/game_panel.tscn" id="7_pnsml"]
+[ext_resource type="Script" path="res://app/io/client/match/dugout/dugout_panel.gd" id="8_dugout"]
+[ext_resource type="Script" path="res://app/io/client/input/roster_drag.gd" id="9_rdrag"]
+[ext_resource type="Script" path="res://app/io/client/match/minimap/minimap.gd" id="10_minim"]
+[ext_resource type="Script" path="res://app/io/client/match/player_strip/player_strip.gd" id="11_strip"]
+[ext_resource type="Script" path="res://app/io/client/match/hud_dock/hud_dock.gd" id="12_dock"]
+[ext_resource type="Script" path="res://app/io/client/match/dugout/staff_panel.gd" id="14_staff"]
+[ext_resource type="Script" path="res://app/io/client/match/player_actions/player_actions.gd" id="13_acts"]
+
+[node name="ArenaPhase" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="PlayerCard" parent="." node_paths=PackedStringArray("arena_phase") instance=ExtResource("4_pnsml")]
+visible = false
+arena_phase = NodePath("..")
+
+[node name="ColorRect" parent="PlayerCard" index="0"]
+offset_left = 1160.0
+offset_top = 360.0
+offset_right = 1623.0
+offset_bottom = 954.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+
+[node name="GameControlManager" type="Node" parent="."]
+
+[node name="CameraMover" type="Node2D" parent="GameControlManager" node_paths=PackedStringArray("target")]
+script = ExtResource("2_cam_mover")
+target = NodePath("../../Camera2D")
+
+[node name="CameraRotator" type="Node2D" parent="GameControlManager" node_paths=PackedStringArray("target")]
+script = ExtResource("3_cam_rot")
+target = NodePath("../../Arena")
+
+[node name="Arena" parent="." instance=ExtResource("4_arena")]
+
+[node name="GamePanel" parent="." instance=ExtResource("7_pnsml")]
+
+[node name="DugoutLayer" type="CanvasLayer" parent="."]
+
+[node name="BlueDugout" type="Control" parent="DugoutLayer"]
+offset_left = 12.0
+offset_top = 96.0
+offset_right = 282.0
+offset_bottom = 700.0
+mouse_filter = 1
+script = ExtResource("8_dugout")
+
+[node name="RedDugout" type="Control" parent="DugoutLayer"]
+offset_left = 1638.0
+offset_top = 96.0
+offset_right = 1908.0
+offset_bottom = 700.0
+mouse_filter = 1
+script = ExtResource("8_dugout")
+team = 1
+
+[node name="BlueStaff" type="PanelContainer" parent="DugoutLayer"]
+offset_left = 12.0
+offset_top = 708.0
+offset_right = 282.0
+offset_bottom = 866.0
+script = ExtResource("14_staff")
+
+[node name="RedStaff" type="PanelContainer" parent="DugoutLayer"]
+offset_left = 1638.0
+offset_top = 708.0
+offset_right = 1908.0
+offset_bottom = 866.0
+script = ExtResource("14_staff")
+team = 1
+
+[node name="DragLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="RosterDrag" type="Node" parent="." node_paths=PackedStringArray("drag_layer", "arena", "dugouts")]
+script = ExtResource("9_rdrag")
+drag_layer = NodePath("../DragLayer")
+arena = NodePath("../Arena")
+dugouts = [NodePath("../DugoutLayer/BlueDugout"), NodePath("../DugoutLayer/RedDugout")]
+
+[node name="MinimapLayer" type="CanvasLayer" parent="."]
+
+[node name="Minimap" type="Control" parent="MinimapLayer" node_paths=PackedStringArray("camera", "arena_phase", "pitch")]
+offset_left = 1638.0
+offset_top = 878.0
+offset_right = 1908.0
+offset_bottom = 1034.0
+script = ExtResource("10_minim")
+camera = NodePath("../../Camera2D")
+arena_phase = NodePath("../..")
+pitch = NodePath("../../Arena/PlayArea")
+
+[node name="HudLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerStrip" type="Control" parent="HudLayer" node_paths=PackedStringArray("arena_phase")]
+offset_left = 560.0
+offset_top = 904.0
+offset_right = 1360.0
+offset_bottom = 992.0
+mouse_filter = 1
+script = ExtResource("11_strip")
+arena_phase = NodePath("../..")
+
+[node name="HudDock" type="Control" parent="HudLayer" node_paths=PackedStringArray("arena_phase")]
+offset_left = 760.0
+offset_top = 1000.0
+offset_right = 1160.0
+offset_bottom = 1034.0
+mouse_filter = 1
+script = ExtResource("12_dock")
+arena_phase = NodePath("../..")
+
+[node name="PlayerActions" type="Control" parent="HudLayer" node_paths=PackedStringArray("arena_phase")]
+offset_right = 200.0
+offset_bottom = 168.0
+mouse_filter = 1
+script = ExtResource("13_acts")
+arena_phase = NodePath("../..")

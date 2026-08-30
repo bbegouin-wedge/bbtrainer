@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://o1vvrb5cdj41"]
+
+[ext_resource type="Script" uid="uid://whejbmjg3n18" path="res://app/io/client/bootstrap/gui_phase.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://dxpcgxyp7fp2a" path="res://app/io/client/pregame/welcome/welcome_ui.tscn" id="2_welcome"]
+[ext_resource type="PackedScene" uid="uid://dyhu8l1o0xe6o" path="res://app/io/client/pregame/team_chooser/team_chooser.tscn" id="3_team_chooser"]
+[ext_resource type="PackedScene" uid="uid://lu12l2ogvnfn" path="res://app/io/client/pregame/team_compositor/team_compositor.tscn" id="4_team_compositor"]
+[ext_resource type="PackedScene" uid="uid://bi8uenu2030d1" path="res://app/io/client/pregame/inducements_selector/inducement_selector.tscn" id="5_inducement"]
+[ext_resource type="PackedScene" uid="uid://dqsu7ooy656dt" path="res://app/io/client/pregame/skill_chooser/skill_chooser.tscn" id="6_eyeej"]
+
+[node name="GuiPhase" type="Node"]
+script = ExtResource("1_script")
+
+[node name="WelcomeUI" parent="." instance=ExtResource("2_welcome")]
+
+[node name="TeamChooser" parent="." instance=ExtResource("3_team_chooser")]
+
+[node name="TeamCompositor" parent="." instance=ExtResource("4_team_compositor")]
+
+[node name="InducementSelector" parent="." instance=ExtResource("5_inducement")]
+
+[node name="SkillChooser" parent="." instance=ExtResource("6_eyeej")]

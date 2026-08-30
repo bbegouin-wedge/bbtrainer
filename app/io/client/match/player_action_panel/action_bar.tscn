@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=3 uid="uid://dy5np2emr5xgf"]
+
+[ext_resource type="PackedScene" uid="uid://yrg4u66cgkpg" path="res://app/io/client/widgets/action_button/action_button.tscn" id="2_p2ol4"]
+[ext_resource type="Texture2D" uid="uid://c7ppb4sisls0b" path="res://assets/ui/icons/player/ready.png" id="3_67ldc"]
+[ext_resource type="Texture2D" uid="uid://dk0hohg0f2i66" path="res://assets/ui/icons/player/played.png" id="4_cduoq"]
+[ext_resource type="Texture2D" uid="uid://blo3rmg0c36ht" path="res://assets/ui/icons/player/prone.png" id="5_tmc77"]
+[ext_resource type="Texture2D" uid="uid://b1nahrh266r4j" path="res://assets/ui/icons/player/ko.png" id="6_qn3sk"]
+[ext_resource type="Texture2D" uid="uid://duulofso64w06" path="res://assets/ui/icons/player/stunned.png" id="7_6n6sy"]
+[ext_resource type="Texture2D" uid="uid://8eysq5i3itps" path="res://assets/ui/icons/player/injured.png" id="8_8wmgt"]
+[ext_resource type="Texture2D" uid="uid://dpjcb0fjrhohe" path="res://assets/ui/icons/player/gazed.png" id="9_5xcnh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjcwa"]
+content_margin_left = 10.0
+
+[node name="ActionPanels" type="Panel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 112.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rjcwa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 3.0
+color = Color(0, 0.08627451, 0.10980392, 0.5294118)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="pret" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("2_p2ol4")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+label_text = "Pret !"
+button_icon = ExtResource("3_67ldc")
+
+[node name="played" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("2_p2ol4")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+label_text = "Joué"
+button_icon = ExtResource("4_cduoq")
+
+[node name="spacer#2" type="Control" parent="ColorRect/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="prone" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("2_p2ol4")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+label_text = " À terre"
+button_icon = ExtResource("5_tmc77")
+
+[node name="stunned" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("2_p2ol4")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+label_text = "Sonné"
+button_icon = ExtResource("6_qn3sk")
+
+[node name="spacer#3" type="Control" parent="ColorRect/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="ko" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("2_p2ol4")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+label_text = "KO"
+button_icon = ExtResource("7_6n6sy")
+
+[node name="Blessé" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("2_p2ol4")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+label_text = "Blessé"
+button_icon = ExtResource("8_8wmgt")
+
+[node name="spacer#4" type="Control" parent="ColorRect/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Distrait" parent="ColorRect/MarginContainer/VBoxContainer2" instance=ExtResource("2_p2ol4")]
+custom_minimum_size = Vector2(65, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+label_text = "distrait"
+button_icon = ExtResource("9_5xcnh")
+
+[node name="spacer#5" type="Control" parent="ColorRect/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 7.0

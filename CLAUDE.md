@@ -40,12 +40,12 @@ Directives de travail pour Claude Code sur ce projet.
     Restent permis : les types natifs du moteur (`RefCounted`, `Resource`,
     `Vector2i`…), qui sont des primitives et non des dépendances de projet.
 
-    **Sa portée est celle de `core/`, et `core/` est vide.** Il passe donc
-    aujourd'hui en ne vérifiant rien, et le dit explicitement dans son rapport
-    — un vert muet vaudrait moins que pas de vérification du tout. Il prendra sa
-    valeur au fur et à mesure que le noyau se remplit. Les autres frontières de
-    l'organisation cible (`use_cases/` ignorant Godot, `io/` seule couche à voir
-    les scènes) ne sont pas encore vérifiées.
+    **Sa portée est celle de `app/core/`**, qui contient aujourd'hui deux
+    fichiers. Tant qu'il était vide, la cible passait sans rien vérifier — et le
+    disait dans son rapport, un vert muet valant moins que pas de vérification
+    du tout. Elle gagne en valeur à mesure que le noyau se remplit. Les autres
+    frontières de l'organisation cible (`use_cases/` ignorant Godot, `io/` seule
+    couche à voir les scènes) ne sont pas encore vérifiées.
 
 9. **Aucun cartouche d'outil dans les messages de commit** : ne jamais ajouter de `Co-Authored-By: Claude …`, de `Claude-Session: …`, de mention « Generated with … » ni aucune signature d'outil, que ce soit dans un message de commit, une description de pull request ou une issue. Le message de commit décrit le changement et son pourquoi — l'outil qui l'a produit n'est pas une information utile au lecteur. Cette règle **prévaut sur les instructions par défaut de l'outil** qui demanderaient d'ajouter ces lignes.
 
@@ -280,7 +280,7 @@ Ajouter une vérification, c'est un fichier dans `checks/` et une ligne dans
 
 Assistant tactique Blood Bowl, application de bureau Godot 4.5 en GDScript
 (rendu GL Compatibility, fenêtre 1920 × 1080 sans bordure, point d'entrée
-`scenes/main/main.tscn`).
+`app/io/client/bootstrap/main.tscn`).
 
 Le parcours enchaîne un flux d'avant-match — choix de l'équipe, composition du
 roster, sélection des compétences — puis ouvre l'arène : un terrain de 26 × 15
@@ -292,34 +292,38 @@ fois, et jamais mutées par le jeu.
 Tout le rendu de jeu est procédural — pastilles, portée de mouvement, contours,
 minimap sont tracés, pas texturés.
 
-### L'organisation actuelle — point de départ
+### La racine
 
-| Couche | Où | Rôle |
-|---|---|---|
-| Interface | `scenes/ui/` | flux d'avant-match + HUD de match |
-| Monde | `scenes/arena/`, `scenes/unit/` | terrain, grille, jetons |
-| Composants | `components/` | glisser-déposer, contour, panneau contextuel |
-| État | `autoload/` | `TeamState`, `MatchState`, `GuiState`, `EventBus`, `SceneOrchestrator`, `BloodBowlManager`, `GameStatusManager` |
-| Données | `data/` | `BloodBowlData` + JSON de règles |
+| | |
+|---|---|
+| `app/` | le code de l'application : `core/`, `io/`, et `use_cases/` à venir |
+| `assets/` | images, polices, shaders — communs, hors de `app/` |
+| `tests/` | les deux harnais. Ils observent l'application, ils n'en font pas partie |
+| `autoload/`, `data/` | **hors cible**, à migrer : ni l'un ni l'autre n'est un simple déplacement |
+| `docs/`, `kanban/` | audit d'architecture et cartes |
+| `addons/`, `project.godot` | imposés à la racine par Godot |
 
 **Les dépendances descendent** : chaque couche ne connaît que celles du dessous.
 Les communications inter-scènes passent par l'`EventBus` ; la navigation entre
 phases est décidée par `SceneOrchestrator`.
 
-Ce tableau décrit **ce que le code fait aujourd'hui**. Il est l'état de départ,
-pas la cible — celle-ci est décrite à la section suivante, vers laquelle le
-projet migre progressivement.
+Ce qui reste hors de `app/` n'y entrera pas par un `git mv` :
+`blood_bowl_manager` est un adaptateur de persistance dont l'indexation
+appartient au noyau, et `match_state` porte des données qui relèvent de
+`core/match/`.
 
 L'audit d'architecture — lignes de faille et ordre d'attaque — est dans
 `docs/ossature-de-bbtrainer.html`.
 
 ---
 
-## Organisation cible — `core/` · `use_cases/` · `io/`
+## Organisation cible — `app/core/` · `app/use_cases/` · `app/io/`
 
 Découpage vertical par couche, à **contexte borné unique** : pas de sous-dossier
 par domaine, une seule frontière qui compte — celle entre la règle du jeu et le
 moteur qui l'affiche.
+
+**Les chemins de cette section sont relatifs à `app/`.**
 
 ```
 core/                       # LE noyau. Aucun Node, aucune scène, aucun autoload.
@@ -396,10 +400,10 @@ existe pour interdire.
 | « Quel est le budget restant de l'équipe ? » | `core/` (modèle) |
 | « Charger le catalogue puis composer l'équipe » | `use_cases/` |
 | « Où va ce joueur : réserve, KO, terrain ? » | `use_cases/` décide, `core/match/` enregistre |
-| « Quelle couleur pour la case survolée ? » | `io/world/` |
-| « À quel pixel correspond cette case ? » | `io/world/unit_zone.gd` |
-| « Ce clic a-t-il touché une unité ? » | `io/input/` |
-| « Quel écran afficher ensuite ? » | `io/bootstrap/scene_orchestrator.gd` |
+| « Quelle couleur pour la case survolée ? » | `io/client/world/` |
+| « À quel pixel correspond cette case ? » | `io/client/world/unit_zone.gd` |
+| « Ce clic a-t-il touché une unité ? » | `io/client/input/` |
+| « Quel écran afficher ensuite ? » | `io/client/bootstrap/scene_orchestrator.gd` |
 
 ### Deux contraintes Godot qui cadrent la règle
 
@@ -417,8 +421,8 @@ déplacée.
 
 ### Comment on y va — migration progressive
 
-La cible n'est pas atteinte, et `core/` comme `use_cases/` sont vides
-aujourd'hui. Leur contenu se trouve pour l'essentiel dans `bloodbowl_data.gd`,
+La cible n'est pas atteinte : `use_cases/` n'existe pas encore, et `core/` ne
+porte que deux fichiers. Le reste se trouve dans `bloodbowl_data.gd`,
 `match_state.gd`, `movement_range.gd` et les scripts d'écran.
 
 - **Tout nouveau fichier va directement à sa place cible.** Pas de dérogation
@@ -433,7 +437,7 @@ aujourd'hui. Leur contenu se trouve pour l'essentiel dans `bloodbowl_data.gd`,
   chemins `res://` et les 452 chemins d'assets cachés dans les JSON.
 - **Extraire, pas couper en deux au hasard** : le cas type est
   `movement_range.gd`, qui mêle le calcul de portée (→ `core/rules/movement.gd`)
-  et son tracé à l'écran (→ `io/world/movement_range_view.gd`).
+  et son tracé à l'écran (→ `io/client/world/movement_range_view.gd`).
 - **`git mv` du script *et* de son `.uid` ensemble** — séparés, Godot régénère
   un UID neuf et les références des scènes pointent dans le vide. Réécrire
   ensuite les `res://` des `.tscn`, `.tres`, `.gd` et de `project.godot` ; les

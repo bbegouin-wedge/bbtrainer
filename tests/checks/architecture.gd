@@ -16,7 +16,7 @@ extends RefCounted
 ##    ailleurs, qu'ils se voient.
 
 const Files := preload("res://tests/lib/files.gd")
-const ROOT := "res://core"
+const ROOT := "res://app/core"
 
 
 func run(_tree: SceneTree, report) -> void:

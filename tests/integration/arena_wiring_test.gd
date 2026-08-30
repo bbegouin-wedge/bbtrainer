@@ -12,14 +12,14 @@ extends "res://tests/lib/test_case.gd"
 
 
 func test_the_play_area_receives_a_grid_at_startup() -> void:
-	var arena := await mount("res://io/client/world/arena.tscn")
+	var arena := await mount("res://app/io/client/world/arena.tscn")
 	var zone: UnitZone = arena.play_area
 	check(zone.unit_grid != null, "la zone de jeu doit avoir reçu une grille")
 	equals(zone.unit_grid.size, Pitch.SIZE, "la grille a la taille du terrain")
 
 
 func test_the_play_area_bounds_match_the_pitch() -> void:
-	var arena := await mount("res://io/client/world/arena.tscn")
+	var arena := await mount("res://app/io/client/world/arena.tscn")
 	var zone: UnitZone = arena.play_area
 	is_true(zone.is_tile_in_bounds(Vector2i(0, 0)), "le coin haut-gauche est jouable")
 	is_true(

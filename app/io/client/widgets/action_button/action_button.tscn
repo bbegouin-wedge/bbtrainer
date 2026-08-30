@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://yrg4u66cgkpg"]
+
+[ext_resource type="Texture2D" uid="uid://dk0hohg0f2i66" path="res://assets/ui/icons/player/played.png" id="1_7mkft"]
+[ext_resource type="Script" uid="uid://dhfwh8x6573cc" path="res://app/io/client/widgets/action_button/action_button.gd" id="1_44urq"]
+[ext_resource type="FontFile" uid="uid://bdipyov827sdf" path="res://assets/fonts/SedgwickAve-Regular.ttf" id="3_u3c5n"]
+
+[node name="Panel" type="Panel"]
+custom_minimum_size = Vector2(65, 80)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1795.0
+offset_bottom = -955.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"transparentPanel"
+script = ExtResource("1_44urq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"FlatButton"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Button/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+texture = ExtResource("1_7mkft")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="spacer2" type="Control" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_u3c5n")
+text = "Joz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="spacer3" type="Control" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
