@@ -249,9 +249,15 @@ Contournement délibéré : `git commit --no-verify`.
 | `make test` | intégrité + tests de comportement |
 | `make check-integrity V=scenes` | une seule vérification, par son nom |
 | `make verbeux` | idem, sortie moteur brute et non filtrée |
-| `make import` | réimporte les assets — une fois après un clone, ou après avoir ajouté des fichiers |
 | `make godot` | affiche le moteur utilisé |
 | `make journal` | réaffiche le rapport complet de la dernière exécution |
+
+**Le réimport du cache `.godot/` est automatique.** Les trois vérifications le
+déclenchent, mais seulement si un fichier ou un dossier a changé depuis la
+dernière fois : 1,9 s quand rien n'a bougé, 4,7 s sinon. Les **dossiers**
+comptent dans ce test autant que les fichiers — `git mv` préserve la date de
+modification du fichier déplacé, si bien qu'un renommage seul passerait
+inaperçu ; la date du dossier, elle, change.
 
 Le moteur est cherché dans le `PATH`, puis à l'emplacement d'installation par
 défaut. Sur une autre machine : `make check-integrity GODOT=/chemin/vers/Godot`.
@@ -432,18 +438,18 @@ aujourd'hui. Leur contenu se trouve pour l'essentiel dans `bloodbowl_data.gd`,
   un UID neuf et les références des scènes pointent dans le vide. Réécrire
   ensuite les `res://` des `.tscn`, `.tres`, `.gd` et de `project.godot` ; les
   `uid://` n'ont pas à bouger.
-- **`make import` est obligatoire après un déplacement, avant de croire le
-  filet.** Le registre des UID garde les anciens chemins tant qu'il n'est pas
-  reconstruit : un lot déplaçant trois scènes a produit 12 échecs qui ont tous
-  disparu à l'import, dont un autoload prétendument non monté — un dégât
-  collatéral, pas une casse.
+- **Le réimport du cache est automatique** — les vérifications le déclenchent
+  quand quelque chose a changé. Il ne l'a pas toujours été, et l'oublier coûtait
+  cher : le registre des UID garde les anciens chemins tant qu'il n'est pas
+  reconstruit, et un lot déplaçant trois scènes a produit 12 échecs fantômes,
+  dont un autoload prétendument non monté.
 
-  Ce point a d'abord été documenté à l'envers, sur la foi d'une mesure faite sur
-  **un seul script** : celle-ci passait au vert sans import, parce qu'un script
-  a un `.uid` qui voyage avec lui. Une scène n'en a pas — son UID est écrit dans
-  le `.tscn`, et la correspondance chemin ↔ UID ne vit que dans le cache. La
-  leçon générale : **une mesure sur un cas ne fait pas une règle**, surtout
-  quand le cas est le plus simple des deux.
+  Ce point a même été documenté à l'envers un temps, sur la foi d'une mesure
+  faite sur **un seul script** : elle passait au vert sans import, parce qu'un
+  script a un `.uid` qui voyage avec lui. Une scène n'en a pas — son UID est
+  écrit dans le `.tscn`, et la correspondance chemin ↔ UID ne vit que dans le
+  cache. La leçon générale : **une mesure sur un cas ne fait pas une règle**,
+  surtout quand ce cas est le plus simple des deux.
 
 ### L'horizon — noyau et adaptateurs
 

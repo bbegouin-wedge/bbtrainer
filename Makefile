@@ -13,6 +13,13 @@ GODOT ?= $(shell command -v godot 2>/dev/null || echo $(HOME)/Applications/godot
 
 JOURNAL := .tests.log
 
+# Réimport conditionnel du cache .godot/ — uid_cache.bin, liste des class_name,
+# assets convertis. Sans lui, un déplacement laisse le registre des UID sur les
+# anciens chemins et le filet crie au loup : le lot du monde a produit 12 échecs
+# fantômes qui ont tous disparu à l'import.
+STAMP       := .godot/.import-stamp
+IMPORT_SCAN := core io autoload data tests assets project.godot
+
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=
 
@@ -30,8 +37,7 @@ help:
 	@echo "  make verbeux              idem, sortie moteur brute et non filtrée"
 	@echo "  make check-arch           les seules règles d'architecture (core/)"
 	@echo "  make test-behaviour       tests de comportement (unit + integration)"
-	@echo "  make test                 intégrité + tests unitaires"
-	@echo "  make import               réimporte les assets (une fois après un clone)"
+	@echo "  make test                 intégrité + tests de comportement"
 	@echo "  make godot                affiche le moteur utilisé"
 	@echo "  make journal              réaffiche le rapport de la dernière exécution"
 	@echo ""
@@ -64,15 +70,25 @@ debug: godot
 editeur: godot
 	@"$(GODOT)" --path "$(CURDIR)" -e
 
-import: godot
-	@"$(GODOT)" --headless --path "$(CURDIR)" --import
+# Le test de fraîcheur vit dans la recette et non dans les prérequis : un nom de
+# fichier contenant une espace suffirait à faire couper make au mauvais endroit.
+#
+# Les DOSSIERS comptent autant que les fichiers : `git mv` préserve la date de
+# modification du fichier déplacé, donc un renommage seul ne rendrait pas le
+# témoin périmé. La date du dossier, elle, change — et `find` les parcourt.
+import:
+	@if [ ! -f "$(STAMP)" ] || \
+	   [ -n "$$(find $(IMPORT_SCAN) -newer "$(STAMP)" -print -quit 2>/dev/null)" ]; then \
+	  "$(GODOT)" --headless --path "$(CURDIR)" --import > /dev/null 2>&1; \
+	  mkdir -p .godot && touch "$(STAMP)"; \
+	fi
 
 # La sortie brute du moteur contient 199 lignes d'erreurs préexistantes
 # (TileSet, shader) qui ne sont pas des échecs : le rapport est donc préfixé par
 # le harnais, et seul ce préfixe est affiché. Le code de sortie vient de Godot,
 # jamais du grep — un grep sans correspondance sort en 1 et déguiserait un
 # succès en échec.
-check-integrity: godot
+check-integrity: godot import
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- $(V) \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
@@ -87,7 +103,7 @@ check-integrity: godot
 # Règle 8 de CLAUDE.md. Sous-ensemble de check-integrity, qui l'exécute aussi.
 # Recette propre plutôt qu'un appel à check-integrity : ce dernier concluait
 # « INTÉGRITÉ : OK » sur un make check-arch, ce qui répond à une autre question.
-check-arch: godot
+check-arch: godot import
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_tests.gd -- architecture \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
@@ -100,7 +116,7 @@ check-arch: godot
 
 # Même filtrage que check-integrity, et pour la même raison : le code de sortie
 # vient de Godot, pas du grep.
-test-behaviour: godot
+test-behaviour: godot import
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_behaviour.gd \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
