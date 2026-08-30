@@ -1,0 +1,540 @@
+<title>Le domaine de Blood Bowl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #f3f5f2; --card: #ffffff; --rule: #dde2dc;
+  --ink: #141c17; --ink-soft: #55605a; --ink-faint: #8b948e;
+  --accent: #2f6b3f; --accent-wash: #e6eee7;
+  --core: #1d4e89; --core-wash: #e4ecf6;
+  --grave: #9b2226; --warn: #8a5a00; --calm: #4a5568;
+  --grave-wash: #f7e7e7; --warn-wash: #f7efdf;
+  --shadow: 0 1px 2px rgba(20,32,23,.05), 0 8px 24px -18px rgba(20,32,23,.4);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121613; --card: #191f1b; --rule: #2b332d;
+    --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+    --accent: #7fc08e; --accent-wash: #1b2a1f;
+    --core: #7fa8dd; --core-wash: #17222f;
+    --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+    --grave-wash: #2a1a1a; --warn-wash: #2a2113;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121613; --card: #191f1b; --rule: #2b332d;
+  --ink: #e7ebe7; --ink-soft: #a3aca6; --ink-faint: #737d77;
+  --accent: #7fc08e; --accent-wash: #1b2a1f;
+  --core: #7fa8dd; --core-wash: #17222f;
+  --grave: #e07a7a; --warn: #d8a54a; --calm: #9aa6b4;
+  --grave-wash: #2a1a1a; --warn-wash: #2a2113;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -18px rgba(0,0,0,.9);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: "Public Sans", system-ui, sans-serif; line-height: 1.65; font-size: 16px;
+}
+.wrap { max-width: 940px; margin: 0 auto; padding: 56px 24px 96px;
+        display: flex; flex-direction: column; gap: 52px; }
+section { display: flex; flex-direction: column; gap: 18px; }
+h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); letter-spacing: -.02em; line-height: 1.08; text-wrap: balance; }
+h2 { font-size: clamp(1.35rem, 2.6vw, 1.7rem); letter-spacing: -.01em; text-wrap: balance; }
+h3 { font-size: 1.05rem; letter-spacing: -.005em; }
+p { margin: 0; max-width: 68ch; }
+.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 62ch; }
+.eyebrow { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .68rem; letter-spacing: .14em;
+           text-transform: uppercase; color: var(--ink-faint); margin: 0; }
+code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .88em;
+       background: var(--accent-wash); padding: .1em .34em; border-radius: 3px; color: var(--ink); }
+strong { font-weight: 600; }
+
+blockquote { margin: 0; padding: 2px 0 2px 18px; border-left: 2px solid var(--accent);
+             color: var(--ink-soft); font-style: italic; max-width: 66ch; }
+blockquote cite { display: block; font-style: normal; font-size: .8rem; color: var(--ink-faint);
+                  margin-top: 6px; font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+.panel { background: var(--card); border: 1px solid var(--rule); border-radius: 5px;
+         padding: 24px 22px; box-shadow: var(--shadow); }
+figure { margin: 0; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { margin-top: 16px; font-size: .88rem; color: var(--ink-soft); }
+
+.core-box { fill: var(--core-wash); stroke: var(--core); stroke-width: 1.4; }
+.adapter-box { fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.2; }
+.log-box { fill: var(--warn-wash); stroke: var(--warn); stroke-width: 1.2; }
+.grave-box { fill: var(--grave-wash); stroke: var(--grave); stroke-width: 1.2; }
+.plain-box { fill: none; stroke: var(--rule); stroke-width: 1; }
+.t-title { font-family: "Public Sans", sans-serif; font-size: 13px; font-weight: 600; fill: var(--ink); }
+.t-small { font-family: "Public Sans", sans-serif; font-size: 11px; fill: var(--ink); }
+.t-sub { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9.5px; fill: var(--ink-faint); }
+.t-lane { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: .1em;
+          text-transform: uppercase; fill: var(--ink-faint); }
+.wire { stroke: var(--accent); stroke-width: 1.5; fill: none; }
+.wire-grave { stroke: var(--grave); stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
+.wire-warn { stroke: var(--warn); stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
+.head { fill: var(--accent); }
+.head-grave { fill: var(--grave); }
+.head-warn { fill: var(--warn); }
+.wire-label { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9.5px; fill: var(--ink-soft); }
+
+.scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 5px; background: var(--card); }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .64rem; letter-spacing: .1em;
+     text-transform: uppercase; color: var(--ink-faint); font-weight: 400; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.path { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .82rem; white-space: nowrap; }
+td.num { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.where { display: inline-block; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .66rem;
+         padding: .18em .5em; border-radius: 3px; white-space: nowrap; }
+.w-ok { background: var(--accent-wash); color: var(--accent); }
+.w-todo { background: var(--core-wash); color: var(--core); }
+.w-bad { background: var(--grave-wash); color: var(--grave); }
+
+ul { padding-left: 20px; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+li { max-width: 68ch; }
+
+.foot { font-size: .82rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 20px; }
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Passe de conception · bbTrainer</p>
+  <h1>Le domaine de Blood Bowl</h1>
+  <p class="lede">Ce que le livre de règles dit de la structure du jeu, et ce que ça
+  invalide dans le noyau qu'on est en train d'écrire. Trois cartes sont fausses, et
+  un module entier manquait.</p>
+</header>
+
+<section>
+  <h2>Ce que cette passe est, et ce qu'elle n'est pas</h2>
+  <p>Elle cartographie <strong>la structure</strong> du domaine : ses composants, ses
+  frontières, et les mécanismes qui traversent tout. Elle ne contient pas les règles —
+  les cibles de jets, les modificateurs, les tables. Celles-là restent le travail des
+  cartes, qui les sourceront une par une.</p>
+  <p>Sa source est <code>references/lrb.pdf</code> — le <em>Livre de Règles Bonifiées</em>
+  de la Saison 3, 122 pages, en français. Chaque affirmation ci-dessous est citée. Ce qui
+  n'est pas cité n'est pas ici.</p>
+  <p><strong>Et sa limite, qu'il faut poser d'emblée : un document n'a pas de test qui
+  rougit.</strong> Le reste du projet tient parce que quatre vérifications contredisent ce
+  qu'on écrit — la couverture a démenti un commentaire, la mutation a trouvé une boucle
+  infinie. Rien de tout ça ne s'applique ici. Ce document est une hypothèse à confronter,
+  et la première carte qui le contredira aura raison contre lui.</p>
+</section>
+
+<section>
+  <h2>Le temps a deux découpages, et ils ne s'emboîtent pas</h2>
+  <p>C'est la trouvaille structurelle de la passe, et celle qu'aucune carte n'aurait faite
+  seule.</p>
+  <blockquote>
+    Chaque mi-temps comprend huit rounds, et chaque round est composé de deux tours, un
+    pour chaque Coach. Ceci signifie qu'au fil d'un match, il y aura deux mi-temps, seize
+    rounds et trente-deux tours : seize pour chaque Coach.
+    <cite>p. 28</cite>
+  </blockquote>
+  <blockquote>
+    Une <strong>Phase</strong> est la période de jeu entre le moment où une équipe engage
+    et celui où l'une des deux équipes marque, ou la fin de la mi-temps. Ceci signifie que
+    la longueur d'une Phase n'est jamais fixée ; certaines durent toute une mi-temps,
+    tandis que d'autres ne peuvent durer qu'un seul round, voire un seul tour !
+    <cite>p. 28</cite>
+  </blockquote>
+  <div class="panel">
+    <figure>
+      <svg viewBox="0 0 900 300" role="img" aria-label="Une frise du temps d'un match : deux mi-temps de huit rounds, chaque round contenant deux tours ; en dessous, les Phases se succèdent avec des longueurs variables dont les frontières tombent au milieu des rounds.">
+        <text class="t-lane" x="64" y="56" text-anchor="end">mi-temps</text>
+        <rect class="plain-box" x="70" y="36" width="400" height="26" rx="3"></rect>
+        <text class="t-small" x="270" y="54" text-anchor="middle">première mi-temps</text>
+        <rect class="plain-box" x="470" y="36" width="400" height="26" rx="3"></rect>
+        <text class="t-small" x="670" y="54" text-anchor="middle">seconde mi-temps</text>
+
+        <text class="t-lane" x="64" y="100" text-anchor="end">rounds</text>
+        <rect class="core-box" x="70" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="95" y="97" text-anchor="middle">1</text>
+        <rect class="core-box" x="120" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="145" y="97" text-anchor="middle">2</text>
+        <rect class="core-box" x="170" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="195" y="97" text-anchor="middle">3</text>
+        <rect class="core-box" x="220" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="245" y="97" text-anchor="middle">4</text>
+        <rect class="core-box" x="270" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="295" y="97" text-anchor="middle">5</text>
+        <rect class="core-box" x="320" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="345" y="97" text-anchor="middle">6</text>
+        <rect class="core-box" x="370" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="395" y="97" text-anchor="middle">7</text>
+        <rect class="core-box" x="420" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="445" y="97" text-anchor="middle">8</text>
+        <rect class="core-box" x="470" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="495" y="97" text-anchor="middle">1</text>
+        <rect class="core-box" x="520" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="545" y="97" text-anchor="middle">2</text>
+        <rect class="core-box" x="570" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="595" y="97" text-anchor="middle">3</text>
+        <rect class="core-box" x="620" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="645" y="97" text-anchor="middle">4</text>
+        <rect class="core-box" x="670" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="695" y="97" text-anchor="middle">5</text>
+        <rect class="core-box" x="720" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="745" y="97" text-anchor="middle">6</text>
+        <rect class="core-box" x="770" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="795" y="97" text-anchor="middle">7</text>
+        <rect class="core-box" x="820" y="80" width="50" height="26" rx="2"></rect>
+        <text class="t-sub" x="845" y="97" text-anchor="middle">8</text>
+
+        <text class="t-lane" x="64" y="139" text-anchor="end">tours</text>
+        <rect class="plain-box" x="70" y="122" width="800" height="22" rx="2"></rect>
+        <line class="plain-box" x1="95" y1="122" x2="95" y2="144"></line>
+        <line class="plain-box" x1="120" y1="122" x2="120" y2="144"></line>
+        <line class="plain-box" x1="145" y1="122" x2="145" y2="144"></line>
+        <line class="plain-box" x1="170" y1="122" x2="170" y2="144"></line>
+        <line class="plain-box" x1="195" y1="122" x2="195" y2="144"></line>
+        <line class="plain-box" x1="220" y1="122" x2="220" y2="144"></line>
+        <line class="plain-box" x1="245" y1="122" x2="245" y2="144"></line>
+        <line class="plain-box" x1="270" y1="122" x2="270" y2="144"></line>
+        <text class="t-sub" x="82" y="137" text-anchor="middle">A</text>
+        <text class="t-sub" x="107" y="137" text-anchor="middle">D</text>
+        <text class="t-sub" x="132" y="137" text-anchor="middle">A</text>
+        <text class="t-sub" x="157" y="137" text-anchor="middle">D</text>
+        <text class="t-sub" x="182" y="137" text-anchor="middle">A</text>
+        <text class="t-sub" x="207" y="137" text-anchor="middle">D</text>
+        <text class="t-sub" x="470" y="137" text-anchor="middle">… trente-deux tours, deux par round, l'attaque en premier …</text>
+
+        <text class="t-lane" x="64" y="192" text-anchor="end">phases</text>
+        <rect class="adapter-box" x="70" y="170" width="175" height="30" rx="3"></rect>
+        <text class="t-small" x="157" y="190" text-anchor="middle">Phase 1</text>
+        <rect class="adapter-box" x="245" y="170" width="225" height="30" rx="3"></rect>
+        <text class="t-small" x="357" y="190" text-anchor="middle">Phase 2</text>
+        <rect class="adapter-box" x="470" y="170" width="25" height="30" rx="3"></rect>
+        <text class="t-sub" x="482" y="190" text-anchor="middle">3</text>
+        <rect class="adapter-box" x="495" y="170" width="375" height="30" rx="3"></rect>
+        <text class="t-small" x="682" y="190" text-anchor="middle">Phase 4</text>
+
+        <line class="wire-grave" x1="245" y1="76" x2="245" y2="206"></line>
+        <text class="wire-label" x="250" y="222" text-anchor="start">touchdown, au milieu du round 4</text>
+        <line class="wire-grave" x1="470" y1="32" x2="470" y2="206"></line>
+        <text class="wire-label" x="466" y="222" text-anchor="end">mi-temps</text>
+        <line class="wire-grave" x1="495" y1="76" x2="495" y2="206"></line>
+        <text class="wire-label" x="500" y="252" text-anchor="start">touchdown dès le premier tour : une Phase d'un seul tour</text>
+      </svg>
+      <figcaption>Les rounds sont réguliers et comptés ; les Phases ne le sont pas. Une
+      Phase commence à un coup d'envoi et finit à un touchdown ou à la mi-temps — donc ses
+      frontières tombent <strong>à l'intérieur</strong> d'un round. Un état de match ne
+      peut pas représenter les deux par une seule énumération imbriquée.</figcaption>
+    </figure>
+  </div>
+  <p>Conséquence directe : <code>Phase::Playing { active, turn }</code>, tel que la
+  carte 24 le dessinait, ne peut pas exister. Il faut porter <em>en même temps</em> où l'on
+  en est dans le round et où l'on en est dans la Phase, et ces deux compteurs avancent
+  indépendamment.</p>
+</section>
+
+<section>
+  <h2>Le jet de dés — la machine que personne ne possédait</h2>
+  <p>Le livre décrit <strong>une fois</strong>, dans ses principes généraux, une machinerie
+  de jet que toutes les règles réutilisent ensuite. Aucune carte du kanban ne la portait :
+  chacune en aurait réimplémenté un fragment, et les fragments auraient divergé.</p>
+  <div class="panel">
+    <figure>
+      <svg viewBox="0 0 900 250" role="img" aria-label="Le trajet d'un jet de dés : jeter le groupe, choisir un dé, appliquer les modificateurs, comparer au résultat requis, conclure. Deux chemins exceptionnels : un 1 ou un 6 naturel court-circuite les modificateurs, et une relance renvoie au début, une seule fois.">
+        <defs>
+          <marker id="p1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head" points="0,0 10,5 0,10"></polygon>
+          </marker>
+          <marker id="p2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head-grave" points="0,0 10,5 0,10"></polygon>
+          </marker>
+          <marker id="p3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <polygon class="head-warn" points="0,0 10,5 0,10"></polygon>
+          </marker>
+        </defs>
+
+        <rect class="core-box" x="20" y="70" width="150" height="56" rx="4"></rect>
+        <text class="t-title" x="95" y="94" text-anchor="middle">jeter le groupe</text>
+        <text class="t-sub" x="95" y="112" text-anchor="middle">1, 2 ou 3 dés</text>
+
+        <rect class="core-box" x="200" y="70" width="150" height="56" rx="4"></rect>
+        <text class="t-title" x="275" y="94" text-anchor="middle">choisir un dé</text>
+        <text class="t-sub" x="275" y="112" text-anchor="middle">si c'est un groupe</text>
+
+        <rect class="core-box" x="380" y="70" width="150" height="56" rx="4"></rect>
+        <text class="t-title" x="455" y="94" text-anchor="middle">modificateurs</text>
+        <text class="t-sub" x="455" y="112" text-anchor="middle">jamais au-dessus de 6</text>
+
+        <rect class="core-box" x="560" y="70" width="150" height="56" rx="4"></rect>
+        <text class="t-title" x="635" y="94" text-anchor="middle">résultat requis</text>
+        <text class="t-sub" x="635" y="112" text-anchor="middle">3+, 4+…</text>
+
+        <rect class="adapter-box" x="740" y="70" width="140" height="56" rx="4"></rect>
+        <text class="t-title" x="810" y="94" text-anchor="middle">réussite</text>
+        <text class="t-title" x="810" y="112" text-anchor="middle">ou échec</text>
+
+        <line class="wire" x1="170" y1="98" x2="194" y2="98" marker-end="url(#p1)"></line>
+        <line class="wire" x1="350" y1="98" x2="374" y2="98" marker-end="url(#p1)"></line>
+        <line class="wire" x1="530" y1="98" x2="554" y2="98" marker-end="url(#p1)"></line>
+        <line class="wire" x1="710" y1="98" x2="734" y2="98" marker-end="url(#p1)"></line>
+
+        <path class="wire-grave" d="M 275 126 L 275 180 L 810 180 L 810 132" marker-end="url(#p2)"></path>
+        <text class="wire-label" x="540" y="174" text-anchor="middle">1 naturel = échec · 6 naturel = réussite — les modificateurs ne s'appliquent pas</text>
+
+        <path class="wire-warn" d="M 635 70 L 635 26 L 95 26 L 95 64" marker-end="url(#p3)"></path>
+        <text class="wire-label" x="365" y="20" text-anchor="middle">relance — une seule fois par dé, quelle qu'en soit la source, et jamais une relance</text>
+      </svg>
+      <figcaption>Les deux chemins pointillés sont ceux qu'une implémentation naïve rate.
+      Le jet naturel court-circuite les modificateurs <em>et</em> le résultat requis ; la
+      relance a des règles propres, énoncées une fois pour tout le jeu.</figcaption>
+    </figure>
+  </div>
+  <p>Les règles de relance, citées, valent d'être lues telles qu'elles sont écrites — elles
+  sont bien plus contraignantes qu'on ne le suppose :</p>
+  <blockquote>
+    On doit toujours accepter le second résultat, même s'il est pire que le premier ; on ne
+    peut jamais relancer une relance. […] Si une règle vous permet de relancer plusieurs
+    dés, alors vous devez tous les relancer ensemble. Vous ne pouvez pas en relancer
+    certains, attendre le résultat, puis décider si vous voulez relancer les autres. […] On
+    ne peut jamais relancer un dé plus d'une fois, quel que soit le nombre de règles ou de
+    sources vous octroyant une relance. […] Si une relance vous autorise à relancer un dé
+    d'un groupe de dés, alors vous ne pouvez pas utiliser une autre relance d'une autre
+    source pour relancer le reste des dés de ce groupe.
+    <cite>p. 22</cite>
+  </blockquote>
+  <p>Un jet doit donc porter, avec lui, la trace de ce qui a déjà été relancé et par quelle
+  source. Ce n'est pas un booléen.</p>
+</section>
+
+<section>
+  <h2>Quatre dés, pas six</h2>
+  <blockquote>
+    La majorité des actions utiliseront des dés à six faces ordinaires (D6) ou des dés de
+    Blocage, mais parfois, vous aurez besoin d'en jeter d'autres, comme un dé à huit faces
+    (D8) ou un dé à seize faces (D16).
+    <cite>p. 21</cite>
+  </blockquote>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Type</th><th>Ce qu'il sert</th><th>État dans le noyau</th></tr></thead>
+      <tbody>
+        <tr><td class="path">D6</td><td>l'essentiel — 113 occurrences dans le livre</td><td><span class="where w-ok">juste</span></td></tr>
+        <tr><td class="path">dé de Blocage</td><td>la résolution d'un blocage</td><td><span class="where w-ok">juste</span></td></tr>
+        <tr><td class="path">D8</td><td>direction — dévier, rebondir, valdinguer</td><td><span class="where w-ok">juste</span></td></tr>
+        <tr><td class="path">D16</td><td>désigner un joueur au hasard, table des blessures, Prières</td><td><span class="where w-ok">juste</span></td></tr>
+        <tr><td class="path">D3</td><td><strong>n'est pas un dé</strong> — c'est un D6 divisé</td><td><span class="where w-bad">réserve à supprimer</span></td></tr>
+        <tr><td class="path">D12</td><td><strong>n'existe pas</strong> — zéro occurrence sur 122 pages</td><td><span class="where w-bad">réserve à supprimer</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <blockquote>
+    Si une règle vous demande de « jeter un D3 », jetez un <strong>D6</strong> et divisez
+    par deux la valeur que le dé indique, en arrondissant les fractions éventuelles à
+    l'entier supérieur.
+    <cite>p. 21, et de nouveau p. 22</cite>
+  </blockquote>
+  <p>La conséquence n'est pas cosmétique : un D3 <strong>consomme un D6</strong>. Une
+  réserve D3 séparée ferait qu'un jet de D3 ne décale pas la suite des D6 — divergence
+  silencieuse avec le vrai jeu, exactement ce que le cloisonnement par type devait éviter.</p>
+  <p>Quant au D12, l'usage qu'on lui prêtait — désigner un joueur au hasard — se fait
+  au D16 :</p>
+  <blockquote>
+    Jetez simplement un D16 et comparez le résultat au numéro des joueurs sur la liste
+    d'équipe correspondante. […] S'il n'y a pas de joueur correspondant, relancez jusqu'à
+    avoir désigné un joueur.
+    <cite>p. 21</cite>
+  </blockquote>
+  <p><strong>La correction ne coûte rien aux journaux déjà écrits</strong>, et c'est la
+  numérotation explicite des flux qui le permet : supprimer les flux 0 et 4 laisse le D6
+  au 1, le blocage au 2, le D8 au 3 et le D16 au 5. Les suites déjà tirées ne bougent
+  pas.</p>
+</section>
+
+<section>
+  <h2>Trois manières de se retrouver au sol, aux conséquences différentes</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>État</th><th>Jet d'armure</th><th>Turnover</th><th>Cause typique</th></tr></thead>
+      <tbody>
+        <tr><td class="path">Mis À Terre</td><td><strong>non</strong></td><td>seulement si le joueur portait le ballon, pendant son activation</td><td>un résultat de blocage, un effet</td></tr>
+        <tr><td class="path">Chuter</td><td>oui</td><td>si le joueur est de l'équipe active</td><td>une esquive ratée, un sprint manqué</td></tr>
+        <tr><td class="path">Être Plaqué</td><td>oui</td><td>si c'est le tour de son équipe</td><td>un blocage adverse</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Confondre les trois — en particulier oublier que <em>Mis À Terre</em> ne déclenche
+  <strong>aucun jet d'armure</strong> — changerait silencieusement le taux de blessures de
+  tout le jeu. Aucune vérification ne l'attraperait : le code tournerait, les tests
+  passeraient, et un agent entraîné sur ce moteur apprendrait un jeu qui n'existe pas.</p>
+</section>
+
+<section>
+  <h2>Le turnover — onze causes, et la liste n'est pas close</h2>
+  <blockquote>
+    Quand un Turnover se produit, l'activation du joueur actuel se termine, et le Tour de
+    son Coach prend aussitôt fin. […] Lorsqu'un Turnover survient, tout jet qui doit être
+    effectué suite à l'événement qui l'a provoqué est <strong>immédiatement effectué</strong>.
+    <cite>p. 32</cite>
+  </blockquote>
+  <p>Deux choses à en retenir pour le noyau :</p>
+  <ul>
+    <li><strong>Il termine deux choses à la fois</strong> — l'activation et le tour. Ce
+    n'est pas une fin de tour ordinaire.</li>
+    <li><strong>Il n'annule pas les jets en cours.</strong> Le jet d'armure du joueur qui
+    vient de chuter est fait quand même. Une implémentation qui viderait la file à
+    l'instant du turnover perdrait des blessures.</li>
+  </ul>
+  <p>Le livre liste onze causes, puis ajoute : <em>« Cette liste n'est pas exhaustive et
+  d'autres règles peuvent entraîner un Turnover. »</em> Le turnover est donc un
+  <strong>mécanisme transverse déclenchable de partout</strong>, pas une conséquence
+  énumérable au même endroit que ses causes.</p>
+</section>
+
+<section>
+  <h2>La séquence d'un match, telle qu'elle est écrite</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Étape</th><th>Ce qu'elle contient</th><th>Où</th></tr></thead>
+      <tbody>
+        <tr><td class="path">Séquence d'Avant Match</td><td>les Fans · la Météo · les Journaliers · les Coups de Pouce · déterminer l'équipe qui engage</td><td>hors noyau — le parcours GDScript existant</td></tr>
+        <tr><td class="path">Séquence de Début de Phase</td><td><strong>trois</strong> étapes : Placement, Coup d'Envoi, Événement de Coup d'Envoi</td><td>noyau</td></tr>
+        <tr><td class="path">Round</td><td>deux tours, l'attaque puis la défense</td><td>noyau</td></tr>
+        <tr><td class="path">Tour</td><td>activer ses joueurs un par un, jusqu'à épuisement ou turnover</td><td>noyau</td></tr>
+        <tr><td class="path">Fin de Phase</td><td>touchdown, ou fin de mi-temps</td><td>noyau</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Trois questions que la carte 24 laissait ouvertes sont répondues, et une l'est à
+  l'inverse de ce que j'aurais supposé :</p>
+  <ul>
+    <li><strong>Qui place en premier ?</strong> <em>« En commençant par l'équipe qui
+    engage »</em> — la <strong>défense</strong>. Et chaque Coach place ses onze d'un bloc ;
+    ce n'est pas une alternance joueur par joueur.</li>
+    <li><strong>Qui joue en premier dans un round ?</strong> <em>« L'équipe qui a
+    réceptionné le ballon au début de la mi-temps aura le premier Tour »</em> —
+    l'<strong>attaque</strong>. Donc l'ordre de placement et l'ordre de jeu sont
+    <em>inversés</em>.</li>
+    <li><strong>Huit rounds par mi-temps</strong>, donc huit tours par équipe et par
+    mi-temps, trente-deux tours en tout.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Les huit actions, et ce que l'annonce laisse comme trace</h2>
+  <p>Une activation déclare <strong>une</strong> action, parmi : Mouvement, Sécurisation du
+  Ballon, Blocage, Blitz, Passe, Transmission, Lancer de coéquipier, Agression — plus les
+  Actions Spéciales apportées par des compétences.</p>
+  <blockquote>
+    Quand vous activez un joueur, vous devez annoncer le type d'Action qu'il va effectuer.
+    […] Vous ne pouvez pas changer d'avis sur l'Action annoncée. Toutefois, vous n'êtes pas
+    obligé d'<em>effectuer</em> l'Action si vous ne souhaitez plus la faire, mais
+    <strong>le joueur comptera comme ayant annoncé cette Action même s'il ne la résout
+    pas</strong>. Ce point est important, car on ne peut annoncer certaines actions qu'une
+    seule fois par Tour.
+    <cite>p. 33</cite>
+  </blockquote>
+  <p>L'état d'un tour doit donc retenir <strong>ce qui a été annoncé</strong>, et non
+  seulement ce qui a eu lieu. Un vocabulaire de commandes qui n'enregistrerait que les
+  faits perdrait cette information — et permettrait deux blitz dans le même tour, sans que
+  rien ne proteste.</p>
+</section>
+
+<section>
+  <h2>La carte des composants du noyau</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Module</th><th>Ce qu'il possède</th><th>État</th></tr></thead>
+      <tbody>
+        <tr><td class="path">dice</td><td>les réserves, une par type, tirées d'une graine</td><td><span class="where w-bad">à corriger — deux réserves de trop</span></td></tr>
+        <tr><td class="path">roll</td><td>groupe, choix, modificateurs, jets naturels, résultat requis, relances</td><td><span class="where w-bad">manquant</span></td></tr>
+        <tr><td class="path">clock</td><td>mi-temps, round, tour, Phase — les deux découpages</td><td><span class="where w-todo">carte 24, à refondre</span></td></tr>
+        <tr><td class="path">game</td><td>commandes, événements, refus, attente</td><td><span class="where w-ok">fait, sauf le compteur de tour</span></td></tr>
+        <tr><td class="path">grid</td><td>qui occupe quelle case</td><td><span class="where w-ok">fait</span></td></tr>
+        <tr><td class="path">pitch</td><td>le terrain, la ligne de mêlée, les larges couloirs, les en-buts</td><td><span class="where w-todo">à écrire</span></td></tr>
+        <tr><td class="path">roster</td><td>les joueurs, leur profil, leur état, leur localisation</td><td><span class="where w-todo">carte 22</span></td></tr>
+        <tr><td class="path">action</td><td>les huit actions, et ce qui a été annoncé dans le tour</td><td><span class="where w-todo">cartes 15 à 18</span></td></tr>
+        <tr><td class="path">skills</td><td>les points d'accroche et l'ordre d'application</td><td><span class="where w-todo">carte 20</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Et trois mécanismes qui <strong>ne sont pas des modules</strong> : ils se déclenchent
+  depuis partout et aucun endroit ne les possède.</p>
+  <ul>
+    <li><strong>Le turnover</strong> — onze causes citées, liste ouverte, et il termine
+    l'activation <em>et</em> le tour.</li>
+    <li><strong>La décision d'un Coach</strong> — déjà modélisée par <code>Pending</code>,
+    avec son propriétaire nommé, parce qu'une compétence peut le transférer.</li>
+    <li><strong>Le rebond du ballon</strong> — <em>Dévier, Rebondir, Valdinguer</em> sont
+    définis une fois, p. 23, et invoqués par la passe, le blocage, le coup d'envoi, la
+    chute d'un porteur.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Ce que la passe invalide</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Où</th><th>Ce qui est faux</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="path">carte 13 <span class="where w-bad">close</span></td>
+          <td>Deux réserves de trop. Le D3 doit consommer un D6 ; le D12 n'existe pas. La
+          numérotation explicite des flux fait que la correction ne touche aucune suite
+          déjà tirée — c'était sa raison d'être.</td>
+        </tr>
+        <tr>
+          <td class="path">carte 14 <span class="where w-bad">close</span></td>
+          <td><code>turn: u32</code> est un compteur plat qui ne correspond à rien. Il faut
+          le round (1 à 8), le tour dans le round, et la mi-temps.</td>
+        </tr>
+        <tr>
+          <td class="path">carte 24 <span class="where w-bad">à réécrire</span></td>
+          <td>Le nom <code>Phase</code> est volé au domaine, où il désigne un engagement.
+          Le niveau « round » manque. Et l'énumération imbriquée ne peut pas porter deux
+          découpages concurrents.</td>
+        </tr>
+        <tr>
+          <td class="path">docs/noyau-et-apprenant</td>
+          <td>La séquence d'avant-match y était absente ; le nombre de décisions par match
+          est à revérifier sur la vraie structure d'activation.</td>
+        </tr>
+        <tr>
+          <td class="path">nouvelle carte</td>
+          <td>Le module <code>roll</code>. Il précède toutes les cartes de règles : chacune
+          en aurait écrit un fragment, et les fragments auraient divergé.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Le glossaire, et deux divergences de traduction</h2>
+  <p>Le projet a <strong>deux sources françaises qui ne disent pas la même chose</strong>,
+  et il faudra trancher laquelle fait foi dans le code :</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Concept</th><th>Le livre de règles</th><th><code>skills_fr.json</code></th></tr></thead>
+      <tbody>
+        <tr><td>la période entre deux coups d'envoi</td><td><strong>Phase</strong></td><td><strong>Engagement</strong></td></tr>
+        <tr><td>la personne qui joue</td><td><strong>Coach</strong></td><td><strong>entraîneur</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Les autres termes officiels, à employer tels quels : <em>Mis À Terre</em>,
+  <em>Chuter</em>, <em>Être Plaqué</em>, <em>Sonné</em>, <em>Turnover</em>,
+  <em>Rebondir</em>, <em>Dévier</em>, <em>Valdinguer</em>, <em>Zone de Tacle</em>,
+  <em>Marqué</em> et <em>Démarqué</em>, <em>Debout</em>, <em>attaque</em> et
+  <em>défense</em>, <em>Box des Réserves</em>, <em>jet naturel</em>, <em>groupe de
+  dés</em>, <em>résultat requis</em>.</p>
+</section>
+
+<p class="foot">Passe effectuée le 30 août 2026 sur <code>references/lrb.pdf</code> —
+<em>Livre de Règles Bonifiées</em> Saison 3, mise à jour du 20/08/26, 122 pages. Les pages
+citées sont celles du PDF. Le chapitre central « Les Règles de Blood Bowl » couvre les
+pages 28 à 51 ; les principes généraux, les profils et l'état de joueur les pages 21 à 27.
+Ce qui n'est pas cité ici n'a pas été lu.</p>
+
+</div>

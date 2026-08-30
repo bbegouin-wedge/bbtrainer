@@ -17,3 +17,6 @@ bin/
 
 # cargo-mutants dépose son rapport là où il est lancé.
 app/core/mutants.out*/
+
+# Le livre de règles : 11 Mio, et ce n'est pas notre ouvrage.
+/references/
