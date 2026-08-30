@@ -4,4 +4,14 @@ version = "0.1.0"
 edition = "2021"
 
 # AUCUNE dépendance vers godot, et c'est le point : le noyau ignore le moteur.
+#
+# La première dépendance du noyau, admise par les critères de la carte 12 —
+# pureté, déterminisme, portabilité — qui la nommait d'avance : « rand sera
+# nécessaire pour les dés, mais avec un générateur semé et épinglé (ChaCha),
+# jamais celui du système ».
+#
+# rand_chacha seul, sans `rand` : on n'utilise que le flux brut de ChaCha8, dont
+# la suite est stable entre versions. Les distributions de `rand` ne le sont pas,
+# et s'en servir ferait dépendre tous les journaux d'un détail d'implémentation.
 [dependencies]
+rand_chacha = { version = "0.9", default-features = false }

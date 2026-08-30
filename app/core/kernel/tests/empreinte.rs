@@ -12,7 +12,10 @@
 //! déterministe ; il prouve que ce qu'il exerce l'est, et attrapera n'importe
 //! quelle cause future — horloge, générateur non semé, structure non ordonnée.
 
-use bbtrainer_kernel::{Grid, GridEvent, Tile, UnitId};
+use bbtrainer_kernel::{Dice, Die, Grid, GridEvent, Tile, UnitId};
+
+/// Fixe : c'est le principe même de l'empreinte.
+const GRAINE_DES: u64 = 20_260_830;
 
 fn trace(events: &[GridEvent]) -> String {
     events
@@ -45,6 +48,19 @@ fn imprimer_l_empreinte() {
             .join(" "),
     );
     morceaux.push(trace(&grid.clear()));
+
+    // Les dés, ajoutés par la carte 13. Le scénario doit suivre l'état du noyau :
+    // une réserve semée par l'horloge ou par le générateur du système passerait
+    // inaperçue si l'empreinte ne regardait que la grille — le contrôle
+    // resterait vert en couvrant une part décroissante du noyau.
+    let mut dice = Dice::new(GRAINE_DES);
+    for die in Die::ALL {
+        let tirages = (0..8)
+            .map(|_| dice.roll(die).to_string())
+            .collect::<Vec<_>>()
+            .join(",");
+        morceaux.push(format!("{die:?}={tirages}"));
+    }
 
     println!("EMPREINTE={}", morceaux.join(" / "));
 }

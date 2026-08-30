@@ -4,6 +4,8 @@
 //! que par une convention : rien ici ne peut appeler le moteur, ni lire un
 //! fichier, ni connaître un pixel.
 
+pub mod dice;
 pub mod grid;
 
+pub use dice::{Dice, Die};
 pub use grid::{Grid, GridEvent, Tile, UnitId};
