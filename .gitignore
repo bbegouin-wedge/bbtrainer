@@ -9,3 +9,8 @@
 # Artefacts de compilation Rust
 .build/
 bin/
+
+# Contrôle de design impeccable : le cache de déduplication et les
+# dérogations privées sont locaux à la machine. Seul config.json est partagé.
+.impeccable/hook.cache.json
+.impeccable/config.local.json

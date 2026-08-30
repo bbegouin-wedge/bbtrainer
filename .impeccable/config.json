@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "fraunces",
+        "createdAt": "2026-08-30T14:38:56.441Z",
+        "reason": "Police de titrage du systeme de design existant du projet (docs/*.html) — confirme par l'utilisateur"
+      }
+    ]
+  }
+}
