@@ -158,7 +158,11 @@ test-behaviour: godot import
 	@"$(GODOT)" --headless --path "$(CURDIR)" --script res://tests/run_behaviour.gd \
 	  > "$(JOURNAL)" 2>&1; code=$$?; \
 	grep -E "^\[(ok|KO|note|----|####)\]" "$(JOURNAL)" || true; \
-	grep -E "SCRIPT ERROR" "$(JOURNAL)" || true; \
+	grep -E "SCRIPT ERROR|godot-rust function call failed" "$(JOURNAL)" || true; \
+	if grep -qE "SCRIPT ERROR|godot-rust function call failed" "$(JOURNAL)"; then \
+	  echo "TESTS DE COMPORTEMENT : ÉCHEC — une erreur moteur a été levée pendant les tests"; \
+	  exit 1; \
+	fi; \
 	if [ $$code -ne 0 ]; then \
 	  echo "TESTS DE COMPORTEMENT : ÉCHEC — sortie complète dans $(JOURNAL)"; \
 	else \

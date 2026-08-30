@@ -16,7 +16,7 @@ extends "res://tests/lib/test_case.gd"
 ## La grille n'est plus un Node : rien à libérer, mais la taille se donne à la
 ## construction là où elle venait d'un @export renseigné dans la scène.
 func _grid() -> UnitGrid:
-	return UnitGrid.new(Pitch.SIZE)
+	return UnitGrid.create(Pitch.SIZE)
 
 
 func _unit() -> Node:
@@ -82,6 +82,28 @@ func test_signal_fires_on_place_remove_and_clear() -> void:
 	equals(counter.count, 4, "une émission au retrait")
 	grid.clear()
 	equals(counter.count, 5, "une émission au vidage")
+
+
+## Le cas que onze tests avaient manqué et que le jeu a trouvé en cinq secondes :
+## `arena.gd` demande si une case est libre AVANT de créer le jeton, donc pour
+## une unité nulle. Le GDScript le tolérait ; la première version Rust refusait
+## la conversion et faisait échouer le dépôt d'un joueur.
+func test_a_null_unit_is_a_valid_question() -> void:
+	var grid := _grid()
+	var unit := _unit()
+	grid.place_unit(Vector2i(5, 5), unit)
+	is_true(
+		grid.is_tile_blocked_for(Vector2i(5, 5), null),
+		"une case occupée est bloquée, même pour personne"
+	)
+	is_false(
+		grid.is_tile_blocked_for(Vector2i(6, 5), null),
+		"une case libre ne l'est pas"
+	)
+	is_false(grid.has_unit(null), "personne n'est jamais sur la grille")
+	equals(grid.get_tile_of(null), Vector2i.ZERO, "personne n'est nulle part")
+	grid.remove_unit(null)
+	is_true(grid.is_tile_occupied(Vector2i(5, 5)), "retirer personne ne retire rien")
 
 
 func test_empty_grid_answers_nothing() -> void:

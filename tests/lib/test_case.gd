@@ -8,6 +8,11 @@ extends RefCounted
 
 var failures: Array[String] = []
 
+## Nombre d'assertions réellement exécutées. Un test interrompu à mi-parcours
+## n'enregistre aucun échec — ses assertions ne sont jamais atteintes — et
+## passerait donc pour vert. Ce compteur est ce qui le démasque.
+var assertions := 0
+
 ## Posé par le lanceur. Nul pour un test unitaire qui n'en a pas besoin ;
 ## indispensable à un test d'intégration, qui doit monter une scène.
 var tree: SceneTree = null
@@ -48,6 +53,7 @@ func mount(scene_path: String) -> Node:
 
 
 func check(condition: bool, message: String) -> void:
+	assertions += 1
 	if not condition:
 		failures.append("%s : %s" % [_current, message])
 

@@ -215,9 +215,20 @@ Directives de travail pour Claude Code sur ce projet.
     parfaitement avoir cessé de fonctionner. Les deux autres ne le verraient
     pas.
 
-    **Vert veut dire vert, pas « pas d'échec ».** Un lanceur qui ne trouve aucun
-    test annonçait « OK » — 0 vérification, 0 échec. Il échoue désormais. Lire
-    le compte, pas seulement la dernière ligne.
+    **Vert veut dire vert, pas « pas d'échec ».** Trois fois un harnais a
+    annoncé « OK » alors qu'il ne vérifiait rien :
+
+    - un lanceur qui **ne trouvait aucun test** — 0 vérification, 0 échec ;
+    - un contrôle de couverture **derrière un tube**, dont le shell rend le code
+      de sortie du dernier maillon : 94,55 % annoncés « ARCHITECTURE : OK » ;
+    - un test **interrompu à mi-parcours** : ses assertions n'étant jamais
+      atteintes, il n'enregistrait aucun échec et passait pour vert.
+
+    Les trois sont fermés — le lanceur échoue s'il ne trouve rien, les codes de
+    sortie viennent de la source et non du tube, chaque test doit avoir exécuté
+    au moins une assertion, et toute erreur moteur levée pendant les tests est
+    un échec. La leçon reste : **lire le compte, pas seulement la dernière
+    ligne.**
 
     Aucune carte ne part en `done/` sans ces trois-là.
 

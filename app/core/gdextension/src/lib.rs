@@ -5,6 +5,8 @@
 
 use godot::prelude::*;
 
+mod unit_grid;
+
 struct BbTrainerExtension;
 
 #[gdextension]

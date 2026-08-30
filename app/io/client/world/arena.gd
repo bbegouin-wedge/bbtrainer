@@ -16,7 +16,7 @@ var dugouts: Array[DugoutPanel] = []
 
 
 func _ready() -> void:
-	play_area.attach_grid(UnitGrid.new(Pitch.SIZE))
+	play_area.attach_grid(UnitGrid.create(Pitch.SIZE))
 	EventBus.game_phase_changed.connect(_on_game_phase_changed)
 
 

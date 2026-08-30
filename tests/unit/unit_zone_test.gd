@@ -9,7 +9,7 @@ extends "res://tests/lib/test_case.gd"
 
 func _zone(size: Vector2i) -> UnitZone:
 	var zone := track(UnitZone.new()) as UnitZone
-	zone.attach_grid(UnitGrid.new(size))
+	zone.attach_grid(UnitGrid.create(size))
 	return zone
 
 

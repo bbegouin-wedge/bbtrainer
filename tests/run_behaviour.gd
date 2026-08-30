@@ -60,7 +60,9 @@ func _run_test(script: GDScript, method: String, report) -> void:
 	case.tree = self
 	await case.call(method)
 	case.cleanup()
-	if case.failures.is_empty():
+	if case.assertions == 0:
+		report.fail("behaviour", "%s n'a exécuté aucune assertion — test vide ou interrompu" % method)
+	elif case.failures.is_empty():
 		report.ok("behaviour", method)
 	else:
 		for failure in case.failures:
