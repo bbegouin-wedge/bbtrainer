@@ -244,6 +244,7 @@ Contournement délibéré : `git commit --no-verify`.
 | `make debug` | idem, avec le débogueur stdout et le mode verbeux |
 | `make editeur` | ouvre l'éditeur — seul endroit où les points d'arrêt existent |
 | `make check-integrity` | les 10 vérifications sur tout le dépôt (cf. règle 13) |
+| `make build-core` | compile le noyau Rust en GDExtension et dépose le `.so` |
 | `make check-arch` | les seules règles d'architecture de `core/` (cf. règle 8) |
 | `make test-behaviour` | tests de comportement : `tests/unit/` et `tests/integration/` |
 | `make test` | intégrité + tests de comportement |
@@ -297,6 +298,7 @@ minimap sont tracés, pas texturés.
 | | |
 |---|---|
 | `app/` | l'application : `core/`, `io/` — assets compris — et `use_cases/` à venir |
+| `bin/`, `.build/` | artefacts de compilation Rust, ignorés par git et reconstruits par `make` |
 | `tests/` | les deux harnais. Ils observent l'application, ils n'en font pas partie |
 | `autoload/`, `data/` | **hors cible**, à migrer : ni l'un ni l'autre n'est un simple déplacement |
 | `docs/`, `kanban/` | audit d'architecture et cartes |
@@ -313,6 +315,41 @@ appartient au noyau, et `match_state` porte des données qui relèvent de
 
 L'audit d'architecture — lignes de faille et ordre d'attaque — est dans
 `docs/ossature-de-bbtrainer.html`.
+
+---
+
+## Le noyau Rust
+
+`app/core/` cohabite en deux langues : le GDScript s'efface à mesure que le Rust
+le remplace. Un répertoire séparé aurait suggéré deux noyaux — il n'y en a
+qu'un.
+
+| | |
+|---|---|
+| dossier | `app/core/` — `Cargo.toml`, `src/`, et `rules/*.gd` encore présents |
+| paquet | `bbtrainer_core` — le nom du dossier et celui du crate sont indépendants, et « core » prêterait à confusion avec la bibliothèque standard |
+| frontière | `app/core/bbtrainer.gdextension`, la seule porte entre GDScript et Rust |
+| artefacts | `CARGO_TARGET_DIR=.build`, le `.so` déposé dans `bin/` — **hors de `app/`** |
+
+**Pourquoi les artefacts sortent de `app/`** : un `target/` sous `res://`
+casserait trois choses d'un coup — l'importeur de Godot le scannerait, le
+harnais le parcourrait à chaque vérification (`DirAccess` voit les fichiers même
+sous un `.gdignore`), et le test de fraîcheur du réimport se déclencherait à
+chaque `cargo build`.
+
+**La version d'API est épinglée** : `features = ["api-4-5"]` dans `Cargo.toml`.
+gdext vise Godot 4.6 par défaut et **refuse de s'initialiser** sur un moteur plus
+ancien. Cette ligne doit suivre la version du moteur ; le message d'erreur de
+gdext la nomme explicitement quand elles divergent.
+
+**Tout ce qui démarre Godot dépend de `build-core`** — `run`, `debug`,
+`editeur`, et les trois vérifications. La GDExtension est chargée au démarrage :
+un `.so` manquant ne casse pas seulement le jeu, il fait échouer le chargement
+des 23 scènes. Aucun témoin daté n'est nécessaire, `cargo build` sans changement
+coûte 0,05 s.
+
+**L'éditeur garde la bibliothèque ouverte.** Le fermer avant de recompiler, au
+moins tant que le rechargement à chaud n'a pas été éprouvé.
 
 ---
 

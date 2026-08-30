@@ -10,6 +10,7 @@ extends SceneTree
 ## Sortie 0 si tout passe, 1 sinon.
 
 const CHECKS := {
+	"extension": "res://tests/checks/extension.gd",
 	"project": "res://tests/checks/project.gd",
 	"pairing": "res://tests/checks/pairing.gd",
 	"classes": "res://tests/checks/classes.gd",

@@ -17,17 +17,21 @@ JOURNAL := .tests.log
 # assets convertis. Sans lui, un déplacement laisse le registre des UID sur les
 # anciens chemins et le filet crie au loup : le lot du monde a produit 12 échecs
 # fantômes qui ont tous disparu à l'import.
+CARGO_TARGET := .build
+LIB          := bin/libbbtrainer_core.so
+
 STAMP       := .godot/.import-stamp
 IMPORT_SCAN := app autoload data tests project.godot
 
 # Vérification à lancer seule : make check-integrity V=scenes
 V ?=
 
-.PHONY: help run debug editeur check-integrity check-arch test-behaviour test verbeux godot import journal
+.PHONY: help run debug editeur build-core check-integrity check-arch test-behaviour test verbeux godot import journal
 
 help:
 	@echo "Cibles :"
 	@echo "  make run                  lance le jeu"
+	@echo "  make build-core           compile le noyau Rust en GDExtension"
 	@echo "  make debug                idem, avec le débogueur stdout et le mode verbeux"
 	@echo "  make editeur              ouvre l'éditeur (seul endroit avec points d'arrêt)"
 	@echo "  make check-integrity      intégrité de tout le projet (10 vérifications)"
@@ -54,20 +58,20 @@ godot:
 # options au moteur ; ARGS reste vide par défaut.
 ARGS ?=
 
-run: godot
+run: godot build-core
 	@"$(GODOT)" --path "$(CURDIR)" $(ARGS)
 
 # Jeu + débogueur stdout local et sortie verbeuse. Les aides visuelles se
 # demandent par ARGS, elles sont trop bavardes pour être posées par défaut :
 #   make debug ARGS="--debug-collisions"            les Area2D des unités
 #   make debug ARGS="--debug-canvas-item-redraw"    chaque _draw() clignote
-debug: godot
+debug: godot build-core
 	@"$(GODOT)" --path "$(CURDIR)" -d --verbose $(ARGS)
 
 # L'éditeur — seul endroit où les points d'arrêt existent. Pour attacher un jeu
 # lancé par `make run` à un éditeur ouvert :
 #   make run ARGS="--remote-debug tcp://127.0.0.1:6007"
-editeur: godot
+editeur: godot build-core
 	@"$(GODOT)" --path "$(CURDIR)" -e
 
 # Le test de fraîcheur vit dans la recette et non dans les prérequis : un nom de
@@ -76,7 +80,16 @@ editeur: godot
 # Les DOSSIERS comptent autant que les fichiers : `git mv` préserve la date de
 # modification du fichier déplacé, donc un renommage seul ne rendrait pas le
 # témoin périmé. La date du dossier, elle, change — et `find` les parcourt.
-import:
+# La GDExtension est chargée au DÉMARRAGE de Godot : un .so manquant ne casse
+# pas seulement le jeu, il fait échouer le chargement des 23 scènes. Tout ce qui
+# démarre le moteur en dépend donc. cargo build sans changement coûte 0,07 s,
+# aucun témoin daté n'est nécessaire.
+build-core:
+	@command -v cargo >/dev/null || { echo "cargo introuvable — installer la chaîne Rust"; exit 1; }
+	@CARGO_TARGET_DIR=$(CARGO_TARGET) cargo build --manifest-path app/core/Cargo.toml
+	@mkdir -p bin && cp $(CARGO_TARGET)/debug/libbbtrainer_core.so $(LIB)
+
+import: build-core
 	@if [ ! -f "$(STAMP)" ] || \
 	   [ -n "$$(find $(IMPORT_SCAN) -newer "$(STAMP)" -print -quit 2>/dev/null)" ]; then \
 	  "$(GODOT)" --headless --path "$(CURDIR)" --import > /dev/null 2>&1; \

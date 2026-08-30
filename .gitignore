@@ -5,3 +5,7 @@
 
 # Journal de `make check-integrity`
 .tests.log
+
+# Artefacts de compilation Rust
+.build/
+bin/
