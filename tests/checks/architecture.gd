@@ -18,6 +18,12 @@ extends RefCounted
 const Files := preload("res://tests/lib/files.gd")
 const ROOT := "res://app/core"
 
+## Types du moteur qui touchent au disque. Ils sont natifs, donc la règle des
+## dépendances de projet ne les voit pas — et pourtant un noyau qui lit un
+## fichier n'est plus un noyau. C'est cet interdit qui empêche la séparation
+## chargeur / catalogue de se défaire en silence.
+const DISK_ACCESS := ["FileAccess", "DirAccess", "ResourceSaver", "ResourceLoader", "ConfigFile"]
+
 
 func run(_tree: SceneTree, report) -> void:
 	var files := Files.list_files(".gd", ROOT)
@@ -28,6 +34,7 @@ func run(_tree: SceneTree, report) -> void:
 	for path in files:
 		_check_inheritance(report, path)
 		_check_dependencies(report, path, forbidden)
+		_check_no_disk_access(report, path)
 	report.ok("architecture", "%d script(s) de core/ vérifiés" % files.size())
 
 
@@ -40,6 +47,17 @@ func _check_inheritance(report, path: String) -> void:
 	var base := script.get_instance_base_type()
 	if ClassDB.is_parent_class(base, "Node"):
 		report.fail("architecture", "%s hérite de %s : pas de Node dans core/" % [path, base])
+
+
+## Le noyau ignore le disque — cf. docs/noyau-et-apprenant.html.
+func _check_no_disk_access(report, path: String) -> void:
+	var code := _bare_code(Files.read(path))
+	for type_name in DISK_ACCESS:
+		if RegEx.create_from_string("\\b" + type_name + "\\b").search(code) != null:
+			report.fail(
+				"architecture",
+				"%s utilise %s : le noyau ne touche pas au disque" % [path, type_name]
+			)
 
 
 func _check_dependencies(report, path: String, forbidden: Dictionary) -> void:

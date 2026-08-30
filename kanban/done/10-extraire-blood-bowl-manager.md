@@ -39,9 +39,31 @@ contient plus que `addons app autoload bin docs kanban tests`.
 
 **10b — sortir la résolution des images du catalogue. FAIT.** Voir ci-dessous.
 
-**10c — séparer le chargeur du catalogue**, et boucher la fuite de
-`skill_list.gd:18,40`, qui fait `BloodBowlManager.data.skills` et traverse la
-façade pour atteindre la donnée brute.
+**10c — séparer le chargeur du catalogue. FAIT.**
+
+| | |
+|---|---|
+| `app/core/bloodbowl_data.gd` | les classes, les index, les recherches |
+| `app/io/persistence/catalog_loader.gd` | la lecture des quatre JSON |
+| `autoload/blood_bowl_manager.gd` | 71 lignes contre 97 : un porteur et une façade |
+
+Cinq méthodes de lecture ont quitté le catalogue, quatre recherches y sont
+remontées du gestionnaire — `get_all_teams` qui trie, `search_teams`,
+`get_affordable_players`, `get_stars_for_team` : ce sont des recherches dans le
+catalogue, pas de l'orchestration. Le code a été **découpé et déplacé, jamais
+réécrit** ; seules les références aux champs ont été préfixées.
+
+La fuite de `skill_list.gd:18,40` est bouchée : `BloodBowlManager.data.skills`
+devient `get_all_skills()`.
+
+**Le nom `BloodBowlData` est conservé.** `Catalog` serait plus juste, mais
+c'est 61 références dans 19 fichiers — un renommage mécanique qui triplerait le
+diff sans rien apprendre. Il mérite son propre lot.
+
+**Le catalogue reste en GDScript.** La question « passe-t-il en Rust ? » devient
+légitime, plus rien ne l'en empêchant, mais y répondre ici aurait voulu dire
+concevoir toute son API à travers la frontière FFI dans le lot dont l'objet est
+de séparer deux métiers.
 
 ## Ce que 10b a débloqué
 
@@ -69,8 +91,9 @@ pouvoir y répondre.
 
 ## Terminé quand
 
-- [ ] la lecture des fichiers et le catalogue ne sont plus dans le même objet
-  — **lot 10c** ;
+- [x] la lecture des fichiers et le catalogue ne sont plus dans le même objet ;
+- [x] `check-arch` interdit désormais au noyau de toucher au disque — vu
+  refuser un `FileAccess` remis dans le catalogue ;
 - [x] les chemins d'images ne sont plus résolus par le catalogue ;
 - [x] les trois vérifications passent, et `make run` affiche les équipes,
   jetons et écussons — contrôlé à l'écran.

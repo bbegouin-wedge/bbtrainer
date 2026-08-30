@@ -214,54 +214,6 @@ var skills_by_uid: Dictionary = {}
 var skill_categories_by_id: Dictionary = {}
 var star_players_by_uid: Dictionary = {}
 
-# Lit un fichier JSON et retourne son dictionnaire racine, ou null en cas d'échec.
-func _read_json_dict(json_path: String, what: String) -> Variant:
-	var file := FileAccess.open(json_path, FileAccess.READ)
-	if not file:
-		push_error("Impossible d'ouvrir le fichier %s: %s" % [what, json_path])
-		return null
-
-	var json := JSON.new()
-	var error := json.parse(file.get_as_text())
-	file.close()
-
-	if error != OK:
-		push_error("Erreur de parsing JSON %s: %s" % [what, json.get_error_message()])
-		return null
-
-	if typeof(json.data) != TYPE_DICTIONARY:
-		push_error("Le JSON %s ne contient pas un dictionnaire racine" % what)
-		return null
-
-	return json.data
-
-func load_from_json(json_path: String) -> bool:
-	var data = _read_json_dict(json_path, "teams")
-	if data == null:
-		return false
-	return parse_data(data)
-
-func parse_data(data: Dictionary) -> bool:
-	bloodbowl_version = data.get("bloodbowl_version", "")
-	edition = data.get("edition", "")
-	
-	teams.clear()
-	teams_by_uid.clear()
-	teams_by_name.clear()
-	
-	if not data.has("teams"):
-		push_error("Le JSON ne contient pas de teams")
-		return false
-	
-	for team_data in data["teams"]:
-		var team = Team.new(team_data)
-		teams.append(team)
-		teams_by_uid[team.uid] = team
-		teams_by_name[team.name] = team
-	
-	print("Chargement réussi: %d équipes" % teams.size())
-	return true
-
 func get_team_by_uid(team_uid: String) -> Team:
 	return teams_by_uid.get(team_uid, null)
 
@@ -281,66 +233,6 @@ func get_teams_by_tier(tier: String) -> Array[Team]:
 		if team.tier == tier:
 			result.append(team)
 	return result
-
-func load_skills_from_json(json_path: String) -> bool:
-	var data = _read_json_dict(json_path, "skills")
-	if data == null:
-		return false
-
-	skills.clear()
-	skills_by_uid.clear()
-
-	if not data.has("skills"):
-		push_error("Le JSON ne contient pas de skills")
-		return false
-
-	for skill_data in data["skills"]:
-		var skill = Skill.new(skill_data)
-		skills.append(skill)
-		skills_by_uid[skill.uid] = skill
-
-	print("Chargement réussi: %d compétences" % skills.size())
-	return true
-
-func load_skill_categories_from_json(json_path: String) -> bool:
-	var data = _read_json_dict(json_path, "skill_categories")
-	if data == null:
-		return false
-
-	skill_categories.clear()
-	skill_categories_by_id.clear()
-
-	if not data.has("skill_categories"):
-		push_error("Le JSON ne contient pas de skill_categories")
-		return false
-
-	for category_data in data["skill_categories"]:
-		var category = SkillCategory.new(category_data)
-		skill_categories.append(category)
-		skill_categories_by_id[category.id] = category
-
-	print("Chargement réussi: %d catégories de compétences" % skill_categories.size())
-	return true
-
-func load_star_players_from_json(json_path: String) -> bool:
-	var data = _read_json_dict(json_path, "star_players")
-	if data == null:
-		return false
-
-	star_players.clear()
-	star_players_by_uid.clear()
-
-	if not data.has("star_players"):
-		push_error("Le JSON ne contient pas de star_players")
-		return false
-
-	for sp_data in data["star_players"]:
-		var sp = StarPlayer.new(sp_data)
-		star_players.append(sp)
-		star_players_by_uid[sp.uid] = sp
-
-	print("Chargement réussi: %d star players" % star_players.size())
-	return true
 
 func get_star_player_by_uid(uid: String) -> StarPlayer:
 	return star_players_by_uid.get(uid, null)
@@ -362,6 +254,47 @@ func get_skill_name(skill_uid: String) -> String:
 	if skill:
 		return skill.name
 	return skill_uid
+
+## Recherches remontées de BloodBowlManager : ce sont des recherches dans le
+## catalogue, pas de l'orchestration.
+
+func get_all_teams() -> Array[Team]:
+	teams.sort_custom(func(a, b): return a.name < b.name)
+	return teams
+
+func search_teams(query: String) -> Array[Team]:
+	var results: Array[Team] = []
+	var query_lower = query.to_lower()
+	
+	for team in teams:
+		if query_lower in team.name.to_lower() or query_lower in team.uid.to_lower():
+			results.append(team)
+	
+	return results
+
+func get_affordable_players(team_uid: String, budget: int) -> Array[Player]:
+	var team = get_team_by_uid(team_uid)
+	if not team:
+		return []
+
+	var affordable: Array[Player] = []
+	for player in team.available_players:
+		if player.cost <= budget:
+			affordable.append(player)
+
+	return affordable
+
+func get_stars_for_team(team: Team) -> Array[StarPlayer]:
+	var result: Array[StarPlayer] = []
+	for sp in star_players:
+		if team.uid in sp.available_for_rosters:
+			result.append(sp)
+	return result
+
+
+func get_all_skills() -> Array[Skill]:
+	return skills
+
 
 func print_summary():
 	print("\n=== Blood Bowl %s - %s ===" % [bloodbowl_version, edition])

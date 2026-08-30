@@ -38,7 +38,11 @@ Directives de travail pour Claude Code sur ce projet.
       autoload, ni `class_name` déclaré ailleurs.
 
     Restent permis : les types natifs du moteur (`RefCounted`, `Resource`,
-    `Vector2i`…), qui sont des primitives et non des dépendances de projet.
+    `Vector2i`…), qui sont des primitives et non des dépendances de projet —
+    **sauf ceux qui touchent au disque** (`FileAccess`, `DirAccess`,
+    `ResourceLoader`, `ResourceSaver`, `ConfigFile`). Ils sont natifs, donc la
+    règle des dépendances ne les voit pas, et pourtant un noyau qui lit un
+    fichier n'est plus un noyau.
 
     **Et la couverture du noyau Rust, qui doit être de 100 %.** `make check-arch`
     lance `cargo llvm-cov --fail-under-lines 100` sur `app/core/kernel/` :

@@ -15,7 +15,7 @@ func display_skills_by_category(category: String) -> void:
 	for child in get_children():
 		child.queue_free()
 
-	for skill in BloodBowlManager.data.skills:
+	for skill in BloodBowlManager.get_all_skills():
 		if skill.category == category:
 			var button := Button.new()
 			button.text = skill.name
@@ -37,7 +37,7 @@ func _update_button_states() -> void:
 			button.disabled = skill_uid in _base_skills
 
 func _find_skill_uid(skill_name: String) -> String:
-	for skill in BloodBowlManager.data.skills:
+	for skill in BloodBowlManager.get_all_skills():
 		if skill.name == skill_name:
 			return skill.uid
 	return ""

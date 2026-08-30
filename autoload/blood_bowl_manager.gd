@@ -1,47 +1,26 @@
 extends Node
 
+## Porte le catalogue et le rend accessible à tous les écrans.
+##
+## Il ne lit plus les fichiers — c'est le travail de CatalogLoader — et ne
+## cherche plus dans les données — c'est celui du catalogue. Il ne reste qu'un
+## porteur d'instance et une façade de délégation.
+
 var data: BloodBowlData
 
+
 func _ready():
-	load_data()
+	data = CatalogLoader.new().load_all()
+	data.print_summary()
 
-func load_data():
-	data = BloodBowlData.new()
 
-	# Charger les équipes depuis le fichier JSON
-	var teams_path = "res://app/io/persistence/teams_fr.json"
-	if data.load_from_json(teams_path):
-		print("Données Blood Bowl chargées avec succès!")
-		data.print_summary()
-	else:
-		push_error("Échec du chargement des données Blood Bowl")
-
-	# Charger les compétences depuis le fichier JSON
-	var skills_path = "res://app/io/persistence/skills_fr.json"
-	if data.load_skills_from_json(skills_path):
-		print("Compétences Blood Bowl chargées avec succès!")
-	else:
-		push_error("Échec du chargement des compétences Blood Bowl")
-
-	# Charger les catégories de compétences depuis le fichier JSON
-	var categories_path = "res://app/io/persistence/skill_cat_fr.json"
-	if not data.load_skill_categories_from_json(categories_path):
-		push_error("Échec du chargement des catégories de compétences")
-
-	# Charger les star players depuis le fichier JSON
-	var star_players_path = "res://app/io/persistence/star_players_fr.json"
-	if data.load_star_players_from_json(star_players_path):
-		print("Star Players Blood Bowl chargés avec succès!")
-	else:
-		push_error("Échec du chargement des Star Players Blood Bowl")
-
-# API d'accès facile
 func get_team(team_uid: String) -> BloodBowlData.Team:
 	return data.get_team_by_uid(team_uid)
 
+
 func get_all_teams() -> Array[BloodBowlData.Team]:
-	data.teams.sort_custom(func(a, b): return a.name < b.name)
-	return data.teams
+	return data.get_all_teams()
+
 
 func get_player(team_uid: String, player_uid: String) -> BloodBowlData.Player:
 	var team = get_team(team_uid)
@@ -49,49 +28,44 @@ func get_player(team_uid: String, player_uid: String) -> BloodBowlData.Player:
 		return team.get_player_by_uid(player_uid)
 	return null
 
+
 func get_teams_for_league(league: String) -> Array[BloodBowlData.Team]:
 	return data.get_teams_by_league(league)
 
+
 func search_teams(query: String) -> Array[BloodBowlData.Team]:
-	var results: Array[BloodBowlData.Team] = []
-	var query_lower = query.to_lower()
-	
-	for team in data.teams:
-		if query_lower in team.name.to_lower() or query_lower in team.uid.to_lower():
-			results.append(team)
-	
-	return results
+	return data.search_teams(query)
+
 
 func get_affordable_players(team_uid: String, budget: int) -> Array[BloodBowlData.Player]:
-	var team = get_team(team_uid)
-	if not team:
-		return []
+	return data.get_affordable_players(team_uid, budget)
 
-	var affordable: Array[BloodBowlData.Player] = []
-	for player in team.available_players:
-		if player.cost <= budget:
-			affordable.append(player)
-
-	return affordable
 
 func get_skill_name(skill_uid: String) -> String:
 	return data.get_skill_name(skill_uid)
 
+
 func get_skill(skill_uid: String) -> BloodBowlData.Skill:
 	return data.get_skill_by_uid(skill_uid)
+
 
 func get_skill_category_label(category_id: String) -> String:
 	return data.get_skill_category_label(category_id)
 
+
+## Ajouté pour que skill_list.gd cesse d'atteindre `BloodBowlManager.data.skills`
+## en traversant la façade.
+func get_all_skills() -> Array[BloodBowlData.Skill]:
+	return data.get_all_skills()
+
+
 func get_all_star_players() -> Array[BloodBowlData.StarPlayer]:
 	return data.star_players
 
+
 func get_stars_for_team(team: BloodBowlData.Team) -> Array[BloodBowlData.StarPlayer]:
-	var result: Array[BloodBowlData.StarPlayer] = []
-	for sp in data.star_players:
-		if team.uid in sp.available_for_rosters:
-			result.append(sp)
-	return result
+	return data.get_stars_for_team(team)
+
 
 func get_star_player(uid: String) -> BloodBowlData.StarPlayer:
 	return data.get_star_player_by_uid(uid)
