@@ -21,7 +21,7 @@ signal star_deselected(star:BloodBowlData.StarPlayer)
 # --- Game flow ---
 signal game_started
 signal turn_changed(team_index: int, turn_number: int)
-signal game_phase_changed(new_phase: GameStatusManager.GameStatus)
+signal game_phase_changed(new_phase: SceneOrchestrator.GameStatus)
 
 # --- UI / Navigation ---
 signal scene_change_requested(scene_path: String)

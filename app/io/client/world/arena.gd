@@ -20,8 +20,8 @@ func _ready() -> void:
 	EventBus.game_phase_changed.connect(_on_game_phase_changed)
 
 
-func _on_game_phase_changed(new_phase: GameStatusManager.GameStatus) -> void:
-	if new_phase == GameStatusManager.GameStatus.READY_TO_RUN:
+func _on_game_phase_changed(new_phase: SceneOrchestrator.GameStatus) -> void:
+	if new_phase == SceneOrchestrator.GameStatus.READY_TO_RUN:
 		_start_match()
 
 

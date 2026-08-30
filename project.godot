@@ -23,12 +23,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 BloodBowlManager="*res://autoload/blood_bowl_manager.gd"
-GameStatusManager="*res://autoload/game_status_manager.gd"
 TeamState="*res://autoload/team_state.gd"
 MatchState="*res://autoload/match_state.gd"
-EventBus="*res://autoload/event_bus.gd"
-SceneOrchestrator="*res://autoload/scene_orchestrator.gd"
-GuiState="*res://autoload/gui_state.gd"
+EventBus="*res://app/io/bus/event_bus.gd"
+SceneOrchestrator="*res://app/io/client/bootstrap/scene_orchestrator.gd"
+GuiState="*res://app/io/client/bootstrap/gui_state.gd"
 
 [display]
 

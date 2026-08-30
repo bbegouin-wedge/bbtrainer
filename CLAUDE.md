@@ -327,7 +327,7 @@ minimap sont tracés, pas texturés.
 | `app/` | l'application : `core/`, `io/` — assets compris — et `use_cases/` à venir |
 | `bin/`, `.build/` | artefacts de compilation Rust, ignorés par git et reconstruits par `make` |
 | `tests/` | les deux harnais. Ils observent l'application, ils n'en font pas partie |
-| `autoload/`, `data/` | **hors cible**, à migrer : ni l'un ni l'autre n'est un simple déplacement |
+| `autoload/`, `data/` | **hors cible** — il n'y reste que `blood_bowl_manager`, `match_state` et `team_state`, qui demandent des extractions et non des déplacements |
 | `docs/`, `kanban/` | audit d'architecture et cartes |
 | `addons/`, `project.godot` | imposés à la racine par Godot |
 

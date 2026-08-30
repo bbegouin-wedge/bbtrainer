@@ -5,8 +5,8 @@ func _ready():
 	_setup_tree();
 	EventBus.game_phase_changed.connect(_on_game_phase_changed)
 	
-func _on_game_phase_changed(phase:  GameStatusManager.GameStatus):
-	if phase == GameStatusManager.GameStatus.SELECT_SKILLS:
+func _on_game_phase_changed(phase:  SceneOrchestrator.GameStatus):
+	if phase == SceneOrchestrator.GameStatus.SELECT_SKILLS:
 		TeamState.expandTeamComposition()
 		_populate_tree(TeamState.get_expanded_team());
 

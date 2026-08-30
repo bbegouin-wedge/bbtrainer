@@ -1,5 +1,12 @@
 extends Node
 
+enum GameStatus { STARTING,
+CHOOSE_TEAM,
+RECRUIT_PLAYER,
+SELECT_INDUCEMENTS,
+SELECT_SKILLS,
+READY_TO_RUN }
+
 enum Scene { WELCOME, TEAM_CHOOSER, TEAM_COMPOSITOR, INDUCEMENT_SELECTOR, SKILL_CHOOSER, ARENA }
 
 const SCENE_ORDER := [
@@ -60,18 +67,18 @@ func _emit_game_phase(scene_id: Scene) -> void:
 	var status := _get_game_status(scene_id)
 	EventBus.game_phase_changed.emit(status)
 
-func _get_game_status(scene_id: Scene) -> GameStatusManager.GameStatus:
+func _get_game_status(scene_id: Scene) -> GameStatus:
 	match scene_id:
 		Scene.WELCOME:
-			return GameStatusManager.GameStatus.STARTING
+			return GameStatus.STARTING
 		Scene.TEAM_CHOOSER:
-			return GameStatusManager.GameStatus.CHOOSE_TEAM
+			return GameStatus.CHOOSE_TEAM
 		Scene.TEAM_COMPOSITOR:
-			return GameStatusManager.GameStatus.RECRUIT_PLAYER
+			return GameStatus.RECRUIT_PLAYER
 		Scene.INDUCEMENT_SELECTOR:
-			return GameStatusManager.GameStatus.SELECT_INDUCEMENTS
+			return GameStatus.SELECT_INDUCEMENTS
 		Scene.SKILL_CHOOSER:
-			return GameStatusManager.GameStatus.SELECT_SKILLS
+			return GameStatus.SELECT_SKILLS
 		Scene.ARENA:
-			return GameStatusManager.GameStatus.READY_TO_RUN
-	return GameStatusManager.GameStatus.STARTING
+			return GameStatus.READY_TO_RUN
+	return GameStatus.STARTING

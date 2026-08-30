@@ -1,4 +1,4 @@
-# 6 — Éclater `autoload/`
+# 6 — Éclater `autoload/` : les déplacements purs
 
 ## Objectif
 
@@ -49,23 +49,44 @@ silencieux. Mauvaise — ça ne se fait pas fichier par fichier.
 caractériser d'abord (`tests/unit/`), convertir ensuite, et un test
 d'intégration pour le câblage que les tests unitaires ne voient pas.
 
-## Questions ouvertes
+## Ce que ce lot fait, et ce qu'il laisse
 
-- **Combien de lots ?** Les deux premiers (`scene_orchestrator`, `gui_state`)
-  sont des `git mv` purs — ils peuvent partir seuls, tout de suite.
-  `blood_bowl_manager`, `match_state` et `team_state` sont des extractions.
-- **`MatchState` reste-t-il un autoload** une fois sa donnée dans `core/match/` ?
-  Il faudra bien que quelqu'un tienne l'instance courante — un use case, ou un
-  autoload mince qui ne fait plus que la porter.
-- **`EventBus` survit-il à `use_cases/` ?** L'architecture cible le remplace à
-  terme par des commandes et des événements explicites. Le déplacer dans
-  `io/bus/` est-il un pas utile, ou un déplacement qu'on défera ?
+La carte s'est resserrée sur ce qui est un **déplacement** : trois autoloads
+changent de dossier, un quatrième disparaît. Les trois restants —
+`blood_bowl_manager`, `match_state`, `team_state` — demandent des extractions et
+ont leurs propres cartes (10 et 11).
+
+| Script | Fait |
+|---|---|
+| `scene_orchestrator.gd` | → `app/io/client/bootstrap/` |
+| `gui_state.gd` | → `app/io/client/bootstrap/` |
+| `event_bus.gd` | → `app/io/bus/` |
+| `game_status_manager.gd` | **supprimé** |
+
+## Le risque d'ordre de chargement, levé par la mesure
+
+`event_bus.gd` déclare `signal game_phase_changed(new_phase: …GameStatus)` — une
+annotation **résolue à l'analyse**. Or `EventBus` est déclaré **avant**
+`SceneOrchestrator` dans `project.godot`, alors que `GameStatusManager` l'était
+avant. Le repli était prêt : un `class_name GamePhase` visible quel que soit
+l'ordre.
+
+Il n'a pas servi. **Aucune erreur d'analyse** : GDScript résout le type d'un
+autoload par le registre de classes, pas par l'ordre d'instanciation. L'énumération
+a donc pu rejoindre `SceneOrchestrator`, qui décide déjà des transitions.
+
+## Le doublon mort
+
+L'audit avait vu juste, et le code le confirme mot pour mot : `_changeStatus()`
+jamais appelé, `onStateChanged` sans abonné, `getCurrentStatus()` sans appelant,
+et un `currentState` qui ne fait que refléter `EventBus.game_phase_changed` sans
+que personne ne le lise. Seule l'énumération vivait encore, citée par quatre
+fichiers.
 
 ## Terminé quand
 
-- `autoload/` n'existe plus, `project.godot` ne déclare que les autoloads
-  restants ;
-- `make check-arch` vérifie un `core/` qui a grossi, sans violation ;
-- `make test-behaviour` couvre le comportement de ce qui a été converti ;
-- `make run` : le parcours complet, du choix d'équipe au dépôt d'un joueur sur
-  le terrain.
+- [x] les trois scripts sont à leur place cible, `project.godot` à jour ;
+- [x] `game_status_manager.gd` n'existe plus, aucune trace de `GameStatusManager` ;
+- [x] les trois vérifications passent — 129, deux de moins, l'autoload mort en
+  moins ;
+- [x] `make run` : parcours contrôlé à l'écran, zéro erreur au journal.
